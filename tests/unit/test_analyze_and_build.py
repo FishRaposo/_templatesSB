@@ -8,7 +8,7 @@ TODO: Review and implement actual test logic
 import unittest
 import sys
 from pathlib import Path
-from unittest.mock import Mock, patch, MagicMock
+from unittest.mock import Mock, patch, MagicMock, mock_open
 
 # Add scripts directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "scripts"))
@@ -16,7 +16,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent / "scripts"))
 try:
     import analyze_and_build
 except ImportError as e:
-    print(f"Warning: Could not import {module_name}: {e}")
+    print(f"Warning: Could not import analyze_and_build: {e}")
     analyze_and_build = None
 
 class TestAnalyzeAndBuild(unittest.TestCase):
@@ -88,16 +88,53 @@ class TestAnalyzeAndBuild(unittest.TestCase):
 
     def test_generate_gap_documentation(self):
         """Test generate_gap_documentation function"""
-        # TODO: Implement based on docstring: Generate comprehensive gap documentation...
-        # Arrange
-        self = 'test_value'
-        analysis = 'test_value'
-        output_path = 'test_value'
+        if analyze_and_build is None:
+            self.skipTest("analyze_and_build module not available")
 
-        # Act & Assert
-        # TODO: Add actual test implementation
-        with self.assertRaises(NotImplementedError):
-            self.fail('Test not implemented yet')
+        # Arrange
+        mock_gap1 = MagicMock()
+        mock_gap1.suggested_name = "gap-1"
+        mock_gap1.priority = "high"
+        mock_gap1.categories = ["cat1"]
+        mock_gap1.suggested_stacks = ["stack1"]
+        mock_gap1.suggested_tier = "core"
+        mock_gap1.description = "description 1"
+        mock_gap1.gap_reason = "reason 1"
+        mock_gap1.requirements = ["req1"]
+
+        mock_gap2 = MagicMock()
+        mock_gap2.suggested_name = "gap-2"
+        mock_gap2.priority = "medium"
+        mock_gap2.categories = ["cat2"]
+        mock_gap2.suggested_stacks = ["stack2"]
+        mock_gap2.suggested_tier = "mvp"
+        mock_gap2.description = "description 2"
+        mock_gap2.gap_reason = "reason 2"
+        mock_gap2.requirements = ["req2"]
+
+        analysis = {
+            "timestamp": "2023-01-01T00:00:00",
+            "description": "Test Project",
+            "detected_gaps": [mock_gap1, mock_gap2]
+        }
+        output_path = Path("test_output.md")
+
+        # Act
+        with patch('analyze_and_build.ProjectAnalysisPipeline.__init__', return_value=None):
+            pipeline = analyze_and_build.ProjectAnalysisPipeline()
+
+            with patch("builtins.open", mock_open()) as mocked_file:
+                doc_content = pipeline.generate_gap_documentation(analysis, output_path)
+
+                # Assert
+                self.assertIn("# Task Gap Analysis Report", doc_content)
+                self.assertIn("gap-1", doc_content)
+                self.assertIn("gap-2", doc_content)
+                self.assertIn("Phase 1: Critical & High Priority Gaps", doc_content)
+
+                # Verify file write
+                mocked_file.assert_called_with(output_path, 'w', encoding='utf-8')
+                mocked_file().write.assert_called_with(doc_content)
 
     # Skipping private function: _generate_phase_section
     # Skipping private function: _generate_detailed_gaps
