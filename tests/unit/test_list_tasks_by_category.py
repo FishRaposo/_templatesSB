@@ -14,6 +14,7 @@ from io import StringIO
 # Add scripts directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "scripts"))
 
+module_name = 'list_tasks_by_category'
 try:
     import list_tasks_by_category
 except ImportError as e:
