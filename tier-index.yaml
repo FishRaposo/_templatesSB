@@ -1,0 +1,929 @@
+# Machine-Readable Tier Index for Universal Documentation Templates
+# Version: 2.0 - Ontology-Based Structure
+# Last Updated: 2025-12-10
+# Purpose: AI agent source of truth for tier-based template selection
+# Ontology: universal/ → tiers/ → stacks/
+
+tier_index_version: "2.0"
+
+# Template Resolution Algorithm
+template_resolution_algorithm: "effective_template = universal + universal_tier + stack_base + stack_tier"
+
+# Merge Priority Rules (higher priority overrides lower)
+merge_priority:
+  stack_vs_universal: "stack > universal"
+  tier_vs_base: "tier > base"
+  tier_hierarchy: "enterprise > core > mvp"
+
+# Universal Patterns (apply to EVERY project, EVERY stack, ALWAYS)
+universal_patterns:
+  docs:
+    - file: "QUICKSTART-AI.tpl.md"
+      version: "3.0"
+      purpose: "AI agent quickstart and project initialization"
+      tiers: ["mvp", "core", "enterprise"]
+    
+    - file: "SYSTEM-MAP.md"
+      version: "2.0"
+      purpose: "System architecture and component mapping"
+      tiers: ["mvp", "core", "enterprise"]
+    
+    - file: "VALIDATION.tpl.md"
+      version: "2.0"
+      purpose: "Validation protocols and quality gates"
+      tiers: ["core", "enterprise"]
+    
+    - file: "SYSTEM-INTEGRATION.tpl.md"
+      version: "3.0"
+      purpose: "Integration patterns, system utilities, and AI agent integration with comprehensive automation tools"
+      tiers: ["core", "enterprise"]
+    
+    - file: "TIERED-TEMPLATES.tpl.md"
+      version: "2.0"
+      purpose: "Tier selection and progression guidelines"
+      tiers: ["mvp", "core", "enterprise"]
+    
+    - file: "MIGRATION-GUIDE.tpl.md"
+      version: "2.0"
+      purpose: "Migration procedures and upgrade paths"
+      tiers: ["core", "enterprise"]
+    
+    - file: "README.tpl.md"
+      version: "2.0"
+      purpose: "Universal project documentation template"
+      tiers: ["mvp", "core", "enterprise"]
+    
+    - file: "INDEX.tpl.md"
+      version: "2.0"
+      purpose: "Universal index and navigation template"
+      tiers: ["mvp", "core", "enterprise"]
+    
+    - file: "FEATURES.tpl.md"
+      version: "1.0"
+      purpose: "Feature documentation and tracking"
+      tiers: ["core", "enterprise"]
+    
+    - file: "AGENT-GUIDE.tpl.md"
+      version: "3.0"
+      purpose: "Comprehensive AI agent orchestration, delegation, memory, safety, and failure mode management"
+      tiers: ["core", "enterprise"]
+    - file: "EXECUTION-ENGINE.tpl.md"
+      version: "2.0"
+      purpose: "Template execution engine and processing pipeline"
+      tiers: ["core", "enterprise"]
+    
+    - file: "TEMPLATE-BEST-PRACTICES.tpl.md"
+      version: "3.0"
+      purpose: "Comprehensive guide for template selection, usage, and maintenance with best practices for AI agents and humans"
+      tiers: ["mvp", "core", "enterprise"]
+
+  code:
+    - file: "MODULE-TEMPLATE-BACKEND.tpl.md"
+      version: "2.0"
+      purpose: "Backend module structure template"
+      tiers: ["mvp", "core", "enterprise"]
+      overlay_for: "universal/code/"
+    
+    - file: "MODULE-TEMPLATE-FRONTEND.tpl.md"
+      version: "2.0"
+      purpose: "Frontend module structure template"
+      tiers: ["mvp", "core", "enterprise"]
+
+  scripts:
+    - directory: "scripts/"
+      purpose: "Universal scripts for build, test, deploy"
+      tiers: ["mvp", "core", "enterprise"]
+
+  tests:
+    - file: "TESTING-STRATEGY.tpl.md"
+      version: "2.0"
+      purpose: "Universal testing strategy and patterns"
+      tiers: ["core", "enterprise"]
+      location: "tests/docs/"
+
+# Tier Overlays (adjust weight and strictness of universal rules)
+tier_overlays:
+  mvp:
+    docs:
+      - file: "README.tpl.md"
+        version: "1.0"
+        purpose: "MVP-specific documentation requirements"
+        overlay_for: "universal/docs/README.tpl.md"
+    
+    code:
+      - file: "minimal-boilerplate.tpl.go"
+        version: "1.0"
+        purpose: "Minimal code structure for MVP"
+        overlay_for: "universal/code/"
+      
+      - file: "minimal-boilerplate-flutter.tpl.dart"
+        version: "1.0"
+        purpose: "Minimal Flutter code structure for MVP"
+        overlay_for: "universal/code/"
+      
+      - file: "minimal-boilerplate-python.tpl.py"
+        version: "1.0"
+        purpose: "Minimal Python code structure for MVP"
+        overlay_for: "universal/code/"
+      
+      - file: "minimal-boilerplate-node.tpl.js"
+        version: "1.0"
+        purpose: "Minimal Node.js code structure for MVP"
+        overlay_for: "universal/code/"
+      
+      - file: "minimal-boilerplate-react.tpl.jsx"
+        version: "1.0"
+        purpose: "Minimal React code structure for MVP"
+        overlay_for: "universal/code/"
+      
+      - file: "minimal-boilerplate-react_native.tpl.jsx"
+        version: "1.0"
+        purpose: "Minimal React Native code structure for MVP"
+        overlay_for: "universal/code/"
+    
+    tests:
+      - file: "basic-tests.tpl.go"
+        version: "1.0"
+        purpose: "MVP-level Go testing patterns: unit tests, basic component tests, minimal mocking. Use for simple Go projects needing essential test coverage."
+        overlay_for: "universal/"
+      
+      - file: "basic-tests-flutter.tpl.dart"
+        version: "1.0"
+        purpose: "MVP-level Flutter testing patterns: widget tests, unit tests, basic UI testing. Use for simple Flutter apps needing core test coverage."
+        overlay_for: "universal/"
+      
+      - file: "basic-tests-python.tpl.py"
+        version: "1.0"
+        purpose: "MVP-level Python testing patterns: pytest unit tests, basic fixtures, simple mocking. Use for Python projects requiring essential test coverage."
+        overlay_for: "universal/"
+      
+      - file: "basic-tests-node.tpl.js"
+        version: "1.0"
+        purpose: "MVP-level Node.js testing patterns: Jest unit tests, basic API testing, simple mocking. Use for Node.js projects needing core test coverage."
+        overlay_for: "universal/"
+      
+      - file: "basic-tests-react.tpl.jsx"
+        version: "1.0"
+        purpose: "MVP-level React testing patterns: component tests, user interactions, basic state testing. Use for React apps needing essential test coverage."
+        overlay_for: "universal/"
+      
+      - file: "basic-tests-react_native.tpl.jsx"
+        version: "1.0"
+        purpose: "MVP-level React Native testing patterns: component tests, native module mocking, basic mobile UI testing. Use for React Native apps needing core test coverage."
+        overlay_for: "universal/"
+
+  core:
+    docs:
+      - file: "README.tpl.md"
+        version: "2.0"
+        purpose: "Core production documentation requirements"
+        overlay_for: "universal/docs/README.tpl.md"
+    
+    code:
+      - file: "production-boilerplate.tpl.go"
+        version: "2.0"
+        purpose: "Production-ready code structure"
+        overlay_for: "universal/code/"
+      
+      - file: "production-boilerplate-flutter.tpl.dart"
+        version: "2.0"
+        purpose: "Production-ready Flutter code structure"
+        overlay_for: "universal/code/"
+      
+      - file: "production-boilerplate-python.tpl.py"
+        version: "2.0"
+        purpose: "Production-ready Python code structure"
+        overlay_for: "universal/code/"
+      
+      - file: "production-boilerplate-node.tpl.js"
+        version: "2.0"
+        purpose: "Production-ready Node.js code structure"
+        overlay_for: "universal/code/"
+      
+      - file: "production-boilerplate-react.tpl.jsx"
+        version: "2.0"
+        purpose: "Production-ready React code structure"
+        overlay_for: "universal/code/"
+      
+      - file: "production-boilerplate-react_native.tpl.jsx"
+        version: "2.0"
+        purpose: "Production-ready React Native code structure"
+        overlay_for: "universal/code/"
+    
+    tests:
+      - file: "comprehensive-tests.tpl.go"
+        version: "2.0"
+        purpose: "Core-level Go testing patterns: unit tests, integration tests, HTTP API testing, database testing, benchmarks. Use for production Go projects requiring comprehensive test coverage."
+        overlay_for: "universal/"
+      
+      - file: "comprehensive-tests-flutter.tpl.dart"
+        version: "2.0"
+        purpose: "Core-level Flutter testing patterns: widget tests, integration tests, golden tests, performance testing. Use for production Flutter apps requiring comprehensive test coverage."
+        overlay_for: "universal/"
+      
+      - file: "comprehensive-tests-python.tpl.py"
+        version: "2.0"
+        purpose: "Core-level Python testing patterns: pytest unit/integration tests, API testing, database testing, async testing. Use for production Python projects requiring comprehensive test coverage."
+        overlay_for: "universal/"
+      
+      - file: "comprehensive-tests-node.tpl.js"
+        version: "2.0"
+        purpose: "Core-level Node.js testing patterns: Jest unit/integration tests, API testing, database testing, performance testing. Use for production Node.js projects requiring comprehensive test coverage."
+        overlay_for: "universal/"
+      
+      - file: "comprehensive-tests-react.tpl.jsx"
+        version: "2.0"
+        purpose: "Core-level React testing patterns: component tests, integration tests, Redux testing, API mocking, accessibility testing. Use for production React apps requiring comprehensive test coverage."
+        overlay_for: "universal/"
+      
+      - file: "comprehensive-tests-react_native.tpl.jsx"
+        version: "2.0"
+        purpose: "Core-level React Native testing patterns: component tests, integration tests, native module testing, AsyncStorage testing. Use for production React Native apps requiring comprehensive test coverage."
+        overlay_for: "universal/"
+
+  enterprise:
+    docs:
+      - file: "README.tpl.md"
+        version: "3.0"
+        purpose: "Enterprise-grade documentation requirements"
+        overlay_for: "universal/docs/README.tpl.md"
+    
+    code:
+      - file: "enterprise-boilerplate.tpl.go"
+        version: "3.0"
+        purpose: "Enterprise-grade code structure"
+        overlay_for: "universal/code/"
+      
+      - file: "enterprise-boilerplate-flutter.tpl.dart"
+        version: "3.0"
+        purpose: "Enterprise-grade Flutter code structure"
+        overlay_for: "universal/code/"
+      
+      - file: "enterprise-boilerplate-python.tpl.py"
+        version: "3.0"
+        purpose: "Enterprise-grade Python code structure"
+        overlay_for: "universal/code/"
+      
+      - file: "enterprise-boilerplate-node.tpl.js"
+        version: "3.0"
+        purpose: "Enterprise-grade Node.js code structure"
+        overlay_for: "universal/code/"
+      
+      - file: "enterprise-boilerplate-react.tpl.jsx"
+        version: "3.0"
+        purpose: "Enterprise-grade React code structure"
+        overlay_for: "universal/code/"
+      
+      - file: "enterprise-boilerplate-react_native.tpl.jsx"
+        version: "3.0"
+        purpose: "Enterprise-grade React Native code structure"
+        overlay_for: "universal/code/"
+    
+    tests:
+      - file: "enterprise-tests.tpl.go"
+        version: "3.0"
+        purpose: "Enterprise-level Go testing patterns: security tests (JWT, AES-256), compliance (GDPR, HIPAA, SOC 2), resilience (circuit breaker), performance benchmarks, integration testing. Use for enterprise Go projects requiring comprehensive security and compliance testing."
+        overlay_for: "universal/"
+      
+      - file: "enterprise-tests-flutter.tpl.dart"
+        version: "3.0"
+        purpose: "Enterprise-level Flutter testing patterns: security tests (biometric auth, secure storage), compliance testing, resilience testing, performance optimization, integration testing. Use for enterprise Flutter apps requiring comprehensive security and compliance testing."
+        overlay_for: "universal/"
+      
+      - file: "enterprise-tests-python.tpl.py"
+        version: "3.0"
+        purpose: "Enterprise-level Python testing patterns: security tests (JWT, MFA, encryption), compliance (GDPR, HIPAA, SOC 2), resilience testing, performance benchmarks, integration testing. Use for enterprise Python projects requiring comprehensive security and compliance testing."
+        overlay_for: "universal/"
+      
+      - file: "enterprise-tests-node.tpl.js"
+        version: "3.0"
+        purpose: "Enterprise-level Node.js testing patterns: security tests (JWT, MFA, AES-256), compliance (GDPR, HIPAA, SOC 2), resilience testing, performance benchmarks, integration testing. Use for enterprise Node.js projects requiring comprehensive security and compliance testing."
+        overlay_for: "universal/"
+      
+      - file: "enterprise-tests-react.tpl.jsx"
+        version: "3.0"
+        purpose: "Enterprise-level React testing patterns: security tests (JWT, XSS prevention, CSRF protection), compliance (GDPR, HIPAA, SOC 2), resilience (circuit breaker, retry), performance testing, integration testing with MSW. Use for enterprise React projects requiring comprehensive security and compliance testing."
+        overlay_for: "universal/"
+      
+      - file: "enterprise-tests-react_native.tpl.jsx"
+        version: "3.0"
+        purpose: "Enterprise-level React Native testing patterns: mobile security (biometric auth, secure storage, device security), mobile compliance, offline sync management, background tasks, mobile performance optimization. Use for enterprise React Native projects requiring comprehensive mobile security and compliance testing."
+        overlay_for: "universal/"
+
+# Stack Patterns (teach how each ecosystem behaves)
+stack_patterns:
+  next:
+    base_template: "stacks/next/base/docs/PROJECT-STRUCTURE.tpl.md"
+    base:
+      docs:
+        - file: "FRAMEWORK-PATTERNS-react.tpl.md"
+          version: "2.0"
+          purpose: "Next.js framework patterns and conventions"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "TESTING-EXAMPLES-react.tpl.md"
+          version: "2.0"
+          purpose: "Next.js testing examples and patterns"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "ARCHITECTURE-react.tpl.md"
+          version: "2.0"
+          purpose: "Next.js architecture patterns"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "CI-EXAMPLES-react.tpl.md"
+          version: "2.0"
+          purpose: "Next.js CI/CD examples"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "PROJECT-STRUCTURE.tpl.md"
+          version: "1.0"
+          purpose: "Next.js project structure"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "README.tpl.md"
+          version: "1.0"
+          purpose: "Next.js project README and documentation"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "PACKAGE-MANAGEMENT.tpl.md"
+          version: "1.0"
+          purpose: "Next.js package management and dependencies"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "STATE-MANAGEMENT.tpl.md"
+          version: "1.0"
+          purpose: "Next.js state management patterns"
+          tiers: ["core", "enterprise"]
+
+        - file: "HOOKS-PATTERNS.tpl.md"
+          version: "1.0"
+          purpose: "Next.js hooks patterns and conventions"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "ERROR-HANDLING.tpl.md"
+          version: "1.0"
+          purpose: "Next.js error handling and exception management"
+          tiers: ["core", "enterprise"]
+
+        - file: "PERFORMANCE.tpl.md"
+          version: "1.0"
+          purpose: "Next.js performance optimization and profiling"
+          tiers: ["core", "enterprise"]
+
+  flutter:
+    base_template: "stacks/flutter/base/docs/PROJECT-STRUCTURE.tpl.md"
+    base:
+      docs:
+        - file: "FRAMEWORK-PATTERNS-flutter.tpl.md"
+          version: "2.0"
+          purpose: "Flutter framework patterns and conventions"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "TESTING-EXAMPLES-flutter.tpl.md"
+          version: "2.0"
+          purpose: "Flutter testing examples and patterns"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "ARCHITECTURE-flutter.tpl.md"
+          version: "2.0"
+          purpose: "Flutter architecture patterns"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "CI-EXAMPLES-flutter.tpl.md"
+          version: "2.0"
+          purpose: "Flutter CI/CD examples"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "PROJECT-STRUCTURE.tpl.md"
+          version: "1.0"
+          purpose: "Flutter project structure"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "NAVIGATION.tpl.md"
+          version: "1.0"
+          purpose: "Flutter navigation patterns"
+          tiers: ["core", "enterprise"]
+        
+        - file: "NETWORKING.tpl.md"
+          version: "1.0"
+          purpose: "Flutter networking patterns"
+          tiers: ["core", "enterprise"]
+        
+        - file: "STATE-MANAGEMENT.tpl.md"
+          version: "1.0"
+          purpose: "Flutter state management"
+          tiers: ["core", "enterprise"]
+        
+        - file: "README.tpl.md"
+          version: "1.0"
+          purpose: "Flutter project README and documentation"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "PACKAGE-MANAGEMENT.tpl.md"
+          version: "1.0"
+          purpose: "Flutter package management and dependencies"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "PERFORMANCE.tpl.md"
+          version: "1.0"
+          purpose: "Flutter performance optimization and profiling"
+          tiers: ["core", "enterprise"]
+        
+        - file: "ERROR-HANDLING.tpl.md"
+          version: "1.0"
+          purpose: "Flutter error handling and exception management"
+          tiers: ["core", "enterprise"]
+
+  python:
+    base_template: "stacks/python/base/docs/PROJECT-STRUCTURE.tpl.md"
+    base:
+      docs:
+        - file: "FRAMEWORK-PATTERNS-python.tpl.md"
+          version: "2.0"
+          purpose: "Python framework patterns and conventions"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "TESTING-EXAMPLES-python.tpl.md"
+          version: "2.0"
+          purpose: "Python testing examples and patterns"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "ARCHITECTURE-python.tpl.md"
+          version: "2.0"
+          purpose: "Python architecture patterns"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "CI-EXAMPLES-python.tpl.md"
+          version: "2.0"
+          purpose: "Python CI/CD examples"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "PROJECT-STRUCTURE.tpl.md"
+          version: "1.0"
+          purpose: "Python project structure"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "README.tpl.md"
+          version: "1.0"
+          purpose: "Python-specific README"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "PACKAGE-MANAGEMENT.tpl.md"
+          version: "1.0"
+          purpose: "Python package management and dependencies"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "PERFORMANCE.tpl.md"
+          version: "1.0"
+          purpose: "Python performance optimization and profiling"
+          tiers: ["core", "enterprise"]
+        
+        - file: "ERROR-HANDLING.tpl.md"
+          version: "1.0"
+          purpose: "Python error handling and exception management"
+          tiers: ["core", "enterprise"]
+
+  node:
+    base_template: "stacks/node/base/docs/PROJECT-STRUCTURE.tpl.md"
+    base:
+      docs:
+        - file: "FRAMEWORK-PATTERNS-node.tpl.md"
+          version: "2.0"
+          purpose: "Node.js framework patterns and conventions"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "TESTING-EXAMPLES-node.tpl.md"
+          version: "2.0"
+          purpose: "Node.js testing examples and patterns"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "ARCHITECTURE-node.tpl.md"
+          version: "2.0"
+          purpose: "Node.js architecture patterns"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "CI-EXAMPLES-node.tpl.md"
+          version: "2.0"
+          purpose: "Node.js CI/CD examples"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "PROJECT-STRUCTURE.tpl.md"
+          version: "1.0"
+          purpose: "Node.js project structure"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "README.tpl.md"
+          version: "1.0"
+          purpose: "Node.js project README and documentation"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "PACKAGE-MANAGEMENT.tpl.md"
+          version: "1.0"
+          purpose: "Node.js package management and dependencies"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "PERFORMANCE.tpl.md"
+          version: "1.0"
+          purpose: "Node.js performance optimization and profiling"
+          tiers: ["core", "enterprise"]
+        
+        - file: "ERROR-HANDLING.tpl.md"
+          version: "1.0"
+          purpose: "Node.js error handling and exception management"
+          tiers: ["core", "enterprise"]
+
+  react:
+    base_template: "stacks/react/base/docs/PROJECT-STRUCTURE.tpl.md"
+    base:
+      docs:
+        - file: "FRAMEWORK-PATTERNS-react.tpl.md"
+          version: "2.0"
+          purpose: "React framework patterns and conventions"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "TESTING-EXAMPLES-react.tpl.md"
+          version: "2.0"
+          purpose: "React testing examples and patterns"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "ARCHITECTURE-react.tpl.md"
+          version: "2.0"
+          purpose: "React architecture patterns"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "CI-EXAMPLES-react.tpl.md"
+          version: "2.0"
+          purpose: "React CI/CD examples"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "PROJECT-STRUCTURE.tpl.md"
+          version: "1.0"
+          purpose: "React project structure"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "README.tpl.md"
+          version: "1.0"
+          purpose: "React project README and documentation"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "PACKAGE-MANAGEMENT.tpl.md"
+          version: "1.0"
+          purpose: "React package management and dependencies"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "PERFORMANCE.tpl.md"
+          version: "1.0"
+          purpose: "React performance optimization and profiling"
+          tiers: ["core", "enterprise"]
+        
+        - file: "ERROR-HANDLING.tpl.md"
+          version: "1.0"
+          purpose: "React error handling and exception management"
+          tiers: ["core", "enterprise"]
+
+  react_native:
+    base_template: "stacks/react_native/base/docs/PROJECT-STRUCTURE.tpl.md"
+    base:
+      docs:
+        - file: "FRAMEWORK-PATTERNS-react-native.tpl.md"
+          version: "2.0"
+          purpose: "React Native framework patterns and conventions"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "TESTING-EXAMPLES-react-native.tpl.md"
+          version: "2.0"
+          purpose: "React Native testing examples and patterns"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "ARCHITECTURE-react-native.tpl.md"
+          version: "2.0"
+          purpose: "React Native architecture patterns"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "CI-EXAMPLES-react-native.tpl.md"
+          version: "2.0"
+          purpose: "React Native CI/CD examples"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "PROJECT-STRUCTURE.tpl.md"
+          version: "1.0"
+          purpose: "React Native project structure"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "README.tpl.md"
+          version: "1.0"
+          purpose: "React Native project README and documentation"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "PACKAGE-MANAGEMENT.tpl.md"
+          version: "1.0"
+          purpose: "React Native package management and dependencies"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "PERFORMANCE.tpl.md"
+          version: "1.0"
+          purpose: "React Native performance optimization and profiling"
+          tiers: ["core", "enterprise"]
+        
+        - file: "ERROR-HANDLING.tpl.md"
+          version: "1.0"
+          purpose: "React Native error handling and exception management"
+          tiers: ["core", "enterprise"]
+
+  go:
+    base_template: "stacks/go/base/docs/PROJECT-STRUCTURE.tpl.md"
+    base:
+      docs:
+        - file: "FRAMEWORK-PATTERNS-go.tpl.md"
+          version: "2.0"
+          purpose: "Go framework patterns and conventions"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "TESTING-EXAMPLES-go.tpl.md"
+          version: "2.0"
+          purpose: "Go testing examples and patterns"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "ARCHITECTURE-go.tpl.md"
+          version: "2.0"
+          purpose: "Go architecture patterns"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "CI-EXAMPLES-go.tpl.md"
+          version: "2.0"
+          purpose: "Go CI/CD examples"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "PROJECT-STRUCTURE.tpl.md"
+          version: "1.0"
+          purpose: "Go project structure"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "README.tpl.md"
+          version: "1.0"
+          purpose: "Go project README and documentation"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "PACKAGE-MANAGEMENT.tpl.md"
+          version: "1.0"
+          purpose: "Go package management and dependencies"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "PERFORMANCE.tpl.md"
+          version: "1.0"
+          purpose: "Go performance optimization and profiling"
+          tiers: ["core", "enterprise"]
+
+  r:
+    base_template: "stacks/r/base/docs/PROJECT-STRUCTURE.tpl.md"
+    base:
+      docs:
+        - file: "FRAMEWORK-PATTERNS-python.tpl.md"
+          version: "2.0"
+          purpose: "R framework patterns and conventions"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "TESTING-EXAMPLES-python.tpl.md"
+          version: "2.0"
+          purpose: "R testing examples and patterns"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "ARCHITECTURE-python.tpl.md"
+          version: "2.0"
+          purpose: "R architecture patterns"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "CI-EXAMPLES-r.tpl.md"
+          version: "2.0"
+          purpose: "R CI/CD examples"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "PROJECT-STRUCTURE.tpl.md"
+          version: "1.0"
+          purpose: "R project structure"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "README.tpl.md"
+          version: "1.0"
+          purpose: "R project README and documentation"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "PACKAGE-MANAGEMENT.tpl.md"
+          version: "1.0"
+          purpose: "R package management and dependencies"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "PERFORMANCE.tpl.md"
+          version: "1.0"
+          purpose: "R performance optimization and profiling"
+          tiers: ["core", "enterprise"]
+
+        - file: "ERROR-HANDLING.tpl.md"
+          version: "1.0"
+          purpose: "R error handling and exception management"
+          tiers: ["core", "enterprise"]
+
+        - file: "DATA-PROCESSING.tpl.md"
+          version: "1.0"
+          purpose: "R data processing guidance"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "ASYNC-PATTERNS.tpl.md"
+          version: "1.0"
+          purpose: "R async and parallelism patterns"
+          tiers: ["core", "enterprise"]
+
+  sql:
+    base_template: "stacks/sql/base/docs/PROJECT-STRUCTURE.tpl.md"
+    base:
+      docs:
+        - file: "FRAMEWORK-PATTERNS-python.tpl.md"
+          version: "2.0"
+          purpose: "SQL framework patterns and conventions"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "TESTING-EXAMPLES-python.tpl.md"
+          version: "2.0"
+          purpose: "SQL testing examples and patterns"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "ARCHITECTURE-python.tpl.md"
+          version: "2.0"
+          purpose: "SQL architecture patterns"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "CI-EXAMPLES-python.tpl.md"
+          version: "2.0"
+          purpose: "SQL CI/CD examples"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "PROJECT-STRUCTURE.tpl.md"
+          version: "1.0"
+          purpose: "SQL project structure"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "README.tpl.md"
+          version: "1.0"
+          purpose: "SQL project README and documentation"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "PACKAGE-MANAGEMENT.tpl.md"
+          version: "1.0"
+          purpose: "SQL package management and dependencies"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "PERFORMANCE.tpl.md"
+          version: "1.0"
+          purpose: "SQL performance optimization and profiling"
+          tiers: ["core", "enterprise"]
+
+        - file: "ERROR-HANDLING.tpl.md"
+          version: "1.0"
+          purpose: "SQL error handling and exception management"
+          tiers: ["core", "enterprise"]
+
+        - file: "DATA-PROCESSING.tpl.md"
+          version: "1.0"
+          purpose: "SQL data processing guidance"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "ASYNC-PATTERNS.tpl.md"
+          version: "1.0"
+          purpose: "SQL async and concurrency patterns"
+          tiers: ["core", "enterprise"]
+
+  generic:
+    base_template: "stacks/generic/base/docs/README.tpl.md"
+    base:
+      docs:
+        - file: "README.tpl.md"
+          version: "1.0"
+          purpose: "Generic stack README"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "setup-guide.tpl.md"
+          version: "1.0"
+          purpose: "Generic stack setup guide"
+          tiers: ["mvp", "core", "enterprise"]
+
+  typescript:
+    base_template: "stacks/typescript/base/docs/README.tpl.md"
+    base:
+      docs:
+        - file: "README.tpl.md"
+          version: "1.0"
+          purpose: "TypeScript stack README"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "setup-guide.tpl.md"
+          version: "1.0"
+          purpose: "TypeScript stack setup guide"
+          tiers: ["mvp", "core", "enterprise"]
+
+# Template Version Tracking
+template_metadata:
+  compatibility_matrix:
+    "1.0": ["mvp", "core", "enterprise"]
+    "2.0": ["mvp", "core", "enterprise"]
+    "3.0": ["core", "enterprise"]
+  
+  upgrade_paths:
+    "1.0->2.0": "Minor updates - no breaking changes"
+    "2.0->3.0": "Major restructuring - ontology-based system"
+
+# Stack Configuration
+stack_configuration:
+  available_stacks: ["flutter", "python", "node", "react", "react_native", "next", "go", "r", "sql", "generic", "typescript"]
+  default_stack: "flutter"
+  base_templates:
+    flutter: "stacks/flutter/base/docs/PROJECT-STRUCTURE.tpl.md"
+    python: "stacks/python/base/docs/PROJECT-STRUCTURE.tpl.md"
+    node: "stacks/node/base/docs/PROJECT-STRUCTURE.tpl.md"
+    react: "stacks/react/base/docs/PROJECT-STRUCTURE.tpl.md"
+    react_native: "stacks/react_native/base/docs/PROJECT-STRUCTURE.tpl.md"
+    next: "stacks/next/base/docs/PROJECT-STRUCTURE.tpl.md"
+    go: "stacks/go/base/docs/PROJECT-STRUCTURE.tpl.md"
+    r: "stacks/r/base/docs/PROJECT-STRUCTURE.tpl.md"
+    sql: "stacks/sql/base/docs/PROJECT-STRUCTURE.tpl.md"
+    generic: "stacks/generic/base/docs/README.tpl.md"
+    typescript: "stacks/typescript/base/docs/README.tpl.md"
+  stack_dependencies:
+    flutter: []
+    python: []
+    node: []
+    react: []
+    react_native: ["flutter"]  # Shares some patterns with Flutter
+    go: []
+    generic: []  # Technology-agnostic, no dependencies
+    typescript: ["node"]  # Builds on Node.js patterns
+
+# Testing Templates Configuration
+testing_templates:
+  mvp:
+    - "tiers/mvp/tests/basic-tests.tpl.go"
+    - "tiers/mvp/tests/basic-tests-flutter.tpl.dart"
+    - "tiers/mvp/tests/basic-tests-python.tpl.py"
+    - "tiers/mvp/tests/basic-tests-node.tpl.js"
+    - "tiers/mvp/tests/basic-tests-react.tpl.jsx"
+    - "tiers/mvp/tests/basic-tests-react_native.tpl.jsx"
+    - "stacks/generic/base/tests/unit-tests-pattern.tpl.md"
+    - "stacks/typescript/base/tests/unit-tests-pattern.tpl.md"
+    - "stacks/next/base/tests/test-base-scaffold.tpl.jsx"
+    - "stacks/sql/base/tests/test-base-scaffold.tpl.py"
+    - "stacks/r/base/tests/test-base-scaffold.tpl.py"
+  
+  core:
+    - "tiers/core/tests/comprehensive-tests.tpl.go"
+    - "tiers/core/tests/comprehensive-tests-flutter.tpl.dart"
+    - "tiers/core/tests/comprehensive-tests-python.tpl.py"
+    - "tiers/core/tests/comprehensive-tests-node.tpl.js"
+    - "tiers/core/tests/comprehensive-tests-react.tpl.jsx"
+    - "tiers/core/tests/comprehensive-tests-react_native.tpl.jsx"
+    - "stacks/generic/base/tests/integration-tests-pattern.tpl.md"
+    - "stacks/typescript/base/tests/integration-tests-pattern.tpl.md"
+    - "stacks/next/base/tests/test-base-scaffold.tpl.jsx"
+    - "stacks/sql/base/tests/test-base-scaffold.tpl.py"
+    - "stacks/r/base/tests/test-base-scaffold.tpl.py"
+  
+  enterprise:
+    - "tiers/enterprise/tests/enterprise-tests.tpl.go"
+    - "tiers/enterprise/tests/enterprise-tests-flutter.tpl.dart"
+    - "tiers/enterprise/tests/enterprise-tests-python.tpl.py"
+    - "tiers/enterprise/tests/enterprise-tests-node.tpl.js"
+    - "tiers/enterprise/tests/enterprise-tests-react.tpl.jsx"
+    - "tiers/enterprise/tests/enterprise-tests-react_native.tpl.jsx"
+    - "stacks/generic/base/tests/test-utilities-pattern.tpl.md"
+    - "stacks/typescript/base/tests/test-utilities-pattern.tpl.md"
+    - "stacks/next/base/tests/test-base-scaffold.tpl.jsx"
+    - "stacks/sql/base/tests/test-base-scaffold.tpl.py"
+    - "stacks/r/base/tests/test-base-scaffold.tpl.py"
+
+# AI Agent Configuration
+agent_configuration:
+  template_resolution:
+    algorithm: "effective_template = universal + universal_tier + stack_base + stack_tier"
+    priority_rules: "stack > universal, tier > base, enterprise > core > mvp"
+    conflict_resolution: "highest priority wins"
+  
+  validation_rules:
+    required_templates: ["README.tpl.md", "PROJECT-STRUCTURE.tpl.md"]
+    stack_specific_validation: true
+    tier_specific_validation: true
+  
+  # Updated file counts to reflect actual template structure after adding comprehensive MVP content
+  expected_file_counts:
+    mvp: 38  # 6 code + 6 docs + 6 examples + 6 tests + 14 supporting files
+    core: 28  # 6 code + 6 docs + 6 tests + 10 supporting files
+    enterprise: 28  # 6 code + 6 docs + 6 tests + 10 supporting files
+
+# Migration Information
+migration_info:
+  previous_version: "1.0"
+  migration_date: "2025-12-10"
+  major_changes:
+    - "Restructured to ontology-based system"
+    - "Consolidated Node.js stack patterns"
+    - "Normalized all template naming to .tpl.md"
+    - "Created explicit merge hierarchy"
+    - "Added comprehensive stack patterns"

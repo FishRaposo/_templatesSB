@@ -1,0 +1,13 @@
+# Analysis options for MINS Blueprint Flutter overlays
+# These are template files designed to be copied into actual Flutter projects
+# They will not lint correctly in isolation due to missing Flutter SDK packages
+
+analyzer:
+  exclude:
+    - "**/*.tpl.dart"
+    - "lib/**"
+  
+linter:
+  rules:
+    # Disable all rules for template files
+    enable: []

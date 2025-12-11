@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(done)",
+      "Bash(python scripts/validate-templates.py:*)",
+      "Bash(python comprehensive_template_fixer.py:*)"
+    ]
+  }
+}

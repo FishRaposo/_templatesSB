@@ -1,0 +1,2361 @@
+tasks:
+  web-scraping:
+    description: Scrape pages, parse HTML/JSON, respect robots, store results.
+    categories:
+    - data-ingestion
+    - automation
+    - web
+    default_stacks:
+    - python
+    - go
+    allowed_stacks:
+    - python
+    - go
+    - node
+    - r
+    - sql
+    recommended_tier:
+      single-site: mvp
+      multi-site: core
+      enterprise-crawler: full
+    files:
+    - id: WEB-SCRAPING_CONFIG
+      target_path: config/web-scraping.{ext}
+      universal_template: tasks/web-scraping/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: WEB-SCRAPING_SERVICE
+      target_path: src/web-scraping/service.{ext}
+      universal_template: tasks/web-scraping/universal/code/PIPELINE-SKELETON.tpl.md
+      merge_behavior: create
+    - id: WEB-SCRAPING_SERVICE
+      target_path: src/web-scraping/service.{ext}
+      universal_template: tasks/web-scraping/universal/code/WEB-SCRAPING-SKELETON.tpl.md
+      merge_behavior: create
+    - id: WEB-SCRAPING_DOCS
+      target_path: docs/WEB-SCRAPING.md
+      universal_template: tasks/web-scraping/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: WEB-SCRAPING_TESTS
+      target_path: tests/web-scraping/test_web-scraping.{ext}
+      universal_template: tasks/web-scraping/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: WEB-SCRAPING_SERVICE
+      target_path: src/web-scraping/service.go
+      universal_template: tasks/web-scraping/universal/code/WEB-SCRAPING-SKELETON.tpl.md
+      stack_overrides:
+        go: tasks/web-scraping/stacks/go/base/code/web_scraping_service.tpl.go
+      merge_behavior: create
+    - id: WEB-SCRAPING_SERVICE
+      target_path: src/web-scraping/service.js
+      universal_template: tasks/web-scraping/universal/code/WEB-SCRAPING-SKELETON.tpl.md
+      stack_overrides:
+        node: tasks/web-scraping/stacks/node/base/code/web_scraping_service.tpl.js
+      merge_behavior: create
+    - id: WEB-SCRAPING_SERVICE
+      target_path: src/web-scraping/service.py
+      universal_template: tasks/web-scraping/universal/code/WEB-SCRAPING-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/web-scraping/stacks/python/base/code/SCRAPER-SERVICE.tpl.py
+      merge_behavior: create
+    - id: WEB-SCRAPING_SERVICE
+      target_path: src/web-scraping/service.py
+      universal_template: tasks/web-scraping/universal/code/WEB-SCRAPING-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/web-scraping/stacks/python/base/code/web_scraping_service.tpl.py
+      merge_behavior: create
+    - id: WEB-SCRAPING_TESTS
+      target_path: tests/web-scraping/test_web-scraping.py
+      universal_template: tasks/web-scraping/universal/code/WEB-SCRAPING-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/web-scraping/stacks/python/base/tests/TEST_SCRAPER.tpl.py
+      merge_behavior: create
+  etl-pipeline:
+    description: Extract → Transform → Load between APIs/DBs/data lakes.
+    categories:
+    - data-processing
+    - etl
+    - analytics
+    default_stacks:
+    - python
+    - sql
+    allowed_stacks:
+    - python
+    - sql
+    - go
+    recommended_tier:
+      basic-etl: core
+      enterprise-etl: full
+    files:
+    - id: ETL-PIPELINE_CONFIG
+      target_path: config/etl-pipeline.{ext}
+      universal_template: tasks/etl-pipeline/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: ETL-PIPELINE_SERVICE
+      target_path: src/etl-pipeline/service.{ext}
+      universal_template: tasks/etl-pipeline/universal/code/ETL-PIPELINE-SKELETON.tpl.md
+      merge_behavior: create
+    - id: ETL-PIPELINE_DOCS
+      target_path: docs/ETL-PIPELINE.md
+      universal_template: tasks/etl-pipeline/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: ETL-PIPELINE_TESTS
+      target_path: tests/etl-pipeline/test_etl-pipeline.{ext}
+      universal_template: tasks/etl-pipeline/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: ETL-PIPELINE_SERVICE
+      target_path: src/etl-pipeline/service.go
+      universal_template: tasks/etl-pipeline/universal/code/ETL-PIPELINE-SKELETON.tpl.md
+      stack_overrides:
+        go: tasks/etl-pipeline/stacks/go/base/code/etl_pipeline_service.tpl.go
+      merge_behavior: create
+    - id: ETL-PIPELINE_SERVICE
+      target_path: src/etl-pipeline/service.py
+      universal_template: tasks/etl-pipeline/universal/code/ETL-PIPELINE-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/etl-pipeline/stacks/python/base/code/etl_pipeline_service.tpl.py
+      merge_behavior: create
+  email-notifications:
+    description: Email notification system with templates, queuing, and delivery tracking.
+    categories:
+    - communication
+    - messaging
+    default_stacks:
+    - python
+    - node
+    allowed_stacks:
+    - python
+    - node
+    - go
+    recommended_tier:
+      basic-emails: mvp
+      production-notifications: core
+      enterprise-messaging: full
+    files:
+    - id: EMAIL_SERVICE
+      target_path: src/email/service.{ext}
+      universal_template: tasks/email-notifications/universal/code/EMAIL-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/email-notifications/stacks/python/base/code/EMAIL-SERVICE.tpl.py
+      merge_behavior: create
+    - id: EMAIL_TEMPLATES
+      target_path: templates/email/
+      universal_template: tasks/email-notifications/universal/code/TEMPLATE-EXAMPLES.tpl.md
+      merge_behavior: create_directory
+  cron-worker:
+    description: Scheduled job system with cron integration and job monitoring.
+    categories:
+    - automation
+    - scheduling
+    default_stacks:
+    - python
+    - go
+    allowed_stacks:
+    - python
+    - go
+    - node
+    recommended_tier:
+      basic-cron: mvp
+      production-scheduler: core
+      enterprise-automation: full
+    files:
+    - id: CRON_WORKER
+      target_path: src/cron/worker.{ext}
+      universal_template: tasks/cron-worker/universal/code/CRON-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/cron-worker/stacks/python/base/code/CRON-WORKER.tpl.py
+      merge_behavior: create
+    - id: CRON_SCHEDULE
+      target_path: config/cron.yaml
+      universal_template: tasks/cron-worker/universal/code/SCHEDULE.tpl.yaml
+      merge_behavior: create
+  data-analysis-report:
+    description: Data analysis and reporting system with visualization capabilities.
+    categories:
+    - analytics
+    - reporting
+    default_stacks:
+    - python
+    - r
+    allowed_stacks:
+    - python
+    - r
+    - node
+    recommended_tier:
+      basic-analysis: mvp
+      production-reports: core
+      enterprise-analytics: full
+    files:
+    - id: ANALYSIS_ENGINE
+      target_path: src/analysis/engine.{ext}
+      universal_template: tasks/data-analysis-report/universal/code/ANALYSIS-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/data-analysis-report/stacks/python/base/code/ANALYSIS-ENGINE.tpl.py
+        r: tasks/data-analysis-report/stacks/r/base/code/ANALYSIS-ENGINE.tpl.R
+      merge_behavior: create
+  ml-inference-api:
+    description: Machine learning inference API with model loading and prediction
+      endpoints.
+    categories:
+    - machine-learning
+    - api
+    default_stacks:
+    - python
+    allowed_stacks:
+    - python
+    - go
+    - node
+    recommended_tier:
+      basic-inference: mvp
+      production-api: core
+      enterprise-ml: full
+    files:
+    - id: ML_INFERENCE_SERVICE
+      target_path: src/ml/inference.{ext}
+      universal_template: tasks/ml-inference-api/universal/code/INFERENCE-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/ml-inference-api/stacks/python/base/code/INFERENCE-SERVICE.tpl.py
+      merge_behavior: create
+  auth-basic:
+    description: Email/password, sessions/JWT, password reset.
+    categories:
+    - auth
+    - security
+    - users
+    default_stacks:
+    - node
+    - python
+    allowed_stacks:
+    - node
+    - python
+    - nextjs
+    recommended_tier:
+      basic-auth: mvp
+      production-auth: core
+    files:
+    - id: AUTH-BASIC_SERVICE
+      target_path: src/auth-basic/service.{ext}
+      universal_template: tasks/auth-basic/universal/code/AUTH-BASIC-SKELETON.tpl.md
+      merge_behavior: create
+    - id: AUTH-BASIC_CONFIG
+      target_path: config/auth-basic.{ext}
+      universal_template: tasks/auth-basic/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: AUTH-BASIC_DOCS
+      target_path: docs/AUTH-BASIC.md
+      universal_template: tasks/auth-basic/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: AUTH-BASIC_TESTS
+      target_path: tests/auth-basic/test_auth-basic.{ext}
+      universal_template: tasks/auth-basic/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: AUTH-BASIC_COMPONENT
+      target_path: src/auth-basic/component.tsx
+      universal_template: tasks/auth-basic/universal/code/AUTH-BASIC-SKELETON.tpl.md
+      stack_overrides:
+        nextjs: tasks/auth-basic/stacks/nextjs/base/code/auth_basic_component.tpl.tsx
+      merge_behavior: create
+    - id: AUTH-BASIC_SERVICE
+      target_path: src/auth-basic/service.js
+      universal_template: tasks/auth-basic/universal/code/AUTH-BASIC-SKELETON.tpl.md
+      stack_overrides:
+        node: tasks/auth-basic/stacks/node/base/code/auth_basic_service.tpl.js
+      merge_behavior: create
+    - id: AUTH-BASIC_SERVICE
+      target_path: src/auth-basic/service.py
+      universal_template: tasks/auth-basic/universal/code/AUTH-BASIC-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/auth-basic/stacks/python/base/code/auth_basic_service.tpl.py
+      merge_behavior: create
+  rest-api-service:
+    description: Standard CRUD API with auth, validation, pagination, rate limits.
+    categories:
+    - api
+    - backend
+    - crud
+    default_stacks:
+    - node
+    - python
+    allowed_stacks:
+    - node
+    - python
+    - go
+    - nextjs
+    recommended_tier:
+      basic-endpoints: mvp
+      production-api: core
+      enterprise-api: full
+    files:
+    - id: REST-API-SERVICE_CONFIG
+      target_path: config/rest-api-service.{ext}
+      universal_template: tasks/rest-api-service/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: REST-API-SERVICE_SERVICE
+      target_path: src/rest-api-service/service.{ext}
+      universal_template: tasks/rest-api-service/universal/code/REST-API-SERVICE-SKELETON.tpl.md
+      merge_behavior: create
+    - id: REST-API-SERVICE_DOCS
+      target_path: docs/REST-API-SERVICE.md
+      universal_template: tasks/rest-api-service/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: REST-API-SERVICE_TESTS
+      target_path: tests/rest-api-service/test_rest-api-service.{ext}
+      universal_template: tasks/rest-api-service/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: REST-API-SERVICE_SERVICE
+      target_path: src/rest-api-service/service.go
+      universal_template: tasks/rest-api-service/universal/code/REST-API-SERVICE-SKELETON.tpl.md
+      stack_overrides:
+        go: tasks/rest-api-service/stacks/go/base/code/rest_api_service_service.tpl.go
+      merge_behavior: create
+    - id: REST-API-SERVICE_SERVICE
+      target_path: src/rest-api-service/service.tsx
+      universal_template: tasks/rest-api-service/universal/code/REST-API-SERVICE-SKELETON.tpl.md
+      stack_overrides:
+        nextjs: tasks/rest-api-service/stacks/nextjs/base/code/rest_api_service_component.tpl.tsx
+      merge_behavior: create
+    - id: REST-API-SERVICE_SERVICE
+      target_path: src/rest-api-service/service.js
+      universal_template: tasks/rest-api-service/universal/code/REST-API-SERVICE-SKELETON.tpl.md
+      stack_overrides:
+        node: tasks/rest-api-service/stacks/node/base/code/rest_api_service_service.tpl.js
+      merge_behavior: create
+    - id: REST-API-SERVICE_SERVICE
+      target_path: src/rest-api-service/service.py
+      universal_template: tasks/rest-api-service/universal/code/REST-API-SERVICE-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/rest-api-service/stacks/python/base/code/rest_api_service_service.tpl.py
+      merge_behavior: create
+  graphql-api:
+    description: Schema, resolvers, data loaders, field-level auth.
+    categories:
+    - api
+    - backend
+    - graphql
+    default_stacks:
+    - node
+    - python
+    allowed_stacks:
+    - node
+    - python
+    recommended_tier:
+      basic-graphql: core
+      production-graphql: full
+    files:
+    - id: GRAPHQL-API_CONFIG
+      target_path: config/graphql-api.{ext}
+      universal_template: tasks/graphql-api/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: GRAPHQL-API_SERVICE
+      target_path: src/graphql-api/service.{ext}
+      universal_template: tasks/graphql-api/universal/code/GRAPHQL-API-SKELETON.tpl.md
+      merge_behavior: create
+    - id: GRAPHQL-API_DOCS
+      target_path: docs/GRAPHQL-API.md
+      universal_template: tasks/graphql-api/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: GRAPHQL-API_TESTS
+      target_path: tests/graphql-api/test_graphql-api.{ext}
+      universal_template: tasks/graphql-api/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: GRAPHQL-API_SERVICE
+      target_path: src/graphql-api/service.js
+      universal_template: tasks/graphql-api/universal/code/GRAPHQL-API-SKELETON.tpl.md
+      stack_overrides:
+        node: tasks/graphql-api/stacks/node/base/code/graphql_api_service.tpl.js
+      merge_behavior: create
+    - id: GRAPHQL-API_SERVICE
+      target_path: src/graphql-api/service.py
+      universal_template: tasks/graphql-api/universal/code/GRAPHQL-API-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/graphql-api/stacks/python/base/code/graphql_api_service.tpl.py
+      merge_behavior: create
+  web-dashboard:
+    description: Admin or analytics dashboard with cards, filters, charts, tables.
+    categories:
+    - frontend
+    - dashboard
+    - analytics
+    default_stacks:
+    - react
+    - nextjs
+    allowed_stacks:
+    - react
+    - nextjs
+    - flutter
+    recommended_tier:
+      static-dashboard: mvp
+      live-dashboard: core
+      enterprise-dashboard: full
+    files:
+    - id: WEB-DASHBOARD_CONFIG
+      target_path: config/web-dashboard.{ext}
+      universal_template: tasks/web-dashboard/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: WEB-DASHBOARD_SERVICE
+      target_path: src/web-dashboard/service.{ext}
+      universal_template: tasks/web-dashboard/universal/code/WEB-DASHBOARD-SKELETON.tpl.md
+      merge_behavior: create
+    - id: WEB-DASHBOARD_DOCS
+      target_path: docs/WEB-DASHBOARD.md
+      universal_template: tasks/web-dashboard/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: WEB-DASHBOARD_TESTS
+      target_path: tests/web-dashboard/test_web-dashboard.{ext}
+      universal_template: tasks/web-dashboard/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: WEB-DASHBOARD_COMPONENT
+      target_path: src/web-dashboard/component.tsx
+      universal_template: tasks/web-dashboard/universal/code/WEB-DASHBOARD-SKELETON.tpl.md
+      stack_overrides:
+        nextjs: tasks/web-dashboard/stacks/nextjs/base/code/web_dashboard_component.tpl.tsx
+      merge_behavior: create
+    - id: WEB-DASHBOARD_COMPONENT
+      target_path: src/web-dashboard/component.jsx
+      universal_template: tasks/web-dashboard/universal/code/WEB-DASHBOARD-SKELETON.tpl.md
+      stack_overrides:
+        react: tasks/web-dashboard/stacks/react/base/code/web_dashboard_component.tpl.jsx
+      merge_behavior: create
+  landing-page:
+    description: Marketing page with sections, CTAs, analytics hooks, A/B test ready.
+    categories:
+    - frontend
+    - marketing
+    - web
+    default_stacks:
+    - nextjs
+    - react
+    allowed_stacks:
+    - nextjs
+    - react
+    - flutter
+    recommended_tier:
+      single-page: mvp
+      conversion-optimized: core
+      ab-testing-ready: full
+    files:
+    - id: LANDING-PAGE_CONFIG
+      target_path: config/landing-page.{ext}
+      universal_template: tasks/landing-page/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: LANDING-PAGE_SERVICE
+      target_path: src/landing-page/service.{ext}
+      universal_template: tasks/landing-page/universal/code/LANDING-PAGE-SKELETON.tpl.md
+      merge_behavior: create
+    - id: LANDING-PAGE_DOCS
+      target_path: docs/LANDING-PAGE.md
+      universal_template: tasks/landing-page/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: LANDING-PAGE_TESTS
+      target_path: tests/landing-page/test_landing-page.{ext}
+      universal_template: tasks/landing-page/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: LANDING-PAGE_COMPONENT
+      target_path: src/landing-page/component.tsx
+      universal_template: tasks/landing-page/universal/code/LANDING-PAGE-SKELETON.tpl.md
+      stack_overrides:
+        nextjs: tasks/landing-page/stacks/nextjs/base/code/landing_page_component.tpl.tsx
+      merge_behavior: create
+    - id: LANDING-PAGE_COMPONENT
+      target_path: src/landing-page/component.jsx
+      universal_template: tasks/landing-page/universal/code/LANDING-PAGE-SKELETON.tpl.md
+      stack_overrides:
+        react: tasks/landing-page/stacks/react/base/code/landing_page_component.tpl.jsx
+      merge_behavior: create
+  public-api-gateway:
+    description: 'Wrap internal services with external-facing secure API: keys, quotas,
+      logging.'
+    categories:
+    - api
+    - security
+    - infrastructure
+    default_stacks:
+    - node
+    - go
+    allowed_stacks:
+    - node
+    - go
+    recommended_tier:
+      basic-gateway: core
+      enterprise-gateway: full
+    files:
+    - id: PUBLIC-API-GATEWAY_CONFIG
+      target_path: config/public-api-gateway.{ext}
+      universal_template: tasks/public-api-gateway/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: PUBLIC-API-GATEWAY_SERVICE
+      target_path: src/public-api-gateway/service.{ext}
+      universal_template: tasks/public-api-gateway/universal/code/PUBLIC-API-GATEWAY-SKELETON.tpl.md
+      merge_behavior: create
+    - id: PUBLIC-API-GATEWAY_DOCS
+      target_path: docs/PUBLIC-API-GATEWAY.md
+      universal_template: tasks/public-api-gateway/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: PUBLIC-API-GATEWAY_TESTS
+      target_path: tests/public-api-gateway/test_public-api-gateway.{ext}
+      universal_template: tasks/public-api-gateway/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: PUBLIC-API-GATEWAY_SERVICE
+      target_path: src/public-api-gateway/service.go
+      universal_template: tasks/public-api-gateway/universal/code/PUBLIC-API-GATEWAY-SKELETON.tpl.md
+      stack_overrides:
+        go: tasks/public-api-gateway/stacks/go/base/code/public_api_gateway_service.tpl.go
+      merge_behavior: create
+    - id: PUBLIC-API-GATEWAY_SERVICE
+      target_path: src/public-api-gateway/service.js
+      universal_template: tasks/public-api-gateway/universal/code/PUBLIC-API-GATEWAY-SKELETON.tpl.md
+      stack_overrides:
+        node: tasks/public-api-gateway/stacks/node/base/code/public_api_gateway_service.tpl.js
+      merge_behavior: create
+  auth-oauth:
+    description: Google/GitHub/Twitter/etc. login flows, token storage, linking accounts.
+    categories:
+    - auth
+    - security
+    - integration
+    default_stacks:
+    - node
+    - nextjs
+    allowed_stacks:
+    - node
+    - nextjs
+    - flutter
+    - react
+    recommended_tier:
+      oauth-integration: core
+      enterprise-oauth: full
+    files:
+    - id: AUTH-OAUTH_SERVICE
+      target_path: src/auth-oauth/service.{ext}
+      universal_template: tasks/auth-oauth/universal/code/AUTH-OAUTH-SKELETON.tpl.md
+      merge_behavior: create
+    - id: AUTH-OAUTH_CONFIG
+      target_path: config/auth-oauth.{ext}
+      universal_template: tasks/auth-oauth/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: AUTH-OAUTH_DOCS
+      target_path: docs/AUTH-OAUTH.md
+      universal_template: tasks/auth-oauth/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: AUTH-OAUTH_TESTS
+      target_path: tests/auth-oauth/test_auth-oauth.{ext}
+      universal_template: tasks/auth-oauth/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: AUTH-OAUTH_COMPONENT
+      target_path: src/auth-oauth/component.tsx
+      universal_template: tasks/auth-oauth/universal/code/AUTH-OAUTH-SKELETON.tpl.md
+      stack_overrides:
+        nextjs: tasks/auth-oauth/stacks/nextjs/base/code/auth_oauth_component.tpl.tsx
+      merge_behavior: create
+    - id: AUTH-OAUTH_SERVICE
+      target_path: src/auth-oauth/service.js
+      universal_template: tasks/auth-oauth/universal/code/AUTH-OAUTH-SKELETON.tpl.md
+      stack_overrides:
+        node: tasks/auth-oauth/stacks/node/base/code/auth_oauth_service.tpl.js
+      merge_behavior: create
+    - id: AUTH-OAUTH_COMPONENT
+      target_path: src/auth-oauth/component.jsx
+      universal_template: tasks/auth-oauth/universal/code/AUTH-OAUTH-SKELETON.tpl.md
+      stack_overrides:
+        react: tasks/auth-oauth/stacks/react/base/code/auth_oauth_component.tpl.jsx
+      merge_behavior: create
+  user-profile-management:
+    description: Profile CRUD, avatars, preferences, settings pages.
+    categories:
+    - users
+    - frontend
+    - crud
+    default_stacks:
+    - react
+    - nextjs
+    allowed_stacks:
+    - react
+    - nextjs
+    - flutter
+    - node
+    - python
+    recommended_tier:
+      basic-profile: mvp
+      production-profile: core
+    files:
+    - id: USER-PROFILE-MANAGEMENT_CONFIG
+      target_path: config/user-profile-management.{ext}
+      universal_template: tasks/user-profile-management/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: USER-PROFILE-MANAGEMENT_SERVICE
+      target_path: src/user-profile-management/service.{ext}
+      universal_template: tasks/user-profile-management/universal/code/USER-PROFILE-MANAGEMENT-SKELETON.tpl.md
+      merge_behavior: create
+    - id: USER-PROFILE-MANAGEMENT_DOCS
+      target_path: docs/USER-PROFILE-MANAGEMENT.md
+      universal_template: tasks/user-profile-management/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: USER-PROFILE-MANAGEMENT_TESTS
+      target_path: tests/user-profile-management/test_user-profile-management.{ext}
+      universal_template: tasks/user-profile-management/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: USER-PROFILE-MANAGEMENT_COMPONENT
+      target_path: src/user-profile-management/component.tsx
+      universal_template: tasks/user-profile-management/universal/code/USER-PROFILE-MANAGEMENT-SKELETON.tpl.md
+      stack_overrides:
+        nextjs: tasks/user-profile-management/stacks/nextjs/base/code/user_profile_management_component.tpl.tsx
+      merge_behavior: create
+    - id: USER-PROFILE-MANAGEMENT_SERVICE
+      target_path: src/user-profile-management/service.js
+      universal_template: tasks/user-profile-management/universal/code/USER-PROFILE-MANAGEMENT-SKELETON.tpl.md
+      stack_overrides:
+        node: tasks/user-profile-management/stacks/node/base/code/user_profile_management_service.tpl.js
+      merge_behavior: create
+    - id: USER-PROFILE-MANAGEMENT_SERVICE
+      target_path: src/user-profile-management/service.py
+      universal_template: tasks/user-profile-management/universal/code/USER-PROFILE-MANAGEMENT-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/user-profile-management/stacks/python/base/code/user_profile_management_service.tpl.py
+      merge_behavior: create
+    - id: USER-PROFILE-MANAGEMENT_COMPONENT
+      target_path: src/user-profile-management/component.jsx
+      universal_template: tasks/user-profile-management/universal/code/USER-PROFILE-MANAGEMENT-SKELETON.tpl.md
+      stack_overrides:
+        react: tasks/user-profile-management/stacks/react/base/code/user_profile_management_component.tpl.jsx
+      merge_behavior: create
+  billing-stripe:
+    description: Plans, subscriptions, metered billing, webhooks handling, invoices.
+    categories:
+    - billing
+    - integration
+    - saas
+    default_stacks:
+    - node
+    - python
+    allowed_stacks:
+    - node
+    - python
+    recommended_tier:
+      basic-billing: core
+      enterprise-billing: full
+    files:
+    - id: BILLING-STRIPE_SERVICE
+      target_path: src/billing-stripe/service.{ext}
+      universal_template: tasks/billing-stripe/universal/code/BILLING-STRIPE-SKELETON.tpl.md
+      merge_behavior: create
+    - id: BILLING-STRIPE_CONFIG
+      target_path: config/billing-stripe.{ext}
+      universal_template: tasks/billing-stripe/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: BILLING-STRIPE_DOCS
+      target_path: docs/BILLING-STRIPE.md
+      universal_template: tasks/billing-stripe/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: BILLING-STRIPE_TESTS
+      target_path: tests/billing-stripe/test_billing-stripe.{ext}
+      universal_template: tasks/billing-stripe/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: BILLING-STRIPE_SERVICE
+      target_path: src/billing-stripe/service.js
+      universal_template: tasks/billing-stripe/universal/code/BILLING-STRIPE-SKELETON.tpl.md
+      stack_overrides:
+        node: tasks/billing-stripe/stacks/node/base/code/billing_stripe_service.tpl.js
+      merge_behavior: create
+    - id: BILLING-STRIPE_SERVICE
+      target_path: src/billing-stripe/service.py
+      universal_template: tasks/billing-stripe/universal/code/BILLING-STRIPE-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/billing-stripe/stacks/python/base/code/billing_stripe_service.tpl.py
+      merge_behavior: create
+  team-workspaces:
+    description: Organizations, roles, invitations, member permissions.
+    categories:
+    - teams
+    - saas
+    - permissions
+    default_stacks:
+    - node
+    allowed_stacks:
+    - node
+    - react
+    - nextjs
+    recommended_tier:
+      basic-teams: core
+      enterprise-teams: full
+    files:
+    - id: TEAM-WORKSPACES_CONFIG
+      target_path: config/team-workspaces.{ext}
+      universal_template: tasks/team-workspaces/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: TEAM-WORKSPACES_SERVICE
+      target_path: src/team-workspaces/service.{ext}
+      universal_template: tasks/team-workspaces/universal/code/TEAM-WORKSPACES-SKELETON.tpl.md
+      merge_behavior: create
+    - id: TEAM-WORKSPACES_DOCS
+      target_path: docs/TEAM-WORKSPACES.md
+      universal_template: tasks/team-workspaces/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: TEAM-WORKSPACES_TESTS
+      target_path: tests/team-workspaces/test_team-workspaces.{ext}
+      universal_template: tasks/team-workspaces/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: TEAM-WORKSPACES_COMPONENT
+      target_path: src/team-workspaces/component.tsx
+      universal_template: tasks/team-workspaces/universal/code/TEAM-WORKSPACES-SKELETON.tpl.md
+      stack_overrides:
+        nextjs: tasks/team-workspaces/stacks/nextjs/base/code/team_workspaces_component.tpl.tsx
+      merge_behavior: create
+    - id: TEAM-WORKSPACES_SERVICE
+      target_path: src/team-workspaces/service.js
+      universal_template: tasks/team-workspaces/universal/code/TEAM-WORKSPACES-SKELETON.tpl.md
+      stack_overrides:
+        node: tasks/team-workspaces/stacks/node/base/code/team_workspaces_service.tpl.js
+      merge_behavior: create
+    - id: TEAM-WORKSPACES_COMPONENT
+      target_path: src/team-workspaces/component.jsx
+      universal_template: tasks/team-workspaces/universal/code/TEAM-WORKSPACES-SKELETON.tpl.md
+      stack_overrides:
+        react: tasks/team-workspaces/stacks/react/base/code/team_workspaces_component.tpl.jsx
+      merge_behavior: create
+  job-queue:
+    description: Generic job queue with workers, retries, dead-letter queues, metrics.
+    categories:
+    - automation
+    - background
+    - queue
+    default_stacks:
+    - go
+    - node
+    - python
+    allowed_stacks:
+    - go
+    - node
+    - python
+    recommended_tier:
+      basic-queue: core
+      enterprise-queue: full
+    files:
+    - id: JOB-QUEUE_CONFIG
+      target_path: config/job-queue.{ext}
+      universal_template: tasks/job-queue/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: JOB-QUEUE_SERVICE
+      target_path: src/job-queue/service.{ext}
+      universal_template: tasks/job-queue/universal/code/JOB-QUEUE-SKELETON.tpl.md
+      merge_behavior: create
+    - id: JOB-QUEUE_DOCS
+      target_path: docs/JOB-QUEUE.md
+      universal_template: tasks/job-queue/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: JOB-QUEUE_TESTS
+      target_path: tests/job-queue/test_job-queue.{ext}
+      universal_template: tasks/job-queue/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: JOB-QUEUE_SERVICE
+      target_path: src/job-queue/service.go
+      universal_template: tasks/job-queue/universal/code/JOB-QUEUE-SKELETON.tpl.md
+      stack_overrides:
+        go: tasks/job-queue/stacks/go/base/code/job_queue_service.tpl.go
+      merge_behavior: create
+    - id: JOB-QUEUE_SERVICE
+      target_path: src/job-queue/service.js
+      universal_template: tasks/job-queue/universal/code/JOB-QUEUE-SKELETON.tpl.md
+      stack_overrides:
+        node: tasks/job-queue/stacks/node/base/code/job_queue_service.tpl.js
+      merge_behavior: create
+    - id: JOB-QUEUE_SERVICE
+      target_path: src/job-queue/service.py
+      universal_template: tasks/job-queue/universal/code/JOB-QUEUE-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/job-queue/stacks/python/base/code/job_queue_service.tpl.py
+      merge_behavior: create
+  scheduled-tasks:
+    description: 'Cron-like jobs: cleanup, syncs, data refresh, email digests.'
+    categories:
+    - automation
+    - scheduling
+    - background
+    default_stacks:
+    - go
+    - python
+    allowed_stacks:
+    - go
+    - python
+    - node
+    recommended_tier:
+      basic-scheduler: mvp
+      production-scheduler: core
+    files:
+    - id: SCHEDULED-TASKS_CONFIG
+      target_path: config/scheduled-tasks.{ext}
+      universal_template: tasks/scheduled-tasks/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: SCHEDULED-TASKS_SERVICE
+      target_path: src/scheduled-tasks/service.{ext}
+      universal_template: tasks/scheduled-tasks/universal/code/SCHEDULED-TASKS-SKELETON.tpl.md
+      merge_behavior: create
+    - id: SCHEDULED-TASKS_DOCS
+      target_path: docs/SCHEDULED-TASKS.md
+      universal_template: tasks/scheduled-tasks/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: SCHEDULED-TASKS_TESTS
+      target_path: tests/scheduled-tasks/test_scheduled-tasks.{ext}
+      universal_template: tasks/scheduled-tasks/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: SCHEDULED-TASKS_SERVICE
+      target_path: src/scheduled-tasks/service.go
+      universal_template: tasks/scheduled-tasks/universal/code/SCHEDULED-TASKS-SKELETON.tpl.md
+      stack_overrides:
+        go: tasks/scheduled-tasks/stacks/go/base/code/scheduled_tasks_service.tpl.go
+      merge_behavior: create
+    - id: SCHEDULED-TASKS_SERVICE
+      target_path: src/scheduled-tasks/service.js
+      universal_template: tasks/scheduled-tasks/universal/code/SCHEDULED-TASKS-SKELETON.tpl.md
+      stack_overrides:
+        node: tasks/scheduled-tasks/stacks/node/base/code/scheduled_tasks_service.tpl.js
+      merge_behavior: create
+    - id: SCHEDULED-TASKS_SERVICE
+      target_path: src/scheduled-tasks/service.py
+      universal_template: tasks/scheduled-tasks/universal/code/SCHEDULED-TASKS-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/scheduled-tasks/stacks/python/base/code/scheduled_tasks_service.tpl.py
+      merge_behavior: create
+  notification-center:
+    description: 'Unified notifications: email, push, in-app, with preferences.'
+    categories:
+    - communication
+    - notifications
+    - integration
+    default_stacks:
+    - node
+    - python
+    allowed_stacks:
+    - node
+    - python
+    - react
+    - flutter
+    recommended_tier:
+      basic-notifications: core
+      enterprise-notifications: full
+    files:
+    - id: NOTIFICATION-CENTER_CONFIG
+      target_path: config/notification-center.{ext}
+      universal_template: tasks/notification-center/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: NOTIFICATION-CENTER_SERVICE
+      target_path: src/notification-center/service.{ext}
+      universal_template: tasks/notification-center/universal/code/NOTIFICATION-CENTER-SKELETON.tpl.md
+      merge_behavior: create
+    - id: NOTIFICATION-CENTER_DOCS
+      target_path: docs/NOTIFICATION-CENTER.md
+      universal_template: tasks/notification-center/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: NOTIFICATION-CENTER_TESTS
+      target_path: tests/notification-center/test_notification-center.{ext}
+      universal_template: tasks/notification-center/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: NOTIFICATION-CENTER_SERVICE
+      target_path: src/notification-center/service.js
+      universal_template: tasks/notification-center/universal/code/NOTIFICATION-CENTER-SKELETON.tpl.md
+      stack_overrides:
+        node: tasks/notification-center/stacks/node/base/code/notification_center_service.tpl.js
+      merge_behavior: create
+    - id: NOTIFICATION-CENTER_SERVICE
+      target_path: src/notification-center/service.py
+      universal_template: tasks/notification-center/universal/code/NOTIFICATION-CENTER-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/notification-center/stacks/python/base/code/notification_center_service.tpl.py
+      merge_behavior: create
+    - id: NOTIFICATION-CENTER_COMPONENT
+      target_path: src/notification-center/component.jsx
+      universal_template: tasks/notification-center/universal/code/NOTIFICATION-CENTER-SKELETON.tpl.md
+      stack_overrides:
+        react: tasks/notification-center/stacks/react/base/code/notification_center_component.tpl.jsx
+      merge_behavior: create
+  webhook-consumer:
+    description: Robust handling of third-party webhooks (Stripe, GitHub, etc.), idempotency,
+      logging.
+    categories:
+    - integration
+    - webhooks
+    - api
+    default_stacks:
+    - node
+    - python
+    allowed_stacks:
+    - node
+    - python
+    - go
+    recommended_tier:
+      basic-webhooks: core
+      enterprise-webhooks: full
+    files:
+    - id: WEBHOOK-CONSUMER_CONFIG
+      target_path: config/webhook-consumer.{ext}
+      universal_template: tasks/webhook-consumer/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: WEBHOOK-CONSUMER_SERVICE
+      target_path: src/webhook-consumer/service.{ext}
+      universal_template: tasks/webhook-consumer/universal/code/WEBHOOK-CONSUMER-SKELETON.tpl.md
+      merge_behavior: create
+    - id: WEBHOOK-CONSUMER_DOCS
+      target_path: docs/WEBHOOK-CONSUMER.md
+      universal_template: tasks/webhook-consumer/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: WEBHOOK-CONSUMER_TESTS
+      target_path: tests/webhook-consumer/test_webhook-consumer.{ext}
+      universal_template: tasks/webhook-consumer/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: WEBHOOK-CONSUMER_SERVICE
+      target_path: src/webhook-consumer/service.go
+      universal_template: tasks/webhook-consumer/universal/code/WEBHOOK-CONSUMER-SKELETON.tpl.md
+      stack_overrides:
+        go: tasks/webhook-consumer/stacks/go/base/code/webhook_consumer_service.tpl.go
+      merge_behavior: create
+    - id: WEBHOOK-CONSUMER_SERVICE
+      target_path: src/webhook-consumer/service.js
+      universal_template: tasks/webhook-consumer/universal/code/WEBHOOK-CONSUMER-SKELETON.tpl.md
+      stack_overrides:
+        node: tasks/webhook-consumer/stacks/node/base/code/webhook_consumer_service.tpl.js
+      merge_behavior: create
+    - id: WEBHOOK-CONSUMER_SERVICE
+      target_path: src/webhook-consumer/service.py
+      universal_template: tasks/webhook-consumer/universal/code/WEBHOOK-CONSUMER-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/webhook-consumer/stacks/python/base/code/webhook_consumer_service.tpl.py
+      merge_behavior: create
+  file-processing-pipeline:
+    description: Upload → validate → transform → store → index.
+    categories:
+    - files
+    - processing
+    - pipeline
+    default_stacks:
+    - python
+    - go
+    allowed_stacks:
+    - python
+    - go
+    - node
+    - r
+    recommended_tier:
+      basic-processing: core
+      enterprise-processing: full
+    files:
+    - id: FILE-PROCESSING-PIPELINE_CONFIG
+      target_path: config/file-processing-pipeline.{ext}
+      universal_template: tasks/file-processing-pipeline/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: FILE-PROCESSING-PIPELINE_SERVICE
+      target_path: src/file-processing-pipeline/service.{ext}
+      universal_template: tasks/file-processing-pipeline/universal/code/FILE-PROCESSING-PIPELINE-SKELETON.tpl.md
+      merge_behavior: create
+    - id: FILE-PROCESSING-PIPELINE_DOCS
+      target_path: docs/FILE-PROCESSING-PIPELINE.md
+      universal_template: tasks/file-processing-pipeline/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: FILE-PROCESSING-PIPELINE_TESTS
+      target_path: tests/file-processing-pipeline/test_file-processing-pipeline.{ext}
+      universal_template: tasks/file-processing-pipeline/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: FILE-PROCESSING-PIPELINE_SERVICE
+      target_path: src/file-processing-pipeline/service.go
+      universal_template: tasks/file-processing-pipeline/universal/code/FILE-PROCESSING-PIPELINE-SKELETON.tpl.md
+      stack_overrides:
+        go: tasks/file-processing-pipeline/stacks/go/base/code/file_processing_pipeline_service.tpl.go
+      merge_behavior: create
+    - id: FILE-PROCESSING-PIPELINE_SERVICE
+      target_path: src/file-processing-pipeline/service.js
+      universal_template: tasks/file-processing-pipeline/universal/code/FILE-PROCESSING-PIPELINE-SKELETON.tpl.md
+      stack_overrides:
+        node: tasks/file-processing-pipeline/stacks/node/base/code/file_processing_pipeline_service.tpl.js
+      merge_behavior: create
+    - id: FILE-PROCESSING-PIPELINE_SERVICE
+      target_path: src/file-processing-pipeline/service.py
+      universal_template: tasks/file-processing-pipeline/universal/code/FILE-PROCESSING-PIPELINE-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/file-processing-pipeline/stacks/python/base/code/file_processing_pipeline_service.tpl.py
+      merge_behavior: create
+  analytics-event-pipeline:
+    description: Collect events, batch/stream, aggregate, expose to dashboard.
+    categories:
+    - analytics
+    - events
+    - data
+    default_stacks:
+    - node
+    - go
+    allowed_stacks:
+    - node
+    - go
+    - sql
+    - r
+    recommended_tier:
+      basic-analytics: core
+      enterprise-analytics: full
+    files:
+    - id: ANALYTICS-EVENT-PIPELINE_SERVICE
+      target_path: src/analytics-event-pipeline/service.{ext}
+      universal_template: tasks/analytics-event-pipeline/universal/code/ANALYTICS-EVENT-PIPELINE-SKELETON.tpl.md
+      merge_behavior: create
+    - id: ANALYTICS-EVENT-PIPELINE_CONFIG
+      target_path: config/analytics-event-pipeline.{ext}
+      universal_template: tasks/analytics-event-pipeline/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: ANALYTICS-EVENT-PIPELINE_DOCS
+      target_path: docs/ANALYTICS-EVENT-PIPELINE.md
+      universal_template: tasks/analytics-event-pipeline/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: ANALYTICS-EVENT-PIPELINE_TESTS
+      target_path: tests/analytics-event-pipeline/test_analytics-event-pipeline.{ext}
+      universal_template: tasks/analytics-event-pipeline/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: ANALYTICS-EVENT-PIPELINE_SERVICE
+      target_path: src/analytics-event-pipeline/service.go
+      universal_template: tasks/analytics-event-pipeline/universal/code/ANALYTICS-EVENT-PIPELINE-SKELETON.tpl.md
+      stack_overrides:
+        go: tasks/analytics-event-pipeline/stacks/go/base/code/analytics_event_pipeline_service.tpl.go
+      merge_behavior: create
+    - id: ANALYTICS-EVENT-PIPELINE_SERVICE
+      target_path: src/analytics-event-pipeline/service.js
+      universal_template: tasks/analytics-event-pipeline/universal/code/ANALYTICS-EVENT-PIPELINE-SKELETON.tpl.md
+      stack_overrides:
+        node: tasks/analytics-event-pipeline/stacks/node/base/code/analytics_event_pipeline_service.tpl.js
+      merge_behavior: create
+  data-exploration-report:
+    description: 'EDA pipeline: load data, clean, generate summary plots and a report.'
+    categories:
+    - analytics
+    - data-science
+    - reporting
+    default_stacks:
+    - r
+    - python
+    allowed_stacks:
+    - r
+    - python
+    recommended_tier:
+      basic-exploration: mvp
+      production-exploration: core
+    files:
+    - id: DATA-EXPLORATION-REPORT_CONFIG
+      target_path: config/data-exploration-report.{ext}
+      universal_template: tasks/data-exploration-report/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: DATA-EXPLORATION-REPORT_SERVICE
+      target_path: src/data-exploration-report/service.{ext}
+      universal_template: tasks/data-exploration-report/universal/code/DATA-EXPLORATION-REPORT-SKELETON.tpl.md
+      merge_behavior: create
+    - id: DATA-EXPLORATION-REPORT_DOCS
+      target_path: docs/DATA-EXPLORATION-REPORT.md
+      universal_template: tasks/data-exploration-report/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: DATA-EXPLORATION-REPORT_TESTS
+      target_path: tests/data-exploration-report/test_data-exploration-report.{ext}
+      universal_template: tasks/data-exploration-report/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: DATA-EXPLORATION-REPORT_SERVICE
+      target_path: src/data-exploration-report/service.py
+      universal_template: tasks/data-exploration-report/universal/code/DATA-EXPLORATION-REPORT-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/data-exploration-report/stacks/python/base/code/data_exploration_report_service.tpl.py
+      merge_behavior: create
+  forecasting-engine:
+    description: 'Time-series forecasting: trends, seasonality, prediction intervals.'
+    categories:
+    - analytics
+    - forecasting
+    - ml
+    default_stacks:
+    - r
+    - python
+    allowed_stacks:
+    - r
+    - python
+    recommended_tier:
+      basic-forecasting: core
+      enterprise-forecasting: full
+    files:
+    - id: FORECASTING-ENGINE_CONFIG
+      target_path: config/forecasting-engine.{ext}
+      universal_template: tasks/forecasting-engine/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: FORECASTING-ENGINE_SERVICE
+      target_path: src/forecasting-engine/service.{ext}
+      universal_template: tasks/forecasting-engine/universal/code/FORECASTING-ENGINE-SKELETON.tpl.md
+      merge_behavior: create
+    - id: FORECASTING-ENGINE_DOCS
+      target_path: docs/FORECASTING-ENGINE.md
+      universal_template: tasks/forecasting-engine/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: FORECASTING-ENGINE_TESTS
+      target_path: tests/forecasting-engine/test_forecasting-engine.{ext}
+      universal_template: tasks/forecasting-engine/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: FORECASTING-ENGINE_SERVICE
+      target_path: src/forecasting-engine/service.py
+      universal_template: tasks/forecasting-engine/universal/code/FORECASTING-ENGINE-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/forecasting-engine/stacks/python/base/code/forecasting_engine_service.tpl.py
+      merge_behavior: create
+  segmentation-clustering:
+    description: Cluster users/keywords/products/content into segments.
+    categories:
+    - analytics
+    - ml
+    - segmentation
+    default_stacks:
+    - python
+    - r
+    allowed_stacks:
+    - python
+    - r
+    recommended_tier:
+      basic-clustering: core
+      enterprise-clustering: full
+    files:
+    - id: SEGMENTATION-CLUSTERING_CONFIG
+      target_path: config/segmentation-clustering.{ext}
+      universal_template: tasks/segmentation-clustering/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: SEGMENTATION-CLUSTERING_SERVICE
+      target_path: src/segmentation-clustering/service.{ext}
+      universal_template: tasks/segmentation-clustering/universal/code/SEGMENTATION-CLUSTERING-SKELETON.tpl.md
+      merge_behavior: create
+    - id: SEGMENTATION-CLUSTERING_DOCS
+      target_path: docs/SEGMENTATION-CLUSTERING.md
+      universal_template: tasks/segmentation-clustering/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: SEGMENTATION-CLUSTERING_TESTS
+      target_path: tests/segmentation-clustering/test_segmentation-clustering.{ext}
+      universal_template: tasks/segmentation-clustering/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: SEGMENTATION-CLUSTERING_SERVICE
+      target_path: src/segmentation-clustering/service.py
+      universal_template: tasks/segmentation-clustering/universal/code/SEGMENTATION-CLUSTERING-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/segmentation-clustering/stacks/python/base/code/segmentation_clustering_service.tpl.py
+      merge_behavior: create
+  ab-test-analysis:
+    description: Analyze A/B test results, significance, uplift, power.
+    categories:
+    - analytics
+    - testing
+    - statistics
+    default_stacks:
+    - r
+    - python
+    allowed_stacks:
+    - r
+    - python
+    recommended_tier:
+      basic-analysis: core
+      enterprise-analysis: full
+    files:
+    - id: AB-TEST-ANALYSIS_SERVICE
+      target_path: src/ab-test-analysis/service.{ext}
+      universal_template: tasks/ab-test-analysis/universal/code/AB-TEST-ANALYSIS-SKELETON.tpl.md
+      merge_behavior: create
+    - id: AB-TEST-ANALYSIS_CONFIG
+      target_path: config/ab-test-analysis.{ext}
+      universal_template: tasks/ab-test-analysis/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: AB-TEST-ANALYSIS_DOCS
+      target_path: docs/AB-TEST-ANALYSIS.md
+      universal_template: tasks/ab-test-analysis/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: AB-TEST-ANALYSIS_TESTS
+      target_path: tests/ab-test-analysis/test_ab-test-analysis.{ext}
+      universal_template: tasks/ab-test-analysis/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: AB-TEST-ANALYSIS_SERVICE
+      target_path: src/ab-test-analysis/service.py
+      universal_template: tasks/ab-test-analysis/universal/code/AB-TEST-ANALYSIS-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/ab-test-analysis/stacks/python/base/code/ab_test_analysis_service.tpl.py
+      merge_behavior: create
+  embedding-index:
+    description: Create and query vector index for semantic search/retrieval.
+    categories:
+    - ml
+    - search
+    - vectors
+    default_stacks:
+    - python
+    - node
+    allowed_stacks:
+    - python
+    - node
+    - sql
+    recommended_tier:
+      basic-embeddings: core
+      enterprise-embeddings: full
+    files:
+    - id: EMBEDDING-INDEX_CONFIG
+      target_path: config/embedding-index.{ext}
+      universal_template: tasks/embedding-index/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: EMBEDDING-INDEX_SERVICE
+      target_path: src/embedding-index/service.{ext}
+      universal_template: tasks/embedding-index/universal/code/EMBEDDING-INDEX-SKELETON.tpl.md
+      merge_behavior: create
+    - id: EMBEDDING-INDEX_DOCS
+      target_path: docs/EMBEDDING-INDEX.md
+      universal_template: tasks/embedding-index/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: EMBEDDING-INDEX_TESTS
+      target_path: tests/embedding-index/test_embedding-index.{ext}
+      universal_template: tasks/embedding-index/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: EMBEDDING-INDEX_SERVICE
+      target_path: src/embedding-index/service.js
+      universal_template: tasks/embedding-index/universal/code/EMBEDDING-INDEX-SKELETON.tpl.md
+      stack_overrides:
+        node: tasks/embedding-index/stacks/node/base/code/embedding_index_service.tpl.js
+      merge_behavior: create
+    - id: EMBEDDING-INDEX_SERVICE
+      target_path: src/embedding-index/service.py
+      universal_template: tasks/embedding-index/universal/code/EMBEDDING-INDEX-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/embedding-index/stacks/python/base/code/embedding_index_service.tpl.py
+      merge_behavior: create
+  seo-keyword-research:
+    description: Fetch SERPs, extract keywords, cluster by intent, difficulty scoring.
+    categories:
+    - seo
+    - research
+    - data
+    default_stacks:
+    - python
+    - r
+    allowed_stacks:
+    - python
+    - r
+    - sql
+    recommended_tier:
+      basic-research: core
+      enterprise-research: full
+    files:
+    - id: SEO-KEYWORD-RESEARCH_CONFIG
+      target_path: config/seo-keyword-research.{ext}
+      universal_template: tasks/seo-keyword-research/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: SEO-KEYWORD-RESEARCH_SERVICE
+      target_path: src/seo-keyword-research/service.{ext}
+      universal_template: tasks/seo-keyword-research/universal/code/SEO-KEYWORD-RESEARCH-SKELETON.tpl.md
+      merge_behavior: create
+    - id: SEO-KEYWORD-RESEARCH_DOCS
+      target_path: docs/SEO-KEYWORD-RESEARCH.md
+      universal_template: tasks/seo-keyword-research/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: SEO-KEYWORD-RESEARCH_TESTS
+      target_path: tests/seo-keyword-research/test_seo-keyword-research.{ext}
+      universal_template: tasks/seo-keyword-research/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: SEO-KEYWORD-RESEARCH_SERVICE
+      target_path: src/seo-keyword-research/service.py
+      universal_template: tasks/seo-keyword-research/universal/code/SEO-KEYWORD-RESEARCH-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/seo-keyword-research/stacks/python/base/code/seo_keyword_research_service.tpl.py
+      merge_behavior: create
+  seo-onpage-auditor:
+    description: Analyze title/meta/H1/content, lighthouse-like scores, structured
+      suggestions.
+    categories:
+    - seo
+    - auditing
+    - analysis
+    default_stacks:
+    - python
+    allowed_stacks:
+    - python
+    - nextjs
+    - react
+    recommended_tier:
+      basic-audit: core
+    files:
+    - id: SEO-ONPAGE-AUDITOR_CONFIG
+      target_path: config/seo-onpage-auditor.{ext}
+      universal_template: tasks/seo-onpage-auditor/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: SEO-ONPAGE-AUDITOR_SERVICE
+      target_path: src/seo-onpage-auditor/service.{ext}
+      universal_template: tasks/seo-onpage-auditor/universal/code/SEO-ONPAGE-AUDITOR-SKELETON.tpl.md
+      merge_behavior: create
+    - id: SEO-ONPAGE-AUDITOR_DOCS
+      target_path: docs/SEO-ONPAGE-AUDITOR.md
+      universal_template: tasks/seo-onpage-auditor/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: SEO-ONPAGE-AUDITOR_TESTS
+      target_path: tests/seo-onpage-auditor/test_seo-onpage-auditor.{ext}
+      universal_template: tasks/seo-onpage-auditor/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: SEO-ONPAGE-AUDITOR_COMPONENT
+      target_path: src/seo-onpage-auditor/component.tsx
+      universal_template: tasks/seo-onpage-auditor/universal/code/SEO-ONPAGE-AUDITOR-SKELETON.tpl.md
+      stack_overrides:
+        nextjs: tasks/seo-onpage-auditor/stacks/nextjs/base/code/seo_onpage_auditor_component.tpl.tsx
+      merge_behavior: create
+    - id: SEO-ONPAGE-AUDITOR_SERVICE
+      target_path: src/seo-onpage-auditor/service.py
+      universal_template: tasks/seo-onpage-auditor/universal/code/SEO-ONPAGE-AUDITOR-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/seo-onpage-auditor/stacks/python/base/code/seo_onpage_auditor_service.tpl.py
+      merge_behavior: create
+    - id: SEO-ONPAGE-AUDITOR_COMPONENT
+      target_path: src/seo-onpage-auditor/component.jsx
+      universal_template: tasks/seo-onpage-auditor/universal/code/SEO-ONPAGE-AUDITOR-SKELETON.tpl.md
+      stack_overrides:
+        react: tasks/seo-onpage-auditor/stacks/react/base/code/seo_onpage_auditor_component.tpl.jsx
+      merge_behavior: create
+  seo-rank-tracker:
+    description: Track keyword rankings over time per domain, visualize trends.
+    categories:
+    - seo
+    - tracking
+    - analytics
+    default_stacks:
+    - python
+    - go
+    allowed_stacks:
+    - python
+    - go
+    - sql
+    - r
+    - nextjs
+    recommended_tier:
+      basic-tracking: core
+      enterprise-tracking: full
+    files:
+    - id: SEO-RANK-TRACKER_CONFIG
+      target_path: config/seo-rank-tracker.{ext}
+      universal_template: tasks/seo-rank-tracker/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: SEO-RANK-TRACKER_SERVICE
+      target_path: src/seo-rank-tracker/service.{ext}
+      universal_template: tasks/seo-rank-tracker/universal/code/SEO-RANK-TRACKER-SKELETON.tpl.md
+      merge_behavior: create
+    - id: SEO-RANK-TRACKER_DOCS
+      target_path: docs/SEO-RANK-TRACKER.md
+      universal_template: tasks/seo-rank-tracker/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: SEO-RANK-TRACKER_TESTS
+      target_path: tests/seo-rank-tracker/test_seo-rank-tracker.{ext}
+      universal_template: tasks/seo-rank-tracker/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: SEO-RANK-TRACKER_SERVICE
+      target_path: src/seo-rank-tracker/service.go
+      universal_template: tasks/seo-rank-tracker/universal/code/SEO-RANK-TRACKER-SKELETON.tpl.md
+      stack_overrides:
+        go: tasks/seo-rank-tracker/stacks/go/base/code/seo_rank_tracker_service.tpl.go
+      merge_behavior: create
+    - id: SEO-RANK-TRACKER_COMPONENT
+      target_path: src/seo-rank-tracker/component.tsx
+      universal_template: tasks/seo-rank-tracker/universal/code/SEO-RANK-TRACKER-SKELETON.tpl.md
+      stack_overrides:
+        nextjs: tasks/seo-rank-tracker/stacks/nextjs/base/code/seo_rank_tracker_component.tpl.tsx
+      merge_behavior: create
+    - id: SEO-RANK-TRACKER_SERVICE
+      target_path: src/seo-rank-tracker/service.py
+      universal_template: tasks/seo-rank-tracker/universal/code/SEO-RANK-TRACKER-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/seo-rank-tracker/stacks/python/base/code/seo_rank_tracker_service.tpl.py
+      merge_behavior: create
+  content-brief-generator:
+    description: Given keyword sets → outline + headings + questions + internal link
+      suggestions.
+    categories:
+    - content
+    - seo
+    - generation
+    default_stacks:
+    - python
+    allowed_stacks:
+    - python
+    - nextjs
+    recommended_tier:
+      basic-generation: mvp
+      production-generation: core
+    files:
+    - id: CONTENT-BRIEF-GENERATOR_CONFIG
+      target_path: config/content-brief-generator.{ext}
+      universal_template: tasks/content-brief-generator/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: CONTENT-BRIEF-GENERATOR_SERVICE
+      target_path: src/content-brief-generator/service.{ext}
+      universal_template: tasks/content-brief-generator/universal/code/CONTENT-BRIEF-GENERATOR-SKELETON.tpl.md
+      merge_behavior: create
+    - id: CONTENT-BRIEF-GENERATOR_DOCS
+      target_path: docs/CONTENT-BRIEF-GENERATOR.md
+      universal_template: tasks/content-brief-generator/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: CONTENT-BRIEF-GENERATOR_TESTS
+      target_path: tests/content-brief-generator/test_content-brief-generator.{ext}
+      universal_template: tasks/content-brief-generator/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: CONTENT-BRIEF-GENERATOR_COMPONENT
+      target_path: src/content-brief-generator/component.tsx
+      universal_template: tasks/content-brief-generator/universal/code/CONTENT-BRIEF-GENERATOR-SKELETON.tpl.md
+      stack_overrides:
+        nextjs: tasks/content-brief-generator/stacks/nextjs/base/code/content_brief_generator_component.tpl.tsx
+      merge_behavior: create
+    - id: CONTENT-BRIEF-GENERATOR_SERVICE
+      target_path: src/content-brief-generator/service.py
+      universal_template: tasks/content-brief-generator/universal/code/CONTENT-BRIEF-GENERATOR-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/content-brief-generator/stacks/python/base/code/content_brief_generator_service.tpl.py
+      merge_behavior: create
+  email-campaign-engine:
+    description: Segment lists, define campaigns, send, track opens/clicks, basic
+      automations.
+    categories:
+    - email
+    - marketing
+    - automation
+    default_stacks:
+    - node
+    - python
+    allowed_stacks:
+    - node
+    - python
+    - react
+    - nextjs
+    - sql
+    recommended_tier:
+      basic-campaigns: core
+      enterprise-campaigns: full
+    files:
+    - id: EMAIL-CAMPAIGN-ENGINE_CONFIG
+      target_path: config/email-campaign-engine.{ext}
+      universal_template: tasks/email-campaign-engine/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: EMAIL-CAMPAIGN-ENGINE_SERVICE
+      target_path: src/email-campaign-engine/service.{ext}
+      universal_template: tasks/email-campaign-engine/universal/code/EMAIL-CAMPAIGN-ENGINE-SKELETON.tpl.md
+      merge_behavior: create
+    - id: EMAIL-CAMPAIGN-ENGINE_DOCS
+      target_path: docs/EMAIL-CAMPAIGN-ENGINE.md
+      universal_template: tasks/email-campaign-engine/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: EMAIL-CAMPAIGN-ENGINE_TESTS
+      target_path: tests/email-campaign-engine/test_email-campaign-engine.{ext}
+      universal_template: tasks/email-campaign-engine/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: EMAIL-CAMPAIGN-ENGINE_COMPONENT
+      target_path: src/email-campaign-engine/component.tsx
+      universal_template: tasks/email-campaign-engine/universal/code/EMAIL-CAMPAIGN-ENGINE-SKELETON.tpl.md
+      stack_overrides:
+        nextjs: tasks/email-campaign-engine/stacks/nextjs/base/code/email_campaign_engine_component.tpl.tsx
+      merge_behavior: create
+    - id: EMAIL-CAMPAIGN-ENGINE_SERVICE
+      target_path: src/email-campaign-engine/service.js
+      universal_template: tasks/email-campaign-engine/universal/code/EMAIL-CAMPAIGN-ENGINE-SKELETON.tpl.md
+      stack_overrides:
+        node: tasks/email-campaign-engine/stacks/node/base/code/email_campaign_engine_service.tpl.js
+      merge_behavior: create
+    - id: EMAIL-CAMPAIGN-ENGINE_SERVICE
+      target_path: src/email-campaign-engine/service.py
+      universal_template: tasks/email-campaign-engine/universal/code/EMAIL-CAMPAIGN-ENGINE-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/email-campaign-engine/stacks/python/base/code/email_campaign_engine_service.tpl.py
+      merge_behavior: create
+    - id: EMAIL-CAMPAIGN-ENGINE_COMPONENT
+      target_path: src/email-campaign-engine/component.jsx
+      universal_template: tasks/email-campaign-engine/universal/code/EMAIL-CAMPAIGN-ENGINE-SKELETON.tpl.md
+      stack_overrides:
+        react: tasks/email-campaign-engine/stacks/react/base/code/email_campaign_engine_component.tpl.jsx
+      merge_behavior: create
+  link-monitoring:
+    description: Track backlinks, broken links, redirects, domain health.
+    categories:
+    - seo
+    - monitoring
+    - links
+    default_stacks:
+    - go
+    - python
+    allowed_stacks:
+    - go
+    - python
+    - sql
+    - nextjs
+    recommended_tier:
+      basic-monitoring: core
+      enterprise-monitoring: full
+    files:
+    - id: LINK-MONITORING_CONFIG
+      target_path: config/link-monitoring.{ext}
+      universal_template: tasks/link-monitoring/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: LINK-MONITORING_SERVICE
+      target_path: src/link-monitoring/service.{ext}
+      universal_template: tasks/link-monitoring/universal/code/LINK-MONITORING-SKELETON.tpl.md
+      merge_behavior: create
+    - id: LINK-MONITORING_DOCS
+      target_path: docs/LINK-MONITORING.md
+      universal_template: tasks/link-monitoring/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: LINK-MONITORING_TESTS
+      target_path: tests/link-monitoring/test_link-monitoring.{ext}
+      universal_template: tasks/link-monitoring/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: LINK-MONITORING_SERVICE
+      target_path: src/link-monitoring/service.go
+      universal_template: tasks/link-monitoring/universal/code/LINK-MONITORING-SKELETON.tpl.md
+      stack_overrides:
+        go: tasks/link-monitoring/stacks/go/base/code/link_monitoring_service.tpl.go
+      merge_behavior: create
+    - id: LINK-MONITORING_COMPONENT
+      target_path: src/link-monitoring/component.tsx
+      universal_template: tasks/link-monitoring/universal/code/LINK-MONITORING-SKELETON.tpl.md
+      stack_overrides:
+        nextjs: tasks/link-monitoring/stacks/nextjs/base/code/link_monitoring_component.tpl.tsx
+      merge_behavior: create
+    - id: LINK-MONITORING_SERVICE
+      target_path: src/link-monitoring/service.py
+      universal_template: tasks/link-monitoring/universal/code/LINK-MONITORING-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/link-monitoring/stacks/python/base/code/link_monitoring_service.tpl.py
+      merge_behavior: create
+  crud-module:
+    description: 'Generic CRUD stack: model definition → API → forms → tables → filters.'
+    categories:
+    - crud
+    - scaffold
+    - productivity
+    default_stacks:
+    - node
+    - python
+    allowed_stacks:
+    - node
+    - python
+    - go
+    - react
+    - nextjs
+    - flutter
+    recommended_tier:
+      basic-crud: mvp
+      production-crud: core
+      enterprise-crud: full
+    files:
+    - id: CRUD-MODULE_CONFIG
+      target_path: config/crud-module.{ext}
+      universal_template: tasks/crud-module/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: CRUD-MODULE_SERVICE
+      target_path: src/crud-module/service.{ext}
+      universal_template: tasks/crud-module/universal/code/CRUD-MODULE-SKELETON.tpl.md
+      merge_behavior: create
+    - id: CRUD-MODULE_DOCS
+      target_path: docs/CRUD-MODULE.md
+      universal_template: tasks/crud-module/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: CRUD-MODULE_TESTS
+      target_path: tests/crud-module/test_crud-module.{ext}
+      universal_template: tasks/crud-module/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: CRUD-MODULE_SERVICE
+      target_path: src/crud-module/service.go
+      universal_template: tasks/crud-module/universal/code/CRUD-MODULE-SKELETON.tpl.md
+      stack_overrides:
+        go: tasks/crud-module/stacks/go/base/code/crud_module_service.tpl.go
+      merge_behavior: create
+    - id: CRUD-MODULE_COMPONENT
+      target_path: src/crud-module/component.tsx
+      universal_template: tasks/crud-module/universal/code/CRUD-MODULE-SKELETON.tpl.md
+      stack_overrides:
+        nextjs: tasks/crud-module/stacks/nextjs/base/code/crud_module_component.tpl.tsx
+      merge_behavior: create
+    - id: CRUD-MODULE_SERVICE
+      target_path: src/crud-module/service.js
+      universal_template: tasks/crud-module/universal/code/CRUD-MODULE-SKELETON.tpl.md
+      stack_overrides:
+        node: tasks/crud-module/stacks/node/base/code/crud_module_service.tpl.js
+      merge_behavior: create
+    - id: CRUD-MODULE_SERVICE
+      target_path: src/crud-module/service.py
+      universal_template: tasks/crud-module/universal/code/CRUD-MODULE-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/crud-module/stacks/python/base/code/crud_module_service.tpl.py
+      merge_behavior: create
+    - id: CRUD-MODULE_COMPONENT
+      target_path: src/crud-module/component.jsx
+      universal_template: tasks/crud-module/universal/code/CRUD-MODULE-SKELETON.tpl.md
+      stack_overrides:
+        react: tasks/crud-module/stacks/react/base/code/crud_module_component.tpl.jsx
+      merge_behavior: create
+  admin-panel:
+    description: Superuser UI for managing users, config, logs, feature flags.
+    categories:
+    - admin
+    - management
+    - ui
+    default_stacks:
+    - nextjs
+    - react
+    allowed_stacks:
+    - nextjs
+    - react
+    - node
+    - go
+    recommended_tier:
+      basic-admin: core
+      enterprise-admin: full
+    files:
+    - id: ADMIN-PANEL_SERVICE
+      target_path: src/admin-panel/service.{ext}
+      universal_template: tasks/admin-panel/universal/code/ADMIN-PANEL-SKELETON.tpl.md
+      merge_behavior: create
+    - id: ADMIN-PANEL_CONFIG
+      target_path: config/admin-panel.{ext}
+      universal_template: tasks/admin-panel/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: ADMIN-PANEL_DOCS
+      target_path: docs/ADMIN-PANEL.md
+      universal_template: tasks/admin-panel/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: ADMIN-PANEL_TESTS
+      target_path: tests/admin-panel/test_admin-panel.{ext}
+      universal_template: tasks/admin-panel/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: ADMIN-PANEL_SERVICE
+      target_path: src/admin-panel/service.go
+      universal_template: tasks/admin-panel/universal/code/ADMIN-PANEL-SKELETON.tpl.md
+      stack_overrides:
+        go: tasks/admin-panel/stacks/go/base/code/admin_panel_service.tpl.go
+      merge_behavior: create
+    - id: ADMIN-PANEL_COMPONENT
+      target_path: src/admin-panel/component.tsx
+      universal_template: tasks/admin-panel/universal/code/ADMIN-PANEL-SKELETON.tpl.md
+      stack_overrides:
+        nextjs: tasks/admin-panel/stacks/nextjs/base/code/admin_panel_component.tpl.tsx
+      merge_behavior: create
+    - id: ADMIN-PANEL_SERVICE
+      target_path: src/admin-panel/service.js
+      universal_template: tasks/admin-panel/universal/code/ADMIN-PANEL-SKELETON.tpl.md
+      stack_overrides:
+        node: tasks/admin-panel/stacks/node/base/code/admin_panel_service.tpl.js
+      merge_behavior: create
+    - id: ADMIN-PANEL_COMPONENT
+      target_path: src/admin-panel/component.jsx
+      universal_template: tasks/admin-panel/universal/code/ADMIN-PANEL-SKELETON.tpl.md
+      stack_overrides:
+        react: tasks/admin-panel/stacks/react/base/code/admin_panel_component.tpl.jsx
+      merge_behavior: create
+  feature-flags:
+    description: Toggle features by user, cohort, or environment with UI + SDK.
+    categories:
+    - features
+    - flags
+    - management
+    default_stacks:
+    - node
+    - go
+    allowed_stacks:
+    - node
+    - go
+    - react
+    - nextjs
+    recommended_tier:
+      basic-flags: core
+      enterprise-flags: full
+    files:
+    - id: FEATURE-FLAGS_CONFIG
+      target_path: config/feature-flags.{ext}
+      universal_template: tasks/feature-flags/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: FEATURE-FLAGS_SERVICE
+      target_path: src/feature-flags/service.{ext}
+      universal_template: tasks/feature-flags/universal/code/FEATURE-FLAGS-SKELETON.tpl.md
+      merge_behavior: create
+    - id: FEATURE-FLAGS_DOCS
+      target_path: docs/FEATURE-FLAGS.md
+      universal_template: tasks/feature-flags/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: FEATURE-FLAGS_TESTS
+      target_path: tests/feature-flags/test_feature-flags.{ext}
+      universal_template: tasks/feature-flags/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: FEATURE-FLAGS_SERVICE
+      target_path: src/feature-flags/service.go
+      universal_template: tasks/feature-flags/universal/code/FEATURE-FLAGS-SKELETON.tpl.md
+      stack_overrides:
+        go: tasks/feature-flags/stacks/go/base/code/feature_flags_service.tpl.go
+      merge_behavior: create
+    - id: FEATURE-FLAGS_COMPONENT
+      target_path: src/feature-flags/component.tsx
+      universal_template: tasks/feature-flags/universal/code/FEATURE-FLAGS-SKELETON.tpl.md
+      stack_overrides:
+        nextjs: tasks/feature-flags/stacks/nextjs/base/code/feature_flags_component.tpl.tsx
+      merge_behavior: create
+    - id: FEATURE-FLAGS_SERVICE
+      target_path: src/feature-flags/service.js
+      universal_template: tasks/feature-flags/universal/code/FEATURE-FLAGS-SKELETON.tpl.md
+      stack_overrides:
+        node: tasks/feature-flags/stacks/node/base/code/feature_flags_service.tpl.js
+      merge_behavior: create
+    - id: FEATURE-FLAGS_COMPONENT
+      target_path: src/feature-flags/component.jsx
+      universal_template: tasks/feature-flags/universal/code/FEATURE-FLAGS-SKELETON.tpl.md
+      stack_overrides:
+        react: tasks/feature-flags/stacks/react/base/code/feature_flags_component.tpl.jsx
+      merge_behavior: create
+  multitenancy:
+    description: 'Workspace/tenant isolation: per-tenant data, routing, billing hooks.'
+    categories:
+    - multitenancy
+    - saas
+    - architecture
+    default_stacks:
+    - node
+    - go
+    allowed_stacks:
+    - node
+    - go
+    - sql
+    recommended_tier:
+      basic-multitenancy: full
+    files:
+    - id: MULTITENANCY_CONFIG
+      target_path: config/multitenancy.{ext}
+      universal_template: tasks/multitenancy/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: MULTITENANCY_SERVICE
+      target_path: src/multitenancy/service.{ext}
+      universal_template: tasks/multitenancy/universal/code/MULTITENANCY-SKELETON.tpl.md
+      merge_behavior: create
+    - id: MULTITENANCY_DOCS
+      target_path: docs/MULTITENANCY.md
+      universal_template: tasks/multitenancy/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: MULTITENANCY_TESTS
+      target_path: tests/multitenancy/test_multitenancy.{ext}
+      universal_template: tasks/multitenancy/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: MULTITENANCY_SERVICE
+      target_path: src/multitenancy/service.go
+      universal_template: tasks/multitenancy/universal/code/MULTITENANCY-SKELETON.tpl.md
+      stack_overrides:
+        go: tasks/multitenancy/stacks/go/base/code/multitenancy_service.tpl.go
+      merge_behavior: create
+    - id: MULTITENANCY_SERVICE
+      target_path: src/multitenancy/service.js
+      universal_template: tasks/multitenancy/universal/code/MULTITENANCY-SKELETON.tpl.md
+      stack_overrides:
+        node: tasks/multitenancy/stacks/node/base/code/multitenancy_service.tpl.js
+      merge_behavior: create
+  audit-logging:
+    description: Who did what, when, on which object, with replayable logs.
+    categories:
+    - audit
+    - logging
+    - security
+    default_stacks:
+    - node
+    - go
+    - python
+    allowed_stacks:
+    - node
+    - go
+    - python
+    - sql
+    recommended_tier:
+      basic-audit: core
+      enterprise-audit: full
+    files:
+    - id: AUDIT-LOGGING_SERVICE
+      target_path: src/audit-logging/service.{ext}
+      universal_template: tasks/audit-logging/universal/code/AUDIT-LOGGING-SKELETON.tpl.md
+      merge_behavior: create
+    - id: AUDIT-LOGGING_CONFIG
+      target_path: config/audit-logging.{ext}
+      universal_template: tasks/audit-logging/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: AUDIT-LOGGING_DOCS
+      target_path: docs/AUDIT-LOGGING.md
+      universal_template: tasks/audit-logging/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: AUDIT-LOGGING_TESTS
+      target_path: tests/audit-logging/test_audit-logging.{ext}
+      universal_template: tasks/audit-logging/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: AUDIT-LOGGING_SERVICE
+      target_path: src/audit-logging/service.go
+      universal_template: tasks/audit-logging/universal/code/AUDIT-LOGGING-SKELETON.tpl.md
+      stack_overrides:
+        go: tasks/audit-logging/stacks/go/base/code/audit_logging_service.tpl.go
+      merge_behavior: create
+    - id: AUDIT-LOGGING_SERVICE
+      target_path: src/audit-logging/service.js
+      universal_template: tasks/audit-logging/universal/code/AUDIT-LOGGING-SKELETON.tpl.md
+      stack_overrides:
+        node: tasks/audit-logging/stacks/node/base/code/audit_logging_service.tpl.js
+      merge_behavior: create
+    - id: AUDIT-LOGGING_SERVICE
+      target_path: src/audit-logging/service.py
+      universal_template: tasks/audit-logging/universal/code/AUDIT-LOGGING-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/audit-logging/stacks/python/base/code/audit_logging_service.tpl.py
+      merge_behavior: create
+  healthchecks-telemetry:
+    description: /app/health, metrics endpoints, uptime checks, basic observability
+      wiring.
+    categories:
+    - devops
+    - monitoring
+    - health
+    default_stacks:
+    - go
+    - node
+    - python
+    allowed_stacks:
+    - go
+    - node
+    - python
+    recommended_tier:
+      basic-health: core
+    files:
+    - id: HEALTHCHECKS-TELEMETRY_CONFIG
+      target_path: config/healthchecks-telemetry.{ext}
+      universal_template: tasks/healthchecks-telemetry/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: HEALTHCHECKS-TELEMETRY_SERVICE
+      target_path: src/healthchecks-telemetry/service.{ext}
+      universal_template: tasks/healthchecks-telemetry/universal/code/HEALTHCHECKS-TELEMETRY-SKELETON.tpl.md
+      merge_behavior: create
+    - id: HEALTHCHECKS-TELEMETRY_DOCS
+      target_path: docs/HEALTHCHECKS-TELEMETRY.md
+      universal_template: tasks/healthchecks-telemetry/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: HEALTHCHECKS-TELEMETRY_TESTS
+      target_path: tests/healthchecks-telemetry/test_healthchecks-telemetry.{ext}
+      universal_template: tasks/healthchecks-telemetry/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: HEALTHCHECKS-TELEMETRY_SERVICE
+      target_path: src/healthchecks-telemetry/service.go
+      universal_template: tasks/healthchecks-telemetry/universal/code/HEALTHCHECKS-TELEMETRY-SKELETON.tpl.md
+      stack_overrides:
+        go: tasks/healthchecks-telemetry/stacks/go/base/code/healthchecks_telemetry_service.tpl.go
+      merge_behavior: create
+    - id: HEALTHCHECKS-TELEMETRY_SERVICE
+      target_path: src/healthchecks-telemetry/service.js
+      universal_template: tasks/healthchecks-telemetry/universal/code/HEALTHCHECKS-TELEMETRY-SKELETON.tpl.md
+      stack_overrides:
+        node: tasks/healthchecks-telemetry/stacks/node/base/code/healthchecks_telemetry_service.tpl.js
+      merge_behavior: create
+    - id: HEALTHCHECKS-TELEMETRY_SERVICE
+      target_path: src/healthchecks-telemetry/service.py
+      universal_template: tasks/healthchecks-telemetry/universal/code/HEALTHCHECKS-TELEMETRY-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/healthchecks-telemetry/stacks/python/base/code/healthchecks_telemetry_service.tpl.py
+      merge_behavior: create
+  ci-template:
+    description: 'GitHub Actions / GitLab CI / etc: lint → test → build → deploy.'
+    categories:
+    - devops
+    - ci
+    - automation
+    default_stacks:
+    - agnostic
+    allowed_stacks:
+    - agnostic
+    recommended_tier:
+      basic-ci: core
+      enterprise-ci: full
+    files:
+    - id: CI-TEMPLATE_SERVICE
+      target_path: src/ci-template/service.{ext}
+      universal_template: tasks/ci-template/universal/code/CI-TEMPLATE-SKELETON.tpl.md
+      merge_behavior: create
+    - id: CI-TEMPLATE_CONFIG
+      target_path: config/ci-template.{ext}
+      universal_template: tasks/ci-template/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: CI-TEMPLATE_DOCS
+      target_path: docs/CI-TEMPLATE.md
+      universal_template: tasks/ci-template/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: CI-TEMPLATE_TESTS
+      target_path: tests/ci-template/test_ci-template.{ext}
+      universal_template: tasks/ci-template/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+  error-reporting:
+    description: Centralized logging + external service integration (Sentry-like).
+    categories:
+    - devops
+    - logging
+    - monitoring
+    default_stacks:
+    - node
+    - python
+    - go
+    allowed_stacks:
+    - node
+    - python
+    - go
+    recommended_tier:
+      basic-reporting: core
+      enterprise-reporting: full
+    files:
+    - id: ERROR-REPORTING_CONFIG
+      target_path: config/error-reporting.{ext}
+      universal_template: tasks/error-reporting/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: ERROR-REPORTING_SERVICE
+      target_path: src/error-reporting/service.{ext}
+      universal_template: tasks/error-reporting/universal/code/ERROR-REPORTING-SKELETON.tpl.md
+      merge_behavior: create
+    - id: ERROR-REPORTING_DOCS
+      target_path: docs/ERROR-REPORTING.md
+      universal_template: tasks/error-reporting/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: ERROR-REPORTING_TESTS
+      target_path: tests/error-reporting/test_error-reporting.{ext}
+      universal_template: tasks/error-reporting/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: ERROR-REPORTING_SERVICE
+      target_path: src/error-reporting/service.go
+      universal_template: tasks/error-reporting/universal/code/ERROR-REPORTING-SKELETON.tpl.md
+      stack_overrides:
+        go: tasks/error-reporting/stacks/go/base/code/error_reporting_service.tpl.go
+      merge_behavior: create
+    - id: ERROR-REPORTING_SERVICE
+      target_path: src/error-reporting/service.js
+      universal_template: tasks/error-reporting/universal/code/ERROR-REPORTING-SKELETON.tpl.md
+      stack_overrides:
+        node: tasks/error-reporting/stacks/node/base/code/error_reporting_service.tpl.js
+      merge_behavior: create
+    - id: ERROR-REPORTING_SERVICE
+      target_path: src/error-reporting/service.py
+      universal_template: tasks/error-reporting/universal/code/ERROR-REPORTING-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/error-reporting/stacks/python/base/code/error_reporting_service.tpl.py
+      merge_behavior: create
+  config-management:
+    description: '12-factor style config: env vars, secrets, per-env files.'
+    categories:
+    - config
+    - devops
+    - 12factor
+    default_stacks:
+    - all
+    allowed_stacks:
+    - python
+    - go
+    - node
+    - react
+    - nextjs
+    - flutter
+    - sql
+    - r
+    recommended_tier:
+      basic-config: mvp
+      production-config: core
+      enterprise-config: full
+    files:
+    - id: CONFIG-MANAGEMENT_SERVICE
+      target_path: src/config-management/service.{ext}
+      universal_template: tasks/config-management/universal/code/CONFIG-MANAGEMENT-SKELETON.tpl.md
+      merge_behavior: create
+    - id: CONFIG-MANAGEMENT_CONFIG
+      target_path: config/config-management.{ext}
+      universal_template: tasks/config-management/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: CONFIG-MANAGEMENT_DOCS
+      target_path: docs/CONFIG-MANAGEMENT.md
+      universal_template: tasks/config-management/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: CONFIG-MANAGEMENT_TESTS
+      target_path: tests/config-management/test_config-management.{ext}
+      universal_template: tasks/config-management/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: CONFIG-MANAGEMENT_SERVICE
+      target_path: src/config-management/service.go
+      universal_template: tasks/config-management/universal/code/CONFIG-MANAGEMENT-SKELETON.tpl.md
+      stack_overrides:
+        go: tasks/config-management/stacks/go/base/code/config_management_service.tpl.go
+      merge_behavior: create
+    - id: CONFIG-MANAGEMENT_CONFIG
+      target_path: config/config-management.tsx
+      universal_template: tasks/config-management/universal/code/CONFIG-MANAGEMENT-SKELETON.tpl.md
+      stack_overrides:
+        nextjs: tasks/config-management/stacks/nextjs/base/code/config_management_component.tpl.tsx
+      merge_behavior: create
+    - id: CONFIG-MANAGEMENT_SERVICE
+      target_path: src/config-management/service.js
+      universal_template: tasks/config-management/universal/code/CONFIG-MANAGEMENT-SKELETON.tpl.md
+      stack_overrides:
+        node: tasks/config-management/stacks/node/base/code/config_management_service.tpl.js
+      merge_behavior: create
+    - id: CONFIG-MANAGEMENT_SERVICE
+      target_path: src/config-management/service.py
+      universal_template: tasks/config-management/universal/code/CONFIG-MANAGEMENT-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/config-management/stacks/python/base/code/config_management_service.tpl.py
+      merge_behavior: create
+    - id: CONFIG-MANAGEMENT_CONFIG
+      target_path: config/config-management.jsx
+      universal_template: tasks/config-management/universal/code/CONFIG-MANAGEMENT-SKELETON.tpl.md
+      stack_overrides:
+        react: tasks/config-management/stacks/react/base/code/config_management_component.tpl.jsx
+      merge_behavior: create
+  canary-release:
+    description: 'Basic staged rollout logic: canary % routing, rollback script, monitoring
+      hooks.'
+    categories:
+    - devops
+    - deployment
+    - reliability
+    default_stacks:
+    - go
+    - node
+    allowed_stacks:
+    - go
+    - node
+    recommended_tier:
+      basic-canary: full
+    files:
+    - id: CANARY-RELEASE_SERVICE
+      target_path: src/canary-release/service.{ext}
+      universal_template: tasks/canary-release/universal/code/CANARY-RELEASE-SKELETON.tpl.md
+      merge_behavior: create
+    - id: CANARY-RELEASE_CONFIG
+      target_path: config/canary-release.{ext}
+      universal_template: tasks/canary-release/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: CANARY-RELEASE_DOCS
+      target_path: docs/CANARY-RELEASE.md
+      universal_template: tasks/canary-release/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: CANARY-RELEASE_TESTS
+      target_path: tests/canary-release/test_canary-release.{ext}
+      universal_template: tasks/canary-release/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: CANARY-RELEASE_SERVICE
+      target_path: src/canary-release/service.go
+      universal_template: tasks/canary-release/universal/code/CANARY-RELEASE-SKELETON.tpl.md
+      stack_overrides:
+        go: tasks/canary-release/stacks/go/base/code/canary_release_service.tpl.go
+      merge_behavior: create
+    - id: CANARY-RELEASE_SERVICE
+      target_path: src/canary-release/service.js
+      universal_template: tasks/canary-release/universal/code/CANARY-RELEASE-SKELETON.tpl.md
+      stack_overrides:
+        node: tasks/canary-release/stacks/node/base/code/canary_release_service.tpl.js
+      merge_behavior: create
+  llm-prompt-router:
+    description: Given task → choose model, prompt template, tools, temp, etc.
+    categories:
+    - ai
+    - llm
+    - routing
+    default_stacks:
+    - python
+    - node
+    allowed_stacks:
+    - python
+    - node
+    recommended_tier:
+      basic-routing: core
+      enterprise-routing: full
+    files:
+    - id: LLM-PROMPT-ROUTER_CONFIG
+      target_path: config/llm-prompt-router.{ext}
+      universal_template: tasks/llm-prompt-router/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: LLM-PROMPT-ROUTER_SERVICE
+      target_path: src/llm-prompt-router/service.{ext}
+      universal_template: tasks/llm-prompt-router/universal/code/LLM-PROMPT-ROUTER-SKELETON.tpl.md
+      merge_behavior: create
+    - id: LLM-PROMPT-ROUTER_DOCS
+      target_path: docs/LLM-PROMPT-ROUTER.md
+      universal_template: tasks/llm-prompt-router/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: LLM-PROMPT-ROUTER_TESTS
+      target_path: tests/llm-prompt-router/test_llm-prompt-router.{ext}
+      universal_template: tasks/llm-prompt-router/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: LLM-PROMPT-ROUTER_SERVICE
+      target_path: src/llm-prompt-router/service.js
+      universal_template: tasks/llm-prompt-router/universal/code/LLM-PROMPT-ROUTER-SKELETON.tpl.md
+      stack_overrides:
+        node: tasks/llm-prompt-router/stacks/node/base/code/llm_prompt_router_service.tpl.js
+      merge_behavior: create
+    - id: LLM-PROMPT-ROUTER_SERVICE
+      target_path: src/llm-prompt-router/service.py
+      universal_template: tasks/llm-prompt-router/universal/code/LLM-PROMPT-ROUTER-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/llm-prompt-router/stacks/python/base/code/llm_prompt_router_service.tpl.py
+      merge_behavior: create
+  rag-pipeline:
+    description: Ingest → chunk → embed → store → query → answer generation.
+    categories:
+    - ai
+    - rag
+    - retrieval
+    default_stacks:
+    - python
+    allowed_stacks:
+    - python
+    - sql
+    recommended_tier:
+      basic-rag: core
+      enterprise-rag: full
+    files:
+    - id: RAG-PIPELINE_CONFIG
+      target_path: config/rag-pipeline.{ext}
+      universal_template: tasks/rag-pipeline/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: RAG-PIPELINE_SERVICE
+      target_path: src/rag-pipeline/service.{ext}
+      universal_template: tasks/rag-pipeline/universal/code/RAG-PIPELINE-SKELETON.tpl.md
+      merge_behavior: create
+    - id: RAG-PIPELINE_DOCS
+      target_path: docs/RAG-PIPELINE.md
+      universal_template: tasks/rag-pipeline/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: RAG-PIPELINE_TESTS
+      target_path: tests/rag-pipeline/test_rag-pipeline.{ext}
+      universal_template: tasks/rag-pipeline/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: RAG-PIPELINE_SERVICE
+      target_path: src/rag-pipeline/service.py
+      universal_template: tasks/rag-pipeline/universal/code/RAG-PIPELINE-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/rag-pipeline/stacks/python/base/code/rag_pipeline_service.tpl.py
+      merge_behavior: create
+  agentic-workflow:
+    description: 'Multi-step agent orchestration: planner, executor, verifier.'
+    categories:
+    - ai
+    - agents
+    - orchestration
+    default_stacks:
+    - python
+    allowed_stacks:
+    - python
+    recommended_tier:
+      basic-agents: core
+      enterprise-agents: full
+    files:
+    - id: AGENTIC-WORKFLOW_SERVICE
+      target_path: src/agentic-workflow/service.{ext}
+      universal_template: tasks/agentic-workflow/universal/code/AGENTIC-WORKFLOW-SKELETON.tpl.md
+      merge_behavior: create
+    - id: AGENTIC-WORKFLOW_CONFIG
+      target_path: config/agentic-workflow.{ext}
+      universal_template: tasks/agentic-workflow/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: AGENTIC-WORKFLOW_DOCS
+      target_path: docs/AGENTIC-WORKFLOW.md
+      universal_template: tasks/agentic-workflow/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: AGENTIC-WORKFLOW_TESTS
+      target_path: tests/agentic-workflow/test_agentic-workflow.{ext}
+      universal_template: tasks/agentic-workflow/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: AGENTIC-WORKFLOW_SERVICE
+      target_path: src/agentic-workflow/service.py
+      universal_template: tasks/agentic-workflow/universal/code/AGENTIC-WORKFLOW-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/agentic-workflow/stacks/python/base/code/agentic_workflow_service.tpl.py
+      merge_behavior: create
+  code-refactor-agent:
+    description: Target repo → plan refactor → create diffs → run tests → produce
+      report.
+    categories:
+    - ai
+    - refactoring
+    - development
+    default_stacks:
+    - python
+    - node
+    allowed_stacks:
+    - python
+    - node
+    recommended_tier:
+      basic-refactor: core
+      enterprise-refactor: full
+    files:
+    - id: CODE-REFACTOR-AGENT_SERVICE
+      target_path: src/code-refactor-agent/service.{ext}
+      universal_template: tasks/code-refactor-agent/universal/code/CODE-REFACTOR-AGENT-SKELETON.tpl.md
+      merge_behavior: create
+    - id: CODE-REFACTOR-AGENT_CONFIG
+      target_path: config/code-refactor-agent.{ext}
+      universal_template: tasks/code-refactor-agent/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: CODE-REFACTOR-AGENT_DOCS
+      target_path: docs/CODE-REFACTOR-AGENT.md
+      universal_template: tasks/code-refactor-agent/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: CODE-REFACTOR-AGENT_TESTS
+      target_path: tests/code-refactor-agent/test_code-refactor-agent.{ext}
+      universal_template: tasks/code-refactor-agent/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: CODE-REFACTOR-AGENT_SERVICE
+      target_path: src/code-refactor-agent/service.js
+      universal_template: tasks/code-refactor-agent/universal/code/CODE-REFACTOR-AGENT-SKELETON.tpl.md
+      stack_overrides:
+        node: tasks/code-refactor-agent/stacks/node/base/code/code_refactor_agent_service.tpl.js
+      merge_behavior: create
+    - id: CODE-REFACTOR-AGENT_SERVICE
+      target_path: src/code-refactor-agent/service.py
+      universal_template: tasks/code-refactor-agent/universal/code/CODE-REFACTOR-AGENT-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/code-refactor-agent/stacks/python/base/code/code_refactor_agent_service.tpl.py
+      merge_behavior: create
+  project-bootstrap:
+    description: Given stack + tier + tasks → assemble everything (you already kind
+      of have this).
+    categories:
+    - meta
+    - bootstrap
+    - tooling
+    default_stacks:
+    - python
+    allowed_stacks:
+    - python
+    recommended_tier:
+      basic-bootstrap: all
+    files:
+    - id: PROJECT-BOOTSTRAP_CONFIG
+      target_path: config/project-bootstrap.{ext}
+      universal_template: tasks/project-bootstrap/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: PROJECT-BOOTSTRAP_SERVICE
+      target_path: src/project-bootstrap/service.{ext}
+      universal_template: tasks/project-bootstrap/universal/code/PROJECT-BOOTSTRAP-SKELETON.tpl.md
+      merge_behavior: create
+    - id: PROJECT-BOOTSTRAP_DOCS
+      target_path: docs/PROJECT-BOOTSTRAP.md
+      universal_template: tasks/project-bootstrap/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: PROJECT-BOOTSTRAP_TESTS
+      target_path: tests/project-bootstrap/test_project-bootstrap.{ext}
+      universal_template: tasks/project-bootstrap/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: PROJECT-BOOTSTRAP_SERVICE
+      target_path: src/project-bootstrap/service.py
+      universal_template: tasks/project-bootstrap/universal/code/PROJECT-BOOTSTRAP-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/project-bootstrap/stacks/python/base/code/project_bootstrap_service.tpl.py
+      merge_behavior: create
+  docs-site:
+    description: Autogenerated docs site from markdown/YAML + sidebar + search.
+    categories:
+    - docs
+    - site
+    - documentation
+    default_stacks:
+    - nextjs
+    - react
+    allowed_stacks:
+    - nextjs
+    - react
+    recommended_tier:
+      basic-docs: core
+    files:
+    - id: DOCS-SITE_CONFIG
+      target_path: config/docs-site.{ext}
+      universal_template: tasks/docs-site/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: DOCS-SITE_SERVICE
+      target_path: src/docs-site/service.{ext}
+      universal_template: tasks/docs-site/universal/code/DOCS-SITE-SKELETON.tpl.md
+      merge_behavior: create
+    - id: DOCS-SITE_DOCS
+      target_path: docs/DOCS-SITE.md
+      universal_template: tasks/docs-site/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: DOCS-SITE_TESTS
+      target_path: tests/docs-site/test_docs-site.{ext}
+      universal_template: tasks/docs-site/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: DOCS-SITE_COMPONENT
+      target_path: src/docs-site/component.tsx
+      universal_template: tasks/docs-site/universal/code/DOCS-SITE-SKELETON.tpl.md
+      stack_overrides:
+        nextjs: tasks/docs-site/stacks/nextjs/base/code/docs_site_component.tpl.tsx
+      merge_behavior: create
+    - id: DOCS-SITE_COMPONENT
+      target_path: src/docs-site/component.jsx
+      universal_template: tasks/docs-site/universal/code/DOCS-SITE-SKELETON.tpl.md
+      stack_overrides:
+        react: tasks/docs-site/stacks/react/base/code/docs_site_component.tpl.jsx
+      merge_behavior: create
+  sample-data-generator:
+    description: Fixtures + realistic fake data for dev/staging environments.
+    categories:
+    - data
+    - testing
+    - development
+    default_stacks:
+    - python
+    - node
+    allowed_stacks:
+    - python
+    - node
+    - sql
+    recommended_tier:
+      basic-generator: mvp
+      production-generator: core
+    files:
+    - id: SAMPLE-DATA-GENERATOR_CONFIG
+      target_path: config/sample-data-generator.{ext}
+      universal_template: tasks/sample-data-generator/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: SAMPLE-DATA-GENERATOR_SERVICE
+      target_path: src/sample-data-generator/service.{ext}
+      universal_template: tasks/sample-data-generator/universal/code/SAMPLE-DATA-GENERATOR-SKELETON.tpl.md
+      merge_behavior: create
+    - id: SAMPLE-DATA-GENERATOR_DOCS
+      target_path: docs/SAMPLE-DATA-GENERATOR.md
+      universal_template: tasks/sample-data-generator/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: SAMPLE-DATA-GENERATOR_TESTS
+      target_path: tests/sample-data-generator/test_sample-data-generator.{ext}
+      universal_template: tasks/sample-data-generator/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
+    - id: SAMPLE-DATA-GENERATOR_SERVICE
+      target_path: src/sample-data-generator/service.js
+      universal_template: tasks/sample-data-generator/universal/code/SAMPLE-DATA-GENERATOR-SKELETON.tpl.md
+      stack_overrides:
+        node: tasks/sample-data-generator/stacks/node/base/code/sample_data_generator_service.tpl.js
+      merge_behavior: create
+    - id: SAMPLE-DATA-GENERATOR_SERVICE
+      target_path: src/sample-data-generator/service.py
+      universal_template: tasks/sample-data-generator/universal/code/SAMPLE-DATA-GENERATOR-SKELETON.tpl.md
+      stack_overrides:
+        python: tasks/sample-data-generator/stacks/python/base/code/sample_data_generator_service.tpl.py
+      merge_behavior: create
+task_config: null
+task_dependencies:
+  auth-oauth:
+  - auth-basic
+  user-profile-management:
+  - auth-basic
+  team-workspaces:
+  - auth-basic
+  - user-profile-management
+  scheduled-tasks:
+  - job-queue
+  notification-center:
+  - job-queue
+  admin-panel:
+  - auth-basic
+  feature-flags:
+  - config-management
+  multitenancy:
+  - auth-basic
+  - config-management
+  analytics-event-pipeline:
+  - etl-pipeline
+  forecasting-engine:
+  - etl-pipeline
+  segmentation-clustering:
+  - etl-pipeline
+  seo-rank-tracker:
+  - web-scraping
+  seo-onpage-auditor:
+  - web-scraping
+  rag-pipeline:
+  - embedding-index
+  agentic-workflow:
+  - llm-prompt-router
+  code-refactor-agent:
+  - llm-prompt-router
