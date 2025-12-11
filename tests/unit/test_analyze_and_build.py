@@ -253,5 +253,117 @@ class TestAnalyzeAndBuild(unittest.TestCase):
         self.pipeline.build_project.assert_called_once()
         self.assertTrue((output_dir / "analysis-report.json").exists())
 
+class TestProjectAnalysisPipeline(unittest.TestCase):
+    """Test ProjectAnalysisPipeline class"""
+
+    def setUp(self):
+        """Setup for each test method"""
+        # Mock dependencies
+        self.mock_task_detection_system = patch('analyze_and_build.TaskDetectionSystem').start()
+        self.mock_detector = self.mock_task_detection_system.return_value
+
+        self.mock_file = patch('builtins.open', mock_open(read_data="tasks: {}")).start()
+        self.mock_yaml = patch('analyze_and_build.yaml').start()
+        self.mock_yaml.safe_load.return_value = {'tasks': {}}
+
+        if analyze_and_build:
+            self.pipeline = analyze_and_build.ProjectAnalysisPipeline()
+        else:
+            self.pipeline = None
+
+    def tearDown(self):
+        patch.stopall()
+
+    def test_analyze_project(self):
+        """Test analyze_project method"""
+        if not self.pipeline:
+            self.skipTest("analyze_and_build module not loaded")
+
+        # Arrange
+        description = "Build a web app"
+        suggest_stacks = True
+
+        # Setup mock return values
+        mock_task = MagicMock()
+        mock_task.task_id = "test-task"
+        mock_task.confidence = 0.9
+        mock_task.tier = "core"
+        mock_task.categories = ["web"]
+        mock_task.has_templates = True # Simulate validation result
+
+        mock_gap = MagicMock()
+        mock_gap.priority = "high"
+
+        mock_stack_rec = MagicMock()
+        mock_stack_rec.primary_stack = "python"
+
+        self.mock_detector.analyze_requirements.return_value = (
+            [mock_task],
+            [mock_gap],
+            mock_stack_rec
+        )
+
+        # We also need to make sure _validate_tasks sees the task in task_index
+        # The pipeline loads task_index in __init__. We patched safe_load to return {'tasks': {}}
+        # So we should update self.pipeline.task_index to match our mock_task
+        self.pipeline.task_index = {
+            'tasks': {
+                'test-task': {
+                    'files': ['some_file.py']
+                }
+            }
+        }
+
+        # Act
+        analysis = self.pipeline.analyze_project(description, suggest_stacks)
+
+        # Assert
+        self.mock_detector.analyze_requirements.assert_called_once_with(description, suggest_stacks)
+
+        self.assertEqual(analysis['description'], description)
+        self.assertEqual(analysis['stack_recommendation'], mock_stack_rec)
+
+        # Check that detected tasks are present
+        self.assertEqual(len(analysis['detected_tasks']), 1)
+        self.assertEqual(analysis['detected_tasks'][0].task_id, 'test-task')
+
+        # Check gaps
+        self.assertEqual(len(analysis['detected_gaps']), 1)
+
+        # Check validation summary structure
+        self.assertIn('validation_summary', analysis)
+        summary = analysis['validation_summary']
+        self.assertEqual(summary['total_requirements_detected'], 2) # 1 task + 1 gap
+        self.assertEqual(summary['identified_gaps'], 1)
+        self.assertEqual(summary['tasks_with_templates'], 1)
+
+    def test_generate_build_config(self):
+        """Test generate_build_config method"""
+        # TODO: Implement based on docstring: Generate resolver-compatible build configuration...
+        # TODO: Add actual test implementation
+        with self.assertRaises(NotImplementedError):
+            self.fail('Test not implemented yet')
+
+    def test_build_project(self):
+        """Test build_project method"""
+        # TODO: Implement based on docstring: Build project using the template system...
+        # TODO: Add actual test implementation
+        with self.assertRaises(NotImplementedError):
+            self.fail('Test not implemented yet')
+
+    def test_generate_gap_documentation(self):
+        """Test generate_gap_documentation method"""
+        # TODO: Implement based on docstring: Generate comprehensive gap documentation...
+        # TODO: Add actual test implementation
+        with self.assertRaises(NotImplementedError):
+            self.fail('Test not implemented yet')
+
+    def test_run_full_pipeline(self):
+        """Test run_full_pipeline method"""
+        # TODO: Implement based on docstring: Run the complete analysis and building pipeline...
+        # TODO: Add actual test implementation
+        with self.assertRaises(NotImplementedError):
+            self.fail('Test not implemented yet')
+
 if __name__ == '__main__':
     unittest.main()
