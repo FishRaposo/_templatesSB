@@ -1,14 +1,8 @@
-/// Template: config-management.tpl.dart
-/// Purpose: config-management template
-/// Stack: flutter
-/// Tier: base
-
-# Universal Template System - Flutter Stack
-# Generated: 2025-12-10
-# Purpose: Configuration management utilities
-# Tier: base
-# Stack: flutter
-# Category: utilities
+///
+/// File: config-management.tpl.dart
+/// Purpose: Template for unknown implementation
+/// Generated for: {{PROJECT_NAME}}
+///
 
 // -----------------------------------------------------------------------------
 // FILE: config-management.tpl.dart

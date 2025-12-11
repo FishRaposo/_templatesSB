@@ -219,6 +219,10 @@ class TemplateValidator:
             valid_headers = ['#', '<!--']
             if template_file.suffix in ['.js', '.jsx', '.ts', '.tsx', '.go', '.dart']:
                 valid_headers.extend(['//', '/**', '///'])
+            elif template_file.suffix in ['.py']:
+                valid_headers.extend(['"""', "'''"])
+            elif template_file.suffix in ['.sql', '.R']:
+                valid_headers.extend(['--'])
 
             if not content.lstrip().startswith(tuple(valid_headers)):
                 self.log_issue("warning", template_file, "Missing header comment")

@@ -1,3 +1,7 @@
+// File: webhook_consumer_service.tpl.go
+// Purpose: Template for webhook-consumer implementation
+// Generated for: {{PROJECT_NAME}}
+
 // Webhookconsumer Service for Go
 // Generated for {{PROJECT_NAME}}
 package webhook_consumer

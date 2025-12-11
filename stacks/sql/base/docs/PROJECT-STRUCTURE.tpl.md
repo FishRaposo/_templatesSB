@@ -1,9 +1,8 @@
-# Universal Template System - Sql Stack
-# Generated: 2025-12-10
-# Purpose: sql template utilities
-# Tier: base
-# Stack: sql
-# Category: template
+<!--
+File: PROJECT-STRUCTURE.tpl.md
+Purpose: Template for unknown implementation
+Template Version: 1.0
+-->
 
 # {{PROJECT_NAME}} - SQL Project Structure
 

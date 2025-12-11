@@ -1,14 +1,8 @@
-/// Template: basic-tests-flutter.tpl.dart
-/// Purpose: basic-tests-flutter template
-/// Stack: flutter
-/// Tier: base
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: mvp
-# Stack: unknown
-# Category: testing
+///
+/// File: basic-tests-flutter.tpl.dart
+/// Purpose: Template for unknown implementation
+/// Generated for: {{PROJECT_NAME}}
+///
 
 # Basic Flutter Testing Template
 # Purpose: MVP-level testing template with unit and widget tests for Flutter applications

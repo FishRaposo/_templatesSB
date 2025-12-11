@@ -1,16 +1,8 @@
 /**
- * Template: landing_page_component.tpl.tsx
- * Purpose: landing_page_component template
- * Stack: typescript
- * Tier: base
+ * File: landing_page_component.tpl.tsx
+ * Purpose: Template for landing-page implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Component tests
-# Tier: base
-# Stack: unknown
-# Category: utilities
 
 // -----------------------------------------------------------------------------
 // FILE: landing_page_component.tpl.tsx

@@ -1,16 +1,8 @@
 /**
- * Template: scheduled_tasks_service.tpl.js
- * Purpose: scheduled_tasks_service template
- * Stack: node
- * Tier: base
+ * File: scheduled_tasks_service.tpl.js
+ * Purpose: Template for scheduled-tasks implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Node Stack
-# Generated: 2025-12-10
-# Purpose: node template utilities
-# Tier: base
-# Stack: node
-# Category: utilities
 
 # ScheduledTasks Service for Node
 # Generated for {{PROJECT_NAME}}

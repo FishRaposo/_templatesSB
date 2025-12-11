@@ -1,9 +1,8 @@
-# Universal Template System - Python Stack
-# Generated: 2025-12-10
-# Purpose: python template utilities
-# Tier: base
-# Stack: python
-# Category: utilities
+"""
+File: scheduled_tasks_service.tpl.py
+Purpose: Template for scheduled-tasks implementation
+Generated for: {{PROJECT_NAME}}
+"""
 
 # ScheduledTasks Service for Python
 # Generated for {{PROJECT_NAME}}

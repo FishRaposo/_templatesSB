@@ -1,3 +1,7 @@
+// File: canary_release_service.tpl.go
+// Purpose: Template for canary-release implementation
+// Generated for: {{PROJECT_NAME}}
+
 // Canaryrelease Service for Go
 // Generated for {{PROJECT_NAME}}
 package canary_release

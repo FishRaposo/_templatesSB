@@ -1,16 +1,8 @@
 /**
- * Template: rest_api_service_component.tpl.tsx
- * Purpose: rest_api_service_component template
- * Stack: typescript
- * Tier: base
+ * File: rest_api_service_component.tpl.tsx
+ * Purpose: Template for rest-api-service implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Component tests
-# Tier: base
-# Stack: unknown
-# Category: utilities
 
 // -----------------------------------------------------------------------------
 // FILE: rest_api_service_component.tpl.tsx

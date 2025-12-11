@@ -1,16 +1,8 @@
 /**
- * Template: error-handling-pattern.tpl.ts
- * Purpose: error-handling-pattern template
- * Stack: typescript
- * Tier: base
+ * File: error-handling-pattern.tpl.ts
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Typescript Stack
-# Generated: 2025-12-10
-# Purpose: Error handling utilities
-# Tier: base
-# Stack: typescript
-# Category: utilities
 
 // -----------------------------------------------------------------------------
 // FILE: error-handling-pattern.tpl.ts
