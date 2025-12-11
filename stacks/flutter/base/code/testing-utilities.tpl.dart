@@ -4,18 +4,6 @@
 /// Generated for: {{PROJECT_NAME}}
 ///
 
-/// Template: testing-utilities.tpl.dart
-/// Purpose: testing-utilities template
-/// Stack: flutter
-/// Tier: base
-
-# Universal Template System - Flutter Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: base
-# Stack: flutter
-# Category: utilities
-
 // -----------------------------------------------------------------------------
 // FILE: testing-utilities.tpl.dart
 // PURPOSE: Comprehensive testing utilities and helpers for Flutter projects

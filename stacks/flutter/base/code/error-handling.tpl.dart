@@ -4,18 +4,6 @@
 /// Generated for: {{PROJECT_NAME}}
 ///
 
-/// Template: error-handling.tpl.dart
-/// Purpose: error-handling template
-/// Stack: flutter
-/// Tier: base
-
-# Universal Template System - Flutter Stack
-# Generated: 2025-12-10
-# Purpose: Error handling utilities
-# Tier: base
-# Stack: flutter
-# Category: utilities
-
 // -----------------------------------------------------------------------------
 // FILE: error-handling.tpl.dart
 // PURPOSE: Comprehensive error handling patterns and utilities for Flutter projects

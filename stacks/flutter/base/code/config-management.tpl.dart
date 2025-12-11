@@ -4,18 +4,6 @@
 /// Generated for: {{PROJECT_NAME}}
 ///
 
-/// Template: config-management.tpl.dart
-/// Purpose: config-management template
-/// Stack: flutter
-/// Tier: base
-
-# Universal Template System - Flutter Stack
-# Generated: 2025-12-10
-# Purpose: Configuration management utilities
-# Tier: base
-# Stack: flutter
-# Category: utilities
-
 // -----------------------------------------------------------------------------
 // FILE: config-management.tpl.dart
 // PURPOSE: Comprehensive configuration management system for Flutter projects

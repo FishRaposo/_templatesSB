@@ -4,18 +4,6 @@
 /// Generated for: {{PROJECT_NAME}}
 ///
 
-/// Template: integration-tests.tpl.dart
-/// Purpose: integration-tests template
-/// Stack: flutter
-/// Tier: base
-
-# Universal Template System - Flutter Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: base
-# Stack: flutter
-# Category: testing
-
 // -----------------------------------------------------------------------------
 // FILE: integration-tests.tpl.dart
 // PURPOSE: Integration testing patterns for Flutter projects

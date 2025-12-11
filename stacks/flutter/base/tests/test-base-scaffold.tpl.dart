@@ -4,18 +4,6 @@
 /// Generated for: {{PROJECT_NAME}}
 ///
 
-/// Template: test-base-scaffold.tpl.dart
-/// Purpose: test-base-scaffold template
-/// Stack: flutter
-/// Tier: base
-
-# Universal Template System - Flutter Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: base
-# Stack: flutter
-# Category: testing
-
 // -----------------------------------------------------------------------------
 // FILE: test-base-scaffold.tpl.dart
 // PURPOSE: Foundational testing patterns and utilities for Flutter projects

@@ -4,18 +4,6 @@
 /// Generated for: {{PROJECT_NAME}}
 ///
 
-/// Template: widget-tests.tpl.dart
-/// Purpose: widget-tests template
-/// Stack: flutter
-/// Tier: base
-
-# Universal Template System - Flutter Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: base
-# Stack: flutter
-# Category: testing
-
 // -----------------------------------------------------------------------------
 // FILE: widget-tests.tpl.dart
 // PURPOSE: Comprehensive widget testing patterns for Flutter projects

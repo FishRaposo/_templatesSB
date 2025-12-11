@@ -4,18 +4,6 @@
 /// Generated for: {{PROJECT_NAME}}
 ///
 
-/// Template: unit-tests.tpl.dart
-/// Purpose: unit-tests template
-/// Stack: flutter
-/// Tier: base
-
-# Universal Template System - Flutter Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: base
-# Stack: flutter
-# Category: testing
-
 // -----------------------------------------------------------------------------
 // FILE: unit-tests.tpl.dart
 // PURPOSE: Comprehensive unit testing patterns for Flutter projects

@@ -78,7 +78,6 @@ Template Version: 1.0
 
 def strip_headers(content):
     """Remove known bad headers from the top of the file"""
-    original_content = content
 
     # Patterns to match headers
     patterns = [
@@ -86,12 +85,22 @@ def strip_headers(content):
         r'^# Universal Template System[\s\S]*?(?=\n\n|\n[^\#]|$)',
         # The /** Template: ... */ header
         r'^\/\*\*[\s\S]*?Template:[\s\S]*?\*\/',
+        # The /** File: ... */ header (our own canonical, remove to regenerate)
+        r'^\/\*\*[\s\S]*?File:[\s\S]*?\*\/',
         # The // FILE: header
         r'^\/\/ FILE:[\s\S]*?(?=\n\n|\n[^\/]|$)',
         # The // Template: header
         r'^\/\/ Template:[\s\S]*?(?=\n\n|\n[^\/]|$)',
+        # The /// Template: header (Dart)
+        r'^\/\/\/ Template:[\s\S]*?(?=\n\n|\n[^\/]|$)',
+        # The /// File: header (Dart canonical)
+        r'^\/\/\/[\s\S]*?File:[\s\S]*?(?=\n\n|\n[^\/]|$)',
         # The # File: header (old canonical)
         r'^# File:[\s\S]*?(?=\n\n|\n[^\#]|$)',
+        # Python """ File: ... """ header
+        r'^"""[\s\S]*?File:[\s\S]*?"""',
+        # HTML <!-- File: ... --> header
+        r'^<!--[\s\S]*?File:[\s\S]*?-->',
     ]
 
     # Handle shebang
@@ -125,9 +134,18 @@ def fix_file(file_path):
         new_path = file_path.with_suffix('.tsx') # .tpl.tsx
         # wait, suffix of .tpl.jsx is .jsx. with_suffix('.tsx') -> .tpl.tsx. Correct.
         try:
-            file_path.rename(new_path)
-            print(f"Renamed {file_path.name} -> {new_path.name}")
-            file_path = new_path
+            if not new_path.exists():
+                file_path.rename(new_path)
+                print(f"Renamed {file_path.name} -> {new_path.name}")
+                file_path = new_path
+            else:
+                print(f"Skipping rename {file_path.name} -> {new_path.name} (target exists)")
+                # If target exists, maybe we should fix target and delete source?
+                # For now, let's process the source as is, or maybe checking target is enough.
+                # If we renamed it in previous run, file_path (the old name) shouldn't exist in iterdir logic?
+                # But here we are processing `file_path` passed from `rglob`.
+                # If `rglob` found .jsx, it exists.
+                pass
         except Exception as e:
             print(f"Error renaming {file_path}: {e}")
             return

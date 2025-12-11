@@ -8,7 +8,7 @@ import re
 from pathlib import Path
 
 # Template root
-TEMPLATE_ROOT = Path(__file__).parent
+TEMPLATE_ROOT = Path(r'd:\Projects\Krei\_templates')
 
 # Node.js service template pattern
 NODE_SERVICE_TEMPLATE = '''#!/usr/bin/env node

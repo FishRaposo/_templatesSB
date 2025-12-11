@@ -4,18 +4,6 @@
 /// Generated for: {{PROJECT_NAME}}
 ///
 
-/// Template: data-validation.tpl.dart
-/// Purpose: data-validation template
-/// Stack: flutter
-/// Tier: base
-
-# Universal Template System - Flutter Stack
-# Generated: 2025-12-10
-# Purpose: Data validation utilities
-# Tier: base
-# Stack: flutter
-# Category: utilities
-
 // -----------------------------------------------------------------------------
 // FILE: data-validation.tpl.dart
 // PURPOSE: Comprehensive data validation utilities for Flutter projects

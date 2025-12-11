@@ -4,18 +4,6 @@
 /// Generated for: {{PROJECT_NAME}}
 ///
 
-/// Template: logging-utilities.tpl.dart
-/// Purpose: logging-utilities template
-/// Stack: flutter
-/// Tier: base
-
-# Universal Template System - Flutter Stack
-# Generated: 2025-12-10
-# Purpose: Logging utilities
-# Tier: base
-# Stack: flutter
-# Category: utilities
-
 // -----------------------------------------------------------------------------
 // FILE: logging-utilities.tpl.dart
 // PURPOSE: Comprehensive logging setup and utilities for Flutter projects

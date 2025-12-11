@@ -94,7 +94,7 @@ TIER_PURPOSE="{config["purpose"]}"
     else:
         raise ValueError(f"Unsupported format: {format}")
 
-def validate_template_availability(tier_name: str, templates_dir: str = ".") -> dict:
+def validate_template_availability(tier_name: str, templates_dir: str = "_templates") -> dict:
     """
     Validate that all required templates exist
     
@@ -175,7 +175,7 @@ def main():
     
     tier_name = sys.argv[1]
     format_type = sys.argv[2] if len(sys.argv) > 2 else "bash"
-    templates_dir = sys.argv[3] if len(sys.argv) > 3 else "."
+    templates_dir = sys.argv[3] if len(sys.argv) > 3 else "_templates"
     
     try:
         result = get_tier_requirements(tier_name, format_type)
