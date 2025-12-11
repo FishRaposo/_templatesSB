@@ -72,19 +72,40 @@ class TestAnalyzeAndBuild(unittest.TestCase):
         with self.assertRaises(NotImplementedError):
             self.fail('Test not implemented yet')
 
-    def test_build_project(self):
+    @patch('analyze_and_build.subprocess.run')
+    @patch('builtins.open', new_callable=unittest.mock.mock_open, read_data="tasks: {}")
+    @patch('analyze_and_build.TaskDetectionSystem')
+    def test_build_project(self, mock_detector, mock_open, mock_subprocess):
         """Test build_project function"""
-        # TODO: Implement based on docstring: Build project using the template system...
         # Arrange
-        self = 'test_value'
-        build_config = 'test_value'
-        output_dir = 'test_value'
-        dry_run = False
+        pipeline = analyze_and_build.ProjectAnalysisPipeline()
 
-        # Act & Assert
-        # TODO: Add actual test implementation
-        with self.assertRaises(NotImplementedError):
-            self.fail('Test not implemented yet')
+        build_config = {
+            "project": {"stack": "python", "tier": "mvp"},
+            "tasks": {}
+        }
+        output_dir = Path('/tmp/test_output')
+
+        # Test dry_run
+        result = pipeline.build_project(build_config, output_dir, dry_run=True)
+        self.assertTrue(result)
+        mock_subprocess.assert_not_called()
+
+        # Test actual build success
+        mock_subprocess.return_value.returncode = 0
+        mock_subprocess.return_value.stdout = "Success"
+
+        result = pipeline.build_project(build_config, output_dir, dry_run=False)
+        self.assertTrue(result)
+        mock_subprocess.assert_called_once()
+
+        # Test build failure
+        mock_subprocess.reset_mock()
+        mock_subprocess.return_value.returncode = 1
+        mock_subprocess.return_value.stderr = "Error"
+
+        result = pipeline.build_project(build_config, output_dir, dry_run=False)
+        self.assertFalse(result)
 
     def test_generate_gap_documentation(self):
         """Test generate_gap_documentation function"""
