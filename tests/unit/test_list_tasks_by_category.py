@@ -91,14 +91,33 @@ class TestListTasksByCategory(unittest.TestCase):
 
     def test_list_category_summary(self):
         """Test list_category_summary function"""
-        # TODO: Implement based on docstring: Show summary of tasks per category...
-        # Arrange
-        task_index = 'test_value'
+        if list_tasks_by_category is None:
+            self.skipTest("list_tasks_by_category module could not be imported")
 
-        # Act & Assert
-        # TODO: Add actual test implementation
-        with self.assertRaises(NotImplementedError):
-            self.fail('Test not implemented yet')
+        # Arrange
+        task_index = {
+            'virtual_categories': {
+                'cat1': {
+                    'display_name': 'Category 1',
+                    'tasks': ['t1', 't2', 't3']
+                },
+                'cat2': {
+                    'display_name': 'Category 2',
+                    'tasks': ['t4', 't5']
+                }
+            }
+        }
+
+        # Act
+        with patch('sys.stdout', new=io.StringIO()) as mock_stdout:
+            list_tasks_by_category.list_category_summary(task_index)
+            output = mock_stdout.getvalue()
+
+        # Assert
+        self.assertIn("Category Summary", output)
+        self.assertIn("Category 1: 3 tasks", output)
+        self.assertIn("Category 2: 2 tasks", output)
+        self.assertIn("Total Tasks: 5", output)
 
     def test_search_tasks(self):
         """Test search_tasks function"""
