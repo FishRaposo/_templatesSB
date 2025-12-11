@@ -1,3 +1,7 @@
+// File: multitenancy_service.tpl.go
+// Purpose: Template for multitenancy implementation
+// Generated for: {{PROJECT_NAME}}
+
 // Multitenancy Service for Go
 // Generated for {{PROJECT_NAME}}
 package multitenancy

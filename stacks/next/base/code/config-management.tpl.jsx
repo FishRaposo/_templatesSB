@@ -1,16 +1,8 @@
 /**
- * Template: config-management.tpl.jsx
- * Purpose: config-management template
- * Stack: react
- * Tier: base
+ * File: config-management.tpl.jsx
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Next Stack
-# Generated: 2025-12-10
-# Purpose: Configuration management utilities
-# Tier: base
-# Stack: next
-# Category: utilities
 
 // -----------------------------------------------------------------------------
 // FILE: config-management.tpl.jsx

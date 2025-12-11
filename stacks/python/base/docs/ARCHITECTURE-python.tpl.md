@@ -1,9 +1,8 @@
-# Universal Template System - Python Stack
-# Generated: 2025-12-10
-# Purpose: python template utilities
-# Tier: base
-# Stack: python
-# Category: template
+<!--
+File: ARCHITECTURE-python.tpl.md
+Purpose: Template for unknown implementation
+Template Version: 1.0
+-->
 
 # Python Architecture Guide - {{PROJECT_NAME}}
 

@@ -1,9 +1,8 @@
-# Universal Template System - Node Stack
-# Generated: 2025-12-10
-# Purpose: node template utilities
-# Tier: base
-# Stack: node
-# Category: template
+<!--
+File: PACKAGE-MANAGEMENT.tpl.md
+Purpose: Template for unknown implementation
+Template Version: 1.0
+-->
 
 # Node.js Package Management Patterns
 

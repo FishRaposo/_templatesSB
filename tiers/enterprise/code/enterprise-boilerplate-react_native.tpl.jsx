@@ -1,16 +1,8 @@
 /**
- * Template: enterprise-boilerplate-react_native.tpl.jsx
- * Purpose: enterprise-boilerplate-react_native template
- * Stack: react
- * Tier: base
+ * File: enterprise-boilerplate-react_native.tpl.jsx
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: unknown template utilities
-# Tier: enterprise
-# Stack: unknown
-# Category: utilities
 
 # Enterprise Boilerplate Template (Full Tier - React)
 

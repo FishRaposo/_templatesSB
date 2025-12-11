@@ -1,16 +1,8 @@
 /**
- * Template: seo_onpage_auditor_component.tpl.tsx
- * Purpose: seo_onpage_auditor_component template
- * Stack: typescript
- * Tier: base
+ * File: seo_onpage_auditor_component.tpl.tsx
+ * Purpose: Template for seo-onpage-auditor implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Component tests
-# Tier: base
-# Stack: unknown
-# Category: utilities
 
 // -----------------------------------------------------------------------------
 // FILE: seo_onpage_auditor_component.tpl.tsx
