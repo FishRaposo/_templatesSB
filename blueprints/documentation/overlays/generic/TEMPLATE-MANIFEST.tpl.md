@@ -15,10 +15,21 @@ These are the primary files that AI agents and developers encounter first.
 
 | File | Purpose | Size | Notes |
 |------|---------|------|-------|
+| `LLM-ENTRYPOINT.md` | **PRIMARY STARTING POINT** - For all AI agents | 7KB | System navigation guide |
 | `AGENTS.md` | **PRIMARY LLM ENTRYPOINT** - Developer guide with AI operating standards | 18KB | Enhanced with archive content (MCP Tools, Script-First) |
 | `CLAUDE.md` | **PRIMARY LLM ENTRYPOINT** - Claude quick reference | 5KB | Essential for Claude Code users |
 | `AI-QUICK-START.md` | AI agent setup guide (6KB) | 6KB | Created from archive blueprint |
 | `QUICKSTART-AI.md` | Comprehensive AI quickstart (42KB) | 42KB | Full version from archive |
+| **Individual AI Agent Guides** | | | **System Documentation** |
+| `AIDER.md` | Aider CLI assistant guide | 2KB | For Aider users |
+| `CODEX.md` | OpenAI Codex integration guide | 2KB | For Codex API users |
+| `CODY.md` | Sourcegraph Cody guide | 2KB | For Cody users |
+| `COPILOT.md` | GitHub Copilot integration guide | 5KB | For Copilot users |
+| `CURSOR.md` | Cursor IDE assistant guide | 4KB | For Cursor users |
+| `GEMINI.md` | Google Gemini/Duet AI guide | 6KB | For Gemini users |
+| `WARP.md` | Warp AI terminal guide | 32KB | For Warp terminal users |
+| `WINDSURF.md` | Windsurf/Codeium assistant guide | 3KB | For Windsurf users |
+| **Project Files** | | | **Templates to Copy** |
 | `README.md` | Project overview | 435B | Basic project description |
 | `CONTEXT.md` | Philosophy & architecture decisions | 3KB | Project context and principles |
 | `INDEX.md` | Project navigation | 8KB | Complete file index |
@@ -49,60 +60,6 @@ Specialized guides for different AI coding assistants.
 | `WINDSURF.md` | Windsurf/Codeium | Windsurf assistant |
 | `WARP.md` | Warp Terminal | AI terminal guide |
 
-#### `blueprints/` - Blueprint System Documentation
-Internal documentation for the blueprint system itself.
-
-| File | Purpose |
-|------|---------|
-| `README.md` | Blueprint system overview |
-| `BLUEPRINT-COMPILER.md` | Blueprint compilation system |
-| `BLUEPRINT-MAPPING.md` | Blueprint mapping documentation |
-| `CHANGELOG-GENERATOR.md` | Automated changelog generation |
-| `SYSTEM-INTEGRATION.md` | System integration documentation |
-| `TIERED-TEMPLATES.md` | Tiered template system |
-| `VALIDATION.md` | Validation protocols |
-
-#### `docs/` - Technical Documentation
-Technical and process documentation.
-
-| File | Purpose |
-|------|---------|
-| `README.md` | Technical docs overview |
-| `PROMPT-VALIDATION.md` | **MANDATORY** - Prompt validation system |
-| `PROMPT-VALIDATION-QUICK.md` | Quick validation checklist |
-| `DOCUMENTATION-MAINTENANCE.md` | **MANDATORY** - Documentation maintenance workflow |
-| `TOOL-CALL-LIMITS.md` | Tool call optimization guide |
-| `TIER-GUIDE.md` | Tier system guidance |
-| `TIER-MAPPING.md` | Tier mapping documentation |
-| `TIER-SELECTION.md` | Tier selection algorithm |
-| `platform-engineering/` | Platform engineering docs (11 files) |
-
-#### `examples/` - Code Examples and Patterns
-Reusable examples and patterns.
-
-| File | Purpose |
-|------|---------|
-| `README.md` | Examples overview |
-| `API-DOCUMENTATION.md` | API documentation examples |
-| `FRAMEWORK-PATTERNS.md` | Framework patterns |
-| `GITIGNORE-EXAMPLES.md` | .gitignore examples |
-| `MIGRATION-GUIDE.md` | Migration examples |
-| `PROJECT-ROADMAP.md` | Roadmap examples |
-| `TESTING-EXAMPLES.md` | Testing examples |
-
-#### `scripts/` - Automation Scripts
-Utility scripts for automation.
-
-| File | Type | Purpose |
-|------|------|---------|
-| `README.md` | - | Scripts documentation |
-| `install.sh` | Shell | Installation script |
-| `self_heal.py` | Python | Self-healing system |
-| `tier_config.py` | Python | Tier configuration |
-| `validate_docs.py` | Python | Documentation validation |
-| `validate_template_versions.py` | Python | Version validation |
-| `validation_protocol_v2.py` | Python | Validation protocol |
-
 #### `templates/` - Reusable Meta-Templates
 Templates for creating other templates.
 
@@ -110,27 +67,6 @@ Templates for creating other templates.
 |------|---------|
 | `README.md` | Meta-templates overview |
 | `SUBDIRECTORY-INDEX.md` | Index for directories with 5+ files |
-
-#### `universal/` - Universal Agent Templates
-Templates that can be used across any project.
-
-| File | Purpose | Note |
-|------|---------|------|
-| `README.md` | Universal templates overview | Different from root files |
-| `AGENT-DELEGATION-MATRIX.md` | Delegation patterns | Universal template |
-| `AGENT-FAILURE-MODES.md` | Failure handling | Universal template |
-| `AGENT-MEMORY-RULES.md` | Memory management | Universal template |
-| `AGENT-ORCHESTRATION.md` | Orchestration patterns | Universal template |
-| `AGENT-SAFETY-FILTERS.md` | Safety protocols | Universal template |
-| `AGENTS.md` | Generic agent guide | Universal template |
-| `AI-GUIDE.md` | General AI guide | Universal template |
-| `CLAUDE.md` | Generic Claude guide | Universal template |
-| `DOCUMENTATION-BLUEPRINT.md` | Generic blueprint | Universal template |
-| `EXECUTION-ENGINE.md` | Execution patterns | Universal template |
-| `INTEGRATION-GUIDE.md` | Integration patterns | Universal template |
-| `TESTING-STRATEGY.md` | Testing patterns | Universal template |
-| `WARP.md` | Generic Warp guide | Universal template |
-| `.gitignore` | Git ignore template | Universal template |
 
 #### `.github/` - GitHub Actions
 CI/CD workflows.
@@ -147,20 +83,12 @@ CI/CD workflows.
 ```
 Root (LLM Entry Points)
 ├── agents/ (Specific AI guides)
-├── blueprints/ (System docs)
-├── docs/ (Technical docs)
-├── examples/ (Code examples)
-├── scripts/ (Automation)
-├── templates/ (Meta-templates)
-├── universal/ (Universal templates)
 └── .github/ (CI/CD)
 ```
 
 ### Key Distinctions
 - **Root files**: Project-specific, primary entry points
-- **Universal files**: Generic templates for any project
 - **Individual agent guides**: In `agents/`, not root
-- **Blueprint system docs**: In `blueprints/`, for maintainers
 
 ---
 
@@ -170,14 +98,8 @@ Root (LLM Entry Points)
 |----------|-------|
 | Root files | 16 |
 | agents/ | 9 |
-| blueprints/ | 7 |
-| docs/ | 19 (including platform-engineering/) |
-| examples/ | 7 |
-| scripts/ | 7 |
-| templates/ | 2 |
-| universal/ | 15 |
 | .github/ | 1 |
-| **Total** | **83** |
+| **Total** | **26** |
 
 ---
 
@@ -187,19 +109,12 @@ Root (LLM Entry Points)
 1. Start with `AGENTS.md` (root) - primary guide
 2. Use `CLAUDE.md` (root) for quick reference
 3. Refer to `AI-QUICK-START.md` for setup
-4. Use `universal/` templates for generic patterns
 
 ### For Developers
 1. Read `README.md` for overview
 2. Check `CONTEXT.md` for philosophy
 3. Use `INDEX.md` for navigation
 4. Refer to appropriate agent guide in `agents/`
-
-### For Maintainers
-1. Use `blueprints/` for system documentation
-2. Run `scripts/` for automation
-3. Update `tier-index.yaml` for tier changes
-4. Use `.github/` for CI/CD
 
 ---
 

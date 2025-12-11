@@ -13,6 +13,24 @@ This blueprint defines the **universal documentation style** used across all tem
 - Define documentation structure for generated projects
 - Ensure all coding agents can work effectively with the system
 
+## 🚨 Important: Project vs Template System Documentation
+
+This blueprint contains **ONLY project documentation templates** that are copied to generated projects. Template system features are kept separate:
+
+### Project Documentation (in this blueprint)
+- Core project files (README.md, CONTEXT.md, etc.)
+- AI agent guides specific to the project
+- Project-specific workflows and guides
+
+### Template System Features (in docs/ folder)
+- Code examples and patterns (docs/examples/)
+- Universal agent templates (docs/universal/)
+- Meta-templates for template creation (docs/templates/)
+- Technical documentation (docs/technical/)
+
+**Rule**: If it helps build/maintain the template system → goes in docs/
+If it's needed by generated projects → goes in the blueprint
+
 ## Documentation Hierarchy
 
 ```

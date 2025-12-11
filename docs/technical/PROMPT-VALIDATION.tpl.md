@@ -149,7 +149,7 @@ This system validates that all AI prompts used in {{PROJECT_NAME}} are:
 
 - [PROMPT-VALIDATION-QUICK.md](PROMPT-VALIDATION-QUICK.md) - 5-minute quick validation
 - [DOCUMENTATION-MAINTENANCE.md](DOCUMENTATION-MAINTENANCE.md) - Documentation maintenance guide
-- [AGENTS.md](../AGENTS.md) - Developer implementation guide
+- [AGENTS.md](../../blueprints/documentation/overlays/generic/AGENTS.tpl.md) - Developer implementation guide
 
 ---
 

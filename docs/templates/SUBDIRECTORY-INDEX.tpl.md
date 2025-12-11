@@ -152,9 +152,9 @@
 
 ## 🔗 Related Documentation
 
-- [Parent INDEX.md](../INDEX.md) - Parent directory index
-- [Project INDEX.md](../../INDEX.md) - Project-wide index
-- [AGENTS.md](../../AGENTS.md) - Development conventions
+- [AGENTS.md](../universal/AGENTS.tpl.md) - Development conventions
+- [Universal Templates](../universal/) - Universal template patterns
+- [Technical Documentation](../technical/) - Technical guides
 
 ---
 

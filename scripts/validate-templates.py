@@ -211,7 +211,7 @@ class TemplateValidator:
         print("\nValidating Template Files...")
         print("-" * 35)
         
-        template_files = list(self.templates_root.rglob("*.tpl.*"))
+        template_files = [f for f in self.templates_root.rglob("*.tpl.*") if "_archive" not in str(f)]
         self.stats["total_files"] = len(template_files)
         
         for template_file in template_files:
@@ -332,7 +332,7 @@ class TemplateValidator:
             self.log_issue("error", "SYSTEM-MAP.md", "Contains reference to old location")
         
         # Check all files that should reference SYSTEM-MAP.md
-        all_files = list(self.templates_root.rglob("*.md"))
+        all_files = [f for f in self.templates_root.rglob("*.md") if "_archive" not in str(f)]
         for file_path in all_files:
             if file_path == system_map_path:
                 continue
@@ -370,7 +370,8 @@ class TemplateValidator:
             
             # Count only actual template files, exclude __pycache__ and compiled files
             actual_files = [f for f in tier_path.rglob("*.tpl.*") 
-                           if "__pycache__" not in str(f) 
+                           if "_archive" not in str(f)
+                           and "__pycache__" not in str(f) 
                            and not str(f).endswith(".pyc")]
             actual_count = len(actual_files)
             

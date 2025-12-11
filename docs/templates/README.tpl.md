@@ -26,8 +26,8 @@ All templates use `{{PLACEHOLDER}}` syntax for dynamic content:
 
 ## Related Documentation
 
-- [../INDEX.md](../INDEX.md) - Project-wide index template
-- [../docs/](../docs/) - Technical documentation
+- [Universal Templates](../universal/) - Universal template patterns
+- [Technical Documentation](../technical/) - Technical guides
 
 ---
 

@@ -58,8 +58,8 @@ overlays:
     enabled: true
     mode: "base"
     apply_to:
-      # === ROOT FOLDER (LLM-facing entrypoints & big-picture files) ===
-      # Primary LLM entrypoints
+      # === PROJECT TEMPLATES (to be copied to generated projects) ===
+      # Primary documentation files
       - "AGENTS.md"           # Main developer guide - PRIMARY LLM ENTRYPOINT
       - "CLAUDE.md"           # Claude quick reference - PRIMARY LLM ENTRYPOINT
       - "AI-QUICK-START.md"   # AI agent setup guide
@@ -79,27 +79,17 @@ overlays:
       - "TODO.md"             # Task tracking
       - "EVALS.md"            # Testing/evaluation
       
-      # === SUBDIRECTORIES ===
-      # agents/ - Individual AI agent guides
+      # === TEMPLATE SUBDIRECTORIES ===
+      # IMPORTANT: This blueprint contains ONLY project documentation templates
+      # Template system features (examples/, universal/, templates/) are in docs/
+      # agents/ - Individual AI agent TEMPLATES (.tpl.md files) - PROJECT SPECIFIC
       - "agents/"
-      # blueprints/ - Blueprint system documentation
-      - "blueprints/"
-      # docs/ - Technical documentation
-      - "docs/"
-      # examples/ - Code examples and patterns
-      - "examples/"
-      # scripts/ - Automation scripts
-      - "scripts/"
-      # templates/ - Reusable meta-templates
-      - "templates/"
-      # universal/ - Universal agent templates
-      - "universal/"
-      # .github/ - GitHub Actions workflows
+      # .github/ - GitHub Actions workflow TEMPLATES - PROJECT SPECIFIC
       - ".github/"
-      # Configuration files
+      # Configuration templates
       - "tier-index.yaml"
       - "requirements.txt"
-      # Documentation
+      # Template manifest
       - "TEMPLATE-MANIFEST.md"
   python:
     enabled: true
@@ -172,9 +162,9 @@ agent_guides:
 
 # Documentation structure template (reorganized with clear hierarchy)
 documentation_structure:
-  # === ROOT FOLDER (LLM-facing entrypoints & big-picture files) ===
+  # === PROJECT TEMPLATES (copied to generated projects) ===
   root:
-    # Primary LLM entrypoints
+    # Primary documentation files
     - AGENTS.md           # Main developer guide - PRIMARY LLM ENTRYPOINT
     - CLAUDE.md           # Claude quick reference - PRIMARY LLM ENTRYPOINT
     - AI-QUICK-START.md   # AI agent setup guide
@@ -194,83 +184,20 @@ documentation_structure:
     - TODO.md             # Task tracking
     - EVALS.md            # Testing/evaluation
   
-  # === SUBDIRECTORIES ===
+  # === TEMPLATE SUBDIRECTORIES ===
   agents:
-    # Individual AI agent guides (moved from root)
-    - README.md
-    - COPILOT.md
-    - GEMINI.md
-    - CURSOR.md
-    - CODY.md
-    - AIDER.md
-    - CODEX.md
-    - WINDSURF.md
-    - WARP.md
+    # Individual AI agent TEMPLATES (.tpl.md files)
+    - README.tpl.md
+    - AIDER.tpl.md
+    - CODEX.tpl.md
+    - CODY.tpl.md
+    - COPILOT.tpl.md
+    - CURSOR.tpl.md
+    - GEMINI.tpl.md
+    - WINDSURF.tpl.md
+    - WARP.tpl.md
   
-  blueprints:
-    # Blueprint system documentation
-    - README.md
-    - BLUEPRINT-COMPILER.md
-    - BLUEPRINT-MAPPING.md
-    - CHANGELOG-GENERATOR.md
-    - SYSTEM-INTEGRATION.md
-    - TIERED-TEMPLATES.md
-    - VALIDATION.md
   
-  docs:
-    # Technical documentation
-    - README.md
-    - PROMPT-VALIDATION.md
-    - PROMPT-VALIDATION-QUICK.md
-    - DOCUMENTATION-MAINTENANCE.md
-    - TOOL-CALL-LIMITS.md
-    - TIER-GUIDE.md
-    - TIER-MAPPING.md
-    - TIER-SELECTION.md
-    - platform-engineering/
-  
-  examples:
-    # Code examples and patterns
-    - README.md
-    - API-DOCUMENTATION.md
-    - FRAMEWORK-PATTERNS.md
-    - GITIGNORE-EXAMPLES.md
-    - MIGRATION-GUIDE.md
-    - PROJECT-ROADMAP.md
-    - TESTING-EXAMPLES.md
-  
-  scripts:
-    # Automation scripts
-    - README.md
-    - install.sh
-    - self_heal.py
-    - tier_config.py
-    - validate_docs.py
-    - validate_template_versions.py
-    - validation_protocol_v2.py
-  
-  templates:
-    # Reusable meta-templates
-    - README.md
-    - SUBDIRECTORY-INDEX.md
-  
-  universal:
-    # Universal agent templates
-    - README.md
-    - AGENT-DELEGATION-MATRIX.md
-    - AGENT-FAILURE-MODES.md
-    - AGENT-MEMORY-RULES.md
-    - AGENT-ORCHESTRATION.md
-    - AGENT-SAFETY-FILTERS.md
-    - AGENTS.md
-    - AI-GUIDE.md
-    - CLAUDE.md
-    - DOCUMENTATION-BLUEPRINT.md
-    - EXECUTION-ENGINE.md
-    - INTEGRATION-GUIDE.md
-    - TESTING-STRATEGY.md
-    - WARP.md
-
 # LLM hints
 llm:
   prompt_preamble: |

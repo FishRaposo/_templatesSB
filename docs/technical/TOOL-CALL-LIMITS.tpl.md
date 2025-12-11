@@ -298,8 +298,8 @@ def profile_tool_usage(func):
 ## 📚 Related Documentation
 
 - [docs/PROMPT-VALIDATION.md](PROMPT-VALIDATION.md) - Prompt optimization
-- [WORKFLOW.md](../WORKFLOW.md) - Workflow optimization
-- [EVALS.md](../EVALS.md) - Performance testing
+- [WORKFLOW.md](../../blueprints/documentation/overlays/generic/WORKFLOW.tpl.md) - Workflow optimization
+- [EVALS.md](../../blueprints/documentation/overlays/generic/EVALS.tpl.md) - Performance testing
 
 ---
 

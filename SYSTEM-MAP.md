@@ -2,7 +2,7 @@
 
 > **Complete Architecture Documentation** - Last Updated: 2025-12-11  
 > **Total Tasks**: 47 production tasks across 9 development categories  
-> **Total Templates**: 93 task templates + 58 implemented tier templates (32 planned)  
+> **Total Templates**: 746 validated templates (71 in documentation blueprint)  
 > **Technology Stacks**: 12 comprehensive stacks (python, go, node, r, sql, nextjs, react, flutter, react_native, agnostic, generic, typescript)  
 > **Architecture**: Hybrid Task-Based + Tier-Based System  
 > **System Health**: EXCELLENT (0 validation issues) ✅
@@ -389,7 +389,7 @@ stacks/[stack]/                          # Self-contained stack folder
 - **Total Tasks**: 46 ✅
 - **Universal Templates**: 92 (CONFIG + SKELETON per task) ✅
 - **Stack Implementations**: Variable per task (based on compatibility) ✅
-- **Template Files**: 667 total ✅
+- **Template Files**: 746 total ✅
 - **Validation Status**: EXCELLENT (0 issues) ✅
 
 ### **Detailed Breakdown by Category**
@@ -1019,29 +1019,43 @@ _templates/
 │   └── docs/                           # Test documentation
 │
 ├── docs/                               # Documentation and guides
-│   ├── TASKS-GUIDE.md                  # Detailed task system documentation
-│   ├── QUICKSTART.md                   # Getting started tutorials
-│   ├── TASK-TEMPLATE.md                # Task creation guidelines
-│   ├── TIER-GUIDE.md                   # Tier selection guide
-│   └── guides/                         # Advanced guides
-│       ├── DOCUMENTATION-MAINTENANCE.md
-│       ├── PROMPT-VALIDATION.md
-│       └── TOOL-CALL-LIMITS.md
-│
-├── examples/                           # Examples and patterns
-│   ├── API-DOCUMENTATION.md
-│   ├── FRAMEWORK-PATTERNS.md
-│   ├── MIGRATION-GUIDE.md
-│   ├── frameworks/                     # Framework-specific patterns
-│   ├── implementation-guides/          # Implementation guides
-│   └── technology-specific/            # Technology-specific guides
-│
-├── platform-engineering/               # Platform engineering tools
-│   ├── AGENTIC-REFACTOR-PLAYBOOK.md
-│   ├── CODE-GENERATION-TEMPLATES.md
-│   ├── MIGRATION-ENGINE.md
-│   ├── VALIDATION-PROTOCOL-v2.md
-│   └── [10 more specialized tools]
+│   ├── examples/                       # Code examples and patterns (7 templates)
+│   │   ├── API-DOCUMENTATION.tpl.md
+│   │   ├── FRAMEWORK-PATTERNS.tpl.md
+│   │   ├── GITIGNORE-EXAMPLES.tpl.md
+│   │   ├── MIGRATION-GUIDE.tpl.md
+│   │   ├── PROJECT-ROADMAP.tpl.md
+│   │   ├── README.tpl.md
+│   │   └── TESTING-EXAMPLES.tpl.md
+│   ├── universal/                      # Universal templates (15 templates)
+│   │   ├── AGENT-DELEGATION-MATRIX.tpl.md
+│   │   ├── AGENT-FAILURE-MODES.tpl.md
+│   │   ├── AGENT-MEMORY-RULES.tpl.md
+│   │   ├── AGENT-ORCHESTRATION.tpl.md
+│   │   ├── AGENT-SAFETY-FILTERS.tpl.md
+│   │   ├── AGENTS.tpl.md
+│   │   ├── AI-GUIDE.tpl.md
+│   │   ├── CLAUDE.tpl.md
+│   │   ├── DOCUMENTATION-BLUEPRINT.tpl.md
+│   │   ├── EXECUTION-ENGINE.tpl.md
+│   │   ├── INTEGRATION-GUIDE.tpl.md
+│   │   ├── README.tpl.md
+│   │   ├── TESTING-STRATEGY.tpl.md
+│   │   ├── WARP.tpl.md
+│   │   └── .gitignore
+│   ├── technical/                      # Technical documentation (11 templates)
+│   │   ├── DOCUMENTATION-MAINTENANCE.tpl.md
+│   │   ├── PROMPT-VALIDATION-QUICK.tpl.md
+│   │   ├── PROMPT-VALIDATION.tpl.md
+│   │   ├── README.tpl.md
+│   │   ├── TIER-GUIDE.tpl.md
+│   │   ├── TIER-MAPPING.tpl.md
+│   │   ├── TIER-SELECTION.tpl.md
+│   │   ├── TOOL-CALL-LIMITS.tpl.md
+│   │   └── platform-engineering/      # Platform engineering tools
+│   └── templates/                      # Meta-templates (2 templates)
+│       ├── README.tpl.md
+│       └── SUBDIRECTORY-INDEX.tpl.md
 │
 ├── backups/                            # Legacy and backup files
 │   ├── SYSTEM-MAP-v2-tier-based.md     # Previous system architecture
@@ -1061,7 +1075,7 @@ _templates/
 When tasks are added or removed:
 1. Update task count in header (currently 46)
 2. Add/remove entries in appropriate category section
-3. Update template file counts (currently 667 total)
+3. Update template file counts (currently 746 total)
 4. Refresh task library inventory
 5. Update validation status if needed
 
@@ -1083,7 +1097,7 @@ When the overall architecture changes:
 
 #### **4. Monthly Verification Checklist**
 - [ ] Verify task count matches actual directories (should be 46)
-- [ ] Check template file counts (should be 667 total)
+- [ ] Check template file counts (should be 746 total)
 - [ ] Validate all script references are accurate
 - [ ] Confirm validation status is current
 - [ ] Test core commands work as documented
@@ -1111,7 +1125,7 @@ python scripts/validate-templates.py --full --report validation-report.json
 ### **System Performance (Latest Test Results)**
 - **Task Detection Accuracy**: 66-87% (tested on diverse project descriptions)
 - **Stack Recommendation Confidence**: 80-90% (based on requirements analysis)
-- **Template Validation**: EXCELLENT (0 issues across 667 templates)
+- **Template Validation**: EXCELLENT (0 issues across 746 templates)
 - **Build Readiness Assessment**: Automated HIGH/MEDIUM/LOW evaluation
 - **Coverage Analysis**: Template availability percentage per project type
 
@@ -1154,7 +1168,7 @@ python scripts/validate-templates.py --full --report validation-report.json
 - **Automated Pipeline**: Created comprehensive analysis and building pipeline
 - **Validation System**: Implemented 5-module validation framework with EXCELLENT health
 - **Task Library Expansion**: Implemented 47 production tasks across 9 categories
-- **Template Count**: Achieved 667 template files with universal and stack-specific implementations
+- **Template Count**: Achieved 746 template files with universal and stack-specific implementations
 - **System Health**: Reached EXCELLENT validation status (0 issues)
 - **Documentation Update**: Comprehensive rewrite of all system documentation
 - **Test Infrastructure Reorganization**: Moved 12 test scripts from scripts/ to tests/ subdirectories
@@ -1173,7 +1187,7 @@ python scripts/validate-templates.py --full --report validation-report.json
 - **Replaced**: Template resolution algorithm with task-based detection
 - **Enhanced**: From manual setup to automated analysis pipeline
 - **Improved**: Validation from basic checks to comprehensive 5-module system
-- **Expanded**: From 56 templates to 667 templates across 47 tasks
+- **Expanded**: From 56 templates to 746 templates across 47 tasks
 
 ---
 
