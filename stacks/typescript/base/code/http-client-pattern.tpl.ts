@@ -1,16 +1,8 @@
 /**
- * Template: http-client-pattern.tpl.ts
- * Purpose: http-client-pattern template
- * Stack: typescript
- * Tier: base
+ * File: http-client-pattern.tpl.ts
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Typescript Stack
-# Generated: 2025-12-10
-# Purpose: HTTP client utilities
-# Tier: base
-# Stack: typescript
-# Category: utilities
 
 // -----------------------------------------------------------------------------
 // FILE: http-client-pattern.tpl.ts

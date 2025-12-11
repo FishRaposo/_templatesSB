@@ -1,16 +1,8 @@
 /**
- * Template: minimal-boilerplate-next.tpl.jsx
- * Purpose: minimal-boilerplate-next template
- * Stack: react
- * Tier: base
+ * File: minimal-boilerplate-next.tpl.jsx
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: unknown template utilities
-# Tier: mvp
-# Stack: unknown
-# Category: utilities
 
 # Minimal Boilerplate Template (MVP Tier - Next.js)
 

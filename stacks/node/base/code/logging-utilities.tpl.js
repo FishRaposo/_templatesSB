@@ -1,16 +1,8 @@
 /**
- * Template: logging-utilities.tpl.js
- * Purpose: logging-utilities template
- * Stack: node
- * Tier: base
+ * File: logging-utilities.tpl.js
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Node Stack
-# Generated: 2025-12-10
-# Purpose: Logging utilities
-# Tier: base
-# Stack: node
-# Category: utilities
 
 #!/usr/bin/env node
 /**

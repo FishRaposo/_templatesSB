@@ -1,9 +1,8 @@
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: unknown template utilities
-# Tier: base
-# Stack: unknown
-# Category: utilities
+<!--
+File: FEATURE-FLAGS-SKELETON.tpl.md
+Purpose: Template for feature-flags implementation
+Template Version: 1.0
+-->
 
 # FeatureFlags Service Skeleton
 

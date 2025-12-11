@@ -1,16 +1,8 @@
 /**
- * Template: feature_flags_component.tpl.tsx
- * Purpose: feature_flags_component template
- * Stack: typescript
- * Tier: base
+ * File: feature_flags_component.tpl.tsx
+ * Purpose: Template for feature-flags implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Component tests
-# Tier: base
-# Stack: unknown
-# Category: utilities
 
 // -----------------------------------------------------------------------------
 // FILE: feature_flags_component.tpl.tsx

@@ -1,9 +1,8 @@
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: base
-# Stack: unknown
-# Category: testing
+<!--
+File: TEST-STRATEGY.tpl.md
+Purpose: Template for healthchecks-telemetry implementation
+Template Version: 1.0
+-->
 
 # Healthchecks Telemetry Testing Strategy
 

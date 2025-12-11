@@ -1,16 +1,8 @@
 /**
- * Template: logging-utilities.tpl.jsx
- * Purpose: logging-utilities template
- * Stack: react
- * Tier: base
+ * File: logging-utilities.tpl.jsx
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - React Stack
-# Generated: 2025-12-10
-# Purpose: Logging utilities
-# Tier: base
-# Stack: react
-# Category: utilities
 
 // -----------------------------------------------------------------------------
 // FILE: logging-utilities.tpl.jsx

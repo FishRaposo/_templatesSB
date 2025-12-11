@@ -1,16 +1,8 @@
 /**
- * Template: comprehensive-tests-react.tpl.jsx
- * Purpose: comprehensive-tests-react template
- * Stack: react
- * Tier: base
+ * File: comprehensive-tests-react.tpl.jsx
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: core
-# Stack: unknown
-# Category: testing
 
 # Comprehensive React Testing Template
 # Purpose: Core-level testing template with unit, component, integration, and feature tests for React applications

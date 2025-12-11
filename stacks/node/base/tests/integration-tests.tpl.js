@@ -1,16 +1,8 @@
 /**
- * Template: integration-tests.tpl.js
- * Purpose: integration-tests template
- * Stack: node
- * Tier: base
+ * File: integration-tests.tpl.js
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Node Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: base
-# Stack: node
-# Category: testing
 
 // -----------------------------------------------------------------------------
 // FILE: integration-tests.tpl.js

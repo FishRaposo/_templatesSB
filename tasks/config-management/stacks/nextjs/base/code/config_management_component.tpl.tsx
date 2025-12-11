@@ -1,16 +1,8 @@
 /**
- * Template: config_management_component.tpl.tsx
- * Purpose: config_management_component template
- * Stack: typescript
- * Tier: base
+ * File: config_management_component.tpl.tsx
+ * Purpose: Template for config-management implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Configuration management utilities
-# Tier: base
-# Stack: unknown
-# Category: utilities
 
 // -----------------------------------------------------------------------------
 // FILE: config_management_component.tpl.tsx
