@@ -1,16 +1,8 @@
 /**
- * Template: data-validation.tpl.js
- * Purpose: data-validation template
- * Stack: node
- * Tier: base
+ * File: data-validation.tpl.js
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Node Stack
-# Generated: 2025-12-10
-# Purpose: Data validation utilities
-# Tier: base
-# Stack: node
-# Category: utilities
 
 #!/usr/bin/env node
 /**

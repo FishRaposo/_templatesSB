@@ -1,14 +1,6 @@
-// Template: enterprise-tests-go.tpl.go
-// Purpose: enterprise-tests-go template
-// Stack: go
-// Tier: base
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: enterprise
-# Stack: unknown
-# Category: testing
+// File: enterprise-tests-go.tpl.go
+// Purpose: Template for unknown implementation
+// Generated for: {{PROJECT_NAME}}
 
 # Enterprise Go Testing Template
 # Purpose: Full-level enterprise testing template with comprehensive security, compliance, and resilience testing

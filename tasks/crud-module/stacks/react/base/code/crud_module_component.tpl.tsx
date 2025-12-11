@@ -1,21 +1,13 @@
 /**
- * Template: auth_oauth_component.tpl.jsx
- * Purpose: auth_oauth_component template
- * Stack: react
- * Tier: base
+ * File: crud_module_component.tpl.tsx
+ * Purpose: Template for crud-module implementation
+ * Generated for: {{PROJECT_NAME}}
  */
 
-# Universal Template System - React Stack
-# Generated: 2025-12-10
-# Purpose: Component tests
-# Tier: base
-# Stack: react
-# Category: utilities
-
 // -----------------------------------------------------------------------------
-// FILE: auth_oauth_component.tpl.jsx
-// PURPOSE: OAuth authentication component for React applications
-// USAGE: Import and adapt for OAuth authentication functionality in React projects
+// FILE: crud_module_component.tpl.jsx
+// PURPOSE: CRUD module component for React applications
+// USAGE: Import and adapt for CRUD functionality in React projects
 // AUTHOR: [[.Author]]
 // VERSION: [[.Version]]
 // SINCE: [[.Version]]
@@ -23,24 +15,24 @@
 
 import React, { useState, useEffect } from 'react';
 
-interface AuthOauthProps {
+interface CrudModuleProps {
   config?: any;
   onStatusChange?: (status: any) => void;
 }
 
-const AuthOauthComponent: React.FC<AuthOauthProps> = ({ config, onStatusChange }) => {
+const CrudModuleComponent: React.FC<CrudModuleProps> = ({ config, onStatusChange }) => {
   const [status, setStatus] = useState('loading');
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    // Initialize auth-oauth service
+    // Initialize crud-module service
     const initializeService = async () => {
       try {
         // TODO: Implement service initialization
         setStatus('ready');
       } catch (error) {
         setStatus('error');
-        console.error('Failed to initialize auth-oauth:', error);
+        console.error('Failed to initialize crud-module:', error);
       }
     };
 
@@ -49,18 +41,18 @@ const AuthOauthComponent: React.FC<AuthOauthProps> = ({ config, onStatusChange }
 
   const handleExecute = async () => {
     // TODO: Implement service execution
-    console.log('Executing auth-oauth...');
+    console.log('Executing crud-module...');
   };
 
   return (
-    <div className="auth-oauth-component">
-      <h3>AuthOauth</h3>
+    <div className="crud-module-component">
+      <h3>CrudModule</h3>
       <p>Status: {status}</p>
       <button onClick={handleExecute} disabled={status !== 'ready'}>
-        Execute auth oauth
+        Execute crud module
       </button>
     </div>
   );
 };
 
-export default AuthOauthComponent;
+export default CrudModuleComponent;

@@ -1,3 +1,7 @@
+// File: healthchecks_telemetry_service.tpl.go
+// Purpose: Template for healthchecks-telemetry implementation
+// Generated for: {{PROJECT_NAME}}
+
 // Healthcheckstelemetry Service for Go
 // Generated for {{PROJECT_NAME}}
 package healthchecks_telemetry

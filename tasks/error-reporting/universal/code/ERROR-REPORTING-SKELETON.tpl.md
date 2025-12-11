@@ -1,9 +1,8 @@
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: unknown template utilities
-# Tier: base
-# Stack: unknown
-# Category: utilities
+<!--
+File: ERROR-REPORTING-SKELETON.tpl.md
+Purpose: Template for error-reporting implementation
+Template Version: 1.0
+-->
 
 # ErrorReporting Service Skeleton
 

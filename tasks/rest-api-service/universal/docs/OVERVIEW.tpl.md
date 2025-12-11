@@ -1,9 +1,8 @@
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: unknown template utilities
-# Tier: base
-# Stack: unknown
-# Category: template
+<!--
+File: OVERVIEW.tpl.md
+Purpose: Template for rest-api-service implementation
+Template Version: 1.0
+-->
 
 # Rest Api Service Overview
 

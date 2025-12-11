@@ -1,9 +1,8 @@
-# Universal Template System - Sql Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: base
-# Stack: sql
-# Category: testing
+"""
+File: test-base-scaffold.tpl.py
+Purpose: Template for unknown implementation
+Generated for: {{PROJECT_NAME}}
+"""
 
 #!/usr/bin/env sql3
 # -----------------------------------------------------------------------------

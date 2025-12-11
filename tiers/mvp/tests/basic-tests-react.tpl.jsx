@@ -1,16 +1,8 @@
 /**
- * Template: basic-tests-react.tpl.jsx
- * Purpose: basic-tests-react template
- * Stack: react
- * Tier: base
+ * File: basic-tests-react.tpl.jsx
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: mvp
-# Stack: unknown
-# Category: testing
 
 # Basic React Testing Template
 # Purpose: MVP-level testing template with unit and component tests for React applications

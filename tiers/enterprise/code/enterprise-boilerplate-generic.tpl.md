@@ -1,9 +1,8 @@
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: unknown template utilities
-# Tier: enterprise
-# Stack: unknown
-# Category: utilities
+<!--
+File: enterprise-boilerplate-generic.tpl.md
+Purpose: Template for unknown implementation
+Template Version: 1.0
+-->
 
 # Enterprise Boilerplate Template (Enterprise Tier - Generic)
 

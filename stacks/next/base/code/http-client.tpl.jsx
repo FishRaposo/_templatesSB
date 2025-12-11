@@ -1,16 +1,8 @@
 /**
- * Template: http-client.tpl.jsx
- * Purpose: http-client template
- * Stack: react
- * Tier: base
+ * File: http-client.tpl.jsx
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Next Stack
-# Generated: 2025-12-10
-# Purpose: HTTP client utilities
-# Tier: base
-# Stack: next
-# Category: utilities
 
 // -----------------------------------------------------------------------------
 // FILE: http-client.tpl.jsx

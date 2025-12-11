@@ -1,3 +1,7 @@
+// File: etl_pipeline_service.tpl.go
+// Purpose: Template for etl-pipeline implementation
+// Generated for: {{PROJECT_NAME}}
+
 // Etlpipeline Service for Go
 // Generated for {{PROJECT_NAME}}
 package etl_pipeline
