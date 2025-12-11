@@ -8,7 +8,7 @@ TODO: Review and implement actual test logic
 import unittest
 import sys
 from pathlib import Path
-from unittest.mock import Mock, patch, MagicMock
+from unittest.mock import Mock, patch, MagicMock, mock_open
 
 # Add scripts directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "scripts"))
@@ -16,7 +16,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent / "scripts"))
 try:
     import analyze_and_build
 except ImportError as e:
-    print(f"Warning: Could not import {module_name}: {e}")
+    print(f"Warning: Could not import analyze_and_build: {e}")
     analyze_and_build = None
 
 class TestAnalyzeAndBuild(unittest.TestCase):
@@ -103,18 +103,51 @@ class TestAnalyzeAndBuild(unittest.TestCase):
     # Skipping private function: _generate_detailed_gaps
     def test_run_full_pipeline(self):
         """Test run_full_pipeline function"""
-        # TODO: Implement based on docstring: Run the complete analysis and building pipeline...
-        # Arrange
-        self = 'test_value'
-        description = 'test_value'
-        output_dir = 'test_value'
-        build = 'test_value'
-        dry_run = False
+        if analyze_and_build is None:
+            self.skipTest("Module analyze_and_build not available")
 
-        # Act & Assert
-        # TODO: Add actual test implementation
-        with self.assertRaises(NotImplementedError):
-            self.fail('Test not implemented yet')
+        # Dependencies to mock
+        with patch('analyze_and_build.TaskDetectionSystem') as MockDetector, \
+             patch('builtins.open', new_callable=mock_open, read_data="tasks: {}") as mock_file:
+
+            # Instantiate the real pipeline
+            pipeline = analyze_and_build.ProjectAnalysisPipeline()
+
+            # Mock internal methods to isolate run_full_pipeline logic
+            pipeline.analyze_project = Mock(return_value={
+                "timestamp": "2024-01-01T00:00:00",
+                "description": "test",
+                "detected_tasks": [],
+                "detected_gaps": [],
+                "stack_recommendation": None,
+                "validation_summary": {"total_requirements_detected": 0, "coverage_percentage": 0, "tasks_with_templates": 0},
+                "build_readiness": {"readiness_level": "low", "recommendation": "none"}
+            })
+            pipeline.generate_build_config = Mock(return_value={
+                 "project": {"stack": "python", "tier": "mvp"},
+                 "tasks": {}
+            })
+            pipeline.build_project = Mock(return_value=True)
+            pipeline.generate_gap_documentation = Mock(return_value="No gaps")
+            pipeline._serialize_analysis_for_export = Mock(return_value={})
+            pipeline._print_pipeline_summary = Mock()
+
+            description = 'test_value'
+            output_dir = Path('test_output')
+            build = True
+            dry_run = False
+
+            # Act
+            report = pipeline.run_full_pipeline(description, output_dir, build, dry_run)
+
+            # Assert
+            pipeline.analyze_project.assert_called_once_with(description)
+            pipeline.generate_build_config.assert_called_once()
+            pipeline.build_project.assert_called_once_with(pipeline.generate_build_config.return_value, output_dir, dry_run)
+            pipeline.generate_gap_documentation.assert_called_once()
+
+            # Verify file writes: report, gap doc, build config
+            self.assertGreaterEqual(mock_file.call_count, 4)
 
     # Skipping private function: _serialize_analysis_for_export
     # Skipping private function: _print_pipeline_summary
