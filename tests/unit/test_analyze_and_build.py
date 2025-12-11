@@ -7,6 +7,9 @@ TODO: Review and implement actual test logic
 
 import unittest
 import sys
+import shutil
+import tempfile
+import os
 from pathlib import Path
 from unittest.mock import Mock, patch, MagicMock
 
@@ -16,7 +19,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent / "scripts"))
 try:
     import analyze_and_build
 except ImportError as e:
-    print(f"Warning: Could not import {module_name}: {e}")
+    print(f"Warning: Could not import analyze_and_build: {e}")
     analyze_and_build = None
 
 class TestAnalyzeAndBuild(unittest.TestCase):
@@ -24,30 +27,36 @@ class TestAnalyzeAndBuild(unittest.TestCase):
 
     def setUp(self):
         """Setup for each test"""
-        # TODO: Add common setup logic
-        pass
+        self.test_dir = tempfile.mkdtemp()
+        self.original_cwd = os.getcwd()
 
     def tearDown(self):
         """Cleanup after each test"""
-        # TODO: Add cleanup logic
-        pass
+        if os.path.exists(self.test_dir):
+            shutil.rmtree(self.test_dir)
+        os.chdir(self.original_cwd)
 
-    def test_main(self):
+    @patch('sys.argv', ['analyze_and_build.py', '--description', 'Test Project', '--no-build'])
+    @patch('analyze_and_build.ProjectAnalysisPipeline')
+    def test_main(self, mock_pipeline_cls):
         """Test main function"""
-        # TODO: Implement based on docstring: Main entry point...
-        # TODO: Add actual test implementation
-        with self.assertRaises(NotImplementedError):
-            self.fail('Test not implemented yet')
+        # Verify setUp created directory
+        self.assertTrue(os.path.exists(self.test_dir))
+
+        # Arrange
+        mock_pipeline = mock_pipeline_cls.return_value
+
+        # Act
+        analyze_and_build.main()
+
+        # Assert
+        mock_pipeline_cls.assert_called_once()
+        mock_pipeline.run_full_pipeline.assert_called_once()
 
     # Skipping private function: __init__
     def test_analyze_project(self):
         """Test analyze_project function"""
         # TODO: Implement based on docstring: Analyze project requirements and return comprehens...
-        # Arrange
-        self = 'test_value'
-        description = 'test_value'
-        suggest_stacks = 'test_value'
-
         # Act & Assert
         # TODO: Add actual test implementation
         with self.assertRaises(NotImplementedError):
@@ -62,11 +71,6 @@ class TestAnalyzeAndBuild(unittest.TestCase):
     def test_generate_build_config(self):
         """Test generate_build_config function"""
         # TODO: Implement based on docstring: Generate resolver-compatible build configuration...
-        # Arrange
-        self = 'test_value'
-        analysis = 'test_value'
-        output_path = 'test_value'
-
         # Act & Assert
         # TODO: Add actual test implementation
         with self.assertRaises(NotImplementedError):
@@ -75,12 +79,6 @@ class TestAnalyzeAndBuild(unittest.TestCase):
     def test_build_project(self):
         """Test build_project function"""
         # TODO: Implement based on docstring: Build project using the template system...
-        # Arrange
-        self = 'test_value'
-        build_config = 'test_value'
-        output_dir = 'test_value'
-        dry_run = False
-
         # Act & Assert
         # TODO: Add actual test implementation
         with self.assertRaises(NotImplementedError):
@@ -89,11 +87,6 @@ class TestAnalyzeAndBuild(unittest.TestCase):
     def test_generate_gap_documentation(self):
         """Test generate_gap_documentation function"""
         # TODO: Implement based on docstring: Generate comprehensive gap documentation...
-        # Arrange
-        self = 'test_value'
-        analysis = 'test_value'
-        output_path = 'test_value'
-
         # Act & Assert
         # TODO: Add actual test implementation
         with self.assertRaises(NotImplementedError):
@@ -104,13 +97,6 @@ class TestAnalyzeAndBuild(unittest.TestCase):
     def test_run_full_pipeline(self):
         """Test run_full_pipeline function"""
         # TODO: Implement based on docstring: Run the complete analysis and building pipeline...
-        # Arrange
-        self = 'test_value'
-        description = 'test_value'
-        output_dir = 'test_value'
-        build = 'test_value'
-        dry_run = False
-
         # Act & Assert
         # TODO: Add actual test implementation
         with self.assertRaises(NotImplementedError):
