@@ -1,3 +1,9 @@
+///
+/// File: error-handling.tpl.dart
+/// Purpose: Template for unknown implementation
+/// Generated for: {{PROJECT_NAME}}
+///
+
 /// Template: error-handling.tpl.dart
 /// Purpose: error-handling template
 /// Stack: flutter

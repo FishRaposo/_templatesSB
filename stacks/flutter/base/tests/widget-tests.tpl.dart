@@ -1,3 +1,9 @@
+///
+/// File: widget-tests.tpl.dart
+/// Purpose: Template for unknown implementation
+/// Generated for: {{PROJECT_NAME}}
+///
+
 /// Template: widget-tests.tpl.dart
 /// Purpose: widget-tests template
 /// Stack: flutter

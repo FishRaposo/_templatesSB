@@ -1,3 +1,9 @@
+///
+/// File: logging-utilities.tpl.dart
+/// Purpose: Template for unknown implementation
+/// Generated for: {{PROJECT_NAME}}
+///
+
 /// Template: logging-utilities.tpl.dart
 /// Purpose: logging-utilities template
 /// Stack: flutter

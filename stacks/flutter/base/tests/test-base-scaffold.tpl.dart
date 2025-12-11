@@ -1,3 +1,9 @@
+///
+/// File: test-base-scaffold.tpl.dart
+/// Purpose: Template for unknown implementation
+/// Generated for: {{PROJECT_NAME}}
+///
+
 /// Template: test-base-scaffold.tpl.dart
 /// Purpose: test-base-scaffold template
 /// Stack: flutter

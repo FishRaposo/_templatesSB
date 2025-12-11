@@ -1,3 +1,9 @@
+///
+/// File: http-client.tpl.dart
+/// Purpose: Template for unknown implementation
+/// Generated for: {{PROJECT_NAME}}
+///
+
 /// Template: http-client.tpl.dart
 /// Purpose: http-client template
 /// Stack: flutter

@@ -1,3 +1,9 @@
+///
+/// File: testing-utilities.tpl.dart
+/// Purpose: Template for unknown implementation
+/// Generated for: {{PROJECT_NAME}}
+///
+
 /// Template: testing-utilities.tpl.dart
 /// Purpose: testing-utilities template
 /// Stack: flutter

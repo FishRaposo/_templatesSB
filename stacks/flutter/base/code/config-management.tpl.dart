@@ -1,3 +1,9 @@
+///
+/// File: config-management.tpl.dart
+/// Purpose: Template for unknown implementation
+/// Generated for: {{PROJECT_NAME}}
+///
+
 /// Template: config-management.tpl.dart
 /// Purpose: config-management template
 /// Stack: flutter
