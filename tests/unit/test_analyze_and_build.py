@@ -168,48 +168,6 @@ class TestAnalyzeAndBuild(unittest.TestCase):
 
     # Skipping private function: _serialize_analysis_for_export
     # Skipping private function: _print_pipeline_summary
-    class TestProjectAnalysisPipeline:
-        """Test ProjectAnalysisPipeline class"""
-
-        def setup_method(self):
-            """Setup for each test method"""
-            # TODO: Initialize class instance
-            pass
-
-        def test_analyze_project(self):
-            """Test analyze_project method"""
-            # TODO: Implement based on docstring: Analyze project requirements and return comprehens...
-            # TODO: Add actual test implementation
-            with self.assertRaises(NotImplementedError):
-                self.fail('Test not implemented yet')
-
-        def test_generate_build_config(self):
-            """Test generate_build_config method"""
-            # TODO: Implement based on docstring: Generate resolver-compatible build configuration...
-            # TODO: Add actual test implementation
-            with self.assertRaises(NotImplementedError):
-                self.fail('Test not implemented yet')
-
-        def test_build_project(self):
-            """Test build_project method"""
-            # TODO: Implement based on docstring: Build project using the template system...
-            # TODO: Add actual test implementation
-            with self.assertRaises(NotImplementedError):
-                self.fail('Test not implemented yet')
-
-        def test_generate_gap_documentation(self):
-            """Test generate_gap_documentation method"""
-            # TODO: Implement based on docstring: Generate comprehensive gap documentation...
-            # TODO: Add actual test implementation
-            with self.assertRaises(NotImplementedError):
-                self.fail('Test not implemented yet')
-
-        def test_run_full_pipeline(self):
-            """Test run_full_pipeline method"""
-            # TODO: Implement based on docstring: Run the complete analysis and building pipeline...
-            # TODO: Add actual test implementation
-            with self.assertRaises(NotImplementedError):
-                self.fail('Test not implemented yet')
 
 
     def test_integration_smoke(self):
