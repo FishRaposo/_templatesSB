@@ -1,16 +1,8 @@
 /**
- * Template: rest_api_service_service.tpl.js
- * Purpose: rest_api_service_service template
- * Stack: node
- * Tier: base
+ * File: rest_api_service_service.tpl.js
+ * Purpose: Template for rest-api-service implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Node Stack
-# Generated: 2025-12-10
-# Purpose: node template utilities
-# Tier: base
-# Stack: node
-# Category: utilities
 
 # RestApiService Service for Node
 # Generated for {{PROJECT_NAME}}

@@ -1,9 +1,8 @@
-# Universal Template System - Python Stack
-# Generated: 2025-12-10
-# Purpose: Error handling utilities
-# Tier: base
-# Stack: python
-# Category: template
+<!--
+File: ERROR-HANDLING.tpl.md
+Purpose: Template for unknown implementation
+Template Version: 1.0
+-->
 
 # Error Handling Guide - Python
 

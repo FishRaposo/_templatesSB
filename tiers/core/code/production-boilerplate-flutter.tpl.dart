@@ -1,14 +1,8 @@
-/// Template: production-boilerplate-flutter.tpl.dart
-/// Purpose: production-boilerplate-flutter template
-/// Stack: flutter
-/// Tier: base
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: unknown template utilities
-# Tier: core
-# Stack: unknown
-# Category: utilities
+///
+/// File: production-boilerplate-flutter.tpl.dart
+/// Purpose: Template for unknown implementation
+/// Generated for: {{PROJECT_NAME}}
+///
 
 # Production Boilerplate Template (Core Tier - Flutter)
 

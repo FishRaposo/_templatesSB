@@ -1,9 +1,8 @@
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Logging utilities
-# Tier: base
-# Stack: unknown
-# Category: utilities
+<!--
+File: AUDIT-LOGGING-SKELETON.tpl.md
+Purpose: Template for audit-logging implementation
+Template Version: 1.0
+-->
 
 # AuditLogging Service Skeleton
 

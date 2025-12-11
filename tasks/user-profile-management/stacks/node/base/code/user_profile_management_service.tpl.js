@@ -1,16 +1,8 @@
 /**
- * Template: user_profile_management_service.tpl.js
- * Purpose: user_profile_management_service template
- * Stack: node
- * Tier: base
+ * File: user_profile_management_service.tpl.js
+ * Purpose: Template for user-profile-management implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Node Stack
-# Generated: 2025-12-10
-# Purpose: node template utilities
-# Tier: base
-# Stack: node
-# Category: utilities
 
 # UserProfileManagement Service for Node
 # Generated for {{PROJECT_NAME}}

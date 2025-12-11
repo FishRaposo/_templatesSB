@@ -1,16 +1,8 @@
 /**
- * Template: admin_panel_component.tpl.tsx
- * Purpose: admin_panel_component template
- * Stack: typescript
- * Tier: base
+ * File: admin_panel_component.tpl.tsx
+ * Purpose: Template for admin-panel implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Component tests
-# Tier: base
-# Stack: unknown
-# Category: utilities
 
 // -----------------------------------------------------------------------------
 // FILE: admin_panel_component.tpl.tsx

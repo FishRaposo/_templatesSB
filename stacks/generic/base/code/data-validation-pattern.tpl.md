@@ -1,9 +1,8 @@
-# Universal Template System - Generic Stack
-# Generated: 2025-12-10
-# Purpose: Data validation utilities
-# Tier: base
-# Stack: generic
-# Category: utilities
+<!--
+File: data-validation-pattern.tpl.md
+Purpose: Template for unknown implementation
+Template Version: 1.0
+-->
 
 # ----------------------------------------------------------------------------- 
 # FILE: data-validation-pattern.tpl.md

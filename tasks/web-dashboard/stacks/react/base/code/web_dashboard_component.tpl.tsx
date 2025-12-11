@@ -1,21 +1,13 @@
 /**
- * Template: feature_flags_component.tpl.jsx
- * Purpose: feature_flags_component template
- * Stack: react
- * Tier: base
+ * File: web_dashboard_component.tpl.tsx
+ * Purpose: Template for web-dashboard implementation
+ * Generated for: {{PROJECT_NAME}}
  */
 
-# Universal Template System - React Stack
-# Generated: 2025-12-10
-# Purpose: Component tests
-# Tier: base
-# Stack: react
-# Category: utilities
-
 // -----------------------------------------------------------------------------
-// FILE: feature_flags_component.tpl.jsx
-// PURPOSE: Feature flags component for React applications
-// USAGE: Import and adapt for feature flag functionality in React projects
+// FILE: web_dashboard_component.tpl.jsx
+// PURPOSE: Web dashboard component for React applications
+// USAGE: Import and adapt for dashboard functionality in React projects
 // AUTHOR: [[.Author]]
 // VERSION: [[.Version]]
 // SINCE: [[.Version]]
@@ -23,24 +15,24 @@
 
 import React, { useState, useEffect } from 'react';
 
-interface FeatureFlagsProps {
+interface WebDashboardProps {
   config?: any;
   onStatusChange?: (status: any) => void;
 }
 
-const FeatureFlagsComponent: React.FC<FeatureFlagsProps> = ({ config, onStatusChange }) => {
+const WebDashboardComponent: React.FC<WebDashboardProps> = ({ config, onStatusChange }) => {
   const [status, setStatus] = useState('loading');
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    // Initialize feature-flags service
+    // Initialize web-dashboard service
     const initializeService = async () => {
       try {
         // TODO: Implement service initialization
         setStatus('ready');
       } catch (error) {
         setStatus('error');
-        console.error('Failed to initialize feature-flags:', error);
+        console.error('Failed to initialize web-dashboard:', error);
       }
     };
 
@@ -49,18 +41,18 @@ const FeatureFlagsComponent: React.FC<FeatureFlagsProps> = ({ config, onStatusCh
 
   const handleExecute = async () => {
     // TODO: Implement service execution
-    console.log('Executing feature-flags...');
+    console.log('Executing web-dashboard...');
   };
 
   return (
-    <div className="feature-flags-component">
-      <h3>FeatureFlags</h3>
+    <div className="web-dashboard-component">
+      <h3>WebDashboard</h3>
       <p>Status: {status}</p>
       <button onClick={handleExecute} disabled={status !== 'ready'}>
-        Execute feature flags
+        Execute web dashboard
       </button>
     </div>
   );
 };
 
-export default FeatureFlagsComponent;
+export default WebDashboardComponent;

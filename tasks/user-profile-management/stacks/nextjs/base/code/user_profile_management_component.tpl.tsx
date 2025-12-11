@@ -1,16 +1,8 @@
 /**
- * Template: user_profile_management_component.tpl.tsx
- * Purpose: user_profile_management_component template
- * Stack: typescript
- * Tier: base
+ * File: user_profile_management_component.tpl.tsx
+ * Purpose: Template for user-profile-management implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Component tests
-# Tier: base
-# Stack: unknown
-# Category: utilities
 
 // -----------------------------------------------------------------------------
 // FILE: user_profile_management_component.tpl.tsx

@@ -1,16 +1,8 @@
 /**
- * Template: authentication-pattern.tpl.ts
- * Purpose: authentication-pattern template
- * Stack: typescript
- * Tier: base
+ * File: authentication-pattern.tpl.ts
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Typescript Stack
-# Generated: 2025-12-10
-# Purpose: typescript template utilities
-# Tier: base
-# Stack: typescript
-# Category: utilities
 
 // -----------------------------------------------------------------------------
 // FILE: authentication-pattern.tpl.ts

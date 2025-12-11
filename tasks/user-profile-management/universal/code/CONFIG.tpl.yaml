@@ -1,9 +1,6 @@
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Configuration management utilities
-# Tier: base
-# Stack: unknown
-# Category: utilities
+# File: CONFIG.tpl.yaml
+# Purpose: Template for user-profile-management implementation
+# Generated for: {{PROJECT_NAME}}
 
 # User Profile Management Configuration
 # Generated for {{PROJECT_NAME}} using {{STACK}} stack

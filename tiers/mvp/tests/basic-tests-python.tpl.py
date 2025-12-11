@@ -1,9 +1,8 @@
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: mvp
-# Stack: unknown
-# Category: testing
+"""
+File: basic-tests-python.tpl.py
+Purpose: Template for unknown implementation
+Generated for: {{PROJECT_NAME}}
+"""
 
 # Basic Python Testing Template
 # Purpose: MVP-level testing template with unit and component tests for Python applications

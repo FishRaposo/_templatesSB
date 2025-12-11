@@ -1,9 +1,8 @@
-# Universal Template System - Python Stack
-# Generated: 2025-12-10
-# Purpose: python template utilities
-# Tier: base
-# Stack: python
-# Category: utilities
+"""
+File: auth_basic_service.tpl.py
+Purpose: Template for auth-basic implementation
+Generated for: {{PROJECT_NAME}}
+"""
 
 # AuthBasic Service for Python
 # Generated for {{PROJECT_NAME}}

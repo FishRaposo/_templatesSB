@@ -1,9 +1,8 @@
-# Universal Template System - Flutter Stack
-# Generated: 2025-12-10
-# Purpose: flutter template utilities
-# Tier: base
-# Stack: flutter
-# Category: template
+<!--
+File: NETWORKING.tpl.md
+Purpose: Template for unknown implementation
+Template Version: 1.0
+-->
 
 # {{PROJECT_NAME}} - Flutter Networking
 
