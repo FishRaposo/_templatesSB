@@ -1,3 +1,7 @@
+// File: audit_logging_service.tpl.go
+// Purpose: Template for audit-logging implementation
+// Generated for: {{PROJECT_NAME}}
+
 // Auditlogging Service for Go
 // Generated for {{PROJECT_NAME}}
 package audit_logging

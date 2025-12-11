@@ -1,21 +1,7 @@
 /**
- * Template: web_dashboard_component.tpl.tsx
- * Purpose: web_dashboard_component template
- * Stack: typescript
- * Tier: base
- */
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Component tests
-# Tier: base
-# Stack: unknown
-# Category: utilities
-
-/**
  * File: web_dashboard_component.tpl.tsx
- * Purpose: Template for base implementation
- * Generated for: {PROJECT_NAME}
+ * Purpose: Template for web-dashboard implementation
+ * Generated for: {{PROJECT_NAME}}
  */
 
 // -----------------------------------------------------------------------------

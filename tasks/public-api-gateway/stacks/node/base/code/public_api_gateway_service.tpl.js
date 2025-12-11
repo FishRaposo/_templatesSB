@@ -1,16 +1,8 @@
 /**
- * Template: public_api_gateway_service.tpl.js
- * Purpose: public_api_gateway_service template
- * Stack: node
- * Tier: base
+ * File: public_api_gateway_service.tpl.js
+ * Purpose: Template for public-api-gateway implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Node Stack
-# Generated: 2025-12-10
-# Purpose: node template utilities
-# Tier: base
-# Stack: node
-# Category: utilities
 
 # PublicApiGateway Service for Node
 # Generated for {{PROJECT_NAME}}

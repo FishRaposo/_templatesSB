@@ -1,3 +1,7 @@
+// File: file_processing_pipeline_service.tpl.go
+// Purpose: Template for file-processing-pipeline implementation
+// Generated for: {{PROJECT_NAME}}
+
 // Fileprocessingpipeline Service for Go
 // Generated for {{PROJECT_NAME}}
 package file_processing_pipeline

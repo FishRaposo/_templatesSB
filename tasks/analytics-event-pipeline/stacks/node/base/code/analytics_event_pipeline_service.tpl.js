@@ -1,16 +1,8 @@
 /**
- * Template: analytics_event_pipeline_service.tpl.js
- * Purpose: analytics_event_pipeline_service template
- * Stack: node
- * Tier: base
+ * File: analytics_event_pipeline_service.tpl.js
+ * Purpose: Template for analytics-event-pipeline implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Node Stack
-# Generated: 2025-12-10
-# Purpose: node template utilities
-# Tier: base
-# Stack: node
-# Category: utilities
 
 #!/usr/bin/env node
 /**

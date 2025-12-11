@@ -1,8 +1,7 @@
 /**
- * Template: feature_flags_service.tpl.js
- * Purpose: feature_flags_service template
- * Stack: node
- * Tier: base
+ * File: feature_flags_service.tpl.js
+ * Purpose: Template for feature-flags implementation
+ * Generated for: {{PROJECT_NAME}}
  */
 
 #!/usr/bin/env node

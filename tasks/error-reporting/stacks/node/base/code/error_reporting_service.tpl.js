@@ -1,8 +1,7 @@
 /**
- * Template: error_reporting_service.tpl.js
- * Purpose: error_reporting_service template
- * Stack: node
- * Tier: base
+ * File: error_reporting_service.tpl.js
+ * Purpose: Template for error-reporting implementation
+ * Generated for: {{PROJECT_NAME}}
  */
 
 #!/usr/bin/env node

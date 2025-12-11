@@ -1,9 +1,8 @@
-# Universal Template System - Node Stack
-# Generated: 2025-12-10
-# Purpose: node template utilities
-# Tier: base
-# Stack: node
-# Category: template
+<!--
+File: PROJECT-STRUCTURE.tpl.md
+Purpose: Template for unknown implementation
+Template Version: 1.0
+-->
 
 # {{PROJECT_NAME}} - TypeScript/Node Project Structure
 

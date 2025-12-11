@@ -1,9 +1,8 @@
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: enterprise
-# Stack: unknown
-# Category: template
+<!--
+File: enterprise-sql-testing-examples.tpl.md
+Purpose: Template for unknown implementation
+Template Version: 1.0
+-->
 
 # Enterprise Tier Testing Examples
 # Purpose: Concrete examples of Enterprise-level testing patterns
