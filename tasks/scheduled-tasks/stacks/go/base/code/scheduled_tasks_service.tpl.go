@@ -1,3 +1,7 @@
+// File: scheduled_tasks_service.tpl.go
+// Purpose: Template for scheduled-tasks implementation
+// Generated for: {{PROJECT_NAME}}
+
 // Scheduledtasks Service for Go
 // Generated for {{PROJECT_NAME}}
 package scheduled_tasks

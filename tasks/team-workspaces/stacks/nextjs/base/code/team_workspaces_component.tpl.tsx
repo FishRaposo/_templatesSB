@@ -1,16 +1,8 @@
 /**
- * Template: team_workspaces_component.tpl.tsx
- * Purpose: team_workspaces_component template
- * Stack: typescript
- * Tier: base
+ * File: team_workspaces_component.tpl.tsx
+ * Purpose: Template for team-workspaces implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Component tests
-# Tier: base
-# Stack: unknown
-# Category: utilities
 
 // -----------------------------------------------------------------------------
 // FILE: team_workspaces_component.tpl.tsx

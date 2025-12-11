@@ -1,16 +1,8 @@
 /**
- * Template: basic-tests-react_native.tpl.jsx
- * Purpose: basic-tests-react_native template
- * Stack: react
- * Tier: base
+ * File: basic-tests-react_native.tpl.jsx
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: mvp
-# Stack: unknown
-# Category: testing
 
 # Basic React Native Testing Template
 # Purpose: MVP-level testing template with component and interaction tests for React Native applications

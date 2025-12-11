@@ -107,25 +107,6 @@ class TemplateValidator:
             with open(tier_index_path, 'r', encoding='utf-8') as f:
                 tier_data = yaml.safe_load(f)
             
-            # region agent log
-            try:
-                with open(r"d:\Projects\Krei\_templates\.cursor\debug.log", "a", encoding="utf-8") as _log:
-                    _log.write(json.dumps({
-                        "sessionId": "debug-session",
-                        "runId": "pre-fix",
-                        "hypothesisId": "H1",
-                        "location": "validate-templates.py:validate_tier_index",
-                        "message": "tier_index_loaded",
-                        "data": {
-                            "keys": list(tier_data.keys()) if isinstance(tier_data, dict) else None,
-                            "testing_templates_type": str(type(tier_data.get("testing_templates"))) if isinstance(tier_data, dict) else None
-                        },
-                        "timestamp": int(datetime.now().timestamp() * 1000)
-                    }) + "\n")
-            except Exception:
-                pass
-            # endregion
-
             # Check required sections
             required_sections = ["universal_patterns", "testing_templates", "stack_patterns"]
             for section in required_sections:
@@ -151,27 +132,6 @@ class TemplateValidator:
         expected_tiers = get_all_tiers()
         expected_stacks = get_all_stacks()
         
-        # region agent log
-        try:
-            with open(r"d:\Projects\Krei\_templates\.cursor\debug.log", "a", encoding="utf-8") as _log:
-                _log.write(json.dumps({
-                    "sessionId": "debug-session",
-                    "runId": "pre-fix",
-                    "hypothesisId": "H1",
-                    "location": "validate-templates.py:_validate_testing_templates",
-                    "message": "testing_templates_shape",
-                    "data": {
-                        "input_type": str(type(testing_templates)),
-                        "provided_keys": list(testing_templates.keys()) if isinstance(testing_templates, dict) else None,
-                        "expected_tiers": expected_tiers,
-                        "expected_stacks": expected_stacks
-                    },
-                    "timestamp": int(datetime.now().timestamp() * 1000)
-                }) + "\n")
-        except Exception:
-            pass
-        # endregion
-
         for tier in expected_tiers:
             if tier not in testing_templates:
                 self.log_issue("error", "tier-index.yaml", f"Missing tier: {tier}")
@@ -242,25 +202,6 @@ class TemplateValidator:
         template_files = list(self.templates_root.rglob("*.tpl.*"))
         self.stats["total_files"] = len(template_files)
         
-        # region agent log
-        try:
-            with open(r"d:\Projects\Krei\_templates\.cursor\debug.log", "a", encoding="utf-8") as _log:
-                _log.write(json.dumps({
-                    "sessionId": "debug-session",
-                    "runId": "pre-fix",
-                    "hypothesisId": "H2",
-                    "location": "validate-templates.py:validate_template_files",
-                    "message": "template_scan",
-                    "data": {
-                        "template_count": self.stats["total_files"],
-                        "sample": [str(template_files[i]) for i in range(min(3, len(template_files)))] if template_files else []
-                    },
-                    "timestamp": int(datetime.now().timestamp() * 1000)
-                }) + "\n")
-        except Exception:
-            pass
-        # endregion
-
         for template_file in template_files:
             self._validate_single_template(template_file)
         
@@ -275,7 +216,15 @@ class TemplateValidator:
             self.stats["validated_files"] += 1
             
             # Check for header comments
-            if not content.startswith("#"):
+            valid_headers = ['#', '<!--']
+            if template_file.suffix in ['.js', '.jsx', '.ts', '.tsx', '.go', '.dart']:
+                valid_headers.extend(['//', '/**', '///'])
+            elif template_file.suffix in ['.py']:
+                valid_headers.extend(['"""', "'''"])
+            elif template_file.suffix in ['.sql', '.R']:
+                valid_headers.extend(['--'])
+
+            if not content.lstrip().startswith(tuple(valid_headers)):
                 self.log_issue("warning", template_file, "Missing header comment")
                 self.stats["structure_issues"] += 1
             
@@ -388,26 +337,6 @@ class TemplateValidator:
                            and not str(f).endswith(".pyc")]
             actual_count = len(actual_files)
             
-            # region agent log
-            try:
-                with open(r"d:\Projects\Krei\_templates\.cursor\debug.log", "a", encoding="utf-8") as _log:
-                    _log.write(json.dumps({
-                        "sessionId": "debug-session",
-                        "runId": "pre-fix",
-                        "hypothesisId": "H3",
-                        "location": "validate-templates.py:validate_tier_overlay_counts",
-                        "message": "tier_overlay_count",
-                        "data": {
-                            "tier": tier,
-                            "expected": expected_count,
-                            "actual": actual_count
-                        },
-                        "timestamp": int(datetime.now().timestamp() * 1000)
-                    }) + "\n")
-            except Exception:
-                pass
-            # endregion
-
             if actual_count != expected_count:
                 self.log_issue("warning", f"tiers/{tier}", 
                              f"Template file count mismatch: expected {expected_count}, got {actual_count}")

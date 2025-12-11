@@ -1,14 +1,6 @@
-// Template: test-base-scaffold.tpl.go
-// Purpose: test-base-scaffold template
-// Stack: go
-// Tier: base
-
-# Universal Template System - Go Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: base
-# Stack: go
-# Category: testing
+// File: test-base-scaffold.tpl.go
+// Purpose: Template for unknown implementation
+// Generated for: {{PROJECT_NAME}}
 
 // -----------------------------------------------------------------------------
 // FILE: test-base-scaffold.tpl.go

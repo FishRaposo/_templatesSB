@@ -1,16 +1,8 @@
 /**
- * Template: test-base-scaffold.tpl.js
- * Purpose: test-base-scaffold template
- * Stack: node
- * Tier: base
+ * File: test-base-scaffold.tpl.js
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Node Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: base
-# Stack: node
-# Category: testing
 
 // -----------------------------------------------------------------------------
 // FILE: test-base-scaffold.tpl.js

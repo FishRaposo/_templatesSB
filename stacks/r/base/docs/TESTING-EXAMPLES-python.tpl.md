@@ -1,9 +1,8 @@
-# Universal Template System - R Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: base
-# Stack: r
-# Category: template
+<!--
+File: TESTING-EXAMPLES-python.tpl.md
+Purpose: Template for unknown implementation
+Template Version: 1.0
+-->
 
 # R Testing Examples - {{PROJECT_NAME}}
 
