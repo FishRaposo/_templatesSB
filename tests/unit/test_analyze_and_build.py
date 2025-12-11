@@ -7,6 +7,7 @@ TODO: Review and implement actual test logic
 
 import unittest
 import sys
+import tempfile
 from pathlib import Path
 from unittest.mock import Mock, patch, MagicMock
 
@@ -16,7 +17,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent / "scripts"))
 try:
     import analyze_and_build
 except ImportError as e:
-    print(f"Warning: Could not import {module_name}: {e}")
+    print(f"Warning: Could not import analyze_and_build: {e}")
     analyze_and_build = None
 
 class TestAnalyzeAndBuild(unittest.TestCase):
@@ -34,10 +35,63 @@ class TestAnalyzeAndBuild(unittest.TestCase):
 
     def test_main(self):
         """Test main function"""
-        # TODO: Implement based on docstring: Main entry point...
-        # TODO: Add actual test implementation
-        with self.assertRaises(NotImplementedError):
-            self.fail('Test not implemented yet')
+        if analyze_and_build is None:
+            self.skipTest("analyze_and_build module not available")
+
+        # Test case 1: Successful execution with description via CLI
+        with tempfile.TemporaryDirectory() as temp_dir:
+            with patch('sys.argv', ['analyze_and_build.py', '--description', 'test description', '--output', temp_dir]), \
+                 patch('prompt_validator.PromptValidator') as MockValidator, \
+                 patch('analyze_and_build.ProjectAnalysisPipeline') as MockPipeline:
+
+                # Setup mocks
+                mock_validator = MockValidator.return_value
+                mock_validator.validate_project_description.return_value.is_valid = True
+                mock_validator.validate_project_description.return_value.warnings = []
+                mock_validator.validate_cli_arguments.return_value.is_valid = True
+
+                mock_pipeline = MockPipeline.return_value
+
+                # Run main
+                analyze_and_build.main()
+
+                # Verify pipeline execution
+                mock_pipeline.run_full_pipeline.assert_called_once()
+                call_args = mock_pipeline.run_full_pipeline.call_args
+                self.assertEqual(call_args.kwargs['description'], 'test description')
+                self.assertTrue(call_args.kwargs['build'])
+                self.assertEqual(str(call_args.kwargs['output_dir']), temp_dir)
+
+        # Test case 2: Validation failure
+        with patch('sys.argv', ['analyze_and_build.py', '--description', 'bad description']), \
+             patch('prompt_validator.PromptValidator') as MockValidator:
+
+            mock_validator = MockValidator.return_value
+            mock_validator.validate_project_description.return_value.is_valid = False
+            mock_validator.validate_project_description.return_value.errors = ["Invalid description"]
+
+            with self.assertRaises(SystemExit) as cm:
+                analyze_and_build.main()
+            self.assertEqual(cm.exception.code, 1)
+
+        # Test case 3: Config only mode
+        with tempfile.TemporaryDirectory() as temp_dir:
+            with patch('sys.argv', ['analyze_and_build.py', '--description', 'test', '--config-only', '--output', temp_dir]), \
+                 patch('prompt_validator.PromptValidator') as MockValidator, \
+                 patch('analyze_and_build.ProjectAnalysisPipeline') as MockPipeline:
+
+                mock_validator = MockValidator.return_value
+                mock_validator.validate_project_description.return_value.is_valid = True
+                mock_validator.validate_cli_arguments.return_value.is_valid = True
+
+                mock_pipeline = MockPipeline.return_value
+                mock_pipeline.analyze_project.return_value = {}
+
+                analyze_and_build.main()
+
+                mock_pipeline.analyze_project.assert_called_once()
+                mock_pipeline.generate_build_config.assert_called_once()
+                mock_pipeline.run_full_pipeline.assert_not_called()
 
     # Skipping private function: __init__
     def test_analyze_project(self):
