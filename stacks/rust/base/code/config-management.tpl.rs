@@ -1,3 +1,4 @@
+// Universal Template System - Rust Config Management Template
 // File: config-management.tpl.rs
 // Purpose: Template for unknown implementation
 // Generated for: {{PROJECT_NAME}}
@@ -441,19 +442,22 @@ fn main() -> Result<(), ConfigError> {
     println!("=== Rust Configuration Management Demo ===");
     
     // Create sample configuration files
-    println!("\n1. Creating sample configuration files...");
+    println!("
+1. Creating sample configuration files...");
     config_utils::create_sample_configs()?;
     println!("   ✓ Created config/development.toml");
     println!("   ✓ Created config/production.toml");
     
     // Load configuration
-    println!("\n2. Loading configuration...");
+    println!("
+2. Loading configuration...");
     let config_manager = ConfigManager::new()?;
     let config = config_manager.get_config();
     println!("   ✓ Loaded configuration for environment: {}", config.environment);
     
     // Display configuration
-    println!("\n3. Configuration Details:");
+    println!("
+3. Configuration Details:");
     println!("   Database: {}:{}@{}", 
              config.database.user, 
              config.database.password, 
@@ -465,23 +469,27 @@ fn main() -> Result<(), ConfigError> {
              config.feature_flags.beta_features);
     
     // Test database URL
-    println!("\n4. Database Connection URL:");
+    println!("
+4. Database Connection URL:");
     println!("   {}", config.get_database_url());
     
     // Test feature flags
-    println!("\n5. Feature Flag Checks:");
+    println!("
+5. Feature Flag Checks:");
     println!("   Dark Mode: {}", config.is_feature_enabled("dark_mode"));
     println!("   Debug Menu: {}", config.is_feature_enabled("debug_menu"));
     println!("   Nonexistent: {}", config.is_feature_enabled("nonexistent"));
     
     // Test configuration validation
-    println!("\n6. Configuration Validation:");
+    println!("
+6. Configuration Validation:");
     match config.validate() {
         Ok(_) => println!("   ✓ Configuration is valid"),
         Err(e) => println!("   ✗ Configuration error: {}", e),
     }
     
-    println!("\n=== Demo Complete ===");
+    println!("
+=== Demo Complete ===");
     
     Ok(())
 }

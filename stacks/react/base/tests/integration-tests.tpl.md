@@ -1,3 +1,4 @@
+# React Integration Tests Template
 // React Integration Testing Template
 // Integration testing patterns for React projects
 

@@ -1,3 +1,4 @@
+# React System Tests Template
 // React System Testing Template
 // End-to-end system testing patterns for React projects
 

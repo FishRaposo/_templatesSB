@@ -220,7 +220,7 @@ class TemplateValidator:
             
             # Check for header comments
             valid_headers = ['#', '<!--']
-            if template_file.suffix in ['.js', '.jsx', '.ts', '.tsx', '.go', '.dart']:
+            if template_file.suffix in ['.js', '.jsx', '.ts', '.tsx', '.go', '.dart', '.rs']:
                 valid_headers.extend(['//', '/**', '///'])
             elif template_file.suffix in ['.py']:
                 valid_headers.extend(['"""', "'''"])

@@ -1,3 +1,4 @@
+# Next.js Integration Tests Template
 // Next.js Integration Testing Template
 // Integration testing patterns for Next.js projects
 
