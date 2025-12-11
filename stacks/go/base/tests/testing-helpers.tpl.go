@@ -1,4 +1,7 @@
+// Universal Template System - Go Testing Helpers Template
 package testing
+
+// {{PROJECT_NAME}} - Go Testing Helpers
 
 import (
 	"bytes"

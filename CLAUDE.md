@@ -53,7 +53,7 @@ This guide is designed to be a **comprehensive reference** for Claude Code to un
 - **Primary Language**: Python 3.8+
 - **Key Framework(s)**: YAML configuration, Jinja2 templates, pathlib for cross-platform compatibility, Blueprint resolution engine
 - **Architecture**: Blueprint-Driven with Task-Based Analysis Pipeline
-- **Last Updated**: 2025-12-10
+- **Last Updated**: 2025-12-11
 
 ---
 
@@ -149,7 +149,7 @@ python -m flake8 scripts/ --max-line-length=100
 python -c "import yaml; yaml.safe_load(open('tasks/task-index.yaml'))"
 
 # Validate template file structure
-python tests/validation/validate_templates.py --structure
+python scripts/validate-templates.py --structure
 ```
 
 ---
@@ -158,7 +158,7 @@ python tests/validation/validate_templates.py --structure
 
 ### High-Level Structure
 
-The Universal Template System uses a **blueprint-driven architecture** with task-based analysis and automated building capabilities. The system is organized around product archetypes (blueprints) that drive stack, tier, and task selection, with 46 production tasks across 9 development categories, and 93+ template files providing universal and stack-specific implementations.
+The Universal Template System uses a **blueprint-driven architecture** with task-based analysis and automated building capabilities. The system is organized around product archetypes (blueprints) that drive stack, tier, and task selection, with 47 production tasks across 9 development categories, and 667+ template files providing universal and stack-specific implementations.
 
 ### Directory Structure
 
@@ -173,7 +173,7 @@ _templates/
 │   │       ├── python/          # Python overlay templates
 │   │       └── [other stacks]/
 │   └── [more blueprints...]     # Additional product archetypes
-├── 📁 tasks/                    # 46 task templates with universal/stack implementations
+├── 📁 tasks/                    # 47 task templates with universal/stack implementations
 │   ├── 📄 task-index.yaml       # Unified task definitions and file mappings
 │   ├── 📁 web-scraping/         # Example task structure
 │   │   ├── 📁 universal/        # Universal templates (apply to all stacks)
@@ -213,7 +213,7 @@ _templates/
 ### Key Architectural Principles
 
 1. **Blueprint-Driven Development**: Product archetypes drive stack, tier, and task selection as system primitives
-2. **Task-Based Organization**: All functionality organized around 46 production tasks
+2. **Task-Based Organization**: All functionality organized around 47 production tasks
 3. **Universal + Stack-Specific**: Universal patterns with stack-specific optimizations and blueprint overlays
 4. **Tiered Complexity**: MVP, Core, and Enterprise tiers for different project needs
 5. **Automated Analysis**: AI-powered task detection and gap analysis
@@ -575,16 +575,16 @@ def test_stack_compatibility():
 python scripts/validate-templates.py --full
 
 # Individual validation modules (legacy script for granular options)
-python tests/validation/validate_templates.py --structure
-python tests/validation/validate_templates.py --content
-python tests/validation/validate_templates.py --mappings
-python tests/validation/validate_templates.py --integration
+python scripts/validate-templates.py --structure
+python scripts/validate-templates.py --content
+python scripts/validate-templates.py --mappings
+python scripts/validate-templates.py --integration
 
 # Generate detailed report
-python tests/validation/validate_templates.py --full --detailed --report validation_report.json
+python scripts/validate-templates.py --full --detailed --report validation_report.json
 
 # Test specific task
-python tests/validation/validate_templates.py --task web-scraping
+python scripts/validate-templates.py --task web-scraping
 ```
 
 **Coverage Requirements (ENFORCED)**:
@@ -928,10 +928,10 @@ class TemplateLogger:
 
 ```bash
 # Enable verbose validation output
-python tests/validation/validate_templates.py --full --detailed
+python scripts/validate-templates.py --full --detailed
 
 # Check specific template
-python tests/validation/validate_templates.py --template web-scraping
+python scripts/validate-templates.py --template web-scraping
 
 # Validate YAML syntax
 python -c "import yaml; yaml.safe_load(open('tasks/task-index.yaml'))"
@@ -983,7 +983,7 @@ print(resolve_template('web-scraping', 'python', 'core'))
 ## 🔑 Key Design Decisions
 
 1. **Blueprint-Driven Architecture**: Product archetypes (blueprints) drive stack, tier, and task selection as system primitives
-2. **Task-Based Organization**: Organized around 46 production tasks rather than technology stacks
+2. **Task-Based Organization**: Organized around 47 production tasks rather than technology stacks
 3. **Universal + Stack-Specific**: Universal patterns with stack optimizations and blueprint overlays for maximum reusability
 4. **Tiered Complexity**: MVP/Core/Enterprise tiers match project maturity levels
 5. **YAML Configuration**: Human-readable task definitions and blueprint metadata

@@ -12,6 +12,8 @@ eggs/
 .eggs/
 lib/
 lib64/
+# But don't ignore lib/ in blueprint overlays (flutter projects need this)
+!blueprints/**/lib/
 parts/
 sdist/
 var/
@@ -43,11 +45,20 @@ ENV/
 ehthumbs.db
 Thumbs.db
 
-# Template generated files
-reference-projects/
+# Template generated files - ignore generated project content but keep READMEs
+reference-projects/**
+!reference-projects/
+!reference-projects/README.md
+!reference-projects/*/
+!reference-projects/*/README.md
 *.log
 
 # Temporary files
 *.tmp
 *.temp
 .cache/
+
+# Go build artifacts
+root/
+pkg/
+go.sum

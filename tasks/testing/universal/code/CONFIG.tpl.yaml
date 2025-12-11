@@ -1,0 +1,15 @@
+# {{PROJECT_NAME}} - Testing Configuration
+# Task: testing
+# Stack: {{STACK}}
+# Tier: {{TIER}}
+
+testing:
+  framework:
+    type: "{{TESTING_FRAMEWORK}}"
+    version: "latest"
+  coverage:
+    enabled: true
+    threshold: 80
+  reports:
+    format: "html"
+    output_dir: "coverage/"

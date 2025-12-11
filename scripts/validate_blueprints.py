@@ -232,6 +232,9 @@ class BlueprintValidator:
         
         # Validate blueprint discovery
         try:
+            # Add templates root to Python path for imports
+            if str(self.templates_root) not in sys.path:
+                sys.path.insert(0, str(self.templates_root))
             from scripts.blueprint_config import get_available_blueprints
             blueprints = get_available_blueprints()
             print(f"  ✅ Blueprint discovery working: {len(blueprints)} blueprints found")

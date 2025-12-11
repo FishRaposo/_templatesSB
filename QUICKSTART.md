@@ -68,7 +68,7 @@ cd {generated-project}/
 - **Blueprints**: Product archetypes (MINS - Minimalist Sustainable Monetization)
 - **Stacks**: Technology frameworks (Flutter, Python, React, Node, Go, etc.)
 - **Tiers**: Complexity levels (MVP, Core, Enterprise)
-- **Tasks**: Functional components (46 total tasks across categories)
+- **Tasks**: Functional components (47 total tasks across categories)
 
 ### Autonomous Resolution Algorithm
 1. Blueprint Selection → Stack Constraints → Tier Defaults → Task Requirements
@@ -79,12 +79,25 @@ cd {generated-project}/
 
 ## 📚 Documentation Structure
 
-Each serves different tools with full feature parity:
+### Agent-Specific Guides (Full Feature Parity)
 
-- **[CLAUDE.md](./CLAUDE.md)** - Primary LLM agent guide (Claude Code)
-- **[AGENTS.md](./AGENTS.md)** - Multi-agent coordination guide
-- **[WARP.md](./WARP.md)** - Terminal workflow guide (Warp)
+| Agent | Guide File | Description |
+|-------|------------|-------------|
+| Claude | [CLAUDE.md](./CLAUDE.md) | Comprehensive Claude Code guide |
+| GitHub Copilot | [COPILOT.md](./COPILOT.md) | Copilot Chat & Workspace guide |
+| Google Gemini | [GEMINI.md](./GEMINI.md) | Gemini Code Assist guide |
+| Cursor | [CURSOR.md](./CURSOR.md) | Cursor AI editor guide |
+| Sourcegraph Cody | [CODY.md](./CODY.md) | Cody code intelligence guide |
+| Aider | [AIDER.md](./AIDER.md) | CLI pair programming guide |
+| OpenAI GPT | [CODEX.md](./CODEX.md) | GPT/Codex code generation guide |
+| Windsurf | [WINDSURF.md](./WINDSURF.md) | Codeium Windsurf guide |
+| Warp | [WARP.md](./WARP.md) | AI terminal workflow guide |
+| Multi-Agent | [AGENTS.md](./AGENTS.md) | Multi-agent coordination |
+
+### System Documentation
+
 - **[SYSTEM-MAP.md](./SYSTEM-MAP.md)** - Complete system architecture
+- **[README.md](./README.md)** - Main project documentation
 
 ---
 
@@ -107,14 +120,16 @@ tiers:
 ### Success Metrics
 - ✅ Autonomous workflow generates compilation-ready projects
 - ✅ Blueprint resolution achieves 1.00 confidence
-- ✅ All templates validated (592 files, 0 errors)
+- ✅ All templates validated (672 files, 0 errors)
 - ✅ Production-ready with comprehensive documentation
 
 ---
 
 ## 🔄 Next Steps
 
-1. **For LLM Agents**: Use the autonomous command above to generate your first project
+1. **For LLM Agents**: 
+   - Start with [LLM-GUIDE.md](./LLM-GUIDE.md) for autonomous project generation
+   - Follow [AGENTIC-RULES.md](./AGENTIC-RULES.md) for mandatory patterns
 2. **For Humans**: Read [CLAUDE.md](./CLAUDE.md) for comprehensive system overview
 3. **For Terminal Users**: See [WARP.md](./WARP.md) for optimized workflows
 4. **For Multi-Agent Systems**: Reference [AGENTS.md](./AGENTS.md) for coordination patterns
