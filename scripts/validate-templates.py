@@ -237,7 +237,7 @@ class TemplateValidator:
                 valid_headers.extend(['--'])
             
             # Special case: .tpl.md files in tests/ directories often contain code
-            if template_file.suffix == '.md' and '/tests/' in str(template_file):
+            if (template_file.suffix == '.md' or template_file.name.endswith('.tpl.md')) and ('/tests/' in str(template_file) or '\\tests\\' in str(template_file) or str(template_file).find('tests') > 0):
                 valid_headers.extend(['//', '/**', '///'])
 
             if not content.lstrip().startswith(tuple(valid_headers)):
@@ -246,7 +246,7 @@ class TemplateValidator:
             
             # Check for required sections based on file type
             # Skip markdown validation for .md files in tests/ that contain code
-            is_code_in_md = template_file.suffix == '.md' and '/tests/' in str(template_file) and content.lstrip().startswith('//')
+            is_code_in_md = template_file.suffix == '.md' and ('/tests/' in str(template_file) or '\\tests\\' in str(template_file) or str(template_file).find('tests') > 0) and content.lstrip().startswith('//')
             if template_file.suffix in ['.md', '.tpl.md'] and not is_code_in_md:
                 self._validate_markdown_template(template_file, content)
             elif template_file.suffix in ['.py', '.js', '.jsx', '.go', '.dart']:
@@ -280,6 +280,15 @@ class TemplateValidator:
         for link_text, link_url in links:
             # Skip if the link URL looks like code (contains function calls, quotes, etc.)
             if any(char in link_url for char in self.CODE_LIKE_CHARS):
+                continue
+            
+            # Skip link validation for blueprint overlay templates (they reference generated files)
+            template_path_str = str(template_file)
+            # Use relative path for detection to handle both absolute and relative paths
+            relative_path = str(template_file.relative_to(self.templates_root)) if self.templates_root in template_file.parents else template_path_str
+            is_blueprint_overlay = ('blueprints' in relative_path and 'overlays' in relative_path)
+            
+            if is_blueprint_overlay:
                 continue
             
             if link_url.startswith('./') or not link_url.startswith(('http://', 'https://', '#')):

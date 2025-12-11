@@ -52,7 +52,7 @@ class PurchaseService extends StateNotifier<PurchaseState> {
   final InAppPurchase _iap;
   
   /// Product ID for premium upgrade
-  static const String premiumProductId = 'premium_remove_ads';
+  static const String premiumProductId = '{{app_name}}_premium_remove_ads';
   static const String _licenseModulusBase64 = 'w+F+2E7hII6Kvfbb3tcQIyinCeNvD2SdZDHFPv+XgI4jjx/WkOn/Sr/a+o8TGWEC/GYV/87awi9ULkvqUNcH0S9hwQrMi6Grj2z5GcBAUBCzYNqLcbbCtENLXr1wJsj97+Ak7h6r1UBTU4252YTUmR0cAnQ6z6ecte+a3faNfgPBWY9QwVhJE9WPhAzTQrFUEh5cs7WbEjGR0CPJFc+1EsC8SqNnNYXEfFhqqcdnLHwUnpspJ/xZDCsMI5J+JrAwoiLvg23phDo/na/fLuuFHyInR5d/5Z6m7W+ms891DkHoKHfW8DAaD2jDdhvO4hmXoKcIX/W4FZ/h4aX2VIQ5AQ==';
   static const String _licenseExponentBase64 = 'AQAB';
   static final BigInt _licenseModulus = _decodeBigIntFromBase64(_licenseModulusBase64);

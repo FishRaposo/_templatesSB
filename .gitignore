@@ -62,3 +62,6 @@ reference-projects/**
 root/
 pkg/
 go.sum
+
+# Archive folder - contains old/deprecated templates and documentation
+_archive/

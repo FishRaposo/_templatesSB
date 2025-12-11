@@ -24,7 +24,7 @@ void main() async {
   // Run the app with Riverpod state management
   runApp(
     const ProviderScope(
-      child: MinsApp(),
+      child: {{#pascalCase app_name}}App(),
     ),
   );
 }
@@ -44,8 +44,8 @@ Future<void> _initializeApp() async {
 /// - Theme configuration (Material 3)
 /// - Navigation setup (GoRouter)
 /// - State management (Riverpod)
-class MinsApp extends ConsumerWidget {
-  const MinsApp({super.key});
+class {{#pascalCase app_name}}App extends ConsumerWidget {
+  const {{#pascalCase app_name}}App({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
