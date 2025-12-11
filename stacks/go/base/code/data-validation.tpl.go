@@ -1,14 +1,6 @@
-// Template: data-validation.tpl.go
-// Purpose: data-validation template
-// Stack: go
-// Tier: base
-
-# Universal Template System - Go Stack
-# Generated: 2025-12-10
-# Purpose: Data validation utilities
-# Tier: base
-# Stack: go
-# Category: utilities
+// File: data-validation.tpl.go
+// Purpose: Template for unknown implementation
+// Generated for: {{PROJECT_NAME}}
 
 // -----------------------------------------------------------------------------
 // FILE: data-validation.tpl.go

@@ -1,3 +1,7 @@
+// File: seo_rank_tracker_service.tpl.go
+// Purpose: Template for seo-rank-tracker implementation
+// Generated for: {{PROJECT_NAME}}
+
 // Seoranktracker Service for Go
 // Generated for {{PROJECT_NAME}}
 package seo_rank_tracker

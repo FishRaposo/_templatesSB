@@ -1,3 +1,7 @@
+// File: link_monitoring_service.tpl.go
+// Purpose: Template for link-monitoring implementation
+// Generated for: {{PROJECT_NAME}}
+
 // Linkmonitoring Service for Go
 // Generated for {{PROJECT_NAME}}
 package link_monitoring

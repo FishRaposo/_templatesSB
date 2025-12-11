@@ -1,8 +1,7 @@
 /**
- * Template: file_processing_pipeline_service.tpl.js
- * Purpose: file_processing_pipeline_service template
- * Stack: node
- * Tier: base
+ * File: file_processing_pipeline_service.tpl.js
+ * Purpose: Template for file-processing-pipeline implementation
+ * Generated for: {{PROJECT_NAME}}
  */
 
 #!/usr/bin/env node

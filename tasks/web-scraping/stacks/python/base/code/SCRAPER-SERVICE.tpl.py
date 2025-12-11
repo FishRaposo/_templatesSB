@@ -1,9 +1,8 @@
-# Universal Template System - Python Stack
-# Generated: 2025-12-10
-# Purpose: python template utilities
-# Tier: base
-# Stack: python
-# Category: utilities
+"""
+File: SCRAPER-SERVICE.tpl.py
+Purpose: Template for web-scraping implementation
+Generated for: {{PROJECT_NAME}}
+"""
 
 # -----------------------------------------------------------------------------
 # FILE: SCRAPER-SERVICE.tpl.py

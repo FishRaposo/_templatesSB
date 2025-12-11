@@ -1,9 +1,8 @@
-# Universal Template System - Typescript Stack
-# Generated: 2025-12-10
-# Purpose: typescript template utilities
-# Tier: base
-# Stack: typescript
-# Category: template
+<!--
+File: README.tpl.md
+Purpose: Template for unknown implementation
+Template Version: 1.0
+-->
 
 # TypeScript Stack Template
 

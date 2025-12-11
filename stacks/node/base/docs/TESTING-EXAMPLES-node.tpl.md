@@ -1,9 +1,8 @@
-# Universal Template System - Node Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: base
-# Stack: node
-# Category: template
+<!--
+File: TESTING-EXAMPLES-node.tpl.md
+Purpose: Template for unknown implementation
+Template Version: 1.0
+-->
 
 # TypeScript/Node Testing Examples - {{PROJECT_NAME}}
 

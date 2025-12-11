@@ -1,14 +1,8 @@
-/// Template: widget-tests.tpl.dart
-/// Purpose: widget-tests template
-/// Stack: flutter
-/// Tier: base
-
-# Universal Template System - Flutter Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: base
-# Stack: flutter
-# Category: testing
+///
+/// File: widget-tests.tpl.dart
+/// Purpose: Template for unknown implementation
+/// Generated for: {{PROJECT_NAME}}
+///
 
 // -----------------------------------------------------------------------------
 // FILE: widget-tests.tpl.dart
