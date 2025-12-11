@@ -29,6 +29,9 @@ if os.name == 'nt':
     sys.stderr.reconfigure(encoding='utf-8')
 
 class TemplateValidator:
+    # Characters that indicate a link URL is likely code content rather than a file path
+    CODE_LIKE_CHARS = ["'", '"', '{', '}', '=', '+', '-', '*', ';']
+    
     def __init__(self, templates_root: Path):
         self.templates_root = templates_root
         self.issues = []
@@ -253,14 +256,15 @@ class TemplateValidator:
         
         # Remove code blocks before checking for broken links to avoid false positives
         # This removes fenced code blocks (```...```) and inline code (`...`)
+        # Note: Does not handle escaped backticks within code blocks
         content_without_code = re.sub(r'```[\s\S]*?```', '', content)
-        content_without_code = re.sub(r'`[^`]+`', '', content_without_code)
+        content_without_code = re.sub(r'`[^`]*`', '', content_without_code)  # Allow empty inline code
         
         # Check for internal links (only in non-code content)
         links = re.findall(r'\[([^\]]+)\]\(([^)]+)\)', content_without_code)
         for link_text, link_url in links:
             # Skip if the link URL looks like code (contains function calls, quotes, etc.)
-            if any(char in link_url for char in ["'", '"', '{', '}', '=', '+', '-', '*', ';']):
+            if any(char in link_url for char in self.CODE_LIKE_CHARS):
                 continue
             
             if link_url.startswith('./') or not link_url.startswith(('http://', 'https://', '#')):
