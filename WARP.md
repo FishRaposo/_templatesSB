@@ -10,7 +10,7 @@
 
 ### High-Level Structure
 
-The Universal Template System uses a **blueprint-driven architecture** with task-based analysis and automated building capabilities. The system is organized around product archetypes (blueprints) that drive stack, tier, and task selection, with 46 production tasks across 9 development categories, and 93+ template files providing universal and stack-specific implementations.
+The Universal Template System uses a **blueprint-driven architecture** with task-based analysis and automated building capabilities. The system is organized around product archetypes (blueprints) that drive stack, tier, and task selection, with 47 production tasks across 9 development categories, and 667+ template files providing universal and stack-specific implementations.
 
 ### Directory Structure
 
@@ -25,7 +25,7 @@ _templates/
 │   │       ├── python/          # Python overlay templates
 │   │       └── [other stacks]/
 │   └── [more blueprints...]     # Additional product archetypes
-├── 📁 tasks/                    # 46 task templates with universal/stack implementations
+├── 📁 tasks/                    # 47 task templates with universal/stack implementations
 │   ├── 📄 task-index.yaml       # Unified task definitions and file mappings
 │   ├── 📁 web-scraping/         # Example task structure
 │   │   ├── 📁 universal/        # Universal templates (apply to all stacks)
@@ -47,7 +47,7 @@ _templates/
 ### Key Architectural Principles
 
 1. **Blueprint-Driven Development**: Product archetypes drive stack, tier, and task selection as system primitives
-2. **Task-Based Organization**: All functionality organized around 46 production tasks
+2. **Task-Based Organization**: All functionality organized around 47 production tasks
 3. **Universal + Stack-Specific**: Universal patterns with stack-specific optimizations and blueprint overlays
 4. **Tiered Complexity**: MVP, Core, and Enterprise tiers for different project needs
 5. **Automated Analysis**: AI-powered task detection and gap analysis
@@ -248,7 +248,7 @@ python scripts/list_tasks_by_category.py --category web-api --details
 # Block 3: Template Validation
 echo "✅ System Validation"
 echo "===================="
-python tests/validation/validate_templates.py --structure
+python scripts/validate-templates.py --structure
 ```
 
 ### Workflow 4: Legacy Project Analysis Pipeline
@@ -408,7 +408,7 @@ echo "- Last Validation: $(date)"
 echo "- Template Updates: $(git log --oneline --since="1 week ago" | wc -l) commits"
 echo ""
 echo "✅ System Health:"
-python tests/validation/validate_templates.py --structure | tail -1
+python scripts/validate-templates.py --structure | tail -1
 ```
 
 ### Development Workflow Dashboard
@@ -422,7 +422,7 @@ echo "Current Tasks in Progress:"
 git status --porcelain | grep -E "(tasks/|scripts/)" | wc -l | xargs echo "- Modified files:"
 echo ""
 echo "Validation Results:"
-if python tests/validation/validate_templates.py --structure > /dev/null 2>&1; then
+if python scripts/validate-templates.py --structure > /dev/null 2>&1; then
     echo "✅ All templates valid"
 else
     echo "❌ Template validation issues detected"
@@ -479,7 +479,7 @@ echo "============================="
 python scripts/validate-templates.py --full --detailed
 echo ""
 echo "📋 Validation Summary:"
-python tests/validation/validate_templates.py --structure
+python scripts/validate-templates.py --structure
 EOF
 
 # Reference Project Generation Block
@@ -507,7 +507,7 @@ alias ts-setup="python scripts/setup-project.py"                    # NEW: Bluep
 alias ts-analyze="python scripts/analyze_and_build.py"
 alias ts-tasks="python scripts/list_tasks_by_category.py --details"
 alias ts-generate="python scripts/generate_reference_projects.py"
-alias ts-status="echo '🏗️  Template System Status' && python tests/validation/validate_templates.py --structure"
+alias ts-status="echo '🏗️  Template System Status' && python scripts/validate-templates.py --structure"
 
 # Blueprint-specific aliases (NEW)
 alias ts-blueprints="python -c \"from scripts.blueprint_config import get_available_blueprints; print(get_available_blueprints())\""
@@ -637,7 +637,7 @@ echo "Once in container:"
 echo "cd /workspace"
 echo "pip install -r requirements.txt"
 echo "export PYTHONPATH=/workspace"
-echo "python tests/validation/validate_templates.py --full"
+echo "python scripts/validate-templates.py --full"
 ```
 
 ---
@@ -722,7 +722,7 @@ except Exception as e:
 " \;
 echo ""
 echo "4. File Structure Validation:"
-python tests/validation/validate_templates.py --structure
+python scripts/validate-templates.py --structure
 ```
 
 ### Performance Monitoring
@@ -736,7 +736,7 @@ echo "Template generation performance:"
 time python scripts/generate_reference_projects.py
 echo ""
 echo "Validation performance:"
-time python tests/validation/validate_templates.py --full
+time python scripts/validate-templates.py --full
 echo ""
 echo "Task detection performance:"
 time python scripts/detect_project_tasks.py --description "test project"
@@ -760,7 +760,7 @@ echo "Step 2: Analyze a sample project"
 python scripts/analyze_and_build.py --description "simple web API" --no-build
 echo ""
 echo "Step 3: Validate the system"
-python tests/validation/validate_templates.py --structure
+python scripts/validate-templates.py --structure
 echo ""
 echo "Step 4: Generate reference projects"
 python scripts/generate_reference_projects.py

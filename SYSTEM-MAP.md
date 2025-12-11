@@ -1,7 +1,7 @@
 # Universal Template System Map
 
-> **Complete Architecture Documentation** - Last Updated: 2025-12-10  
-> **Total Tasks**: 46 production tasks across 9 development categories  
+> **Complete Architecture Documentation** - Last Updated: 2025-12-11  
+> **Total Tasks**: 47 production tasks across 9 development categories  
 > **Total Templates**: 93 task templates + 58 implemented tier templates (32 planned)  
 > **Technology Stacks**: 12 comprehensive stacks (python, go, node, r, sql, nextjs, react, flutter, react_native, agnostic, generic, typescript)  
 > **Architecture**: Hybrid Task-Based + Tier-Based System  
@@ -48,14 +48,14 @@ python scripts/analyze_and_build.py --description "API service" --dry-run --outp
 
 ```bash
 # Comprehensive Template Validation
-python tests/validation/validate_templates.py --full --detailed
+python scripts/validate-templates.py --full --detailed
 
 # Individual Validation Modules
-python tests/validation/validate_templates.py --structure      # Directory structure
-python tests/validation/validate_templates.py --content        # Template syntax & content
-python tests/validation/validate_templates.py --mappings       # File mapping accuracy
-python tests/validation/validate_templates.py --integration    # System compatibility
-python tests/validation/validate_templates.py --metadata       # Metadata consistency
+python scripts/validate-templates.py --structure      # Directory structure
+python scripts/validate-templates.py --content        # Template syntax & content
+python scripts/validate-templates.py --mappings       # File mapping accuracy
+python scripts/validate-templates.py --integration    # System compatibility
+python scripts/validate-templates.py --metadata       # Metadata consistency
 ```
 
 ### 🎯 Task Detection & Analysis
@@ -75,7 +75,7 @@ python scripts/analyze_and_build.py --description "Complex system" --output gap-
 
 ## 🗂️ Virtual Task Categories
 
-The 46 tasks are organized into 9 virtual categories for easy browsing and discovery. Tasks maintain a flat physical structure for system reliability while providing logical grouping for documentation and tools.
+The 47 tasks are organized into 9 virtual categories for easy browsing and discovery. Tasks maintain a flat physical structure for system reliability while providing logical grouping for documentation and tools.
 
 ### **Category Overview**
 
@@ -279,7 +279,7 @@ Stack-Specific Implementation (Technology)
 ```
 
 **Integration Patterns**:
-1. **Task Selection**: Choose functionality patterns (46 tasks)
+1. **Task Selection**: Choose functionality patterns (47 tasks)
 2. **Tier Selection**: Choose complexity level (MVP/Core/Enterprise)
 3. **Stack Selection**: Choose technology (12 stacks)
 4. **Template Generation**: Combine all three for final project
@@ -389,7 +389,7 @@ stacks/[stack]/                          # Self-contained stack folder
 - **Total Tasks**: 46 ✅
 - **Universal Templates**: 92 (CONFIG + SKELETON per task) ✅
 - **Stack Implementations**: Variable per task (based on compatibility) ✅
-- **Template Files**: 93 total ✅
+- **Template Files**: 667 total ✅
 - **Validation Status**: EXCELLENT (0 issues) ✅
 
 ### **Detailed Breakdown by Category**
@@ -865,20 +865,20 @@ node src/main.js
 ### **Comprehensive Validation Framework**
 ```bash
 # Full System Validation
-python tests/validation/validate_templates.py --full --detailed
+python scripts/validate-templates.py --full --detailed
 
 # Individual Validation Modules
-python tests/validation/validate_templates.py --structure      # Directory structure validation
-python tests/validation/validate_templates.py --content        # Template content and syntax
-python tests/validation/validate_templates.py --mappings       # File mapping accuracy
-python tests/validation/validate_templates.py --integration    # System integration testing
-python tests/validation/validate_templates.py --metadata       # Metadata consistency
+python scripts/validate-templates.py --structure      # Directory structure validation
+python scripts/validate-templates.py --content        # Template content and syntax
+python scripts/validate-templates.py --mappings       # File mapping accuracy
+python scripts/validate-templates.py --integration    # System integration testing
+python scripts/validate-templates.py --metadata       # Metadata consistency
 ```
 
 ### **Validation Categories**
 
 #### **Structure Validation**
-- ✅ **Directory Structure**: All 46 task directories properly organized
+- ✅ **Directory Structure**: All 47 task directories properly organized
 - ✅ **Required Files**: CONFIG.tpl.yaml and SKELETON.tpl.md present
 - ✅ **Stack Directories**: Appropriate stack implementations available
 - ✅ **File Permissions**: All files readable and accessible
@@ -956,7 +956,7 @@ tests/
 #### **validate_templates.py**
 - **Purpose**: Comprehensive template validation
 - **Features**: 5 validation modules, detailed reporting, issue tracking
-- **Usage**: `python tests/validation/validate_templates.py --full --detailed`
+- **Usage**: `python scripts/validate-templates.py --full --detailed`
 
 ---
 
@@ -969,7 +969,7 @@ _templates/
 ├── QUICKSTART.md                       # Quick start guide
 ├── requirements.txt                    # Python dependencies
 │
-├── tasks/                              # 46 task templates with implementations
+├── tasks/                              # 47 task templates with implementations
 │   ├── task-index.yaml                 # Unified task definitions and file mappings
 │   ├── web-scraping/                   # Example task structure
 │   │   ├── universal/
@@ -1061,7 +1061,7 @@ _templates/
 When tasks are added or removed:
 1. Update task count in header (currently 46)
 2. Add/remove entries in appropriate category section
-3. Update template file counts (currently 93 total)
+3. Update template file counts (currently 667 total)
 4. Refresh task library inventory
 5. Update validation status if needed
 
@@ -1083,7 +1083,7 @@ When the overall architecture changes:
 
 #### **4. Monthly Verification Checklist**
 - [ ] Verify task count matches actual directories (should be 46)
-- [ ] Check template file counts (should be 93 total)
+- [ ] Check template file counts (should be 667 total)
 - [ ] Validate all script references are accurate
 - [ ] Confirm validation status is current
 - [ ] Test core commands work as documented
@@ -1101,7 +1101,7 @@ find tasks/ -name "*.tpl.*" | wc -l
 wc -l scripts/*.py
 
 # System validation
-python tests/validation/validate_templates.py --full --report validation-report.json
+python scripts/validate-templates.py --full --report validation-report.json
 ```
 
 ---
@@ -1111,7 +1111,7 @@ python tests/validation/validate_templates.py --full --report validation-report.
 ### **System Performance (Latest Test Results)**
 - **Task Detection Accuracy**: 66-87% (tested on diverse project descriptions)
 - **Stack Recommendation Confidence**: 80-90% (based on requirements analysis)
-- **Template Validation**: EXCELLENT (0 issues across 93 templates)
+- **Template Validation**: EXCELLENT (0 issues across 667 templates)
 - **Build Readiness Assessment**: Automated HIGH/MEDIUM/LOW evaluation
 - **Coverage Analysis**: Template availability percentage per project type
 
@@ -1153,8 +1153,8 @@ python tests/validation/validate_templates.py --full --report validation-report.
 - **Template Consolidation**: Unified from multiple YAML files to single task-index.yaml
 - **Automated Pipeline**: Created comprehensive analysis and building pipeline
 - **Validation System**: Implemented 5-module validation framework with EXCELLENT health
-- **Task Library Expansion**: Implemented 46 production tasks across 9 categories
-- **Template Count**: Achieved 93 template files with universal and stack-specific implementations
+- **Task Library Expansion**: Implemented 47 production tasks across 9 categories
+- **Template Count**: Achieved 667 template files with universal and stack-specific implementations
 - **System Health**: Reached EXCELLENT validation status (0 issues)
 - **Documentation Update**: Comprehensive rewrite of all system documentation
 - **Test Infrastructure Reorganization**: Moved 12 test scripts from scripts/ to tests/ subdirectories
@@ -1173,7 +1173,7 @@ python tests/validation/validate_templates.py --full --report validation-report.
 - **Replaced**: Template resolution algorithm with task-based detection
 - **Enhanced**: From manual setup to automated analysis pipeline
 - **Improved**: Validation from basic checks to comprehensive 5-module system
-- **Expanded**: From 56 templates to 93 templates across 46 tasks
+- **Expanded**: From 56 templates to 667 templates across 47 tasks
 
 ---
 
@@ -1185,7 +1185,7 @@ python tests/validation/validate_templates.py --full --report validation-report.
 | **Analysis Only** | Task detection and gap analysis | `python scripts/analyze_and_build.py --description "Chat app" --no-build` |
 | **Interactive Mode** | Guided project setup | `python scripts/analyze_and_build.py --interactive` |
 | **Dry Run** | Preview without execution | `python scripts/analyze_and_build.py --description "API" --dry-run` |
-| **Validate Templates** | Comprehensive system validation | `python tests/validation/validate_templates.py --full --detailed` |
+| **Validate Templates** | Comprehensive system validation | `python scripts/validate-templates.py --full --detailed` |
 | **Task Detection** | Task detection only | `python scripts/detect_project_tasks.py --description "Project requirements"` |
 | **Build Config** | Generate build configuration only | `python scripts/analyze_and_build.py --description "Project" --config-only` |
 

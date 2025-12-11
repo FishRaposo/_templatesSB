@@ -18,7 +18,7 @@ _templates/
 │   │       ├── python/          # Python overlay templates
 │   │       └── [other stacks]/
 │   └── [more blueprints...]     # Additional product archetypes
-├── 📁 tasks/                    # 46 task templates with universal/stack implementations
+├── 📁 tasks/                    # 47 task templates with universal/stack implementations
 │   ├── 📄 task-index.yaml       # Unified task definitions and file mappings
 │   ├── 📁 web-scraping/         # Example task structure
 │   │   ├── 📁 universal/        # Universal templates (apply to all stacks)
@@ -56,13 +56,13 @@ _templates/
 
 ### **Task Library**
 - **46 Production Tasks** across 9 development categories
-- **93 Template Files** with universal and stack-specific implementations
+- **667 Template Files** with universal and stack-specific implementations
 - **12 Technology Stacks**: Python, Node, Go, React, Next.js, Flutter, SQL, R, Generic, TypeScript
 - **3 Tiers**: MVP, Core, Full
 
 ## 🗂️ Task Organization
 
-The 46 tasks are organized into 9 virtual categories for easy browsing:
+The 47 tasks are organized into 9 virtual categories for easy browsing:
 
 | Category | Tasks | Description |
 |----------|-------|-------------|
@@ -114,13 +114,13 @@ python scripts/analyze_and_build.py --description "API service" --dry-run
 ### **Validate Template System**
 ```bash
 # Comprehensive validation
-python tests/validation/validate_templates.py --full --detailed
+python scripts/validate-templates.py --full --detailed
 
 # Individual validation modules
-python tests/validation/validate_templates.py --structure      # Directory structure
-python tests/validation/validate_templates.py --content        # Template syntax & content
-python tests/validation/validate_templates.py --mappings       # File mapping accuracy
-python tests/validation/validate_templates.py --integration    # System compatibility
+python scripts/validate-templates.py --structure      # Directory structure
+python scripts/validate-templates.py --content        # Template syntax & content
+python scripts/validate-templates.py --mappings       # File mapping accuracy
+python scripts/validate-templates.py --integration    # System compatibility
 ```
 
 ## 🎯 Available Tasks
@@ -212,7 +212,7 @@ python tests/validation/validate_templates.py --integration    # System compatib
 ## 🛠️ System Status
 
 ### **Template Health**
-- **Total Tasks**: 46 ✅
+- **Total Tasks**: 47 ✅
 - **Template Files**: 93 ✅
 - **Validation Status**: EXCELLENT (0 issues) ✅
 - **File Mapping Accuracy**: 100% ✅
@@ -273,19 +273,19 @@ python scripts/analyze_and_build.py --description "Complex system" --output gap-
 ### **Template Development**
 ```bash
 # Validate new task
-python tests/validation/validate_templates.py --task my-new-task
+python scripts/validate-templates.py --task my-new-task
 
 # Check template content
-python tests/validation/validate_templates.py --content --detailed
+python scripts/validate-templates.py --content --detailed
 
 # Verify file mappings
-python tests/validation/validate_templates.py --mappings
+python scripts/validate-templates.py --mappings
 ```
 
 ### **System Maintenance**
 ```bash
 # Full system health check
-python tests/validation/validate_templates.py --full --report health-report.json
+python scripts/validate-templates.py --full --report health-report.json
 
 # Integration testing
 python scripts/detect_project_tasks.py --description "test case" --output test-results.json
@@ -306,7 +306,7 @@ python scripts/detect_project_tasks.py --description "test case" --output test-r
 - `docs/` - Architecture and integration guides
 
 ### **Validation Reports**
-- Run `python tests/validation/validate_templates.py --full --detailed` for current system status
+- Run `python scripts/validate-templates.py --full --detailed` for current system status
 - Check `reports/` directory for detailed analysis reports
 
 ## 🎯 System Requirements
@@ -320,7 +320,7 @@ python scripts/detect_project_tasks.py --description "test case" --output test-r
 
 ### **System Status**
 - **Version**: 3.0 - Consolidated Task-Based Architecture
-- **Last Updated**: 2025-12-10
+- **Last Updated**: 2025-12-11
 - **Status**: Production Ready ✅
 - **Architecture**: Task-Based with Automated Analysis Pipeline
 
@@ -337,7 +337,7 @@ python scripts/detect_project_tasks.py --description "test case" --output test-r
 **Lost?** → This README ⭐  
 **Need examples?** → `examples/` directory  
 **Task details?** → `docs/TASKS-GUIDE.md`  
-**Validation issues?** → `python tests/validation/validate_templates.py --full`  
+**Validation issues?** → `python scripts/validate-templates.py --full`  
 **Analysis questions?** → `python scripts/analyze_and_build.py --help`
 
 **Infrastructure as Code for Building Software**  
