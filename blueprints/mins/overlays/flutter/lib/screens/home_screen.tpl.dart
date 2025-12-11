@@ -51,13 +51,15 @@ class _CoreFeatureWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: Implement core feature UI
-    return const Placeholder(
+    return const Center(
       child: Text('Core Feature Here'),
     );
   }
 }
 
 class _PremiumCTA extends StatelessWidget {
+  const _PremiumCTA();
+
   @override
   Widget build(BuildContext context) {
     return Container(

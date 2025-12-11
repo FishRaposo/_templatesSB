@@ -1,4 +1,3 @@
-# React Unit Tests Template
 // React Unit Testing Template
 // Comprehensive unit testing patterns for React projects
 

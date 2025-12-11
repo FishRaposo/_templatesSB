@@ -29,7 +29,7 @@ stacks/rust/
 ├── Cargo.toml.tpl               # Rust project template
 ├── base/
 │   ├── code/                    # Code templates
-│   │       ├── config-management.tpl.rs
+│   │   ├── config-management.tpl.rs
 │   │   ├── error-handling.tpl.rs
 │   │   ├── http-client.tpl.rs
 │   │   ├── logging-utilities.tpl.rs

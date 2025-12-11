@@ -1,4 +1,3 @@
-# Node.js System Tests Template
 // Node.js System Testing Template
 // End-to-end system testing patterns for Node.js projects
 

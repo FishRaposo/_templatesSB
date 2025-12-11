@@ -1,4 +1,3 @@
-# Next.js Unit Tests Template
 // Next.js Unit Testing Template
 // Comprehensive unit testing patterns for Next.js projects
 

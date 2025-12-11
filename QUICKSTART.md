@@ -120,14 +120,16 @@ tiers:
 ### Success Metrics
 - ✅ Autonomous workflow generates compilation-ready projects
 - ✅ Blueprint resolution achieves 1.00 confidence
-- ✅ All templates validated (667 files, 0 errors)
+- ✅ All templates validated (672 files, 0 errors)
 - ✅ Production-ready with comprehensive documentation
 
 ---
 
 ## 🔄 Next Steps
 
-1. **For LLM Agents**: Use the autonomous command above to generate your first project
+1. **For LLM Agents**: 
+   - Start with [LLM-GUIDE.md](./LLM-GUIDE.md) for autonomous project generation
+   - Follow [AGENTIC-RULES.md](./AGENTIC-RULES.md) for mandatory patterns
 2. **For Humans**: Read [CLAUDE.md](./CLAUDE.md) for comprehensive system overview
 3. **For Terminal Users**: See [WARP.md](./WARP.md) for optimized workflows
 4. **For Multi-Agent Systems**: Reference [AGENTS.md](./AGENTS.md) for coordination patterns

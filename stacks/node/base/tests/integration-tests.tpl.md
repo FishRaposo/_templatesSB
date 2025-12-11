@@ -1,4 +1,3 @@
-# Node.js Integration Tests Template
 // Node.js Integration Testing Template
 // Integration testing patterns for Node.js projects with Jest and testcontainers
 

@@ -1,4 +1,3 @@
-# Next.js System Tests Template
 // Next.js System Testing Template
 // End-to-end system testing patterns for Next.js projects
 

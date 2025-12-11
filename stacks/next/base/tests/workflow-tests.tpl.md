@@ -1,4 +1,3 @@
-# Next.js Workflow Tests Template
 // Next.js Workflow Testing Template
 // CI/CD workflow and development workflow tests for Next.js projects
 

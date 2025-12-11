@@ -293,6 +293,14 @@ python scripts/detect_project_tasks.py --description "test case" --output test-r
 
 ## 📚 Documentation
 
+### **🤖 LLM Agent Essentials**
+Start here for autonomous project generation:
+
+| Guide | Purpose |
+|-------|---------|
+| `LLM-GUIDE.md` | **Primary entry point** for autonomous project generation |
+| `AGENTIC-RULES.md` | **Mandatory rules** all AI agents must follow |
+
 ### **AI Agent Guides**
 Each coding agent has a dedicated guide with full feature parity:
 

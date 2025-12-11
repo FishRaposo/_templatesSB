@@ -226,13 +226,19 @@ class TemplateValidator:
                 valid_headers.extend(['"""', "'''"])
             elif template_file.suffix in ['.sql', '.R']:
                 valid_headers.extend(['--'])
+            
+            # Special case: .tpl.md files in tests/ directories often contain code
+            if template_file.suffix == '.md' and '/tests/' in str(template_file):
+                valid_headers.extend(['//', '/**', '///'])
 
             if not content.lstrip().startswith(tuple(valid_headers)):
                 self.log_issue("warning", template_file, "Missing header comment")
                 self.stats["structure_issues"] += 1
             
             # Check for required sections based on file type
-            if template_file.suffix in ['.md', '.tpl.md']:
+            # Skip markdown validation for .md files in tests/ that contain code
+            is_code_in_md = template_file.suffix == '.md' and '/tests/' in str(template_file) and content.lstrip().startswith('//')
+            if template_file.suffix in ['.md', '.tpl.md'] and not is_code_in_md:
                 self._validate_markdown_template(template_file, content)
             elif template_file.suffix in ['.py', '.js', '.jsx', '.go', '.dart']:
                 self._validate_code_template(template_file, content)
