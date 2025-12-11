@@ -1,16 +1,8 @@
 /**
- * Template: enterprise-boilerplate-next.tpl.jsx
- * Purpose: enterprise-boilerplate-next template
- * Stack: react
- * Tier: base
+ * File: enterprise-boilerplate-next.tpl.jsx
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: unknown template utilities
-# Tier: enterprise
-# Stack: unknown
-# Category: utilities
 
 # Enterprise Boilerplate Template (Full Tier - React)
 

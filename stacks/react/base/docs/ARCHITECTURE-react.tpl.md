@@ -1,9 +1,8 @@
-# Universal Template System - React Stack
-# Generated: 2025-12-10
-# Purpose: react template utilities
-# Tier: base
-# Stack: react
-# Category: template
+<!--
+File: ARCHITECTURE-react.tpl.md
+Purpose: Template for unknown implementation
+Template Version: 1.0
+-->
 
 # React Architecture Guide - {{PROJECT_NAME}}
 

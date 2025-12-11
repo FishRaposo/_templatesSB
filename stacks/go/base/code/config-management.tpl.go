@@ -1,14 +1,6 @@
-// Template: config-management.tpl.go
-// Purpose: config-management template
-// Stack: go
-// Tier: base
-
-# Universal Template System - Go Stack
-# Generated: 2025-12-10
-# Purpose: Configuration management utilities
-# Tier: base
-# Stack: go
-# Category: utilities
+// File: config-management.tpl.go
+// Purpose: Template for unknown implementation
+// Generated for: {{PROJECT_NAME}}
 
 // -----------------------------------------------------------------------------
 // FILE: config-management.tpl.go

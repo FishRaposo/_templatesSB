@@ -1,9 +1,8 @@
-# Universal Template System - R Stack
-# Generated: 2025-12-10
-# Purpose: r template utilities
-# Tier: base
-# Stack: r
-# Category: template
+<!--
+File: DATA-PROCESSING.tpl.md
+Purpose: Template for unknown implementation
+Template Version: 1.0
+-->
 
 # R Data Processing Patterns
 

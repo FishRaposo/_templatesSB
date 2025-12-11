@@ -1,3 +1,7 @@
+// File: error_reporting_service.tpl.go
+// Purpose: Template for error-reporting implementation
+// Generated for: {{PROJECT_NAME}}
+
 // Errorreporting Service for Go
 // Generated for {{PROJECT_NAME}}
 package error_reporting

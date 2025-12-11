@@ -1,14 +1,8 @@
-/// Template: logging-utilities.tpl.dart
-/// Purpose: logging-utilities template
-/// Stack: flutter
-/// Tier: base
-
-# Universal Template System - Flutter Stack
-# Generated: 2025-12-10
-# Purpose: Logging utilities
-# Tier: base
-# Stack: flutter
-# Category: utilities
+///
+/// File: logging-utilities.tpl.dart
+/// Purpose: Template for unknown implementation
+/// Generated for: {{PROJECT_NAME}}
+///
 
 // -----------------------------------------------------------------------------
 // FILE: logging-utilities.tpl.dart

@@ -1,14 +1,8 @@
-/// Template: comprehensive-tests-flutter.tpl.dart
-/// Purpose: comprehensive-tests-flutter template
-/// Stack: flutter
-/// Tier: base
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: core
-# Stack: unknown
-# Category: testing
+///
+/// File: comprehensive-tests-flutter.tpl.dart
+/// Purpose: Template for unknown implementation
+/// Generated for: {{PROJECT_NAME}}
+///
 
 # Comprehensive Flutter Testing Template
 # Purpose: Core-level testing template with unit, widget, integration, and feature tests for Flutter applications

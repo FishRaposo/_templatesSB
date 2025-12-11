@@ -11,7 +11,7 @@ import json
 import subprocess
 import shutil
 from pathlib import Path
-from typing import Dict, Optional, Tuple
+from typing import Dict, Optional, Tuple, List
 from dataclasses import asdict
 
 # Import existing configuration systems

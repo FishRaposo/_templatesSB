@@ -1,8 +1,7 @@
 /**
- * Template: job_queue_service.tpl.js
- * Purpose: job_queue_service template
- * Stack: node
- * Tier: base
+ * File: job_queue_service.tpl.js
+ * Purpose: Template for job-queue implementation
+ * Generated for: {{PROJECT_NAME}}
  */
 
 #!/usr/bin/env node

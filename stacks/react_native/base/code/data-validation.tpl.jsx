@@ -1,16 +1,8 @@
 /**
- * Template: data-validation.tpl.jsx
- * Purpose: data-validation template
- * Stack: react
- * Tier: base
+ * File: data-validation.tpl.jsx
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - React_Native Stack
-# Generated: 2025-12-10
-# Purpose: Data validation utilities
-# Tier: base
-# Stack: react_native
-# Category: utilities
 
 // -----------------------------------------------------------------------------
 // FILE: data-validation.tpl.jsx

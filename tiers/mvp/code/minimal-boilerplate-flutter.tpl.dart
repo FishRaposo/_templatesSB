@@ -1,14 +1,8 @@
-/// Template: minimal-boilerplate-flutter.tpl.dart
-/// Purpose: minimal-boilerplate-flutter template
-/// Stack: flutter
-/// Tier: base
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: unknown template utilities
-# Tier: mvp
-# Stack: unknown
-# Category: utilities
+///
+/// File: minimal-boilerplate-flutter.tpl.dart
+/// Purpose: Template for unknown implementation
+/// Generated for: {{PROJECT_NAME}}
+///
 
 # Minimal Boilerplate Template (MVP Tier - Flutter)
 

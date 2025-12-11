@@ -1,8 +1,7 @@
 /**
- * Template: notification_center_service.tpl.js
- * Purpose: notification_center_service template
- * Stack: node
- * Tier: base
+ * File: notification_center_service.tpl.js
+ * Purpose: Template for notification-center implementation
+ * Generated for: {{PROJECT_NAME}}
  */
 
 #!/usr/bin/env node
