@@ -1,9 +1,8 @@
-# Universal Template System - Flutter Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: base
-# Stack: flutter
-# Category: template
+<!--
+File: TESTING-EXAMPLES-flutter.tpl.md
+Purpose: Template for unknown implementation
+Template Version: 1.0
+-->
 
 # Flutter Testing Examples - {{PROJECT_NAME}}
 

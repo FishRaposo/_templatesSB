@@ -1,16 +1,8 @@
 /**
- * Template: llm_prompt_router_service.tpl.js
- * Purpose: llm_prompt_router_service template
- * Stack: node
- * Tier: base
+ * File: llm_prompt_router_service.tpl.js
+ * Purpose: Template for llm-prompt-router implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Node Stack
-# Generated: 2025-12-10
-# Purpose: node template utilities
-# Tier: base
-# Stack: node
-# Category: utilities
 
 # LlmPromptRouter Service for Node
 # Generated for {{PROJECT_NAME}}

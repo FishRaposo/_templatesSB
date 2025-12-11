@@ -1,16 +1,8 @@
 /**
- * Template: admin_panel_service.tpl.js
- * Purpose: admin_panel_service template
- * Stack: node
- * Tier: base
+ * File: admin_panel_service.tpl.js
+ * Purpose: Template for admin-panel implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Node Stack
-# Generated: 2025-12-10
-# Purpose: node template utilities
-# Tier: base
-# Stack: node
-# Category: utilities
 
 #!/usr/bin/env node
 /**

@@ -1,9 +1,6 @@
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: unknown template utilities
-# Tier: enterprise
-# Stack: unknown
-# Category: utilities
+-- File: enterprise-boilerplate-r.tpl.R
+-- Purpose: Template for unknown implementation
+-- Generated for: {{PROJECT_NAME}}
 
 # Enterprise Boilerplate Template (Full Tier - Python)
 

@@ -1,16 +1,8 @@
 /**
- * Template: enterprise-boilerplate-node.tpl.js
- * Purpose: enterprise-boilerplate-node template
- * Stack: node
- * Tier: base
+ * File: enterprise-boilerplate-node.tpl.js
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: unknown template utilities
-# Tier: enterprise
-# Stack: unknown
-# Category: utilities
 
 # Enterprise Boilerplate Template (Full Tier - Node.js)
 

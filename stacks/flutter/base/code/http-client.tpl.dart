@@ -1,14 +1,8 @@
-/// Template: http-client.tpl.dart
-/// Purpose: http-client template
-/// Stack: flutter
-/// Tier: base
-
-# Universal Template System - Flutter Stack
-# Generated: 2025-12-10
-# Purpose: HTTP client utilities
-# Tier: base
-# Stack: flutter
-# Category: utilities
+///
+/// File: http-client.tpl.dart
+/// Purpose: Template for unknown implementation
+/// Generated for: {{PROJECT_NAME}}
+///
 
 // -----------------------------------------------------------------------------
 // FILE: http-client.tpl.dart

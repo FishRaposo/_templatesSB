@@ -1,9 +1,8 @@
-# Universal Template System - Next Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: base
-# Stack: next
-# Category: template
+<!--
+File: TESTING-EXAMPLES-react.tpl.md
+Purpose: Template for unknown implementation
+Template Version: 1.0
+-->
 
 # Next.js Testing Examples - {{PROJECT_NAME}}
 

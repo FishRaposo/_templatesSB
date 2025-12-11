@@ -1,9 +1,8 @@
-# Universal Template System - Generic Stack
-# Generated: 2025-12-10
-# Purpose: Configuration management utilities
-# Tier: base
-# Stack: generic
-# Category: utilities
+<!--
+File: config-management-pattern.tpl.md
+Purpose: Template for unknown implementation
+Template Version: 1.0
+-->
 
 # ----------------------------------------------------------------------------- 
 # FILE: config-management-pattern.tpl.md

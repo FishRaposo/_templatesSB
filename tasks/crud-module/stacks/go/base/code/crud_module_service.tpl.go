@@ -1,3 +1,7 @@
+// File: crud_module_service.tpl.go
+// Purpose: Template for crud-module implementation
+// Generated for: {{PROJECT_NAME}}
+
 // Crudmodule Service for Go
 // Generated for {{PROJECT_NAME}}
 package crud_module

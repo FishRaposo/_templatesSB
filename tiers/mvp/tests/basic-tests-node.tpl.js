@@ -1,16 +1,8 @@
 /**
- * Template: basic-tests-node.tpl.js
- * Purpose: basic-tests-node template
- * Stack: node
- * Tier: base
+ * File: basic-tests-node.tpl.js
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: mvp
-# Stack: unknown
-# Category: testing
 
 # Basic Node.js Testing Template
 # Purpose: MVP-level testing template with unit and component tests for Node.js applications

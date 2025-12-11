@@ -1,9 +1,8 @@
-# Universal Template System - Python Stack
-# Generated: 2025-12-10
-# Purpose: python template utilities
-# Tier: base
-# Stack: python
-# Category: utilities
+"""
+File: file_processing_pipeline_service.tpl.py
+Purpose: Template for file-processing-pipeline implementation
+Generated for: {{PROJECT_NAME}}
+"""
 
 # FileProcessingPipeline Service for Python
 # Generated for {{PROJECT_NAME}}

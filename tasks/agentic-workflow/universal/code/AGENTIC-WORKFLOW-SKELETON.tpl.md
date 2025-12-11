@@ -1,9 +1,8 @@
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: unknown template utilities
-# Tier: base
-# Stack: unknown
-# Category: utilities
+<!--
+File: AGENTIC-WORKFLOW-SKELETON.tpl.md
+Purpose: Template for agentic-workflow implementation
+Template Version: 1.0
+-->
 
 # AgenticWorkflow Service Skeleton
 
