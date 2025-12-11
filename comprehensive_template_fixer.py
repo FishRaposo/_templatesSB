@@ -7,7 +7,7 @@ import os
 import re
 from pathlib import Path
 
-TEMPLATE_ROOT = Path(r'd:\Projects\Krei\_templates')
+TEMPLATE_ROOT = Path(__file__).parent
 
 # Go service template pattern
 GO_SERVICE_TEMPLATE = '''// {{{{SERVICE_NAME}}}} Service for Go
