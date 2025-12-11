@@ -1,9 +1,8 @@
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: unknown template utilities
-# Tier: base
-# Stack: unknown
-# Category: template
+<!--
+File: OVERVIEW.tpl.md
+Purpose: Template for segmentation-clustering implementation
+Template Version: 1.0
+-->
 
 # Segmentation Clustering Overview
 

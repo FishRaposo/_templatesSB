@@ -1,16 +1,8 @@
 /**
- * Template: auth_oauth_service.tpl.js
- * Purpose: auth_oauth_service template
- * Stack: node
- * Tier: base
+ * File: auth_oauth_service.tpl.js
+ * Purpose: Template for auth-oauth implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Node Stack
-# Generated: 2025-12-10
-# Purpose: node template utilities
-# Tier: base
-# Stack: node
-# Category: utilities
 
 #!/usr/bin/env node
 /**

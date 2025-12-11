@@ -1,9 +1,8 @@
-# Universal Template System - Python Stack
-# Generated: 2025-12-10
-# Purpose: python template utilities
-# Tier: base
-# Stack: python
-# Category: utilities
+"""
+File: webhook_consumer_service.tpl.py
+Purpose: Template for webhook-consumer implementation
+Generated for: {{PROJECT_NAME}}
+"""
 
 # WebhookConsumer Service for Python
 # Generated for {{PROJECT_NAME}}

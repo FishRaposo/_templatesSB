@@ -1,14 +1,6 @@
-// Template: minimal-boilerplate.tpl.go
-// Purpose: minimal-boilerplate template
-// Stack: go
-// Tier: base
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: unknown template utilities
-# Tier: mvp
-# Stack: unknown
-# Category: utilities
+// File: minimal-boilerplate.tpl.go
+// Purpose: Template for unknown implementation
+// Generated for: {{PROJECT_NAME}}
 
 # Minimal Boilerplate Template (MVP Tier)
 

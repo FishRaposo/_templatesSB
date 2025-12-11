@@ -1,16 +1,8 @@
 /**
- * Template: auth_basic_service.tpl.js
- * Purpose: auth_basic_service template
- * Stack: node
- * Tier: base
+ * File: auth_basic_service.tpl.js
+ * Purpose: Template for auth-basic implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Node Stack
-# Generated: 2025-12-10
-# Purpose: node template utilities
-# Tier: base
-# Stack: node
-# Category: utilities
 
 #!/usr/bin/env node
 /**

@@ -1,9 +1,8 @@
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: unknown template utilities
-# Tier: base
-# Stack: unknown
-# Category: utilities
+<!--
+File: FILE-PROCESSING-PIPELINE-SKELETON.tpl.md
+Purpose: Template for file-processing-pipeline implementation
+Template Version: 1.0
+-->
 
 # FileProcessingPipeline Service Skeleton
 

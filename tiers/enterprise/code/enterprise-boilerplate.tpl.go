@@ -1,14 +1,6 @@
-// Template: enterprise-boilerplate.tpl.go
-// Purpose: enterprise-boilerplate template
-// Stack: go
-// Tier: base
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: unknown template utilities
-# Tier: enterprise
-# Stack: unknown
-# Category: utilities
+// File: enterprise-boilerplate.tpl.go
+// Purpose: Template for unknown implementation
+// Generated for: {{PROJECT_NAME}}
 
 # Enterprise Boilerplate Template (Full Tier)
 

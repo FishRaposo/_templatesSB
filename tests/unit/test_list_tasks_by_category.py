@@ -7,9 +7,10 @@ TODO: Review and implement actual test logic
 
 import unittest
 import sys
-from io import StringIO
+import io
 from pathlib import Path
 from unittest.mock import Mock, patch, MagicMock
+from io import StringIO
 
 # Add scripts directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "scripts"))
@@ -74,42 +75,138 @@ class TestListTasksByCategory(unittest.TestCase):
 
     def test_list_tasks_by_category(self):
         """Test list_tasks_by_category function"""
-        # TODO: Implement based on docstring: Display tasks organized by virtual category...
-        # Arrange
-        task_index = 'test_value'
-        show_details = 'test_value'
+        if list_tasks_by_category is None:
+            self.skipTest("Module list_tasks_by_category not available")
 
-        # Act & Assert
-        # TODO: Add actual test implementation
-        with self.assertRaises(NotImplementedError):
-            self.fail('Test not implemented yet')
+        # Arrange
+        task_index = {
+            'virtual_categories': {
+                'cat_a': {
+                    'display_name': 'Category A',
+                    'description': 'Description A',
+                    'tasks': ['task_1']
+                }
+            },
+            'tasks': {
+                'task_1': {
+                    'description': 'Task 1 Desc',
+                    'categories': ['cat_a'],
+                    'allowed_stacks': ['stack_1']
+                }
+            }
+        }
+
+        # Test with details=False
+        with patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
+            list_tasks_by_category.list_tasks_by_category(task_index, show_details=False)
+            output = mock_stdout.getvalue()
+
+            self.assertIn('Category A', output)
+            self.assertIn('Description A', output)
+            self.assertIn('task_1', output)
+            self.assertIn('Task 1 Desc', output)
+            # Should NOT show details
+            self.assertNotIn('Categories: cat_a', output)
+            self.assertNotIn('Stacks: stack_1', output)
+
+        # Test with details=True
+        with patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
+            list_tasks_by_category.list_tasks_by_category(task_index, show_details=True)
+            output = mock_stdout.getvalue()
+
+            self.assertIn('Category A', output)
+            self.assertIn('Description A', output)
+            self.assertIn('task_1', output)
+            self.assertIn('Task 1 Desc', output)
+            # Should show details
+            self.assertIn('Categories: cat_a', output)
+            self.assertIn('Stacks: stack_1', output)
 
     def test_list_category_summary(self):
         """Test list_category_summary function"""
+        if list_tasks_by_category is None:
+            self.skipTest("list_tasks_by_category module could not be imported")
+
         # Arrange
-        task_index = self.sample_task_index
+        task_index = {
+            'virtual_categories': {
+                'cat1': {
+                    'display_name': 'Category 1',
+                    'tasks': ['t1', 't2', 't3']
+                },
+                'cat2': {
+                    'display_name': 'Category 2',
+                    'tasks': ['t4', 't5']
+                }
+            }
+        }
 
         # Act
-        list_tasks_by_category.list_category_summary(task_index)
+        with patch('sys.stdout', new=io.StringIO()) as mock_stdout:
+            list_tasks_by_category.list_category_summary(task_index)
+            output = mock_stdout.getvalue()
 
         # Assert
-        output = self.mock_stdout.getvalue()
         self.assertIn("Category Summary", output)
-        self.assertIn("Category 1: 2 tasks", output)
-        self.assertIn("Category 2: 1 tasks", output)
-        self.assertIn("Total Tasks: 3", output)
+        self.assertIn("Category 1: 3 tasks", output)
+        self.assertIn("Category 2: 2 tasks", output)
+        self.assertIn("Total Tasks: 5", output)
 
     def test_search_tasks(self):
         """Test search_tasks function"""
-        # TODO: Implement based on docstring: Search tasks by name, description, or category...
         # Arrange
-        task_index = 'test_value'
-        query = 'test_value'
+        task_index = {
+            'tasks': {
+                'task-1': {
+                    'description': 'Description for task 1',
+                    'categories': ['cat1', 'common']
+                },
+                'task-2': {
+                    'description': 'Description for task 2',
+                    'categories': ['cat2', 'common']
+                }
+            },
+            'virtual_categories': {
+                'cat1': {
+                    'display_name': 'Category 1',
+                    'tasks': ['task-1']
+                },
+                'cat2': {
+                    'display_name': 'Category 2',
+                    'tasks': ['task-2']
+                }
+            }
+        }
 
-        # Act & Assert
-        # TODO: Add actual test implementation
-        with self.assertRaises(NotImplementedError):
-            self.fail('Test not implemented yet')
+        # Test 1: Search by task ID
+        with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
+            list_tasks_by_category.search_tasks(task_index, 'task-1')
+            output = mock_stdout.getvalue()
+            self.assertIn("Search Results for 'task-1'", output)
+            self.assertIn("task-1", output)
+            self.assertNotIn("task-2", output)
+
+        # Test 2: Search by description
+        with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
+            list_tasks_by_category.search_tasks(task_index, 'Description')
+            output = mock_stdout.getvalue()
+            self.assertIn("Search Results for 'Description'", output)
+            self.assertIn("task-1", output)
+            self.assertIn("task-2", output)
+
+        # Test 3: Search by category
+        with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
+            list_tasks_by_category.search_tasks(task_index, 'cat1')
+            output = mock_stdout.getvalue()
+            self.assertIn("Search Results for 'cat1'", output)
+            self.assertIn("task-1", output)
+            self.assertNotIn("task-2", output)
+
+        # Test 4: No results
+        with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
+            list_tasks_by_category.search_tasks(task_index, 'nonexistent')
+            output = mock_stdout.getvalue()
+            self.assertIn("No tasks found matching 'nonexistent'", output)
 
     def test_main(self):
         """Test main function"""
