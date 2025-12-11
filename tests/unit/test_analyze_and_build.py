@@ -20,6 +20,7 @@ try:
     import analyze_and_build
 except ImportError:
     analyze_and_build = None
+    ProjectAnalysisPipeline = None
 
 class TestAnalyzeAndBuild(unittest.TestCase):
     """Test suite for ProjectAnalysisPipeline"""
