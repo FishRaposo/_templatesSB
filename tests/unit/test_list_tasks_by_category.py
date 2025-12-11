@@ -7,6 +7,7 @@ TODO: Review and implement actual test logic
 
 import unittest
 import sys
+from io import StringIO
 from pathlib import Path
 from unittest.mock import Mock, patch, MagicMock
 
@@ -16,7 +17,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent / "scripts"))
 try:
     import list_tasks_by_category
 except ImportError as e:
-    print(f"Warning: Could not import {module_name}: {e}")
+    print(f"Warning: Could not import list_tasks_by_category: {e}")
     list_tasks_by_category = None
 
 class TestListTasksByCategory(unittest.TestCase):
@@ -24,13 +25,45 @@ class TestListTasksByCategory(unittest.TestCase):
 
     def setUp(self):
         """Setup for each test"""
-        # TODO: Add common setup logic
-        pass
+        # Sample task index for testing
+        self.sample_task_index = {
+            'virtual_categories': {
+                'cat1': {
+                    'display_name': 'Category 1',
+                    'description': 'Description 1',
+                    'tasks': ['task1', 'task2']
+                },
+                'cat2': {
+                    'display_name': 'Category 2',
+                    'tasks': ['task3']
+                }
+            },
+            'tasks': {
+                'task1': {
+                    'description': 'Task 1 Description',
+                    'categories': ['cat1'],
+                    'allowed_stacks': ['python', 'node']
+                },
+                'task2': {
+                    'description': 'Task 2 Description',
+                    'categories': ['cat1'],
+                    'allowed_stacks': ['go']
+                },
+                'task3': {
+                    'description': 'Task 3 Description',
+                    'categories': ['cat2'],
+                    'allowed_stacks': ['python']
+                }
+            }
+        }
+
+        # Patch sys.stdout to capture output
+        self.stdout_patcher = patch('sys.stdout', new_callable=StringIO)
+        self.mock_stdout = self.stdout_patcher.start()
 
     def tearDown(self):
         """Cleanup after each test"""
-        # TODO: Add cleanup logic
-        pass
+        self.stdout_patcher.stop()
 
     def test_load_task_index(self):
         """Test load_task_index function"""
@@ -53,14 +86,18 @@ class TestListTasksByCategory(unittest.TestCase):
 
     def test_list_category_summary(self):
         """Test list_category_summary function"""
-        # TODO: Implement based on docstring: Show summary of tasks per category...
         # Arrange
-        task_index = 'test_value'
+        task_index = self.sample_task_index
 
-        # Act & Assert
-        # TODO: Add actual test implementation
-        with self.assertRaises(NotImplementedError):
-            self.fail('Test not implemented yet')
+        # Act
+        list_tasks_by_category.list_category_summary(task_index)
+
+        # Assert
+        output = self.mock_stdout.getvalue()
+        self.assertIn("Category Summary", output)
+        self.assertIn("Category 1: 2 tasks", output)
+        self.assertIn("Category 2: 1 tasks", output)
+        self.assertIn("Total Tasks: 3", output)
 
     def test_search_tasks(self):
         """Test search_tasks function"""
