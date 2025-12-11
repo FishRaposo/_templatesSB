@@ -16,7 +16,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent / "scripts"))
 try:
     import analyze_and_build
 except ImportError as e:
-    print(f"Warning: Could not import {module_name}: {e}")
+    print(f"Warning: Could not import analyze_and_build: {e}")
     analyze_and_build = None
 
 class TestAnalyzeAndBuild(unittest.TestCase):
@@ -61,16 +61,66 @@ class TestAnalyzeAndBuild(unittest.TestCase):
     # Skipping private function: _get_build_recommendation
     def test_generate_build_config(self):
         """Test generate_build_config function"""
-        # TODO: Implement based on docstring: Generate resolver-compatible build configuration...
-        # Arrange
-        self = 'test_value'
-        analysis = 'test_value'
-        output_path = 'test_value'
+        # Create mock TaskMatch objects
+        task1 = Mock()
+        task1.task_id = "task-1"
+        task1.has_templates = True
+        task1.confidence = 0.8
+        task1.tier = "core"
+        task1.categories = ["cat1"]
 
-        # Act & Assert
-        # TODO: Add actual test implementation
-        with self.assertRaises(NotImplementedError):
-            self.fail('Test not implemented yet')
+        task2 = Mock()
+        task2.task_id = "task-2"
+        task2.has_templates = True
+        task2.confidence = 0.6
+        task2.tier = "mvp"
+        task2.categories = ["cat2"]
+
+        task3 = Mock()
+        task3.task_id = "task-3"
+        task3.has_templates = False # Should be filtered out
+
+        # Mock StackRecommendation
+        stack_rec = Mock()
+        stack_rec.primary_stack = "python"
+        stack_rec.secondary_stack = "node"
+
+        # Mock analysis dictionary
+        analysis = {
+            "stack_recommendation": stack_rec,
+            "detected_tasks": [task1, task2, task3],
+            "description": "Test Project",
+            "timestamp": "2023-01-01T00:00:00",
+            "validation_summary": {"coverage_percentage": 80}
+        }
+
+        # Instantiate pipeline without running __init__ since generate_build_config is stateless
+        pipeline = analyze_and_build.ProjectAnalysisPipeline.__new__(analyze_and_build.ProjectAnalysisPipeline)
+
+        # Act
+        build_config = pipeline.generate_build_config(analysis)
+
+        # Assert
+        self.assertEqual(build_config["project"]["name"], "detected-project")
+        self.assertEqual(build_config["project"]["stack"], "python")
+        self.assertEqual(build_config["project"]["secondary_stack"], "node")
+        self.assertEqual(build_config["project"]["description"], "Test Project")
+
+        # Check tasks
+        self.assertIn("task-1", build_config["tasks"])
+        self.assertIn("task-2", build_config["tasks"])
+        self.assertNotIn("task-3", build_config["tasks"])
+
+        self.assertEqual(build_config["tasks"]["task-1"]["tier"], "core")
+        self.assertEqual(build_config["tasks"]["task-1"]["confidence"], 0.8)
+
+        # Test file output if path is provided
+        mock_open = unittest.mock.mock_open()
+        with patch('builtins.open', mock_open):
+            with patch('analyze_and_build.yaml.dump') as mock_yaml_dump:
+                pipeline.generate_build_config(analysis, output_path=Path("test_output.yaml"))
+                mock_open.assert_called_with(Path("test_output.yaml"), 'w', encoding='utf-8')
+                mock_yaml_dump.assert_called()
 
     def test_build_project(self):
         """Test build_project function"""
