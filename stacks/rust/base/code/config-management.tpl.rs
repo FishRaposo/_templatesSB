@@ -442,8 +442,7 @@ fn main() -> Result<(), ConfigError> {
     println!("=== Rust Configuration Management Demo ===");
     
     // Create sample configuration files
-    println!("
-1. Creating sample configuration files...");
+    println!("\n1. Creating sample configuration files...");
     config_utils::create_sample_configs()?;
     println!("   ✓ Created config/development.toml");
     println!("   ✓ Created config/production.toml");

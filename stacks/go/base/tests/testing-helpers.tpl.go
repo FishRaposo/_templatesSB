@@ -524,7 +524,7 @@ func (sh *SecurityHelper) GenerateXSSPayloads() []string {
 func (sh *SecurityHelper) GeneratePathTraversalPayloads() []string {
 	return []string{
 		"../../../etc/passwd",
-		"..\..\..\windows\system32\config\sam",
+		"..\\..\\..\\windows\\system32\\config\\sam",
 		"....//....//....//etc/passwd",
 		"%2e%2e%2f%2e%2e%2f%2e%2e%2fetc%2fpasswd",
 		"..%252f..%252f..%252fetc%252fpasswd",
