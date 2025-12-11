@@ -7,6 +7,7 @@ TODO: Review and implement actual test logic
 
 import unittest
 import sys
+import io
 from pathlib import Path
 from unittest.mock import Mock, patch, MagicMock
 
@@ -16,7 +17,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent / "scripts"))
 try:
     import list_tasks_by_category
 except ImportError as e:
-    print(f"Warning: Could not import {module_name}: {e}")
+    print(f"Warning: Could not import list_tasks_by_category: {e}")
     list_tasks_by_category = None
 
 class TestListTasksByCategory(unittest.TestCase):
@@ -41,15 +42,52 @@ class TestListTasksByCategory(unittest.TestCase):
 
     def test_list_tasks_by_category(self):
         """Test list_tasks_by_category function"""
-        # TODO: Implement based on docstring: Display tasks organized by virtual category...
-        # Arrange
-        task_index = 'test_value'
-        show_details = 'test_value'
+        if list_tasks_by_category is None:
+            self.skipTest("Module list_tasks_by_category not available")
 
-        # Act & Assert
-        # TODO: Add actual test implementation
-        with self.assertRaises(NotImplementedError):
-            self.fail('Test not implemented yet')
+        # Arrange
+        task_index = {
+            'virtual_categories': {
+                'cat_a': {
+                    'display_name': 'Category A',
+                    'description': 'Description A',
+                    'tasks': ['task_1']
+                }
+            },
+            'tasks': {
+                'task_1': {
+                    'description': 'Task 1 Desc',
+                    'categories': ['cat_a'],
+                    'allowed_stacks': ['stack_1']
+                }
+            }
+        }
+
+        # Test with details=False
+        with patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
+            list_tasks_by_category.list_tasks_by_category(task_index, show_details=False)
+            output = mock_stdout.getvalue()
+
+            self.assertIn('Category A', output)
+            self.assertIn('Description A', output)
+            self.assertIn('task_1', output)
+            self.assertIn('Task 1 Desc', output)
+            # Should NOT show details
+            self.assertNotIn('Categories: cat_a', output)
+            self.assertNotIn('Stacks: stack_1', output)
+
+        # Test with details=True
+        with patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
+            list_tasks_by_category.list_tasks_by_category(task_index, show_details=True)
+            output = mock_stdout.getvalue()
+
+            self.assertIn('Category A', output)
+            self.assertIn('Description A', output)
+            self.assertIn('task_1', output)
+            self.assertIn('Task 1 Desc', output)
+            # Should show details
+            self.assertIn('Categories: cat_a', output)
+            self.assertIn('Stacks: stack_1', output)
 
     def test_list_category_summary(self):
         """Test list_category_summary function"""
