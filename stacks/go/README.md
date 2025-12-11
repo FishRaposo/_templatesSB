@@ -29,32 +29,27 @@ The Go stack provides a complete foundation for building high-performance system
 | Template | Purpose | Location |
 |----------|---------|----------|
 | **Go README** | Go stack overview and setup | [📄 View](base/docs/README.tpl.md) |
-| **Setup Guide** | Detailed Go environment configuration | [📄 View](base/docs/setup-guide.tpl.md) |
+| **Setup Guide** | Stack overview and Go documentation | [📄 View](base/docs/README.tpl.md) |
 
 ---
 
 ## 🛠️ Code Templates & Patterns
 
 ### **Universal Code Templates** *(System-Wide Patterns)*
-> 📖 Located in `../../../universal/code/` - Adaptable patterns for any stack
 
 | Template | Purpose | Link |
 |----------|---------|------|
-| **Backend Module** | Universal backend service structure | [📄 View](../../../universal/code/MODULE-TEMPLATE-BACKEND.tpl.md) |
-| **Frontend Module** | Universal frontend component structure | [📄 View](../../../universal/code/MODULE-TEMPLATE-FRONTEND.tpl.md) |
-| **Git Ignore** | Version control ignore patterns | [📄 View](../../../universal/code/.gitignore.tpl) |
 
 ### **Go-Specific Code Patterns** *(This Stack Only)*
 > 🔧 Go implementations with best practices and optimizations
 
 | Pattern | Purpose | Key Features | Location |
 |---------|---------|--------------|----------|
-| **Config Management** | Configuration management and validation | Type-safe configs, environment variables | [📄 View](base/code/config-management-pattern.tpl.go) |
-| **Error Handling** | Custom error classes and middleware | Structured errors, logging, recovery | [📄 View](base/code/error-handling-pattern.tpl.go) |
-| **HTTP Client** | HTTP client with retry and caching | Type-safe requests, interceptors | [📄 View](base/code/http-client-pattern.tpl.go) |
-| **Logging Utilities** | Structured logging framework | Multiple transports, log levels | [📄 View](base/code/logging-utilities-pattern.tpl.go) |
-| **Authentication** | Authentication and authorization | JWT, OAuth, security patterns | [📄 View](base/code/authentication-pattern.tpl.go) |
-| **Data Validation** | Data validation and schema management | Input validation, type safety | [📄 View](base/code/data-validation-pattern.tpl.go) |
+| **Config Management** | Configuration management and validation | Type-safe configs, environment variables | [📄 View](base/code/config-management.tpl.go) |
+| **Error Handling** | Custom error classes and middleware | Structured errors, logging, recovery | [📄 View](base/code/error-handling.tpl.go) |
+| **HTTP Client** | HTTP client with retry and caching | Type-safe requests, interceptors | [📄 View](base/code/http-client.tpl.go) |
+| **Logging Utilities** | Structured logging framework | Multiple transports, log levels | [📄 View](base/code/logging-utilities.tpl.go) |
+| **Data Validation** | Data validation and schema management | Input validation, type safety | [📄 View](base/code/data-validation.tpl.go) |
 
 ---
 
@@ -65,9 +60,9 @@ The Go stack provides a complete foundation for building high-performance system
 
 | Pattern | Purpose | Key Features | Location |
 |---------|---------|--------------|----------|
-| **Unit Tests** | Unit testing framework and patterns | Mock factories, test utilities | [📄 View](base/tests/unit-tests-pattern.tpl.md) |
-| **Integration Tests** | API and integration testing | Test data management, fixtures | [📄 View](base/tests/integration-tests-pattern.tpl.md) |
-| **Test Utilities** | Testing helpers and utilities | Custom matchers, test factories | [📄 View](base/tests/test-utilities-pattern.tpl.md) |
+| **Unit Tests** | Unit testing framework and patterns | Mock factories, test utilities | [📄 View](base/tests/unit-tests.tpl.md) |
+| **Integration Tests** | API and integration testing | Test data management, fixtures | [📄 View](base/tests/integration-tests.tpl.md) |
+| **Test Utilities** | Testing helpers and utilities | Custom matchers, test factories | [📄 View](base/tests/testing-helpers.tpl.go) |
 
 ---
 
@@ -90,7 +85,7 @@ cp [path-to-this-stack]/dependencies.txt.tpl ./go.mod
 go mod tidy  # or appropriate package manager
 
 # 3. Copy configuration files
-cp [path-to-this-stack]/base/docs/setup-guide.tpl.md ./SETUP.md
+cp [path-to-this-stack]/base/docs/README.tpl.md ./SETUP.md
 
 # 4. Follow the setup guide for complete project initialization
 ```
@@ -105,25 +100,23 @@ stacks/go/                        # 🔧 THIS STACK FOLDER (Self-Contained)
 ├── dependencies.txt.tpl                   # 📦 Package management and tooling configs
 │
 ├── 📚 UNIVERSAL TEMPLATES (References)    # 📖 System-wide patterns and documentation
-│   └── → ../../../universal/docs/         # 🔗 Links to universal documentation
 │   └── → ../../../universal/code/         # 🔗 Links to universal code templates
 │
 ├── 🔧 Go-SPECIFIC TEMPLATES # 🎯 Go implementations
 │   └── base/
 │       ├── docs/                          # 📖 Go documentation
 │       │   ├── README.tpl.md              # Go stack overview
-│       │   └── setup-guide.tpl.md         # Go environment setup
+│       │   └── README.tpl.md         # Go environment setup
 │       ├── code/                          # 💻 Go code patterns
-│       │   ├── config-management-pattern.tpl.go
-│       │   ├── error-handling-pattern.tpl.go
-│       │   ├── http-client-pattern.tpl.go
-│       │   ├── logging-utilities-pattern.tpl.go
-│       │   ├── authentication-pattern.tpl.go
-│       │   └── data-validation-pattern.tpl.go
+│       │       ├── config-management.tpl.go
+│       │       ├── error-handling.tpl.go
+│       │       ├── http-client.tpl.go
+│       │       ├── logging-utilities.tpl.go
+│       │   └── data-validation.tpl.go
 │       └── tests/                         # 🧪 Go testing patterns
-│           ├── unit-tests-pattern.tpl.md
-│           ├── integration-tests-pattern.tpl.md
-│           └── test-utilities-pattern.tpl.md
+│           ├── unit-tests.tpl.md
+│           ├── integration-tests.tpl.md
+│           └── testing-helpers.tpl.go
 ```
 
 ---
@@ -132,7 +125,7 @@ stacks/go/                        # 🔧 THIS STACK FOLDER (Self-Contained)
 
 ### **For New Go Projects**
 1. **Read Universal Patterns**: Start with `#
-2. **Configure Environment**: Follow `base/docs/setup-guide.tpl.md`
+2. **Configure Environment**: Follow `base/docs/README.tpl.md`
 3. **Copy Code Patterns**: Use templates from `base/code/` directory
 4. **Set Up Testing**: Implement patterns from `base/tests/` directory
 
@@ -166,7 +159,6 @@ stacks/go/                        # 🔧 THIS STACK FOLDER (Self-Contained)
 ## 🔗 Related Resources
 
 ### **System Documentation**
-- [📖 Universal Documentation Index](../../../universal/docs/)
 - [🗺️ System Architecture Map](../../SYSTEM-MAP.md)
 - [⚡ Quick Start Guide](#)
 
@@ -177,9 +169,6 @@ stacks/go/                        # 🔧 THIS STACK FOLDER (Self-Contained)
 | Modules | [📗 go.dev](https://go.dev/blog/using-go-modules) |
 
 ### **Template System**
-- [📋 Task Templates](../../../tasks/) - 46 production tasks
-- [🏗️ Tier Templates](../../../tiers/) - MVP/Core/Enterprise patterns
-- [🧪 Validation Tools](../../../tests/validation/) - Quality assurance
 
 ---
 
@@ -187,7 +176,7 @@ stacks/go/                        # 🔧 THIS STACK FOLDER (Self-Contained)
 
 ### **Getting Help**
 - 📖 **Universal Issues**: Check `# for system-wide patterns
-- 🔧 **Go Issues**: Reference `base/docs/setup-guide.tpl.md` for configuration
+- 🔧 **Go Issues**: Reference `base/docs/README.tpl.md` for configuration
 - 🗺️ **System Navigation**: Use `SYSTEM-MAP.md` for complete system overview
 
 ### **Contributing**

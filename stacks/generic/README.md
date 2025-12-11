@@ -36,13 +36,9 @@ The Generic stack provides a complete foundation for building technology-agnosti
 ## 🛠️ Code Templates & Patterns
 
 ### **Universal Code Templates** *(System-Wide Patterns)*
-> 📖 Located in `../../../universal/code/` - Adaptable patterns for any stack
 
 | Template | Purpose | Link |
 |----------|---------|------|
-| **Backend Module** | Universal backend service structure | [📄 View](../../../universal/code/MODULE-TEMPLATE-BACKEND.tpl.md) |
-| **Frontend Module** | Universal frontend component structure | [📄 View](../../../universal/code/MODULE-TEMPLATE-FRONTEND.tpl.md) |
-| **Git Ignore** | Version control ignore patterns | [📄 View](../../../universal/code/.gitignore.tpl) |
 
 ### **Generic-Specific Code Patterns** *(This Stack Only)*
 > 🔧 Generic implementations with best practices and optimizations
@@ -52,7 +48,7 @@ The Generic stack provides a complete foundation for building technology-agnosti
 | **Config Management** | Configuration management and validation | Type-safe configs, environment variables | [📄 View](base/code/config-management-pattern.tpl.md) |
 | **Error Handling** | Custom error classes and middleware | Structured errors, logging, recovery | [📄 View](base/code/error-handling-pattern.tpl.md) |
 | **HTTP Client** | HTTP client with retry and caching | Type-safe requests, interceptors | [📄 View](base/code/http-client-pattern.tpl.md) |
-| **Logging Utilities** | Structured logging framework | Multiple transports, log levels | [📄 View](base/code/logging-utilities-pattern.tpl.md) |
+| **Logging Utilities** | Structured logging framework | Multiple transports, log levels | [📄 View](base/code/logging-pattern.tpl.md) |
 | **Authentication** | Authentication and authorization | JWT, OAuth, security patterns | [📄 View](base/code/authentication-pattern.tpl.md) |
 | **Data Validation** | Data validation and schema management | Input validation, type safety | [📄 View](base/code/data-validation-pattern.tpl.md) |
 
@@ -65,8 +61,8 @@ The Generic stack provides a complete foundation for building technology-agnosti
 
 | Pattern | Purpose | Key Features | Location |
 |---------|---------|--------------|----------|
-| **Unit Tests** | Unit testing framework and patterns | Mock factories, test utilities | [📄 View](base/tests/unit-tests-pattern.tpl.md) |
-| **Integration Tests** | API and integration testing | Test data management, fixtures | [📄 View](base/tests/integration-tests-pattern.tpl.md) |
+| **Unit Tests** | Unit testing framework and patterns | Mock factories, test utilities | [📄 View](base/tests/unit-tests.tpl.md) |
+| **Integration Tests** | API and integration testing | Test data management, fixtures | [📄 View](base/tests/integration-tests.tpl.md) |
 | **Test Utilities** | Testing helpers and utilities | Custom matchers, test factories | [📄 View](base/tests/test-utilities-pattern.tpl.md) |
 
 ---
@@ -105,7 +101,6 @@ stacks/generic/                        # 🔧 THIS STACK FOLDER (Self-Contained)
 ├── dependencies.txt.tpl                   # 📦 Package management and tooling configs
 │
 ├── 📚 UNIVERSAL TEMPLATES (References)    # 📖 System-wide patterns and documentation
-│   └── → ../../../universal/docs/         # 🔗 Links to universal documentation
 │   └── → ../../../universal/code/         # 🔗 Links to universal code templates
 │
 ├── 🔧 Generic-SPECIFIC TEMPLATES # 🎯 Generic implementations
@@ -121,9 +116,9 @@ stacks/generic/                        # 🔧 THIS STACK FOLDER (Self-Contained)
 │       │   ├── authentication-pattern.tpl.md
 │       │   └── data-validation-pattern.tpl.md
 │       └── tests/                         # 🧪 Generic testing patterns
-│           ├── unit-tests-pattern.tpl.md
-│           ├── integration-tests-pattern.tpl.md
-│           └── test-utilities-pattern.tpl.md
+│           ├── unit-tests.tpl.md
+│           ├── integration-tests.tpl.md
+│           └── testing-helpers.tpl.md
 ```
 
 ---
@@ -166,7 +161,6 @@ stacks/generic/                        # 🔧 THIS STACK FOLDER (Self-Contained)
 ## 🔗 Related Resources
 
 ### **System Documentation**
-- [📖 Universal Documentation Index](../../../universal/docs/)
 - [🗺️ System Architecture Map](../../SYSTEM-MAP.md)
 - [⚡ Quick Start Guide](#)
 
@@ -177,9 +171,6 @@ stacks/generic/                        # 🔧 THIS STACK FOLDER (Self-Contained)
 | Best-Practices | [📗 google.github.io](https://google.github.io/styleguide/) |
 
 ### **Template System**
-- [📋 Task Templates](../../../tasks/) - 46 production tasks
-- [🏗️ Tier Templates](../../../tiers/) - MVP/Core/Enterprise patterns
-- [🧪 Validation Tools](../../../tests/validation/) - Quality assurance
 
 ---
 

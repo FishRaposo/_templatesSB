@@ -1931,6 +1931,46 @@ tasks:
       universal_template:
         tasks/sample-data-generator/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+  testing:
+    description: Comprehensive testing infrastructure and patterns.
+    display_name: Testing Infrastructure
+    categories:
+    - testing
+    - quality
+    - devops
+    default_stacks:
+    - agnostic
+    allowed_stacks:
+    - python
+    - node
+    - go
+    - flutter
+    - react
+    - nextjs
+    - typescript
+    recommended_tier:
+      basic-testing: mvp
+      production-testing: core
+      enterprise-testing: full
+    files:
+    - id: TESTING_CONFIG
+      target_path: config/testing.{ext}
+      universal_template: tasks/testing/universal/code/CONFIG.tpl.yaml
+      merge_behavior: create
+    - id: TESTING_SERVICE
+      target_path: src/testing/service.{ext}
+      universal_template:
+        tasks/testing/universal/code/TESTING-SKELETON.tpl.md
+      merge_behavior: create
+    - id: TESTING_DOCS
+      target_path: docs/TESTING.md
+      universal_template: tasks/testing/universal/docs/OVERVIEW.tpl.md
+      merge_behavior: create
+    - id: TESTING_TESTS
+      target_path: tests/testing/test_testing.{ext}
+      universal_template:
+        tasks/testing/universal/tests/TEST-STRATEGY.tpl.md
+      merge_behavior: create
 task_config:
   merge_strategies:
     create: Create new file, fail if exists

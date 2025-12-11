@@ -36,22 +36,15 @@ The TypeScript stack provides a complete, type-safe foundation for building scal
 
 | Tier | Template | Purpose | Key Features | Location |
 |------|----------|---------|--------------|----------|
-| **MVP** | Minimal Boilerplate | Rapid prototyping with type safety | Basic HTTP server, typed responses, minimal dependencies | [📄 View](../../../tiers/mvp/code/minimal-boilerplate-typescript.tpl.ts) |
-| **Core** | Production Boilerplate | Production-ready services | Express.js, structured logging, metrics, error handling | [📄 View](../../../tiers/core/code/production-boilerplate-typescript.tpl.ts) |
-| **Enterprise** | Enterprise Boilerplate | Enterprise-grade applications | Advanced security, compliance, multi-region, monitoring | [📄 View](../../../tiers/enterprise/code/enterprise-boilerplate-typescript.tpl.ts) |
 
 ---
 
 ## 🛠️ Code Templates & Patterns
 
 ### **Universal Code Templates** *(System-Wide Patterns)*
-> 📖 Located in `../../../universal/code/` - Adaptable patterns for any stack
 
 | Template | Purpose | Link |
 |----------|---------|------|
-| **Backend Module** | Universal backend service structure | [📄 View](../../../universal/code/MODULE-TEMPLATE-BACKEND.tpl.md) |
-| **Frontend Module** | Universal frontend component structure | [📄 View](../../../universal/code/MODULE-TEMPLATE-FRONTEND.tpl.md) |
-| **Git Ignore** | Version control ignore patterns | [📄 View](../../../universal/code/.gitignore.tpl) |
 
 ### **TypeScript-Specific Code Patterns** *(This Stack Only)*
 > 🔧 TypeScript implementations with type safety and best practices
@@ -74,8 +67,8 @@ The TypeScript stack provides a complete, type-safe foundation for building scal
 
 | Pattern | Purpose | Key Features | Location |
 |---------|---------|--------------|----------|
-| **Unit Tests** | Jest unit testing with type safety | Mock factories, custom matchers, coverage | [📄 View](base/tests/unit-tests-pattern.tpl.md) |
-| **Integration Tests** | API and database integration testing | Supertest, test utilities, data factories | [📄 View](base/tests/integration-tests-pattern.tpl.md) |
+| **Unit Tests** | Jest unit testing with type safety | Mock factories, custom matchers, coverage | [📄 View](base/tests/unit-tests.tpl.md) |
+| **Integration Tests** | API and database integration testing | Supertest, test utilities, data factories | [📄 View](base/tests/integration-tests.tpl.md) |
 | **Test Utilities** | Type-safe testing helpers and utilities | Mock factories, type guards, custom assertions | [📄 View](base/tests/test-utilities-pattern.tpl.md) |
 
 ---
@@ -114,7 +107,6 @@ stacks/typescript/                          # 🔧 THIS STACK FOLDER (Self-Conta
 ├── dependencies.txt.tpl                   # 📦 Package management and tooling configs
 │
 ├── 📚 UNIVERSAL TEMPLATES (References)    # 📖 System-wide patterns and documentation
-│   └── → ../../../universal/docs/         # 🔗 Links to universal documentation
 │   └── → ../../../universal/code/         # 🔗 Links to universal code templates
 │
 ├── 🔧 TYPESCRIPT-SPECIFIC TEMPLATES       # 🎯 TypeScript implementations
@@ -130,9 +122,9 @@ stacks/typescript/                          # 🔧 THIS STACK FOLDER (Self-Conta
 │       │   ├── authentication-pattern.tpl.ts
 │       │   └── data-validation-pattern.tpl.ts
 │       └── tests/                         # 🧪 TypeScript testing patterns
-│           ├── unit-tests-pattern.tpl.md
-│           ├── integration-tests-pattern.tpl.md
-│           └── test-utilities-pattern.tpl.md
+│           ├── unit-tests.tpl.md
+│           ├── integration-tests.tpl.md
+│           └── testing-helpers.tpl.md
 ```
 
 ---
@@ -175,7 +167,6 @@ stacks/typescript/                          # 🔧 THIS STACK FOLDER (Self-Conta
 ## 🔗 Related Resources
 
 ### **System Documentation**
-- [📖 Universal Documentation Index](../../../universal/docs/)
 - [🗺️ System Architecture Map](../../SYSTEM-MAP.md)
 - [⚡ Quick Start Guide](#)
 
@@ -185,9 +176,6 @@ stacks/typescript/                          # 🔧 THIS STACK FOLDER (Self-Conta
 - [🧪 Jest TypeScript Testing](https://jestjs.io/docs/getting-started)
 
 ### **Template System**
-- [📋 Task Templates](../../../tasks/) - 46 production tasks
-- [🏗️ Tier Templates](../../../tiers/) - MVP/Core/Enterprise patterns
-- [🧪 Validation Tools](../../../tests/validation/) - Quality assurance
 
 ---
 
