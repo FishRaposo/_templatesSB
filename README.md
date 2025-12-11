@@ -293,17 +293,32 @@ python scripts/detect_project_tasks.py --description "test case" --output test-r
 
 ## 📚 Documentation
 
+### **AI Agent Guides**
+Each coding agent has a dedicated guide with full feature parity:
+
+| Agent | Guide | Description |
+|-------|-------|-------------|
+| Claude | `CLAUDE.md` | Claude Code comprehensive guide |
+| GitHub Copilot | `COPILOT.md` | Copilot Chat & Workspace |
+| Google Gemini | `GEMINI.md` | Gemini Code Assist |
+| Cursor | `CURSOR.md` | Cursor AI editor |
+| Sourcegraph Cody | `CODY.md` | Code intelligence |
+| Aider | `AIDER.md` | CLI pair programming |
+| OpenAI GPT | `CODEX.md` | GPT/Codex generation |
+| Windsurf | `WINDSURF.md` | Codeium Windsurf |
+| Warp | `WARP.md` | AI terminal workflows |
+| Multi-Agent | `AGENTS.md` | Coordination patterns |
+
 ### **User Guides**
-- `docs/TASKS-GUIDE.md` - Detailed task system documentation
-- `docs/QUICKSTART.md` - Getting started tutorials
-- `ADD-NEW-STACK.md` - Comprehensive guide for adding new technology stacks
-- `ADD-NEW-STACK-CHECKLIST.md` - Step-by-step checklist for stack implementation
+- `QUICKSTART.md` - Getting started guide
+- `SYSTEM-MAP.md` - Complete system architecture
+- `ADD-NEW-STACK.md` - Guide for adding new technology stacks
 - `examples/` - Reference implementations and patterns
 
 ### **Technical Documentation**
 - `scripts/` - Tool documentation and usage examples
-- `docs/TASK-TEMPLATE.md` - Task creation guidelines
-- `docs/` - Architecture and integration guides
+- `tasks/task-index.yaml` - Task definitions and mappings
+- `blueprints/` - Blueprint definitions (mins, documentation)
 
 ### **Validation Reports**
 - Run `python scripts/validate-templates.py --full --detailed` for current system status

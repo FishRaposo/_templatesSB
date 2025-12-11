@@ -1,0 +1,165 @@
+id: documentation
+version: 1
+name: "Documentation Blueprint"
+category: "meta"
+
+description: >
+  Universal documentation standards and patterns for the Universal Template System.
+  Defines agent-specific guides, documentation hierarchy, and style conventions
+  to ensure all coding agents can work effectively with the system.
+
+# What kind of thing this is
+type: "documentation"  # "app" | "pipeline" | "api" | "agent_system" | "dashboard" | "documentation"
+
+# Documentation blueprint applies to all stacks
+stacks:
+  required: []  # No required stacks - applies universally
+  recommended:
+    - python
+    - node
+    - flutter
+  supported:
+    - python
+    - node
+    - go
+    - flutter
+    - react
+    - nextjs
+    - typescript
+    - sql
+    - r
+    - generic
+    - rust
+    - react_native
+
+# Tier defaults for documentation
+tier_defaults:
+  overall: core
+  
+# Documentation-related tasks
+tasks:
+  required:
+    - docs-site
+  recommended:
+    - project-bootstrap
+  optional:
+    - sample-data-generator
+
+# Documentation constraints
+constraints:
+  agent_guides_required: true
+  style_guide_enforced: true
+  metrics_current: true
+  validation_required: true
+
+# Agent-specific overlays
+overlays:
+  python:
+    enabled: true
+    mode: "extend"
+    apply_to:
+      - "docs/"
+      - "README.md"
+  node:
+    enabled: true
+    mode: "extend"
+    apply_to:
+      - "docs/"
+      - "README.md"
+  flutter:
+    enabled: true
+    mode: "extend"
+    apply_to:
+      - "docs/"
+      - "README.md"
+  react:
+    enabled: true
+    mode: "extend"
+    apply_to:
+      - "docs/"
+      - "README.md"
+  go:
+    enabled: true
+    mode: "extend"
+    apply_to:
+      - "docs/"
+      - "README.md"
+
+# Agent guide definitions
+agent_guides:
+  - name: "Claude"
+    file: "CLAUDE.md"
+    description: "Claude Code comprehensive guide"
+    priority: 1
+  - name: "GitHub Copilot"
+    file: "COPILOT.md"
+    description: "GitHub Copilot guide"
+    priority: 2
+  - name: "Google Gemini"
+    file: "GEMINI.md"
+    description: "Gemini Code Assist guide"
+    priority: 3
+  - name: "Cursor"
+    file: "CURSOR.md"
+    description: "Cursor AI editor guide"
+    priority: 4
+  - name: "Sourcegraph Cody"
+    file: "CODY.md"
+    description: "Sourcegraph Cody guide"
+    priority: 5
+  - name: "Aider"
+    file: "AIDER.md"
+    description: "Aider CLI guide"
+    priority: 6
+  - name: "OpenAI GPT"
+    file: "CODEX.md"
+    description: "OpenAI GPT/Codex guide"
+    priority: 7
+  - name: "Windsurf"
+    file: "WINDSURF.md"
+    description: "Windsurf/Codeium guide"
+    priority: 8
+  - name: "Warp"
+    file: "WARP.md"
+    description: "Warp terminal guide"
+    priority: 9
+  - name: "Multi-Agent"
+    file: "AGENTS.md"
+    description: "Multi-agent coordination"
+    priority: 10
+
+# Documentation structure template
+documentation_structure:
+  root:
+    - README.md
+    - QUICKSTART.md
+    - SYSTEM-MAP.md
+    - CONTRIBUTING.md
+    - CHANGELOG.md
+  agents:
+    - CLAUDE.md
+    - COPILOT.md
+    - GEMINI.md
+    - CURSOR.md
+    - CODY.md
+    - AIDER.md
+    - CODEX.md
+    - WINDSURF.md
+    - WARP.md
+    - AGENTS.md
+  technical:
+    - docs/
+    - examples/
+    - guides/
+
+# LLM hints
+llm:
+  prompt_preamble: |
+    You are working with a project that follows the Universal Template System
+    documentation standards. All documentation should be consistent, accessible,
+    and optimized for both human developers and AI coding assistants.
+  architectural_keywords:
+    - "agent-specific guides"
+    - "documentation hierarchy"
+    - "consistent formatting"
+    - "validation before commit"
