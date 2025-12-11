@@ -1,8 +1,7 @@
 /**
- * Template: embedding_index_service.tpl.js
- * Purpose: embedding_index_service template
- * Stack: node
- * Tier: base
+ * File: embedding_index_service.tpl.js
+ * Purpose: Template for embedding-index implementation
+ * Generated for: {{PROJECT_NAME}}
  */
 
 #!/usr/bin/env node

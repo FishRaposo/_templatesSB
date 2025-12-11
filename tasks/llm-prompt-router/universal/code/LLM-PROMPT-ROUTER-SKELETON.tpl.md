@@ -1,9 +1,8 @@
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: unknown template utilities
-# Tier: base
-# Stack: unknown
-# Category: utilities
+<!--
+File: LLM-PROMPT-ROUTER-SKELETON.tpl.md
+Purpose: Template for llm-prompt-router implementation
+Template Version: 1.0
+-->
 
 # LlmPromptRouter Service Skeleton
 

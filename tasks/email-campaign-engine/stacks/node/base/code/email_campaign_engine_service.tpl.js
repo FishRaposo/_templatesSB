@@ -1,8 +1,7 @@
 /**
- * Template: email_campaign_engine_service.tpl.js
- * Purpose: email_campaign_engine_service template
- * Stack: node
- * Tier: base
+ * File: email_campaign_engine_service.tpl.js
+ * Purpose: Template for email-campaign-engine implementation
+ * Generated for: {{PROJECT_NAME}}
  */
 
 #!/usr/bin/env node

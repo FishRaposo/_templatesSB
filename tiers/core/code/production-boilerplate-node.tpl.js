@@ -1,16 +1,8 @@
 /**
- * Template: production-boilerplate-node.tpl.js
- * Purpose: production-boilerplate-node template
- * Stack: node
- * Tier: base
+ * File: production-boilerplate-node.tpl.js
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: unknown template utilities
-# Tier: core
-# Stack: unknown
-# Category: utilities
 
 # Production Boilerplate Template (Core Tier - Node.js)
 

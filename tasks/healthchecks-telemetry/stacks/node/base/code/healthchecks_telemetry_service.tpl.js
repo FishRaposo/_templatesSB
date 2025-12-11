@@ -1,8 +1,7 @@
 /**
- * Template: healthchecks_telemetry_service.tpl.js
- * Purpose: healthchecks_telemetry_service template
- * Stack: node
- * Tier: base
+ * File: healthchecks_telemetry_service.tpl.js
+ * Purpose: Template for healthchecks-telemetry implementation
+ * Generated for: {{PROJECT_NAME}}
  */
 
 #!/usr/bin/env node

@@ -1,16 +1,8 @@
 /**
- * Template: notification_center_component.tpl.jsx
- * Purpose: notification_center_component template
- * Stack: react
- * Tier: base
+ * File: notification_center_component.tpl.tsx
+ * Purpose: Template for notification-center implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - React Stack
-# Generated: 2025-12-10
-# Purpose: Component tests
-# Tier: base
-# Stack: react
-# Category: utilities
 
 // -----------------------------------------------------------------------------
 // FILE: notification_center_component.tpl.jsx

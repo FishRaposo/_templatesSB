@@ -1,16 +1,8 @@
 /**
- * Template: auth_basic_component.tpl.tsx
- * Purpose: auth_basic_component template
- * Stack: typescript
- * Tier: base
+ * File: auth_basic_component.tpl.tsx
+ * Purpose: Template for auth-basic implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Component tests
-# Tier: base
-# Stack: unknown
-# Category: utilities
 
 // -----------------------------------------------------------------------------
 // FILE: auth_basic_component.tpl.tsx

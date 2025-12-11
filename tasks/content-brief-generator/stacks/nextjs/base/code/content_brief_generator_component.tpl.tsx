@@ -1,16 +1,8 @@
 /**
- * Template: content_brief_generator_component.tpl.tsx
- * Purpose: content_brief_generator_component template
- * Stack: typescript
- * Tier: base
+ * File: content_brief_generator_component.tpl.tsx
+ * Purpose: Template for content-brief-generator implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Component tests
-# Tier: base
-# Stack: unknown
-# Category: utilities
 
 // -----------------------------------------------------------------------------
 // FILE: content_brief_generator_component.tpl.tsx

@@ -1,16 +1,8 @@
 /**
- * Template: email_campaign_engine_component.tpl.tsx
- * Purpose: email_campaign_engine_component template
- * Stack: typescript
- * Tier: base
+ * File: email_campaign_engine_component.tpl.tsx
+ * Purpose: Template for email-campaign-engine implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Component tests
-# Tier: base
-# Stack: unknown
-# Category: utilities
 
 // -----------------------------------------------------------------------------
 // FILE: email_campaign_engine_component.tpl.tsx

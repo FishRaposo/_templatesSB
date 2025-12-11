@@ -1,9 +1,8 @@
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: mvp
-# Stack: unknown
-# Category: template
+<!--
+File: mvp-testing-examples.tpl.md
+Purpose: Template for unknown implementation
+Template Version: 1.0
+-->
 
 # MVP Tier Testing Examples
 # Purpose: Concrete examples of MVP-level testing patterns

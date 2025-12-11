@@ -1,16 +1,8 @@
 /**
- * Template: crud_module_component.tpl.tsx
- * Purpose: crud_module_component template
- * Stack: typescript
- * Tier: base
+ * File: crud_module_component.tpl.tsx
+ * Purpose: Template for crud-module implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Component tests
-# Tier: base
-# Stack: unknown
-# Category: utilities
 
 // -----------------------------------------------------------------------------
 // FILE: crud_module_component.tpl.tsx
