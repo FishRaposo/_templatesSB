@@ -1,9 +1,8 @@
-# Universal Template System - Python Stack
-# Generated: 2025-12-10
-# Purpose: Logging utilities
-# Tier: base
-# Stack: python
-# Category: utilities
+"""
+File: logging-utilities.tpl.py
+Purpose: Template for unknown implementation
+Generated for: {{PROJECT_NAME}}
+"""
 
 #!/usr/bin/env python3
 # -----------------------------------------------------------------------------

@@ -1,16 +1,8 @@
 /**
- * Template: config-management-pattern.tpl.ts
- * Purpose: config-management-pattern template
- * Stack: typescript
- * Tier: base
+ * File: config-management-pattern.tpl.ts
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Typescript Stack
-# Generated: 2025-12-10
-# Purpose: Configuration management utilities
-# Tier: base
-# Stack: typescript
-# Category: utilities
 
 // -----------------------------------------------------------------------------
 // FILE: config-management-pattern.tpl.ts

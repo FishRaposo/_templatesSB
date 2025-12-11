@@ -1,3 +1,7 @@
+// File: admin_panel_service.tpl.go
+// Purpose: Template for admin-panel implementation
+// Generated for: {{PROJECT_NAME}}
+
 // Adminpanel Service for Go
 // Generated for {{PROJECT_NAME}}
 package admin_panel

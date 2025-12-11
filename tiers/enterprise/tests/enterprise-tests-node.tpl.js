@@ -1,16 +1,8 @@
 /**
- * Template: enterprise-tests-node.tpl.js
- * Purpose: enterprise-tests-node template
- * Stack: node
- * Tier: base
+ * File: enterprise-tests-node.tpl.js
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: enterprise
-# Stack: unknown
-# Category: testing
 
 # Enterprise Node.js Testing Template
 # Purpose: Full-level enterprise testing template with comprehensive security, compliance, and resilience testing

@@ -1,9 +1,8 @@
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: unknown template utilities
-# Tier: base
-# Stack: unknown
-# Category: utilities
+<!--
+File: ADMIN-PANEL-SKELETON.tpl.md
+Purpose: Template for admin-panel implementation
+Template Version: 1.0
+-->
 
 # AdminPanel Service Skeleton
 

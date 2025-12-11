@@ -1,9 +1,8 @@
-# Universal Template System - Python Stack
-# Generated: 2025-12-10
-# Purpose: python template utilities
-# Tier: base
-# Stack: python
-# Category: utilities
+"""
+File: link_monitoring_service.tpl.py
+Purpose: Template for link-monitoring implementation
+Generated for: {{PROJECT_NAME}}
+"""
 
 # LinkMonitoring Service for Python
 # Generated for {{PROJECT_NAME}}

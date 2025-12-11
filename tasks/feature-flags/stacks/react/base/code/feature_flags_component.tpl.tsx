@@ -1,21 +1,13 @@
 /**
- * Template: admin_panel_component.tpl.jsx
- * Purpose: admin_panel_component template
- * Stack: react
- * Tier: base
+ * File: feature_flags_component.tpl.tsx
+ * Purpose: Template for feature-flags implementation
+ * Generated for: {{PROJECT_NAME}}
  */
 
-# Universal Template System - React Stack
-# Generated: 2025-12-10
-# Purpose: Component tests
-# Tier: base
-# Stack: react
-# Category: utilities
-
 // -----------------------------------------------------------------------------
-// FILE: admin_panel_component.tpl.jsx
-// PURPOSE: Admin panel component for React applications
-// USAGE: Import and adapt for admin panel functionality in React projects
+// FILE: feature_flags_component.tpl.jsx
+// PURPOSE: Feature flags component for React applications
+// USAGE: Import and adapt for feature flag functionality in React projects
 // AUTHOR: [[.Author]]
 // VERSION: [[.Version]]
 // SINCE: [[.Version]]
@@ -23,24 +15,24 @@
 
 import React, { useState, useEffect } from 'react';
 
-interface AdminPanelProps {
+interface FeatureFlagsProps {
   config?: any;
   onStatusChange?: (status: any) => void;
 }
 
-const AdminPanelComponent: React.FC<AdminPanelProps> = ({ config, onStatusChange }) => {
+const FeatureFlagsComponent: React.FC<FeatureFlagsProps> = ({ config, onStatusChange }) => {
   const [status, setStatus] = useState('loading');
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    // Initialize admin-panel service
+    // Initialize feature-flags service
     const initializeService = async () => {
       try {
         // TODO: Implement service initialization
         setStatus('ready');
       } catch (error) {
         setStatus('error');
-        console.error('Failed to initialize admin-panel:', error);
+        console.error('Failed to initialize feature-flags:', error);
       }
     };
 
@@ -49,18 +41,18 @@ const AdminPanelComponent: React.FC<AdminPanelProps> = ({ config, onStatusChange
 
   const handleExecute = async () => {
     // TODO: Implement service execution
-    console.log('Executing admin-panel...');
+    console.log('Executing feature-flags...');
   };
 
   return (
-    <div className="admin-panel-component">
-      <h3>AdminPanel</h3>
+    <div className="feature-flags-component">
+      <h3>FeatureFlags</h3>
       <p>Status: {status}</p>
       <button onClick={handleExecute} disabled={status !== 'ready'}>
-        Execute admin panel
+        Execute feature flags
       </button>
     </div>
   );
 };
 
-export default AdminPanelComponent;
+export default FeatureFlagsComponent;

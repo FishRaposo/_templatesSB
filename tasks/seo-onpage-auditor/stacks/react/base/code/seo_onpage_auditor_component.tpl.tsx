@@ -1,13 +1,13 @@
 /**
- * File: seo_rank_tracker_component.tpl.tsx
- * Purpose: Template for seo-rank-tracker implementation
+ * File: seo_onpage_auditor_component.tpl.tsx
+ * Purpose: Template for seo-onpage-auditor implementation
  * Generated for: {{PROJECT_NAME}}
  */
 
 // -----------------------------------------------------------------------------
-// FILE: seo_rank_tracker_component.tpl.tsx
-// PURPOSE: SEO rank tracker component for Next.js applications
-// USAGE: Import and adapt for SEO rank tracking functionality in Next.js projects
+// FILE: seo_onpage_auditor_component.tpl.jsx
+// PURPOSE: SEO on-page auditor component for React applications
+// USAGE: Import and adapt for SEO auditing functionality in React projects
 // AUTHOR: [[.Author]]
 // VERSION: [[.Version]]
 // SINCE: [[.Version]]
@@ -15,24 +15,24 @@
 
 import React, { useState, useEffect } from 'react';
 
-interface SeoRankTrackerProps {
+interface SeoOnpageAuditorProps {
   config?: any;
   onStatusChange?: (status: any) => void;
 }
 
-const SeoRankTrackerComponent: React.FC<SeoRankTrackerProps> = ({ config, onStatusChange }) => {
+const SeoOnpageAuditorComponent: React.FC<SeoOnpageAuditorProps> = ({ config, onStatusChange }) => {
   const [status, setStatus] = useState('loading');
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    // Initialize seo-rank-tracker service
+    // Initialize seo-onpage-auditor service
     const initializeService = async () => {
       try {
         // TODO: Implement service initialization
         setStatus('ready');
       } catch (error) {
         setStatus('error');
-        console.error('Failed to initialize seo-rank-tracker:', error);
+        console.error('Failed to initialize seo-onpage-auditor:', error);
       }
     };
 
@@ -41,18 +41,18 @@ const SeoRankTrackerComponent: React.FC<SeoRankTrackerProps> = ({ config, onStat
 
   const handleExecute = async () => {
     // TODO: Implement service execution
-    console.log('Executing seo-rank-tracker...');
+    console.log('Executing seo-onpage-auditor...');
   };
 
   return (
-    <div className="seo-rank-tracker-component">
-      <h3>SeoRankTracker</h3>
+    <div className="seo-onpage-auditor-component">
+      <h3>SeoOnpageAuditor</h3>
       <p>Status: {status}</p>
       <button onClick={handleExecute} disabled={status !== 'ready'}>
-        Execute seo rank tracker
+        Execute seo onpage auditor
       </button>
     </div>
   );
 };
 
-export default SeoRankTrackerComponent;
+export default SeoOnpageAuditorComponent;

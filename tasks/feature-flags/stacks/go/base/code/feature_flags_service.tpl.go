@@ -1,3 +1,7 @@
+// File: feature_flags_service.tpl.go
+// Purpose: Template for feature-flags implementation
+// Generated for: {{PROJECT_NAME}}
+
 // Featureflags Service for Go
 // Generated for {{PROJECT_NAME}}
 package feature_flags

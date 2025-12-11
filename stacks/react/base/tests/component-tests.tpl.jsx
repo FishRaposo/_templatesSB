@@ -1,16 +1,8 @@
 /**
- * Template: component-tests.tpl.jsx
- * Purpose: component-tests template
- * Stack: react
- * Tier: base
+ * File: component-tests.tpl.jsx
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - React Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: base
-# Stack: react
-# Category: testing
 
 // -----------------------------------------------------------------------------
 // FILE: component-tests.tpl.jsx
