@@ -1,21 +1,13 @@
 /**
- * Template: seo_onpage_auditor_component.tpl.jsx
- * Purpose: seo_onpage_auditor_component template
- * Stack: react
- * Tier: base
+ * File: landing_page_component.tpl.tsx
+ * Purpose: Template for landing-page implementation
+ * Generated for: {{PROJECT_NAME}}
  */
 
-# Universal Template System - React Stack
-# Generated: 2025-12-10
-# Purpose: Component tests
-# Tier: base
-# Stack: react
-# Category: utilities
-
 // -----------------------------------------------------------------------------
-// FILE: seo_onpage_auditor_component.tpl.jsx
-// PURPOSE: SEO on-page auditor component for React applications
-// USAGE: Import and adapt for SEO auditing functionality in React projects
+// FILE: landing_page_component.tpl.jsx
+// PURPOSE: Landing page component for React applications
+// USAGE: Import and adapt for landing page functionality in React projects
 // AUTHOR: [[.Author]]
 // VERSION: [[.Version]]
 // SINCE: [[.Version]]
@@ -23,24 +15,24 @@
 
 import React, { useState, useEffect } from 'react';
 
-interface SeoOnpageAuditorProps {
+interface LandingPageProps {
   config?: any;
   onStatusChange?: (status: any) => void;
 }
 
-const SeoOnpageAuditorComponent: React.FC<SeoOnpageAuditorProps> = ({ config, onStatusChange }) => {
+const LandingPageComponent: React.FC<LandingPageProps> = ({ config, onStatusChange }) => {
   const [status, setStatus] = useState('loading');
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    // Initialize seo-onpage-auditor service
+    // Initialize landing-page service
     const initializeService = async () => {
       try {
         // TODO: Implement service initialization
         setStatus('ready');
       } catch (error) {
         setStatus('error');
-        console.error('Failed to initialize seo-onpage-auditor:', error);
+        console.error('Failed to initialize landing-page:', error);
       }
     };
 
@@ -49,18 +41,18 @@ const SeoOnpageAuditorComponent: React.FC<SeoOnpageAuditorProps> = ({ config, on
 
   const handleExecute = async () => {
     // TODO: Implement service execution
-    console.log('Executing seo-onpage-auditor...');
+    console.log('Executing landing-page...');
   };
 
   return (
-    <div className="seo-onpage-auditor-component">
-      <h3>SeoOnpageAuditor</h3>
+    <div className="landing-page-component">
+      <h3>LandingPage</h3>
       <p>Status: {status}</p>
       <button onClick={handleExecute} disabled={status !== 'ready'}>
-        Execute seo onpage auditor
+        Execute landing page
       </button>
     </div>
   );
 };
 
-export default SeoOnpageAuditorComponent;
+export default LandingPageComponent;

@@ -1,16 +1,8 @@
 /**
- * Template: link_monitoring_component.tpl.tsx
- * Purpose: link_monitoring_component template
- * Stack: typescript
- * Tier: base
+ * File: link_monitoring_component.tpl.tsx
+ * Purpose: Template for link-monitoring implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Component tests
-# Tier: base
-# Stack: unknown
-# Category: utilities
 
 // -----------------------------------------------------------------------------
 // FILE: link_monitoring_component.tpl.tsx

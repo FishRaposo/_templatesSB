@@ -1,9 +1,8 @@
-# Universal Template System - Generic Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: base
-# Stack: generic
-# Category: testing
+<!--
+File: test-utilities-pattern.tpl.md
+Purpose: Template for unknown implementation
+Template Version: 1.0
+-->
 
 # ----------------------------------------------------------------------------- 
 # FILE: test-utilities-pattern.tpl.md

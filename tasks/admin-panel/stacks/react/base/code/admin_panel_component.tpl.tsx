@@ -1,21 +1,13 @@
 /**
- * Template: team_workspaces_component.tpl.jsx
- * Purpose: team_workspaces_component template
- * Stack: react
- * Tier: base
+ * File: admin_panel_component.tpl.tsx
+ * Purpose: Template for admin-panel implementation
+ * Generated for: {{PROJECT_NAME}}
  */
 
-# Universal Template System - React Stack
-# Generated: 2025-12-10
-# Purpose: Component tests
-# Tier: base
-# Stack: react
-# Category: utilities
-
 // -----------------------------------------------------------------------------
-// FILE: team_workspaces_component.tpl.jsx
-// PURPOSE: Team workspaces component for React applications
-// USAGE: Import and adapt for team workspace functionality in React projects
+// FILE: admin_panel_component.tpl.jsx
+// PURPOSE: Admin panel component for React applications
+// USAGE: Import and adapt for admin panel functionality in React projects
 // AUTHOR: [[.Author]]
 // VERSION: [[.Version]]
 // SINCE: [[.Version]]
@@ -23,24 +15,24 @@
 
 import React, { useState, useEffect } from 'react';
 
-interface TeamWorkspacesProps {
+interface AdminPanelProps {
   config?: any;
   onStatusChange?: (status: any) => void;
 }
 
-const TeamWorkspacesComponent: React.FC<TeamWorkspacesProps> = ({ config, onStatusChange }) => {
+const AdminPanelComponent: React.FC<AdminPanelProps> = ({ config, onStatusChange }) => {
   const [status, setStatus] = useState('loading');
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    // Initialize team-workspaces service
+    // Initialize admin-panel service
     const initializeService = async () => {
       try {
         // TODO: Implement service initialization
         setStatus('ready');
       } catch (error) {
         setStatus('error');
-        console.error('Failed to initialize team-workspaces:', error);
+        console.error('Failed to initialize admin-panel:', error);
       }
     };
 
@@ -49,18 +41,18 @@ const TeamWorkspacesComponent: React.FC<TeamWorkspacesProps> = ({ config, onStat
 
   const handleExecute = async () => {
     // TODO: Implement service execution
-    console.log('Executing team-workspaces...');
+    console.log('Executing admin-panel...');
   };
 
   return (
-    <div className="team-workspaces-component">
-      <h3>TeamWorkspaces</h3>
+    <div className="admin-panel-component">
+      <h3>AdminPanel</h3>
       <p>Status: {status}</p>
       <button onClick={handleExecute} disabled={status !== 'ready'}>
-        Execute team workspaces
+        Execute admin panel
       </button>
     </div>
   );
 };
 
-export default TeamWorkspacesComponent;
+export default AdminPanelComponent;

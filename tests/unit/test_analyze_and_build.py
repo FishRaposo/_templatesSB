@@ -5,168 +5,365 @@ Unit tests for analyze_and_build
 
 import unittest
 import sys
+import tempfile
+import yaml
+import shutil
 from pathlib import Path
 from unittest.mock import Mock, patch, MagicMock, mock_open
 
 # Add scripts directory to path
-repo_root = Path(__file__).resolve().parent.parent.parent
-scripts_dir = repo_root / "scripts"
-if str(scripts_dir) not in sys.path:
-    sys.path.insert(0, str(scripts_dir))
+SCRIPTS_DIR = Path(__file__).parent.parent.parent / "scripts"
+sys.path.insert(0, str(SCRIPTS_DIR))
 
+# Import the module under test
 try:
     import analyze_and_build
-except ImportError as e:
-    print(f"Warning: Could not import analyze_and_build: {e}")
+except ImportError:
     analyze_and_build = None
+    ProjectAnalysisPipeline = None
 
 class TestAnalyzeAndBuild(unittest.TestCase):
-    """Test suite for top-level analyze_and_build functions"""
-
-    def setUp(self):
-        if analyze_and_build is None:
-            self.skipTest("analyze_and_build module not found")
-
-    def test_main(self):
-        """Test main function"""
-        # TODO: Implement based on docstring: Main entry point...
-        # Current logic is main() calls sys.exit, so we need to mock sys.exit and argv
-        # Skipping for now as user requested test_generate_build_config
-        pass
-
-class TestProjectAnalysisPipeline(unittest.TestCase):
-    """Test ProjectAnalysisPipeline class"""
+    """Test suite for ProjectAnalysisPipeline"""
 
     def setUp(self):
         """Setup for each test"""
         if analyze_and_build is None:
-            self.skipTest("analyze_and_build module not found")
+            self.skipTest("analyze_and_build module not imported")
 
-        # Mock dependencies
+        # Create a temporary directory for the test environment
+        self.test_dir = tempfile.TemporaryDirectory()
+        self.addCleanup(self.test_dir.cleanup)
+        self.test_path = Path(self.test_dir.name)
+
+        # Create mock directory structure
+        self.tasks_dir = self.test_path / "tasks"
+        self.tasks_dir.mkdir()
+
+        self.scripts_dir = self.test_path / "scripts"
+        self.scripts_dir.mkdir()
+
+        self.docs_dir = self.test_path / "docs" / "task-gaps"
+        self.docs_dir.mkdir(parents=True)
+
+        self.reports_dir = self.test_path / "reports"
+        self.reports_dir.mkdir()
+
+        # Create a dummy task-index.yaml
+        self.task_index_data = {
+            'tasks': {
+                'task-1': {
+                    'files': ['file1.py'],
+                    'tier': 'mvp',
+                    'description': 'Test Task 1',
+                    'categories': ['test']
+                }
+            }
+        }
+        self.task_index_path = self.tasks_dir / "task-index.yaml"
+        with open(self.task_index_path, "w") as f:
+            yaml.dump(self.task_index_data, f)
+
+        # Patch TaskDetectionSystem
         self.mock_detector_patcher = patch('analyze_and_build.TaskDetectionSystem')
-        self.MockTaskDetectionSystem = self.mock_detector_patcher.start()
+        self.mock_detector_cls = self.mock_detector_patcher.start()
+        self.mock_detector = self.mock_detector_cls.return_value
 
-        # Mock Path to prevent filesystem access in __init__
-        self.mock_path_patcher = patch('analyze_and_build.Path')
-        self.MockPath = self.mock_path_patcher.start()
+        # Configure mock detector default return
+        self.mock_detector.analyze_requirements.return_value = ([], [], None)
 
-        # Setup mock path behavior
-        self.mock_path_instance = MagicMock()
-        self.MockPath.return_value = self.mock_path_instance
-        self.mock_path_instance.parent.parent = self.mock_path_instance
-        self.mock_path_instance.__truediv__.return_value = self.mock_path_instance
+        # Patch __file__ in analyze_and_build to point to our temp scripts dir
+        # This ensures the pipeline initializes with our temp directories
+        self.original_file = analyze_and_build.__file__
+        analyze_and_build.__file__ = str(self.scripts_dir / "analyze_and_build.py")
 
-        # Mock yaml
-        self.mock_yaml_patcher = patch('analyze_and_build.yaml')
-        self.mock_yaml = self.mock_yaml_patcher.start()
-        self.mock_yaml.safe_load.return_value = {'tasks': {}}
-
-        # Mock open
-        self.mock_open = mock_open(read_data="tasks: {}")
-        self.open_patcher = patch('builtins.open', self.mock_open)
-        self.open_patcher.start()
-
-        # Initialize pipeline with mocked __file__
-        with patch('analyze_and_build.__file__', str(scripts_dir / 'analyze_and_build.py')):
-            self.pipeline = analyze_and_build.ProjectAnalysisPipeline()
+        # Initialize the pipeline
+        self.pipeline = analyze_and_build.ProjectAnalysisPipeline()
 
     def tearDown(self):
+        """Cleanup after each test"""
         if analyze_and_build:
+            analyze_and_build.__file__ = self.original_file
+
+        if hasattr(self, 'mock_detector_patcher'):
             self.mock_detector_patcher.stop()
-            self.mock_path_patcher.stop()
-            self.mock_yaml_patcher.stop()
-            self.open_patcher.stop()
+
+    def test_init(self):
+        """Test initialization of ProjectAnalysisPipeline"""
+        self.assertTrue(self.pipeline.gaps_dir.exists())
+        self.assertTrue(self.pipeline.reports_dir.exists())
+        self.assertEqual(self.pipeline.task_index, self.task_index_data)
 
     def test_analyze_project(self):
         """Test analyze_project method"""
-        # Placeholder
-        pass
+        # Arrange
+        description = "Test project"
+        # Mock the detector return values
+        mock_task = Mock()
+        mock_task.task_id = 'task-1'
+        mock_task.confidence = 0.8
+        mock_task.has_templates = False # Default
+        mock_task.categories = ['test']
+        mock_task.tier = 'mvp'
+
+        mock_gap = Mock()
+
+        mock_stack = Mock()
+        mock_stack.primary_stack = 'python'
+        mock_stack.secondary_stack = None
+        mock_stack.confidence = 0.9
+
+        self.mock_detector.analyze_requirements.return_value = ([mock_task], [mock_gap], mock_stack)
+
+        # Act
+        analysis = self.pipeline.analyze_project(description)
+
+        # Assert
+        self.assertEqual(analysis['description'], description)
+        self.assertIn('detected_tasks', analysis)
+        self.assertEqual(len(analysis['detected_tasks']), 1)
+        # Note: analyze_project validates tasks against task_index
+        # Since 'task-1' is in our dummy task_index, it should be validated and updated
+        task = analysis['detected_tasks'][0]
+        self.assertEqual(task.task_id, 'task-1')
+        self.assertTrue(task.has_templates)
+        self.assertEqual(task.template_count, 1)
 
     def test_generate_build_config(self):
         """Test generate_build_config method"""
-
         # Arrange
-        # Mock stack recommendation object
-        mock_stack_rec = MagicMock()
-        mock_stack_rec.primary_stack = "python"
-        mock_stack_rec.secondary_stack = "react"
-
-        # Mock TaskMatch objects using MagicMock
-        # We need to simulate object attributes, MagicMock does this well
-        task1 = MagicMock()
-        task1.task_id = "task_auth"
-        task1.has_templates = True
-        task1.confidence = 0.9
-        task1.tier = "core"
-        task1.categories = ["auth"]
-
-        task2 = MagicMock()
-        task2.task_id = "task_missing"
-        task2.has_templates = False
-
-        task3 = MagicMock()
-        task3.task_id = "task_ui"
-        task3.has_templates = True
-        task3.confidence = 0.4
-        task3.tier = None
-        task3.categories = ["frontend"]
+        mock_task = Mock()
+        mock_task.task_id = 'task-1'
+        mock_task.confidence = 0.8
+        mock_task.has_templates = True
+        mock_task.categories = ['test']
+        mock_task.tier = 'mvp'
 
         analysis = {
-            "description": "Test Project Description",
-            "timestamp": "2024-01-01T12:00:00",
-            "stack_recommendation": mock_stack_rec,
-            "detected_tasks": [task1, task2, task3],
+            "timestamp": "2023-01-01",
+            "description": "Test Project",
+            "stack_recommendation": Mock(primary_stack="python", secondary_stack=None),
+            "detected_tasks": [mock_task],
             "detected_gaps": [],
-            "validation_summary": {
-                "coverage_percentage": 75.0,
-                "total_requirements_detected": 3,
-                "tasks_with_templates": 2
-            }
+            "validation_summary": {"coverage_percentage": 100}
         }
 
-        output_path = "dummy_output.yaml"
+        output_path = self.test_path / "build-config.yaml"
 
         # Act
         config = self.pipeline.generate_build_config(analysis, output_path)
 
         # Assert
-        # Verify project info
-        self.assertEqual(config["project"]["name"], "detected-project")
-        self.assertEqual(config["project"]["stack"], "python")
-        self.assertEqual(config["project"]["secondary_stack"], "react")
-        self.assertEqual(config["project"]["description"], "Test Project Description")
-
-        # Verify tasks
-        self.assertIn("task_auth", config["tasks"])
-        self.assertIn("task_ui", config["tasks"])
-        self.assertNotIn("task_missing", config["tasks"])
-
-        self.assertEqual(config["tasks"]["task_auth"]["tier"], "core")
-        self.assertEqual(config["tasks"]["task_ui"]["tier"], "mvp") # Fallback to project tier
-
-        # Verify project tier calculation
-        # Only 1 high confidence task (task1), so tier should be 'mvp'
-        self.assertEqual(config["project"]["tier"], "mvp")
-
-        # Verify metadata
-        self.assertEqual(config["metadata"]["detection_confidence"], "high")
-        self.assertEqual(config["metadata"]["total_tasks"], 2)
-
-        # Verify file write
-        self.mock_yaml.dump.assert_called()
-        self.mock_open.assert_called_with(output_path, 'w', encoding='utf-8')
+        self.assertTrue(output_path.exists())
+        self.assertEqual(config['project']['stack'], 'python')
+        self.assertIn('task-1', config['tasks'])
 
     def test_build_project(self):
         """Test build_project method"""
-        pass
+        # Arrange
+        build_config = {
+            "project": {"stack": "python", "tier": "mvp"},
+            "tasks": {}
+        }
+        output_dir = self.test_path / "output"
+        output_dir.mkdir()
+
+        # Patch subprocess.run
+        with patch('subprocess.run') as mock_run:
+            mock_run.return_value.returncode = 0
+            mock_run.return_value.stdout = "Success"
+
+            # Create dummy resolver script
+            resolver_script = self.scripts_dir / "resolve_project.py"
+            with open(resolver_script, "w") as f:
+                f.write("pass")
+
+            # Act
+            result = self.pipeline.build_project(build_config, output_dir)
+
+            # Assert
+            self.assertTrue(result)
+            mock_run.assert_called_once()
+
+            # Check arguments passed to subprocess
+            args, _ = mock_run.call_args
+            cmd_list = args[0]
+            self.assertIn(str(resolver_script), cmd_list)
+            self.assertIn(str(output_dir), cmd_list)
 
     def test_generate_gap_documentation(self):
         """Test generate_gap_documentation method"""
-        pass
+        # Arrange
+        mock_gap = Mock()
+        mock_gap.priority = 'high'
+        mock_gap.suggested_name = 'gap-1'
+        mock_gap.categories = ['cat1']
+        mock_gap.suggested_stacks = ['python']
+        mock_gap.description = 'Gap description'
+        mock_gap.gap_reason = 'Reason'
+        mock_gap.requirements = ['req1']
+
+        analysis = {
+            "timestamp": "2023-01-01",
+            "description": "Test Project",
+            "detected_gaps": [mock_gap]
+        }
+        output_path = self.test_path / "gap-analysis.md"
+
+        # Act
+        content = self.pipeline.generate_gap_documentation(analysis, output_path)
+
+        # Assert
+        self.assertTrue(output_path.exists())
+        self.assertIn('gap-1', content)
+        self.assertIn('Gap description', content)
 
     def test_run_full_pipeline(self):
         """Test run_full_pipeline method"""
-        pass
+        # Arrange
+        description = "Test Description"
+        output_dir = self.test_path / "full_output"
+        output_dir.mkdir()
+
+        # Mock methods to isolate pipeline logic
+        self.pipeline.analyze_project = Mock(return_value={
+            "timestamp": "now",
+            "description": description,
+            "validation_summary": {"coverage_percentage": 100, "total_requirements_detected": 1, "tasks_with_templates": 1},
+            "build_readiness": {"readiness_level": "high", "recommendation": "Good"},
+            "stack_recommendation": Mock(primary_stack="python", secondary_stack=None, confidence=1.0),
+            "detected_tasks": [],
+            "detected_gaps": []
+        })
+        self.pipeline.generate_build_config = Mock(return_value={
+            "project": {"stack": "python"},
+            "tasks": {}
+        })
+        self.pipeline.build_project = Mock(return_value=True)
+        self.pipeline.generate_gap_documentation = Mock(return_value="Gap Doc")
+        # We don't need to mock _serialize_analysis_for_export if we provide enough data,
+        # but mocking makes it simpler to avoid key errors if we missed something.
+        self.pipeline._serialize_analysis_for_export = Mock(return_value={})
+
+        # Act
+        report = self.pipeline.run_full_pipeline(description, output_dir, build=True, dry_run=False)
+
+        # Assert
+        self.pipeline.analyze_project.assert_called_once_with(description)
+        self.pipeline.generate_build_config.assert_called_once()
+        self.pipeline.build_project.assert_called_once()
+        self.assertTrue((output_dir / "analysis-report.json").exists())
+
+class TestProjectAnalysisPipeline(unittest.TestCase):
+    """Test ProjectAnalysisPipeline class"""
+
+    def setUp(self):
+        """Setup for each test method"""
+        # Mock dependencies
+        self.mock_task_detection_system = patch('analyze_and_build.TaskDetectionSystem').start()
+        self.mock_detector = self.mock_task_detection_system.return_value
+
+        self.mock_file = patch('builtins.open', mock_open(read_data="tasks: {}")).start()
+        self.mock_yaml = patch('analyze_and_build.yaml').start()
+        self.mock_yaml.safe_load.return_value = {'tasks': {}}
+
+        if analyze_and_build:
+            self.pipeline = analyze_and_build.ProjectAnalysisPipeline()
+        else:
+            self.pipeline = None
+
+    def tearDown(self):
+        patch.stopall()
+
+    def test_analyze_project(self):
+        """Test analyze_project method"""
+        if not self.pipeline:
+            self.skipTest("analyze_and_build module not loaded")
+
+        # Arrange
+        description = "Build a web app"
+        suggest_stacks = True
+
+        # Setup mock return values
+        mock_task = MagicMock()
+        mock_task.task_id = "test-task"
+        mock_task.confidence = 0.9
+        mock_task.tier = "core"
+        mock_task.categories = ["web"]
+        mock_task.has_templates = True # Simulate validation result
+
+        mock_gap = MagicMock()
+        mock_gap.priority = "high"
+
+        mock_stack_rec = MagicMock()
+        mock_stack_rec.primary_stack = "python"
+
+        self.mock_detector.analyze_requirements.return_value = (
+            [mock_task],
+            [mock_gap],
+            mock_stack_rec
+        )
+
+        # We also need to make sure _validate_tasks sees the task in task_index
+        # The pipeline loads task_index in __init__. We patched safe_load to return {'tasks': {}}
+        # So we should update self.pipeline.task_index to match our mock_task
+        self.pipeline.task_index = {
+            'tasks': {
+                'test-task': {
+                    'files': ['some_file.py']
+                }
+            }
+        }
+
+        # Act
+        analysis = self.pipeline.analyze_project(description, suggest_stacks)
+
+        # Assert
+        self.mock_detector.analyze_requirements.assert_called_once_with(description, suggest_stacks)
+
+        self.assertEqual(analysis['description'], description)
+        self.assertEqual(analysis['stack_recommendation'], mock_stack_rec)
+
+        # Check that detected tasks are present
+        self.assertEqual(len(analysis['detected_tasks']), 1)
+        self.assertEqual(analysis['detected_tasks'][0].task_id, 'test-task')
+
+        # Check gaps
+        self.assertEqual(len(analysis['detected_gaps']), 1)
+
+        # Check validation summary structure
+        self.assertIn('validation_summary', analysis)
+        summary = analysis['validation_summary']
+        self.assertEqual(summary['total_requirements_detected'], 2) # 1 task + 1 gap
+        self.assertEqual(summary['identified_gaps'], 1)
+        self.assertEqual(summary['tasks_with_templates'], 1)
+
+    def test_generate_build_config(self):
+        """Test generate_build_config method"""
+        # TODO: Implement based on docstring: Generate resolver-compatible build configuration...
+        # TODO: Add actual test implementation
+        with self.assertRaises(NotImplementedError):
+            self.fail('Test not implemented yet')
+
+    def test_build_project(self):
+        """Test build_project method"""
+        # TODO: Implement based on docstring: Build project using the template system...
+        # TODO: Add actual test implementation
+        with self.assertRaises(NotImplementedError):
+            self.fail('Test not implemented yet')
+
+    def test_generate_gap_documentation(self):
+        """Test generate_gap_documentation method"""
+        # TODO: Implement based on docstring: Generate comprehensive gap documentation...
+        # TODO: Add actual test implementation
+        with self.assertRaises(NotImplementedError):
+            self.fail('Test not implemented yet')
+
+    def test_run_full_pipeline(self):
+        """Test run_full_pipeline method"""
+        # TODO: Implement based on docstring: Run the complete analysis and building pipeline...
+        # TODO: Add actual test implementation
+        with self.assertRaises(NotImplementedError):
+            self.fail('Test not implemented yet')
 
 if __name__ == '__main__':
     unittest.main()

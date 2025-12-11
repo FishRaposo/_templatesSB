@@ -1,9 +1,8 @@
-# Universal Template System - Python Stack
-# Generated: 2025-12-10
-# Purpose: python template utilities
-# Tier: base
-# Stack: python
-# Category: utilities
+"""
+File: rag_pipeline_service.tpl.py
+Purpose: Template for rag-pipeline implementation
+Generated for: {{PROJECT_NAME}}
+"""
 
 # RagPipeline Service for Python
 # Generated for {{PROJECT_NAME}}

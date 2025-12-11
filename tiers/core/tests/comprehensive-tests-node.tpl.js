@@ -1,16 +1,8 @@
 /**
- * Template: comprehensive-tests-node.tpl.js
- * Purpose: comprehensive-tests-node template
- * Stack: node
- * Tier: base
+ * File: comprehensive-tests-node.tpl.js
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: core
-# Stack: unknown
-# Category: testing
 
 # Comprehensive Node.js Testing Template
 # Purpose: Core-level testing template with unit, integration, and feature tests for Node.js applications

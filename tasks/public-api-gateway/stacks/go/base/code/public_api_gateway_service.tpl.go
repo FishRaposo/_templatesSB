@@ -1,3 +1,7 @@
+// File: public_api_gateway_service.tpl.go
+// Purpose: Template for public-api-gateway implementation
+// Generated for: {{PROJECT_NAME}}
+
 // Publicapigateway Service for Go
 // Generated for {{PROJECT_NAME}}
 package public_api_gateway

@@ -1,9 +1,8 @@
-# Universal Template System - Python Stack
-# Generated: 2025-12-10
-# Purpose: Logging utilities
-# Tier: base
-# Stack: python
-# Category: utilities
+"""
+File: audit_logging_service.tpl.py
+Purpose: Template for audit-logging implementation
+Generated for: {{PROJECT_NAME}}
+"""
 
 # AuditLogging Service for Python
 # Generated for {{PROJECT_NAME}}

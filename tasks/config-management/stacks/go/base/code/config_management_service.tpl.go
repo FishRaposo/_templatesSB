@@ -1,3 +1,7 @@
+// File: config_management_service.tpl.go
+// Purpose: Template for config-management implementation
+// Generated for: {{PROJECT_NAME}}
+
 // Configmanagement Service for Go
 // Generated for {{PROJECT_NAME}}
 package config_management

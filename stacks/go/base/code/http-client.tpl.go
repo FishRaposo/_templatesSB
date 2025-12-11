@@ -1,14 +1,6 @@
-// Template: http-client.tpl.go
-// Purpose: http-client template
-// Stack: go
-// Tier: base
-
-# Universal Template System - Go Stack
-# Generated: 2025-12-10
-# Purpose: HTTP client utilities
-# Tier: base
-# Stack: go
-# Category: utilities
+// File: http-client.tpl.go
+// Purpose: Template for unknown implementation
+// Generated for: {{PROJECT_NAME}}
 
 // -----------------------------------------------------------------------------
 // FILE: http-client.tpl.go

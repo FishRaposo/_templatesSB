@@ -1,9 +1,8 @@
-# Universal Template System - Sql Stack
-# Generated: 2025-12-10
-# Purpose: sql template utilities
-# Tier: base
-# Stack: sql
-# Category: template
+<!--
+File: CI-EXAMPLES-python.tpl.md
+Purpose: Template for unknown implementation
+Template Version: 1.0
+-->
 
 # SQL CI/CD Examples - {{PROJECT_NAME}}
 

@@ -1,16 +1,8 @@
 /**
- * Template: enterprise-tests-react.tpl.jsx
- * Purpose: enterprise-tests-react template
- * Stack: react
- * Tier: base
+ * File: enterprise-tests-react.tpl.jsx
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: enterprise
-# Stack: unknown
-# Category: testing
 
 # Enterprise React Testing Template
 # Purpose: Full-level enterprise testing template with comprehensive security, compliance, and resilience testing
