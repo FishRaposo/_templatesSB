@@ -26,13 +26,45 @@ class TestListTasksByCategory(unittest.TestCase):
 
     def setUp(self):
         """Setup for each test"""
-        # TODO: Add common setup logic
-        pass
+        # Sample task index for testing
+        self.sample_task_index = {
+            'virtual_categories': {
+                'cat1': {
+                    'display_name': 'Category 1',
+                    'description': 'Description 1',
+                    'tasks': ['task1', 'task2']
+                },
+                'cat2': {
+                    'display_name': 'Category 2',
+                    'tasks': ['task3']
+                }
+            },
+            'tasks': {
+                'task1': {
+                    'description': 'Task 1 Description',
+                    'categories': ['cat1'],
+                    'allowed_stacks': ['python', 'node']
+                },
+                'task2': {
+                    'description': 'Task 2 Description',
+                    'categories': ['cat1'],
+                    'allowed_stacks': ['go']
+                },
+                'task3': {
+                    'description': 'Task 3 Description',
+                    'categories': ['cat2'],
+                    'allowed_stacks': ['python']
+                }
+            }
+        }
+
+        # Patch sys.stdout to capture output
+        self.stdout_patcher = patch('sys.stdout', new_callable=StringIO)
+        self.mock_stdout = self.stdout_patcher.start()
 
     def tearDown(self):
         """Cleanup after each test"""
-        # TODO: Add cleanup logic
-        pass
+        self.stdout_patcher.stop()
 
     def test_load_task_index(self):
         """Test load_task_index function"""
