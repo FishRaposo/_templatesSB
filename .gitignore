@@ -57,3 +57,8 @@ reference-projects/**
 *.tmp
 *.temp
 .cache/
+
+# Go build artifacts
+root/
+pkg/
+go.sum
