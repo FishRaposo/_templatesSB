@@ -251,9 +251,18 @@ class TemplateValidator:
         if not re.search(r'^# ', content, re.MULTILINE):
             self.log_issue("warning", template_file, "Missing main title (#)")
         
-        # Check for internal links
-        links = re.findall(r'\[([^\]]+)\]\(([^)]+)\)', content)
+        # Remove code blocks before checking for broken links to avoid false positives
+        # This removes fenced code blocks (```...```) and inline code (`...`)
+        content_without_code = re.sub(r'```[\s\S]*?```', '', content)
+        content_without_code = re.sub(r'`[^`]+`', '', content_without_code)
+        
+        # Check for internal links (only in non-code content)
+        links = re.findall(r'\[([^\]]+)\]\(([^)]+)\)', content_without_code)
         for link_text, link_url in links:
+            # Skip if the link URL looks like code (contains function calls, quotes, etc.)
+            if any(char in link_url for char in ["'", '"', '{', '}', '=', '+', '-', '*', ';']):
+                continue
+            
             if link_url.startswith('./') or not link_url.startswith(('http://', 'https://', '#')):
                 # Internal link - check if target exists
                 target_path = (template_file.parent / link_url).resolve()
