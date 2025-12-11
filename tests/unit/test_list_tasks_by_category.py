@@ -7,12 +7,15 @@ TODO: Review and implement actual test logic
 
 import unittest
 import sys
+import io
+import contextlib
 from pathlib import Path
 from unittest.mock import Mock, patch, MagicMock
 
 # Add scripts directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "scripts"))
 
+module_name = 'list_tasks_by_category'
 try:
     import list_tasks_by_category
 except ImportError as e:
@@ -24,12 +27,25 @@ class TestListTasksByCategory(unittest.TestCase):
 
     def setUp(self):
         """Setup for each test"""
-        # TODO: Add common setup logic
-        pass
+        self.task_index = {
+            'virtual_categories': {
+                'test-cat': {
+                    'display_name': 'Test Category',
+                    'description': 'Test Description',
+                    'tasks': ['task-1']
+                }
+            },
+            'tasks': {
+                'task-1': {
+                    'description': 'Task 1 Description',
+                    'categories': ['cat1'],
+                    'allowed_stacks': ['stack1']
+                }
+            }
+        }
 
     def tearDown(self):
         """Cleanup after each test"""
-        # TODO: Add cleanup logic
         pass
 
     def test_load_task_index(self):
@@ -41,15 +57,34 @@ class TestListTasksByCategory(unittest.TestCase):
 
     def test_list_tasks_by_category(self):
         """Test list_tasks_by_category function"""
-        # TODO: Implement based on docstring: Display tasks organized by virtual category...
-        # Arrange
-        task_index = 'test_value'
-        show_details = 'test_value'
+        if list_tasks_by_category is None:
+            self.skipTest("Module not available")
 
-        # Act & Assert
-        # TODO: Add actual test implementation
-        with self.assertRaises(NotImplementedError):
-            self.fail('Test not implemented yet')
+        # Test without details
+        f = io.StringIO()
+        with contextlib.redirect_stdout(f):
+            list_tasks_by_category.list_tasks_by_category(self.task_index, show_details=False)
+
+        output = f.getvalue()
+
+        self.assertIn("Tasks by Virtual Category", output)
+        self.assertIn("Test Category", output)
+        self.assertIn("Test Description", output)
+        self.assertIn("task-1", output)
+        self.assertIn("Task 1 Description", output)
+        # Should NOT contain details
+        self.assertNotIn("Categories:", output)
+        self.assertNotIn("Stacks:", output)
+
+        # Test with details
+        f = io.StringIO()
+        with contextlib.redirect_stdout(f):
+            list_tasks_by_category.list_tasks_by_category(self.task_index, show_details=True)
+
+        output = f.getvalue()
+
+        self.assertIn("Categories: cat1", output)
+        self.assertIn("Stacks: stack1", output)
 
     def test_list_category_summary(self):
         """Test list_category_summary function"""
