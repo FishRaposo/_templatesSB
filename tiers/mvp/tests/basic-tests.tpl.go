@@ -1,14 +1,6 @@
-// Template: basic-tests.tpl.go
-// Purpose: basic-tests template
-// Stack: go
-// Tier: base
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: mvp
-# Stack: unknown
-# Category: testing
+// File: basic-tests.tpl.go
+// Purpose: Template for unknown implementation
+// Generated for: {{PROJECT_NAME}}
 
 # Basic Testing Template (MVP Tier)
 

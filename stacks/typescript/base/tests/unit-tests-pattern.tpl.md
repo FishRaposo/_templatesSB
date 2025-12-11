@@ -1,9 +1,8 @@
-# Universal Template System - Typescript Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: base
-# Stack: typescript
-# Category: testing
+<!--
+File: unit-tests-pattern.tpl.md
+Purpose: Template for unknown implementation
+Template Version: 1.0
+-->
 
 # TypeScript Unit Testing Pattern
 

@@ -1,9 +1,8 @@
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: core
-# Stack: unknown
-# Category: testing
+"""
+File: comprehensive-tests-python.tpl.py
+Purpose: Template for unknown implementation
+Generated for: {{PROJECT_NAME}}
+"""
 
 # Comprehensive Python Testing Template
 # Purpose: Core-level testing template with unit, integration, and feature tests for Python applications

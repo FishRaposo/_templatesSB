@@ -1,9 +1,8 @@
-# Universal Template System - Python Stack
-# Generated: 2025-12-10
-# Purpose: python template utilities
-# Tier: base
-# Stack: python
-# Category: utilities
+"""
+File: user_profile_management_service.tpl.py
+Purpose: Template for user-profile-management implementation
+Generated for: {{PROJECT_NAME}}
+"""
 
 # UserProfileManagement Service for Python
 # Generated for {{PROJECT_NAME}}

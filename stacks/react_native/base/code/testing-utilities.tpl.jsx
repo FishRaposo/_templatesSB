@@ -1,16 +1,8 @@
 /**
- * Template: testing-utilities.tpl.jsx
- * Purpose: testing-utilities template
- * Stack: react
- * Tier: base
+ * File: testing-utilities.tpl.jsx
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - React_Native Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: base
-# Stack: react_native
-# Category: utilities
 
 // -----------------------------------------------------------------------------
 // FILE: testing-utilities.tpl.jsx

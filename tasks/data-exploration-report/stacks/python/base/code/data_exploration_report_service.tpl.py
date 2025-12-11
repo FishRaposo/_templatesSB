@@ -1,9 +1,8 @@
-# Universal Template System - Python Stack
-# Generated: 2025-12-10
-# Purpose: python template utilities
-# Tier: base
-# Stack: python
-# Category: utilities
+"""
+File: data_exploration_report_service.tpl.py
+Purpose: Template for data-exploration-report implementation
+Generated for: {{PROJECT_NAME}}
+"""
 
 # DataExplorationReport Service for Python
 # Generated for {{PROJECT_NAME}}

@@ -1,3 +1,7 @@
+// File: rest_api_service_service.tpl.go
+// Purpose: Template for rest-api-service implementation
+// Generated for: {{PROJECT_NAME}}
+
 // Restapiservice Service for Go
 // Generated for {{PROJECT_NAME}}
 package rest_api_service

@@ -1,16 +1,8 @@
 /**
- * Template: minimal-boilerplate-react.tpl.jsx
- * Purpose: minimal-boilerplate-react template
- * Stack: react
- * Tier: base
+ * File: minimal-boilerplate-react.tpl.jsx
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: unknown template utilities
-# Tier: mvp
-# Stack: unknown
-# Category: utilities
 
 # Minimal Boilerplate Template (MVP Tier - React)
 

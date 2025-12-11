@@ -1,16 +1,8 @@
 /**
- * Template: error-handling.tpl.jsx
- * Purpose: error-handling template
- * Stack: react
- * Tier: base
+ * File: error-handling.tpl.jsx
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - React_Native Stack
-# Generated: 2025-12-10
-# Purpose: Error handling utilities
-# Tier: base
-# Stack: react_native
-# Category: utilities
 
 // -----------------------------------------------------------------------------
 // FILE: error-handling.tpl.jsx
