@@ -1,9 +1,8 @@
-# Universal Template System - Go Stack
-# Generated: 2025-12-10
-# Purpose: Error handling utilities
-# Tier: base
-# Stack: go
-# Category: template
+<!--
+File: ERROR-HANDLING.tpl.md
+Purpose: Template for unknown implementation
+Template Version: 1.0
+-->
 
 # Go Error Handling Patterns
 

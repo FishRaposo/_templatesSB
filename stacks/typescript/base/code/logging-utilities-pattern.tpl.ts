@@ -1,16 +1,8 @@
 /**
- * Template: logging-utilities-pattern.tpl.ts
- * Purpose: logging-utilities-pattern template
- * Stack: typescript
- * Tier: base
+ * File: logging-utilities-pattern.tpl.ts
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Typescript Stack
-# Generated: 2025-12-10
-# Purpose: Logging utilities
-# Tier: base
-# Stack: typescript
-# Category: utilities
 
 // -----------------------------------------------------------------------------
 // FILE: logging-utilities-pattern.tpl.ts

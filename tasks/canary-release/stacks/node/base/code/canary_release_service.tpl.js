@@ -1,16 +1,8 @@
 /**
- * Template: canary_release_service.tpl.js
- * Purpose: canary_release_service template
- * Stack: node
- * Tier: base
+ * File: canary_release_service.tpl.js
+ * Purpose: Template for canary-release implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Node Stack
-# Generated: 2025-12-10
-# Purpose: node template utilities
-# Tier: base
-# Stack: node
-# Category: utilities
 
 #!/usr/bin/env node
 /**

@@ -1,9 +1,8 @@
-# Universal Template System - Next Stack
-# Generated: 2025-12-10
-# Purpose: next template utilities
-# Tier: base
-# Stack: next
-# Category: template
+<!--
+File: ARCHITECTURE-react.tpl.md
+Purpose: Template for unknown implementation
+Template Version: 1.0
+-->
 
 # Next.js Architecture Guide - {{PROJECT_NAME}}
 

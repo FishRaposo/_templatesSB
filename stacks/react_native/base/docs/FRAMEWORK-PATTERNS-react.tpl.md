@@ -1,9 +1,8 @@
-# Universal Template System - React_Native Stack
-# Generated: 2025-12-10
-# Purpose: react_native template utilities
-# Tier: base
-# Stack: react_native
-# Category: template
+<!--
+File: FRAMEWORK-PATTERNS-react.tpl.md
+Purpose: Template for unknown implementation
+Template Version: 1.0
+-->
 
 # React Native Framework Patterns - {{PROJECT_NAME}}
 

@@ -1,9 +1,8 @@
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Configuration management utilities
-# Tier: base
-# Stack: unknown
-# Category: utilities
+<!--
+File: CONFIG-MANAGEMENT-SKELETON.tpl.md
+Purpose: Template for config-management implementation
+Template Version: 1.0
+-->
 
 # ConfigManagement Service Skeleton
 

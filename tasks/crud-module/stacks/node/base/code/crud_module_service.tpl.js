@@ -1,16 +1,8 @@
 /**
- * Template: crud_module_service.tpl.js
- * Purpose: crud_module_service template
- * Stack: node
- * Tier: base
+ * File: crud_module_service.tpl.js
+ * Purpose: Template for crud-module implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Node Stack
-# Generated: 2025-12-10
-# Purpose: node template utilities
-# Tier: base
-# Stack: node
-# Category: utilities
 
 #!/usr/bin/env node
 /**

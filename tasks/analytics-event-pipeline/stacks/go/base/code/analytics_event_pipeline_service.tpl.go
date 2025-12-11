@@ -1,3 +1,7 @@
+// File: analytics_event_pipeline_service.tpl.go
+// Purpose: Template for analytics-event-pipeline implementation
+// Generated for: {{PROJECT_NAME}}
+
 // Analyticseventpipeline Service for Go
 // Generated for {{PROJECT_NAME}}
 package analytics_event_pipeline

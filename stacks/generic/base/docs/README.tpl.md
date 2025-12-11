@@ -1,9 +1,8 @@
-# Universal Template System - Generic Stack
-# Generated: 2025-12-10
-# Purpose: generic template utilities
-# Tier: base
-# Stack: generic
-# Category: template
+<!--
+File: README.tpl.md
+Purpose: Template for unknown implementation
+Template Version: 1.0
+-->
 
 # [PROJECT_NAME]
 

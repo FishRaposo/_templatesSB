@@ -1,16 +1,8 @@
 /**
- * Template: error-handling.tpl.js
- * Purpose: error-handling template
- * Stack: node
- * Tier: base
+ * File: error-handling.tpl.js
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Node Stack
-# Generated: 2025-12-10
-# Purpose: Error handling utilities
-# Tier: base
-# Stack: node
-# Category: utilities
 
 #!/usr/bin/env node
 /**

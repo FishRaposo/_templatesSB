@@ -1,9 +1,8 @@
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: unknown template utilities
-# Tier: mvp
-# Stack: unknown
-# Category: utilities
+<!--
+File: minimal-boilerplate-generic.tpl.md
+Purpose: Template for unknown implementation
+Template Version: 1.0
+-->
 
 # Minimal Boilerplate Template (MVP Tier - Generic)
 

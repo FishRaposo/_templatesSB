@@ -1,3 +1,7 @@
+// File: web_scraping_service.tpl.go
+// Purpose: Template for web-scraping implementation
+// Generated for: {{PROJECT_NAME}}
+
 // Webscraping Service for Go
 // Generated for {{PROJECT_NAME}}
 package web_scraping
