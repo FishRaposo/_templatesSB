@@ -1,16 +1,8 @@
 /**
- * Template: auth_oauth_component.tpl.tsx
- * Purpose: auth_oauth_component template
- * Stack: typescript
- * Tier: base
+ * File: auth_oauth_component.tpl.tsx
+ * Purpose: Template for auth-oauth implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Component tests
-# Tier: base
-# Stack: unknown
-# Category: utilities
 
 // -----------------------------------------------------------------------------
 // FILE: auth_oauth_component.tpl.tsx

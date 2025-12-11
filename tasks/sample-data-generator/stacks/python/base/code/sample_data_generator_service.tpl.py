@@ -1,9 +1,8 @@
-# Universal Template System - Python Stack
-# Generated: 2025-12-10
-# Purpose: python template utilities
-# Tier: base
-# Stack: python
-# Category: utilities
+"""
+File: sample_data_generator_service.tpl.py
+Purpose: Template for sample-data-generator implementation
+Generated for: {{PROJECT_NAME}}
+"""
 
 # SampleDataGenerator Service for Python
 # Generated for {{PROJECT_NAME}}

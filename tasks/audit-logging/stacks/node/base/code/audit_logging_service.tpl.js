@@ -1,16 +1,8 @@
 /**
- * Template: audit_logging_service.tpl.js
- * Purpose: audit_logging_service template
- * Stack: node
- * Tier: base
+ * File: audit_logging_service.tpl.js
+ * Purpose: Template for audit-logging implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Node Stack
-# Generated: 2025-12-10
-# Purpose: Logging utilities
-# Tier: base
-# Stack: node
-# Category: utilities
 
 #!/usr/bin/env node
 /**

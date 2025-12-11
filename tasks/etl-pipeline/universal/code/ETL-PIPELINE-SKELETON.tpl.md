@@ -1,9 +1,8 @@
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: unknown template utilities
-# Tier: base
-# Stack: unknown
-# Category: utilities
+<!--
+File: ETL-PIPELINE-SKELETON.tpl.md
+Purpose: Template for etl-pipeline implementation
+Template Version: 1.0
+-->
 
 # EtlPipeline Service Skeleton
 

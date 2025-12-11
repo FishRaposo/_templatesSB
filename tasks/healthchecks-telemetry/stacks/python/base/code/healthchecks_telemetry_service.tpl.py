@@ -1,9 +1,8 @@
-# Universal Template System - Python Stack
-# Generated: 2025-12-10
-# Purpose: python template utilities
-# Tier: base
-# Stack: python
-# Category: utilities
+"""
+File: healthchecks_telemetry_service.tpl.py
+Purpose: Template for healthchecks-telemetry implementation
+Generated for: {{PROJECT_NAME}}
+"""
 
 # HealthchecksTelemetry Service for Python
 # Generated for {{PROJECT_NAME}}
