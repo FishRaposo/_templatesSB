@@ -16,6 +16,15 @@ from datetime import datetime
 from stack_config import get_all_stacks, get_all_tiers
 from blueprint_config import get_available_blueprints, validate_blueprint, get_blueprint_summary
 
+# Import pydantic models for schema validation
+try:
+    sys.path.insert(0, str(Path(__file__).parent.parent))
+    from template_schema.schema import BlueprintMetadata, TemplateMetadata, TaskMetadata
+    PYDANTIC_AVAILABLE = True
+except ImportError:
+    PYDANTIC_AVAILABLE = False
+    print("Warning: Pydantic not available. Schema validation will be skipped.")
+
 # Ensure consistent UTF-8 output on Windows consoles to avoid encoding errors when printing symbols/emojis
 try:
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -356,6 +365,38 @@ class TemplateValidator:
         
         print("[OK] Tier overlay counts validated")
     
+    def validate_schema_compliance(self):
+        """Validate blueprint and template metadata against pydantic schemas"""
+        if not PYDANTIC_AVAILABLE:
+            print("\nSkipping schema validation (pydantic not available)")
+            return
+        
+        print("\nValidating Schema Compliance...")
+        print("-" * 40)
+        
+        # Validate blueprint metadata files
+        blueprints_dir = self.templates_root / "blueprints"
+        if blueprints_dir.exists():
+            for blueprint_dir in blueprints_dir.iterdir():
+                if not blueprint_dir.is_dir():
+                    continue
+                
+                meta_file = blueprint_dir / "blueprint.meta.yaml"
+                if meta_file.exists():
+                    try:
+                        with open(meta_file, 'r', encoding='utf-8') as f:
+                            data = yaml.safe_load(f)
+                        
+                        # Validate against BlueprintMetadata model
+                        BlueprintMetadata(**data)
+                        print(f"  [OK] {blueprint_dir.name}/blueprint.meta.yaml")
+                        
+                    except Exception as e:
+                        self.log_issue("error", str(meta_file), 
+                                     f"Schema validation failed: {str(e)}")
+        
+        print("[OK] Schema validation complete")
+    
     def validate_blueprints(self):
         """Validate blueprint system integrity and configuration"""
         print("\nValidating Blueprint System...")
@@ -484,6 +525,10 @@ def main():
         validator.validate_system_map_references()
         validator.validate_tier_overlay_counts()
         validator.validate_blueprints()
+        
+        # Run schema validation if --full flag is provided
+        if args.full:
+            validator.validate_schema_compliance()
         
         # Generate report
         report = validator.generate_report(args.report)
