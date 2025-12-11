@@ -1,9 +1,8 @@
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: unknown template utilities
-# Tier: base
-# Stack: unknown
-# Category: utilities
+<!--
+File: PUBLIC-API-GATEWAY-SKELETON.tpl.md
+Purpose: Template for public-api-gateway implementation
+Template Version: 1.0
+-->
 
 # PublicApiGateway Service Skeleton
 

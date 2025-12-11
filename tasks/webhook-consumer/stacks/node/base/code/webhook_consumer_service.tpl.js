@@ -1,16 +1,8 @@
 /**
- * Template: webhook_consumer_service.tpl.js
- * Purpose: webhook_consumer_service template
- * Stack: node
- * Tier: base
+ * File: webhook_consumer_service.tpl.js
+ * Purpose: Template for webhook-consumer implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Node Stack
-# Generated: 2025-12-10
-# Purpose: node template utilities
-# Tier: base
-# Stack: node
-# Category: utilities
 
 # WebhookConsumer Service for Node
 # Generated for {{PROJECT_NAME}}

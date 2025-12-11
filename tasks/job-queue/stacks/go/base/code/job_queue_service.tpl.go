@@ -1,3 +1,7 @@
+// File: job_queue_service.tpl.go
+// Purpose: Template for job-queue implementation
+// Generated for: {{PROJECT_NAME}}
+
 // Jobqueue Service for Go
 // Generated for {{PROJECT_NAME}}
 package job_queue

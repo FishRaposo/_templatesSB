@@ -1,16 +1,8 @@
 /**
- * Template: config_management_service.tpl.js
- * Purpose: config_management_service template
- * Stack: node
- * Tier: base
+ * File: config_management_service.tpl.js
+ * Purpose: Template for config-management implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Node Stack
-# Generated: 2025-12-10
-# Purpose: Configuration management utilities
-# Tier: base
-# Stack: node
-# Category: utilities
 
 #!/usr/bin/env node
 /**

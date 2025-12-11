@@ -1,16 +1,8 @@
 /**
- * Template: production-boilerplate-typescript.tpl.ts
- * Purpose: production-boilerplate-typescript template
- * Stack: typescript
- * Tier: base
+ * File: production-boilerplate-typescript.tpl.ts
+ * Purpose: Template for unknown implementation
+ * Generated for: {{PROJECT_NAME}}
  */
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: unknown template utilities
-# Tier: core
-# Stack: unknown
-# Category: utilities
 
 # Production Boilerplate Template (Core Tier - TypeScript)
 

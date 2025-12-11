@@ -1,14 +1,6 @@
-// Template: production-boilerplate-go.tpl.go
-// Purpose: production-boilerplate-go template
-// Stack: go
-// Tier: base
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: unknown template utilities
-# Tier: core
-# Stack: unknown
-# Category: utilities
+// File: production-boilerplate-go.tpl.go
+// Purpose: Template for unknown implementation
+// Generated for: {{PROJECT_NAME}}
 
 # Production Boilerplate Template (Core Tier - Go)
 

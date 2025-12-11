@@ -1,9 +1,8 @@
-# Universal Template System - Python Stack
-# Generated: 2025-12-10
-# Purpose: Configuration management utilities
-# Tier: base
-# Stack: python
-# Category: utilities
+"""
+File: config_management_service.tpl.py
+Purpose: Template for config-management implementation
+Generated for: {{PROJECT_NAME}}
+"""
 
 # ConfigManagement Service for Python
 # Generated for {{PROJECT_NAME}}

@@ -1,21 +1,13 @@
 /**
- * Template: docs_site_component.tpl.jsx
- * Purpose: docs_site_component template
- * Stack: react
- * Tier: base
+ * File: team_workspaces_component.tpl.tsx
+ * Purpose: Template for team-workspaces implementation
+ * Generated for: {{PROJECT_NAME}}
  */
 
-# Universal Template System - React Stack
-# Generated: 2025-12-10
-# Purpose: Component tests
-# Tier: base
-# Stack: react
-# Category: utilities
-
 // -----------------------------------------------------------------------------
-// FILE: docs_site_component.tpl.jsx
-// PURPOSE: Documentation site component for React applications
-// USAGE: Import and adapt for documentation site functionality in React projects
+// FILE: team_workspaces_component.tpl.jsx
+// PURPOSE: Team workspaces component for React applications
+// USAGE: Import and adapt for team workspace functionality in React projects
 // AUTHOR: [[.Author]]
 // VERSION: [[.Version]]
 // SINCE: [[.Version]]
@@ -23,24 +15,24 @@
 
 import React, { useState, useEffect } from 'react';
 
-interface DocsSiteProps {
+interface TeamWorkspacesProps {
   config?: any;
   onStatusChange?: (status: any) => void;
 }
 
-const DocsSiteComponent: React.FC<DocsSiteProps> = ({ config, onStatusChange }) => {
+const TeamWorkspacesComponent: React.FC<TeamWorkspacesProps> = ({ config, onStatusChange }) => {
   const [status, setStatus] = useState('loading');
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    // Initialize docs-site service
+    // Initialize team-workspaces service
     const initializeService = async () => {
       try {
         // TODO: Implement service initialization
         setStatus('ready');
       } catch (error) {
         setStatus('error');
-        console.error('Failed to initialize docs-site:', error);
+        console.error('Failed to initialize team-workspaces:', error);
       }
     };
 
@@ -49,18 +41,18 @@ const DocsSiteComponent: React.FC<DocsSiteProps> = ({ config, onStatusChange }) 
 
   const handleExecute = async () => {
     // TODO: Implement service execution
-    console.log('Executing docs-site...');
+    console.log('Executing team-workspaces...');
   };
 
   return (
-    <div className="docs-site-component">
-      <h3>DocsSite</h3>
+    <div className="team-workspaces-component">
+      <h3>TeamWorkspaces</h3>
       <p>Status: {status}</p>
       <button onClick={handleExecute} disabled={status !== 'ready'}>
-        Execute docs site
+        Execute team workspaces
       </button>
     </div>
   );
 };
 
-export default DocsSiteComponent;
+export default TeamWorkspacesComponent;

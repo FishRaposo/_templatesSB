@@ -1,14 +1,6 @@
-// Template: comprehensive-tests-go.tpl.go
-// Purpose: comprehensive-tests-go template
-// Stack: go
-// Tier: base
-
-# Universal Template System - Unknown Stack
-# Generated: 2025-12-10
-# Purpose: Testing utilities
-# Tier: core
-# Stack: unknown
-# Category: testing
+// File: comprehensive-tests-go.tpl.go
+// Purpose: Template for unknown implementation
+// Generated for: {{PROJECT_NAME}}
 
 # Comprehensive Go Testing Template
 # Purpose: Core-level testing template with unit, integration, and feature tests for Go applications
