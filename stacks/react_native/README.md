@@ -19,6 +19,12 @@ The React Native stack provides a complete foundation for building cross-platfor
 - Expo for simplified development
 - Comprehensive testing with Jest
 
+## 🎯 Supported Tiers
+
+- MVP
+- Core
+- Enterprise
+
 ---
 
 ## 📚 Complete Documentation Library

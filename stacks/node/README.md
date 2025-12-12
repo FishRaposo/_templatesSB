@@ -19,6 +19,12 @@ The Node.js stack provides a complete foundation for building javascript runtime
 - Rich ecosystem with 1M+ packages
 - Jest testing framework
 
+## 🎯 Supported Tiers
+
+- MVP
+- Core
+- Enterprise
+
 ---
 
 ## 📚 Complete Documentation Library

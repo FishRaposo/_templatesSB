@@ -19,6 +19,12 @@ The SQL stack provides a complete foundation for building database schemas, migr
 - Multi-database compatibility
 - Data validation and constraints
 
+## 🎯 Supported Tiers
+
+- MVP
+- Core
+- Enterprise
+
 ---
 
 ## 📚 Complete Documentation Library

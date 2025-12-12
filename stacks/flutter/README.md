@@ -19,6 +19,12 @@ The Flutter stack provides a complete foundation for building cross-platform mob
 - State management solutions
 - Comprehensive testing framework
 
+## 🎯 Supported Tiers
+
+- MVP
+- Core
+- Enterprise
+
 ---
 
 ## 📚 Complete Documentation Library

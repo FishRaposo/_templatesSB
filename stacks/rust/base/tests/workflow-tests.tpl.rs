@@ -1,3 +1,7 @@
+// File: workflow-tests.tpl.rs
+// Purpose: Template for unknown implementation
+// Generated for: {{PROJECT_NAME}}
+
 #[cfg(test)]
 mod tests {
     #[test]

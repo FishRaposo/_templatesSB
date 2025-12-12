@@ -19,6 +19,12 @@ The TypeScript stack provides a complete, type-safe foundation for building scal
 - **Type Safety**: Interfaces, generics, decorators, and advanced type features
 - **Developer Experience**: Hot reloading, debugging, and comprehensive testing
 
+## 🎯 Supported Tiers
+
+- MVP
+- Core
+- Enterprise
+
 ---
 
 ## 📚 Complete Documentation Library

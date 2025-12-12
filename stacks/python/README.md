@@ -19,6 +19,12 @@ The Python stack provides a complete foundation for building python development 
 - Package management with pip/poetry
 - Type hints and modern Python features
 
+## 🎯 Supported Tiers
+
+- MVP
+- Core
+- Enterprise
+
 ---
 
 ## 📚 Complete Documentation Library

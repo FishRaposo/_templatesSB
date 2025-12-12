@@ -19,6 +19,12 @@ The R stack provides a complete foundation for building statistical computing an
 - Package management with CRAN
 - Comprehensive testing with testthat
 
+## 🎯 Supported Tiers
+
+- MVP
+- Core
+- Enterprise
+
 ---
 
 ## 📚 Complete Documentation Library

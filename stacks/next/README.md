@@ -19,6 +19,12 @@ The Next.js stack provides a complete foundation for building full-stack react f
 - Built-in CSS and Sass support
 - Comprehensive deployment options
 
+## 🎯 Supported Tiers
+
+- MVP
+- Core
+- Enterprise
+
 ---
 
 ## 📚 Complete Documentation Library

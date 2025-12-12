@@ -25,7 +25,7 @@ Use the project generation scripts:
 
 ```bash
 # Generate reference project
-python scripts/generate-reference-projects.py
+python scripts/generate_reference_projects.py
 
 # Or use setup-project.py for specific stack/tier
 python scripts/setup-project.py --manual-stack python --manual-tier mvp

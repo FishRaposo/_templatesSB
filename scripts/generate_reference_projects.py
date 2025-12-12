@@ -8,12 +8,71 @@ import os
 from pathlib import Path
 
 # Stack configurations
-STACKS = ['flutter', 'react_native', 'react', 'next', 'node', 'go', 'python', 'r', 'sql', 'generic', 'typescript']
+STACKS = ['flutter', 'react_native', 'react', 'next', 'node', 'go', 'python', 'r', 'sql', 'generic', 'typescript', 'rust']
 TIERS = ['mvp', 'core', 'enterprise']
+
+def create_rust_project(project_path: Path, tier: str):
+    """Create Rust reference project"""
+    project_path.mkdir(parents=True, exist_ok=True)
+
+    package_name = f"{tier}_rust_reference"
+
+    cargo_toml = f"""[package]
+name = "{package_name}"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+"""
+
+    main_rs = f"""fn main() {{
+    println!("Hello from {tier.title()} Rust Project!");
+}}
+"""
+
+    smoke_test = """#[test]
+fn smoke_test() {
+    assert!(true);
+}
+"""
+
+    env_example = f"""# {tier.title()} Rust Environment Configuration
+# Copy this file to .env and update with your values
+
+APP_ENV={tier}
+"""
+
+    readme = f"""# {tier.title()} Rust Reference Project
+
+This is a {tier} tier Rust reference project.
+
+## Quick Start
+
+```bash
+cargo run
+```
+
+## Testing
+
+```bash
+cargo test
+```
+"""
+
+    (project_path / 'src').mkdir(parents=True, exist_ok=True)
+    (project_path / 'tests').mkdir(parents=True, exist_ok=True)
+
+    (project_path / 'Cargo.toml').write_text(cargo_toml, encoding='utf-8')
+    (project_path / 'src' / 'main.rs').write_text(main_rs, encoding='utf-8')
+    (project_path / 'tests' / 'smoke_test.rs').write_text(smoke_test, encoding='utf-8')
+    (project_path / '.env.example').write_text(env_example, encoding='utf-8')
+    (project_path / 'README.md').write_text(readme, encoding='utf-8')
 
 def create_flutter_project(project_path: Path, tier: str):
     """Create Flutter reference project"""
     project_path.mkdir(parents=True, exist_ok=True)
+    (project_path / 'lib').mkdir(parents=True, exist_ok=True)
+    (project_path / 'test').mkdir(parents=True, exist_ok=True)
     
     # main.dart
     main_dart = f"""import 'package:flutter/material.dart';
@@ -49,7 +108,7 @@ class MyHomePage extends StatelessWidget {{
     # widget_test.dart
     test_dart = f"""import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:reference_app/main.dart';
+import 'package:{tier}_flutter_reference/main.dart';
 
 void main() {{
   testWidgets('{tier.title()} Flutter smoke test', (WidgetTester tester) async {{
@@ -158,8 +217,8 @@ dependencies:
   uses-material-design: true
 """
     
-    (project_path / 'main.dart').write_text(main_dart)
-    (project_path / 'widget_test.dart').write_text(test_dart)
+    (project_path / 'lib' / 'main.dart').write_text(main_dart)
+    (project_path / 'test' / 'widget_test.dart').write_text(test_dart)
     (project_path / 'pubspec.yaml').write_text(pubspec_yaml)
     (project_path / 'README.md').write_text(readme)
 
@@ -3033,11 +3092,12 @@ app.use((err: Error, req: express.Request, res: express.Response, next: express.
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`🚀 TypeScript server running on port ${{PORT}}`);
+  console.log(`🚀 TypeScript server running on port ${PORT}`);
 });
 
 export default app;
-""".format(tier=tier)
+"""
+    main_ts = main_ts.replace('{tier}', tier)
     
     # Test setup file
     test_setup = """import 'jest';
@@ -3091,7 +3151,8 @@ describe('TypeScript App', () => {
     expect(response.body.timestamp).toBeDefined();
   });
 });
-""".format(tier=tier)
+"""
+    app_test_ts = app_test_ts.replace('{tier}', tier)
     
     # Environment example
     env_example = """# Application
@@ -3248,6 +3309,8 @@ def generate_all_reference_projects():
                     create_generic_project(project_path, tier)
                 elif stack == 'typescript':
                     create_typescript_project(project_path, tier)
+                elif stack == 'rust':
+                    create_rust_project(project_path, tier)
                 print(f"    ✅ Created successfully")
             except Exception as e:
                 print(f"    ❌ Failed: {e}")

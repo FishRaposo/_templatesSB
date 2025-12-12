@@ -19,6 +19,12 @@ The React stack provides a complete foundation for building modern frontend deve
 - Create React App scaffolding
 - Comprehensive testing with Jest/React Testing Library
 
+## 🎯 Supported Tiers
+
+- MVP
+- Core
+- Enterprise
+
 ---
 
 ## 📚 Complete Documentation Library

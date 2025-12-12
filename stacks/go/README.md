@@ -19,6 +19,12 @@ The Go stack provides a complete foundation for building high-performance system
 - Gin, Echo, and Fiber web frameworks
 - Built-in testing and benchmarking
 
+## 🎯 Supported Tiers
+
+- MVP
+- Core
+- Enterprise
+
 ---
 
 ## 📚 Complete Documentation Library

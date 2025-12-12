@@ -372,13 +372,53 @@ stack_patterns:
           tiers: ["core", "enterprise"]
 
   rust:
-    base_template: "stacks/rust/base/docs/README.tpl.md"
+    base_template: "stacks/rust/base/docs/PROJECT-STRUCTURE.tpl.md"
     base:
       docs:
+        - file: "FRAMEWORK-PATTERNS-rust.tpl.md"
+          version: "2.0"
+          purpose: "Rust framework patterns and conventions"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "TESTING-EXAMPLES-rust.tpl.md"
+          version: "2.0"
+          purpose: "Rust testing examples and patterns"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "ARCHITECTURE-rust.tpl.md"
+          version: "2.0"
+          purpose: "Rust architecture patterns"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "CI-EXAMPLES-rust.tpl.md"
+          version: "2.0"
+          purpose: "Rust CI/CD examples"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "PROJECT-STRUCTURE.tpl.md"
+          version: "1.0"
+          purpose: "Rust project structure"
+          tiers: ["mvp", "core", "enterprise"]
+
         - file: "README.tpl.md"
           version: "1.0"
           purpose: "Rust project README and documentation"
           tiers: ["mvp", "core", "enterprise"]
+
+        - file: "PACKAGE-MANAGEMENT.tpl.md"
+          version: "1.0"
+          purpose: "Rust package management and dependencies"
+          tiers: ["mvp", "core", "enterprise"]
+
+        - file: "PERFORMANCE.tpl.md"
+          version: "1.0"
+          purpose: "Rust performance optimization and profiling"
+          tiers: ["core", "enterprise"]
+
+        - file: "ERROR-HANDLING.tpl.md"
+          version: "1.0"
+          purpose: "Rust error handling and exception management"
+          tiers: ["core", "enterprise"]
 
   flutter:
     base_template: "stacks/flutter/base/docs/PROJECT-STRUCTURE.tpl.md"
@@ -843,7 +883,7 @@ template_metadata:
 
 # Stack Configuration
 stack_configuration:
-  available_stacks: ["flutter", "python", "node", "react", "react_native", "next", "go", "r", "sql", "generic", "typescript"]
+  available_stacks: ["flutter", "python", "node", "react", "react_native", "next", "go", "r", "sql", "generic", "typescript", "rust"]
   default_stack: "flutter"
   base_templates:
     flutter: "stacks/flutter/base/docs/PROJECT-STRUCTURE.tpl.md"
@@ -857,6 +897,7 @@ stack_configuration:
     sql: "stacks/sql/base/docs/PROJECT-STRUCTURE.tpl.md"
     generic: "stacks/generic/base/docs/README.tpl.md"
     typescript: "stacks/typescript/base/docs/README.tpl.md"
+    rust: "stacks/rust/base/docs/PROJECT-STRUCTURE.tpl.md"
   stack_dependencies:
     flutter: []
     python: []
@@ -866,6 +907,7 @@ stack_configuration:
     go: []
     generic: []  # Technology-agnostic, no dependencies
     typescript: ["node"]  # Builds on Node.js patterns
+    rust: []
 
 # Testing Templates Configuration
 testing_templates:
@@ -881,6 +923,7 @@ testing_templates:
     - "stacks/next/base/tests/test-base-scaffold.tpl.jsx"
     - "stacks/sql/base/tests/test-base-scaffold.tpl.py"
     - "stacks/r/base/tests/test-base-scaffold.tpl.py"
+    - "stacks/rust/base/tests/test-base-scaffold.tpl.rs"
   
   core:
     - "tiers/core/tests/comprehensive-tests.tpl.go"
@@ -894,6 +937,7 @@ testing_templates:
     - "stacks/next/base/tests/test-base-scaffold.tpl.jsx"
     - "stacks/sql/base/tests/test-base-scaffold.tpl.py"
     - "stacks/r/base/tests/test-base-scaffold.tpl.py"
+    - "stacks/rust/base/tests/test-base-scaffold.tpl.rs"
   
   enterprise:
     - "tiers/enterprise/tests/enterprise-tests.tpl.go"
@@ -907,6 +951,7 @@ testing_templates:
     - "stacks/next/base/tests/test-base-scaffold.tpl.jsx"
     - "stacks/sql/base/tests/test-base-scaffold.tpl.py"
     - "stacks/r/base/tests/test-base-scaffold.tpl.py"
+    - "stacks/rust/base/tests/test-base-scaffold.tpl.rs"
 
 # AI Agent Configuration
 agent_configuration:

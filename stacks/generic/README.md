@@ -19,6 +19,12 @@ The Generic stack provides a complete foundation for building technology-agnosti
 - Stack-independent documentation
 - Customizable scaffolding
 
+## 🎯 Supported Tiers
+
+- MVP
+- Core
+- Enterprise
+
 ---
 
 ## 📚 Complete Documentation Library

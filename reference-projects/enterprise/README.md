@@ -15,5 +15,10 @@ python scripts/setup-project.py --manual-tier enterprise --manual-stack <stack>
 - go
 - flutter
 - react
+- react_native
 - next
 - typescript
+- r
+- sql
+- generic
+- rust
