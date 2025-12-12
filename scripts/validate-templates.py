@@ -25,6 +25,18 @@ except ImportError:
     PYDANTIC_AVAILABLE = False
     print("Warning: Pydantic not available. Schema validation will be skipped.")
 
+try:
+    from validate_features_and_workflows import validate_features_and_workflows
+    FEATURES_WORKFLOWS_VALIDATOR_AVAILABLE = True
+except Exception:
+    FEATURES_WORKFLOWS_VALIDATOR_AVAILABLE = False
+
+try:
+    from validate_feature_and_workflow_tests import validate as validate_feature_and_workflow_tests
+    FEATURE_WORKFLOW_TESTS_VALIDATOR_AVAILABLE = True
+except Exception:
+    FEATURE_WORKFLOW_TESTS_VALIDATOR_AVAILABLE = False
+
 # Ensure consistent UTF-8 output on Windows consoles to avoid encoding errors when printing symbols/emojis
 try:
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -240,7 +252,10 @@ class TemplateValidator:
             if (template_file.suffix == '.md' or template_file.name.endswith('.tpl.md')) and ('/tests/' in str(template_file) or '\\tests\\' in str(template_file) or str(template_file).find('tests') > 0):
                 valid_headers.extend(['//', '/**', '///'])
 
-            if not content.lstrip().startswith(tuple(valid_headers)):
+            if template_file.suffix in ['.yaml', '.yml']:
+                valid_headers = []
+
+            if valid_headers and not content.lstrip().startswith(tuple(valid_headers)):
                 self.log_issue("warning", template_file, "Missing header comment")
                 self.stats["structure_issues"] += 1
             
@@ -413,6 +428,59 @@ class TemplateValidator:
         
         print("[OK] Schema validation complete")
     
+    def validate_features_and_workflows(self):
+        if not FEATURES_WORKFLOWS_VALIDATOR_AVAILABLE:
+            print("\nSkipping FEATURES/WORKFLOWS validation")
+            return
+
+        print("\nValidating FEATURES/WORKFLOWS YAML..." )
+        print("-" * 40)
+
+        errors, warnings = validate_features_and_workflows(self.templates_root)
+        for w in warnings:
+            self.log_issue("warning", w.file, w.message)
+        for e in errors:
+            self.log_issue("error", e.file, e.message)
+
+        print("[OK] FEATURES/WORKFLOWS validation complete")
+
+    def validate_feature_and_workflow_tests(self):
+        if not FEATURE_WORKFLOW_TESTS_VALIDATOR_AVAILABLE:
+            print("\nSkipping feature/workflow test coverage validation")
+            return
+
+        print("\nValidating feature/workflow test coverage...")
+        print("-" * 40)
+
+        generic_base = self.templates_root / "stacks" / "generic" / "base"
+        features_path = generic_base / "docs" / "FEATURES.yaml"
+        workflows_path = generic_base / "docs" / "WORKFLOWS.yaml"
+
+        for stack in get_all_stacks():
+            if stack == "generic":
+                continue
+
+            stack_base = self.templates_root / "stacks" / stack / "base"
+            tests_dir = stack_base / "tests"
+            if not tests_dir.exists():
+                continue
+
+            try:
+                errors, warnings = validate_feature_and_workflow_tests(
+                    root=stack_base,
+                    features_path=features_path,
+                    workflows_path=workflows_path,
+                    tests_dir=tests_dir,
+                )
+            except Exception as e:
+                self.log_issue("error", str(tests_dir), f"Feature/workflow test coverage validation error: {e}")
+                continue
+
+            for w in warnings:
+                self.log_issue("warning", w.file, w.message)
+            for e in errors:
+                self.log_issue("error", e.file, e.message)
+
     def validate_blueprints(self):
         """Validate blueprint system integrity and configuration"""
         print("\nValidating Blueprint System...")
@@ -545,6 +613,8 @@ def main():
         # Run schema validation if --full flag is provided
         if args.full:
             validator.validate_schema_compliance()
+            validator.validate_features_and_workflows()
+            validator.validate_feature_and_workflow_tests()
         
         # Generate report
         report = validator.generate_report(args.report)

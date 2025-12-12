@@ -1,0 +1,47 @@
+- id: "wf_onboarding_create_first_note"
+  name: "Onboarding: Create First Note"
+  tier: "core"
+  goal: "Take a brand-new user from signup to having at least one saved note."
+  actors:
+    - "end_user"
+    - "auth_service"
+    - "notes_service"
+  trigger:
+    type: "user_action"
+    description: "User completes signup and sees the welcome screen"
+  preconditions:
+    - "User account created"
+    - "User has not created any notes yet"
+  success_criteria:
+    - "User has at least one note saved"
+    - "Onboarding banner no longer shown on next launch"
+  failure_criteria:
+    - "User abandons before creating a note"
+    - "User encounters an error saving a note"
+  critical_failure_cases:
+    - "Server error during note saving must not create partial data"
+  path:
+    happy_path:
+      - step: "show_welcome_screen"
+        description: "Display welcome message and CTA to create first note"
+        uses_features:
+          - "feature_notes_save"
+      - step: "navigate_to_notes"
+        description: "Navigate to notes list"
+        uses_features:
+          - "feature_notes_save"
+      - step: "create_note"
+        description: "User creates and saves a note"
+        uses_features:
+          - "feature_notes_save"
+    alt_paths:
+      - id: "save_error"
+        description: "Server error during note saving"
+        handling_strategy:
+          - "Show retriable error with 'Try again'"
+          - "Persist draft locally if possible"
+  involved_features:
+    - "feature_notes_save"
+  involved_services:
+    - "auth"
+    - "notes"
