@@ -27,6 +27,21 @@ import yaml
 # Add the templates directory to the path
 sys.path.append(str(Path(__file__).parent.parent))
 
+try:
+    from stack_config import get_all_stacks
+except ImportError:
+    from scripts.stack_config import get_all_stacks
+
+STACK_ALIASES = {
+    'nextjs': 'next',
+    'agnostic': 'generic'
+}
+
+TIER_ALIASES = {
+    'full': 'enterprise',
+    'all': 'enterprise'
+}
+
 @dataclass
 class TaskMatch:
     """Represents a matched task with confidence score"""
@@ -67,6 +82,12 @@ class TaskDetectionSystem:
         self.keyword_mappings = self._build_keyword_mappings()
         self.category_keywords = self._build_category_keywords()
         self.stack_keywords = self._build_stack_keywords()
+
+    def _canonical_stack(self, stack: str) -> str:
+        return STACK_ALIASES.get(stack, stack)
+
+    def _canonical_tier(self, tier: str) -> str:
+        return TIER_ALIASES.get(tier, tier)
         
     def _load_task_index(self) -> Dict:
         """Load the comprehensive task index"""
@@ -196,11 +217,14 @@ class TaskDetectionSystem:
             'node': ['node', 'nodejs', 'express', 'javascript', 'typescript'],
             'go': ['go', 'golang', 'gorilla', 'gin'],
             'react': ['react', 'jsx', 'component', 'hooks'],
-            'nextjs': ['nextjs', 'next', 'ssr', 'static'],
+            'next': ['nextjs', 'next', 'ssr', 'static'],
             'flutter': ['flutter', 'dart', 'mobile', 'cross-platform'],
             'sql': ['sql', 'database', 'postgres', 'mysql', 'query'],
             'r': ['r', 'statistics', 'analysis', 'shiny'],
-            'agnostic': ['language', 'framework', 'platform', 'generic']
+            'generic': ['agnostic', 'language', 'framework', 'platform', 'generic'],
+            'typescript': ['typescript', 'ts'],
+            'rust': ['rust', 'cargo'],
+            'react_native': ['react native', 'reactnative', 'expo']
         }
     
     def _extract_keywords(self, text: str) -> Set[str]:
@@ -222,7 +246,8 @@ class TaskDetectionSystem:
             r'\b(user profile|billing stripe|oauth integration|admin panel)\b',
             r'\b(seo audit|keyword research|rank tracker|content brief)\b',
             r'\b(llm prompt|rag pipeline|agentic workflow|code refactor)\b',
-            r'\b(project bootstrap|docs site|sample data|crud module)\b'
+            r'\b(project bootstrap|docs site|sample data|crud module)\b',
+            r'\b(react native)\b'
         ]
         
         for pattern in patterns:
@@ -337,7 +362,7 @@ class TaskDetectionSystem:
                     categories=task_data.get('categories', []),
                     confidence=confidence,
                     matched_keywords=matched_keywords,
-                    tier=task_data.get('recommended_tier', {}).get('basic', 'core')
+                    tier=self._canonical_tier(task_data.get('recommended_tier', {}).get('basic', 'core'))
                 )
                 matched_tasks.append(match)
         
@@ -358,16 +383,7 @@ class TaskDetectionSystem:
         """Recommend optimal stacks based on detected requirements"""
         
         # Stack scoring based on detected tasks and requirements
-        stack_scores = {
-            'python': 0,
-            'node': 0,
-            'go': 0,
-            'react': 0,
-            'nextjs': 0,
-            'flutter': 0,
-            'sql': 0,
-            'r': 0
-        }
+        stack_scores = {stack: 0.0 for stack in get_all_stacks()}
         
         reasoning = []
         text_lower = text.lower()
@@ -378,14 +394,16 @@ class TaskDetectionSystem:
             allowed_stacks = task_data.get('allowed_stacks', [])
             
             for stack in allowed_stacks:
-                if stack in stack_scores:
-                    stack_scores[stack] += task.confidence * 2
+                canonical_stack = self._canonical_stack(stack)
+                if canonical_stack in stack_scores:
+                    stack_scores[canonical_stack] += task.confidence * 2
         
         # Score based on gaps
         for gap in gaps:
             for stack in gap.suggested_stacks:
-                if stack in stack_scores:
-                    stack_scores[stack] += 0.5  # Moderate boost for gap requirements
+                canonical_stack = self._canonical_stack(stack)
+                if canonical_stack in stack_scores:
+                    stack_scores[canonical_stack] += 0.5  # Moderate boost for gap requirements
         
         # Score based on direct keyword mentions
         for keyword in keywords:
@@ -416,7 +434,7 @@ class TaskDetectionSystem:
             reasoning.append("React is ideal for component-based frontend applications")
         
         if any(word in text_lower for word in ['ssr', 'static', 'seo', 'marketing']):
-            stack_scores['nextjs'] += 0.8
+            stack_scores['next'] += 0.8
             reasoning.append("Next.js provides SSR and SEO optimization")
         
         if any(word in text_lower for word in ['database', 'sql', 'query', 'postgres']):
@@ -641,8 +659,8 @@ class TaskDetectionSystem:
                         suggested_name=pattern['suggested_task'],
                         description=pattern['description'],
                         categories=pattern['categories'],
-                        suggested_stacks=pattern['stacks'],
-                        suggested_tier=pattern['tier'],
+                        suggested_stacks=[self._canonical_stack(s) for s in pattern['stacks']],
+                        suggested_tier=self._canonical_tier(pattern['tier']),
                         requirements=pattern['requirements'],
                         gap_reason=f"Detected keywords: {', '.join(pattern['keywords'])}",
                         priority=pattern['priority']
@@ -685,8 +703,8 @@ class TaskDetectionSystem:
                             suggested_name=pattern['suggested_task'],
                             description=pattern['description'],
                             categories=pattern['categories'],
-                            suggested_stacks=pattern['stacks'],
-                            suggested_tier=pattern['tier'],
+                            suggested_stacks=[self._canonical_stack(s) for s in pattern['stacks']],
+                            suggested_tier=self._canonical_tier(pattern['tier']),
                             requirements=pattern['requirements'],
                             gap_reason=f"Detected high-value keyword: '{keyword}'",
                             priority=pattern['priority']

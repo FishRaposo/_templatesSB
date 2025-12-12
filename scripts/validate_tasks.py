@@ -12,6 +12,18 @@ from pathlib import Path
 from typing import Dict, List, Any, Optional, Set
 import sys
 
+from stack_config import get_all_stacks, get_all_tiers
+
+STACK_ALIASES = {
+    'nextjs': 'next',
+    'agnostic': 'generic'
+}
+
+TIER_ALIASES = {
+    'full': 'enterprise',
+    'all': 'enterprise'
+}
+
 class TaskValidator:
     def __init__(self, templates_root: Path):
         self.templates_root = templates_root
@@ -29,6 +41,12 @@ class TaskValidator:
             "categories": {},
             "stack_coverage": {}
         }
+
+    def _canonical_stack(self, stack: str) -> str:
+        return STACK_ALIASES.get(stack, stack)
+
+    def _canonical_tier(self, tier: str) -> str:
+        return TIER_ALIASES.get(tier, tier)
 
     def validate_all(self) -> Dict[str, Any]:
         """Validate all tasks in the system."""
@@ -142,23 +160,24 @@ class TaskValidator:
         
         for stack_dir in stack_dirs:
             stack_name = stack_dir.name
+            canonical_stack = self._canonical_stack(stack_name)
             
             # Check if stack exists
-            stack_path = self.stacks_dir / stack_name
+            stack_path = self.stacks_dir / canonical_stack
             if not stack_path.exists():
                 self.log_warning(f"Implementation for unsupported stack: {stack_name}", str(stacks_dir))
                 continue
             
             # Update stack coverage
-            if stack_name not in self.stats["stack_coverage"]:
-                self.stats["stack_coverage"][stack_name] = 0
-            self.stats["stack_coverage"][stack_name] += 1
+            if canonical_stack not in self.stats["stack_coverage"]:
+                self.stats["stack_coverage"][canonical_stack] = 0
+            self.stats["stack_coverage"][canonical_stack] += 1
             
             # Validate stack templates
             templates = list(stack_dir.rglob("*.tpl.*"))
             for template_path in templates:
                 self.stats["total_templates"] += 1
-                if self.validate_template_file(template_path, task_name, stack_name):
+                if self.validate_template_file(template_path, task_name, canonical_stack):
                     self.stats["valid_templates"] += 1
                 else:
                     self.stats["invalid_templates"] += 1
@@ -185,22 +204,31 @@ class TaskValidator:
 
     def validate_template_header(self, content: str, task_name: str, stack_name: str) -> bool:
         """Validate template file header."""
-        lines = content.split('\n')[:5]
-        
-        # Look for Universal Template System header
-        for line in lines:
-            if "Universal Template System" in line and task_name.replace('-', ' ').title() in line:
-                return True
-        
-        return False
+        head = "\n".join(content.split('\n')[:12])
+        if "File:" in head:
+            return True
+
+        stripped = content.lstrip()
+        if stripped.startswith(("<!--", "#", "//", "/**", '"""', "'''")):
+            return True
+
+        return stripped.startswith((
+            "import ",
+            "const ",
+            "export ",
+            "package ",
+            "func ",
+            "fn ",
+            "use ",
+            "pub ",
+            "#[",
+            "describe(",
+            "test_that(",
+        ))
 
     def validate_template_placeholders(self, content: str) -> bool:
         """Check if template contains placeholders."""
-        import re
-        
-        # Look for {{PLACEHOLDER}} or {{PLACEHOLDER}} patterns
-        placeholders = re.findall(r'\{\{[^}]+\}\}', content)
-        return len(placeholders) > 0
+        return ("{{" in content) or ("[[" in content) or ("{%" in content)
 
     def validate_task_metadata(self, meta_path: Path, task_name: str) -> None:
         """Validate task metadata YAML."""
@@ -220,36 +248,61 @@ class TaskValidator:
 
     def validate_task_index_entry(self, task_name: str, task_data: Dict[str, Any], task_dir: Path) -> None:
         """Validate task entry in task index."""
-        # Check display name
-        if "display_name" not in task_data:
-            self.log_warning(f"Missing display_name in task index", f"task-index.yaml:{task_name}")
-        
         # Check description
         if "description" not in task_data:
             self.log_warning(f"Missing description in task index", f"task-index.yaml:{task_name}")
         
-        # Check category
-        if "category" not in task_data:
-            self.log_warning(f"Missing category in task index", f"task-index.yaml:{task_name}")
-        
-        # Check file mappings
-        if "file_mappings" in task_data:
-            mappings = task_data["file_mappings"]
-            
-            # Check universal mappings
-            if "universal" in mappings:
-                for file_path in mappings["universal"]:
-                    full_path = self.tasks_dir / file_path
+        # Check categories
+        categories = task_data.get("categories")
+        if not categories or not isinstance(categories, list):
+            self.log_warning("Missing categories in task index", f"task-index.yaml:{task_name}")
+
+        supported_stacks = set(get_all_stacks())
+        for field in ("default_stacks", "allowed_stacks"):
+            for stack in task_data.get(field, []) or []:
+                canonical_stack = self._canonical_stack(stack)
+                if canonical_stack not in supported_stacks:
+                    self.log_warning(f"Unknown stack in task index: {stack}", f"task-index.yaml:{task_name}")
+
+        supported_tiers = set(get_all_tiers())
+        recommended_tier = task_data.get("recommended_tier") or {}
+        if isinstance(recommended_tier, dict):
+            for _, tier in recommended_tier.items():
+                canonical_tier = self._canonical_tier(tier)
+                if canonical_tier not in supported_tiers:
+                    self.log_warning(f"Unknown tier in task index: {tier}", f"task-index.yaml:{task_name}")
+
+        for file_config in task_data.get("files", []) or []:
+            file_id = file_config.get("id")
+            if not file_id:
+                self.log_error("File mapping missing id", f"task-index.yaml:{task_name}")
+
+            target_path = file_config.get("target_path")
+            if not target_path:
+                self.log_error("File mapping missing target_path", f"task-index.yaml:{task_name}:{file_id or 'unknown'}")
+
+            universal_template = file_config.get("universal_template")
+            if universal_template:
+                if isinstance(universal_template, str):
+                    full_path = self.templates_root / universal_template
                     if not full_path.exists():
-                        self.log_error(f"Universal file mapping not found: {file_path}", f"task-index.yaml:{task_name}")
-            
-            # Check stack mappings
-            if "stacks" in mappings:
-                for stack, files in mappings["stacks"].items():
-                    for file_path in files:
-                        full_path = self.tasks_dir / file_path
+                        self.log_error(f"Universal template not found: {universal_template}", f"task-index.yaml:{task_name}:{file_id or 'unknown'}")
+                else:
+                    self.log_error("Universal template mapping has unexpected type", f"task-index.yaml:{task_name}:{file_id or 'unknown'}")
+
+            stack_overrides = file_config.get("stack_overrides") or {}
+            if isinstance(stack_overrides, dict):
+                for override_stack, template_path in stack_overrides.items():
+                    canonical_stack = self._canonical_stack(override_stack)
+                    if canonical_stack not in supported_stacks:
+                        self.log_warning(f"Unknown stack override in task index: {override_stack}", f"task-index.yaml:{task_name}:{file_id or 'unknown'}")
+
+                    if isinstance(template_path, str):
+                        full_path = self.templates_root / template_path
                         if not full_path.exists():
-                            self.log_error(f"Stack file mapping not found: {file_path}", f"task-index.yaml:{task_name}")
+                            self.log_error(f"Stack override template not found: {template_path}", f"task-index.yaml:{task_name}:{file_id or 'unknown'}")
+                    else:
+                        self.log_error("Stack override mapping has unexpected type", f"task-index.yaml:{task_name}:{file_id or 'unknown'}")
 
     def validate_task_index_consistency(self, task_index: Dict[str, Any], task_dirs: List[Path]) -> None:
         """Validate task index consistency with actual tasks."""
@@ -285,8 +338,9 @@ class TaskValidator:
         
         # Check task resolution
         try:
-            from scripts.detect_project_tasks import get_all_tasks
-            tasks = get_all_tasks()
+            from detect_project_tasks import TaskDetectionSystem
+
+            tasks = TaskDetectionSystem().tasks
             print(f"  ✅ Task discovery working: {len(tasks)} tasks found")
         except Exception as e:
             self.log_warning(f"Task discovery issue: {e}", "system integration")

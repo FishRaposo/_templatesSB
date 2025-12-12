@@ -118,7 +118,7 @@ class TemplateConsistencyAuditor:
                 if not readme_path.exists():
                     continue
                 
-                content = readme_path.read_text()
+                content = readme_path.read_text(encoding='utf-8')
                 
                 # Check for required sections
                 required_sections = ['## Overview', '## Features', '## Setup', '## Testing']

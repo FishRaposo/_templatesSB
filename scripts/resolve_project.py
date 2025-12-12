@@ -36,6 +36,16 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+STACK_ALIASES = {
+    'nextjs': 'next',
+    'agnostic': 'generic'
+}
+
+TIER_ALIASES = {
+    'full': 'enterprise',
+    'all': 'enterprise'
+}
+
 @dataclass
 class ProjectSpec:
     """Project specification defining stack, tier, and tasks."""
@@ -91,14 +101,14 @@ class ProjectResolver:
     
     def _load_tier_index(self) -> Dict[str, Any]:
         """Load the tier index configuration."""
-        tier_index_path = self.templates_dir / "tiers" / "tier-index.yaml"
+        tier_index_path = self.templates_dir / "tier-index.yaml"
         if not tier_index_path.exists():
             # Create minimal tier index if it doesn't exist
             return {
                 'tiers': {
                     'mvp': {'description': 'Minimum viable product'},
                     'core': {'description': 'Production-ready'},
-                    'full': {'description': 'Full-featured enterprise'}
+                    'enterprise': {'description': 'Full-featured enterprise'}
                 }
             }
         
@@ -107,6 +117,8 @@ class ProjectResolver:
     
     def resolve_project(self, spec: ProjectSpec) -> List[TemplateInfo]:
         """Resolve a project specification into a list of templates to apply."""
+        spec.stack = self._canonical_stack(spec.stack)
+        spec.tier = self._canonical_tier(spec.tier)
         logger.info(f"Resolving project: {spec.name} ({spec.stack} + {spec.tier} + {spec.tasks})")
         
         templates = []
@@ -161,6 +173,7 @@ class ProjectResolver:
     
     def _load_universal_tier_templates(self, tier: str) -> List[TemplateInfo]:
         """Load universal tier-specific templates."""
+        tier = self._canonical_tier(tier)
         templates = []
         tier_dir = self.templates_dir / "tiers" / tier / "universal"
         
@@ -186,8 +199,11 @@ class ProjectResolver:
     def _load_stack_templates(self, stack: str, tier: Optional[str] = None) -> List[TemplateInfo]:
         """Load stack-specific templates."""
         templates = []
-        
+
+        stack = self._canonical_stack(stack)
+
         if tier:
+            tier = self._canonical_tier(tier)
             stack_dir = self.templates_dir / "stacks" / stack / "tiers" / tier
             template_type = 'stack_tier'
             priority = self.precedence_order['stack_tier']
@@ -218,6 +234,11 @@ class ProjectResolver:
     def _load_task_templates(self, task_name: str, stack: str, tier: str) -> List[TemplateInfo]:
         """Load task-specific templates."""
         templates = []
+
+        stack = self._canonical_stack(stack)
+        tier = self._canonical_tier(tier)
+        stack_variants = self._stack_variants(stack)
+        tier_variants = self._tier_variants(tier)
         
         # Validate task exists
         if task_name not in self.task_index['tasks']:
@@ -227,7 +248,7 @@ class ProjectResolver:
         task_config = self.task_index['tasks'][task_name]
         
         # Check if stack is allowed for this task
-        allowed_stacks = task_config.get('allowed_stacks', [])
+        allowed_stacks = {self._canonical_stack(s) for s in task_config.get('allowed_stacks', [])}
         if allowed_stacks and stack not in allowed_stacks:
             logger.warning(f"Task {task_name} not officially supported on stack {stack}")
         
@@ -248,8 +269,13 @@ class ProjectResolver:
                 ))
         
         # Load task stack-specific templates
-        task_stack_dir = self.templates_dir / "tasks" / task_name / "stacks" / stack / "base"
-        if task_stack_dir.exists():
+        task_stack_dir = None
+        for stack_variant in stack_variants:
+            candidate_dir = self.templates_dir / "tasks" / task_name / "stacks" / stack_variant / "base"
+            if candidate_dir.exists():
+                task_stack_dir = candidate_dir
+                break
+        if task_stack_dir and task_stack_dir.exists():
             for template_file in self._find_template_files(task_stack_dir):
                 relative_path = template_file.relative_to(task_stack_dir)
                 target_path = self._resolve_target_path(relative_path, {'task': task_name, 'stack': stack})
@@ -264,8 +290,16 @@ class ProjectResolver:
                 ))
         
         # Load task stack tier templates
-        task_stack_tier_dir = self.templates_dir / "tasks" / task_name / "stacks" / stack / "tiers" / tier
-        if task_stack_tier_dir.exists():
+        task_stack_tier_dir = None
+        for stack_variant in stack_variants:
+            for tier_variant in tier_variants:
+                candidate_dir = self.templates_dir / "tasks" / task_name / "stacks" / stack_variant / "tiers" / tier_variant
+                if candidate_dir.exists():
+                    task_stack_tier_dir = candidate_dir
+                    break
+            if task_stack_tier_dir:
+                break
+        if task_stack_tier_dir and task_stack_tier_dir.exists():
             for template_file in self._find_template_files(task_stack_tier_dir):
                 relative_path = template_file.relative_to(task_stack_tier_dir)
                 target_path = self._resolve_target_path(relative_path, {'task': task_name, 'stack': stack, 'tier': tier})
@@ -298,9 +332,15 @@ class ProjectResolver:
         template_path = None
         template_type = None
         
-        if stack in stack_overrides:
+        override_stack = None
+        for stack_variant in self._stack_variants(stack):
+            if stack_variant in stack_overrides:
+                override_stack = stack_variant
+                break
+
+        if override_stack is not None:
             # Use stack-specific template
-            template_path = self.templates_dir / stack_overrides[stack]
+            template_path = self.templates_dir / stack_overrides[override_stack]
             template_type = 'task_stack'
         else:
             # Use universal template
@@ -365,18 +405,49 @@ class ProjectResolver:
                 path_parts[i] = part.replace('.tpl.', '.')
         
         return Path(*path_parts)
-    
+
+    def _canonical_stack(self, stack: str) -> str:
+        return STACK_ALIASES.get(stack, stack)
+
+    def _canonical_tier(self, tier: str) -> str:
+        return TIER_ALIASES.get(tier, tier)
+
+    def _stack_variants(self, stack: str) -> List[str]:
+        canonical = self._canonical_stack(stack)
+        variants = [canonical]
+        for alias, canon in STACK_ALIASES.items():
+            if canon == canonical and alias not in variants:
+                variants.append(alias)
+        if stack not in variants:
+            variants.append(stack)
+        return variants
+
+    def _tier_variants(self, tier: str) -> List[str]:
+        canonical = self._canonical_tier(tier)
+        variants = [canonical]
+        for alias, canon in TIER_ALIASES.items():
+            if canon == canonical and alias not in variants:
+                variants.append(alias)
+        if tier not in variants:
+            variants.append(tier)
+        return variants
+
     def _get_file_extension(self, stack: str) -> str:
         """Get the appropriate file extension for a stack."""
+        stack = self._canonical_stack(stack)
         extensions = {
             'python': 'py',
             'go': 'go',
             'node': 'js',
             'flutter': 'dart',
             'react': 'jsx',
+            'next': 'jsx',
             'react_native': 'tsx',
             'sql': 'sql',
-            'r': 'R'
+            'r': 'R',
+            'generic': 'md',
+            'typescript': 'ts',
+            'rust': 'rs'
         }
         return extensions.get(stack, 'txt')
     
@@ -517,10 +588,10 @@ class ProjectResolver:
                 continue
             
             task_config = self.task_index['tasks'][task_name]
-            
+
             # Check if stack is allowed
-            allowed_stacks = task_config.get('allowed_stacks', [])
-            if allowed_stacks and spec.stack not in allowed_stacks:
+            allowed_stacks = {self._canonical_stack(s) for s in task_config.get('allowed_stacks', [])}
+            if allowed_stacks and self._canonical_stack(spec.stack) not in allowed_stacks:
                 errors.append(f"Task '{task_name}' not officially supported on stack '{spec.stack}'")
             
             # Validate file mappings
@@ -572,8 +643,8 @@ def load_project_spec(spec_file: Path) -> ProjectSpec:
     
     return ProjectSpec(
         name=spec_data['name'],
-        stack=spec_data['stack'],
-        tier=spec_data['tier'],
+        stack=STACK_ALIASES.get(spec_data['stack'], spec_data['stack']),
+        tier=TIER_ALIASES.get(spec_data['tier'], spec_data['tier']),
         tasks=spec_data.get('tasks', []),
         output_dir=Path(spec_data.get('output_dir', spec_data['name'])),
         config=spec_data.get('config', {})

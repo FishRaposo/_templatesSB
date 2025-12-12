@@ -222,7 +222,6 @@ tasks:
     - react
     - nextjs
     - flutter
-    - react_native
     - python
     recommended_tier:
       static-dashboard: mvp
@@ -271,7 +270,6 @@ tasks:
     - nextjs
     - react
     - flutter
-    - react_native
     - python
     recommended_tier:
       single-page: mvp
@@ -400,7 +398,6 @@ tasks:
     - nextjs
     - flutter
     - react
-    - react_native
     - python
     recommended_tier:
       oauth-integration: core
@@ -446,7 +443,6 @@ tasks:
     - react
     - nextjs
     - flutter
-    - react_native
     - node
     - python
     recommended_tier:
@@ -1947,7 +1943,7 @@ tasks:
     - flutter
     - react
     - nextjs
-    - typescript
+    - r
     recommended_tier:
       basic-testing: mvp
       production-testing: core
