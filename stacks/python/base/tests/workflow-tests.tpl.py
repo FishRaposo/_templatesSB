@@ -657,3 +657,15 @@ if __name__ == "__main__":
     print("\nNote: Workflow tests require the application to be running.")
     print("They test complete user journeys and business processes.")
     print("Use these tests to verify end-to-end workflows and business logic.")
+
+
+def test_wf_onboarding_create_first_note__happy_path():
+    pytest.skip("TODO")
+
+
+def test_wf_onboarding_create_first_note__alt_path():
+    pytest.skip("TODO")
+
+
+def test_wf_onboarding_create_first_note__critical_failure():
+    pytest.skip("TODO")

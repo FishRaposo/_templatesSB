@@ -371,6 +371,15 @@ stack_patterns:
           purpose: "Next.js performance optimization and profiling"
           tiers: ["core", "enterprise"]
 
+  rust:
+    base_template: "stacks/rust/base/docs/README.tpl.md"
+    base:
+      docs:
+        - file: "README.tpl.md"
+          version: "1.0"
+          purpose: "Rust project README and documentation"
+          tiers: ["mvp", "core", "enterprise"]
+
   flutter:
     base_template: "stacks/flutter/base/docs/PROJECT-STRUCTURE.tpl.md"
     base:
