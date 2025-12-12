@@ -12,13 +12,12 @@ from unittest.mock import Mock, patch, MagicMock
 
 # Add scripts directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "scripts"))
+sys.path.insert(0, str(Path(__file__).parent.parent.parent / "tests" / "validation"))
 
 try:
-    import sys
-sys.path.insert(0, str(Path(__file__).parent.parent.parent / "tests" / "validation"))
-import validate_templates
+    import validate_templates
 except ImportError as e:
-    print(f"Warning: Could not import {module_name}: {e}")
+    print(f"Warning: Could not import validate_templates: {e}")
     validate_templates = None
 
 class TestValidateTemplates(unittest.TestCase):

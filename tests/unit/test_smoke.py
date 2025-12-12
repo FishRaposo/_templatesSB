@@ -14,6 +14,7 @@ from unittest.mock import patch, Mock
 
 # Add scripts directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "scripts"))
+sys.path.insert(0, str(Path(__file__).parent.parent.parent / "tests" / "validation"))
 
 class TestSmokeTests(unittest.TestCase):
     """Smoke tests for core automation scripts"""
@@ -30,9 +31,7 @@ class TestSmokeTests(unittest.TestCase):
     def test_validate_templates_import(self):
         """Test that validate_templates can be imported and basic methods exist"""
         try:
-            import sys
-sys.path.insert(0, str(Path(__file__).parent.parent.parent / "tests" / "validation"))
-import validate_templates
+            import validate_templates
             self.assertTrue(hasattr(validate_templates, 'TemplateValidator'))
             
             # Test basic instantiation
@@ -41,9 +40,7 @@ import validate_templates
                 self.assertIsNotNone(validator)
                 
         except ImportError as e:
-            self.fail(f"Could not import sys
-sys.path.insert(0, str(Path(__file__).parent.parent.parent / "tests" / "validation"))
-import validate_templates: {e}")
+            self.fail(f"Could not import validate_templates: {e}")
     
     def test_detect_project_tasks_import(self):
         """Test that detect_project_tasks can be imported and basic methods exist"""
@@ -124,9 +121,7 @@ import validate_templates: {e}")
     def test_validate_templates_help(self):
         """Test that validate_templates responds to --help"""
         try:
-            import sys
-sys.path.insert(0, str(Path(__file__).parent.parent.parent / "tests" / "validation"))
-import validate_templates
+            import validate_templates
             with patch('builtins.print') as mock_print:
                 with patch('sys.exit') as mock_exit:
                     try:
@@ -159,9 +154,7 @@ class TestBasicFunctionality(unittest.TestCase):
     def test_validate_templates_can_validate(self):
         """Test that validate_templates can perform basic validation"""
         try:
-            import sys
-sys.path.insert(0, str(Path(__file__).parent.parent.parent / "tests" / "validation"))
-import validate_templates
+            import validate_templates
             
             # Create a minimal validator instance
             with patch('pathlib.Path.exists', return_value=True):

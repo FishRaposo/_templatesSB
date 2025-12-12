@@ -126,6 +126,18 @@ def validate_task_invariants(root: Path) -> Tuple[List[ValidationIssue], List[Va
     inv_root = root / "tasks" / "invariants"
     base_files = list(inv_root.glob("task.*.invariants.yaml")) if inv_root.exists() else []
 
+    if known_tasks:
+        for tid in sorted(known_tasks):
+            expected = inv_root / f"task.{tid}.invariants.yaml"
+            if not expected.exists():
+                warnings.append(
+                    ValidationIssue(
+                        severity="warning",
+                        file=str(expected),
+                        message=f"Missing invariant spec for task: {tid}",
+                    )
+                )
+
     if not base_files:
         warnings.append(ValidationIssue(severity="warning", file=str(inv_root), message="No task invariant specs found"))
         return errors, warnings

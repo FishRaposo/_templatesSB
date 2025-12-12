@@ -1,43 +1,69 @@
 <!--
 File: TESTING-EXAMPLES-rust.tpl.md
-Purpose: Template for unknown implementation
-Template Version: 1.0
+Purpose: Examples of testing strategies in Rust
+Generated for: {{PROJECT_NAME}}
 -->
 
-# Rust Testing Examples - {{PROJECT_NAME}}
+# Testing Examples
 
-**Tier**: {{TIER}} | **Stack**: Rust
-
-## Commands
-
-```bash
-cargo test
-cargo test -- --nocapture
-```
-
-## Unit tests (in-module)
+## Unit Testing
+Rust supports unit tests co-located with code.
 
 ```rust
+// function to test
+fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+
 #[cfg(test)]
 mod tests {
+    use super::*;
+
     #[test]
-    fn adds_numbers() {
-        assert_eq!(2 + 2, 4);
+    fn test_add() {
+        assert_eq!(add(2, 2), 4);
     }
 }
 ```
 
-## Integration tests (tests/)
+## Mocking with Mockall
+Use `mockall` to mock external dependencies.
 
 ```rust
-// tests/smoke_test.rs
+use mockall::predicate::*;
+use mockall::*;
+
+#[automock]
+pub trait Database {
+    fn get_user(&self, id: i32) -> Option<String>;
+}
+
 #[test]
-fn smoke_test() {
-    assert!(true);
+fn test_service_logic() {
+    let mut mock = MockDatabase::new();
+    mock.expect_get_user()
+        .with(eq(42))
+        .returning(|_| Some("Alice".to_string()));
+
+    let service = UserService::new(mock);
+    assert_eq!(service.get_name(42), Some("Alice".to_string()));
 }
 ```
 
-## Notes
+## Integration Testing
+Place integration tests in the `tests/` directory.
 
-- Keep tests deterministic.
-- Prefer testing public APIs rather than private implementation details.
+```rust
+// tests/api_integration.rs
+use my_app::create_app;
+use axum_test::TestServer;
+
+#[tokio::test]
+async fn test_health_check() {
+    let app = create_app().await;
+    let server = TestServer::new(app).unwrap();
+    
+    let response = server.get("/health").await;
+    assert_eq!(response.status_code(), 200);
+}
+```

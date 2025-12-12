@@ -15,10 +15,10 @@ from dataclasses import dataclass
 import argparse
 
 
-@dataclass
-# Resolve project root for path consistency
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 
+
+@dataclass
 class EndpointInfo:
     """Information about an API endpoint"""
     path: str

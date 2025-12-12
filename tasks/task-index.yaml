@@ -1,15 +1,7 @@
-# yaml-language-server: disable
-# Custom Template System Task Index
-# This file uses a custom schema for the universal template system, not Ansible tasks schema
-# Structure: virtual_categories (organization), tasks (task definitions), task_config (global config), task_dependencies (relationships)
-
-# Virtual Category Organization
-# Tasks are physically organized in flat structure for simplicity and reliability
-# Virtual categories are defined below for documentation and browsing purposes
 virtual_categories:
   web-api:
-    display_name: "Web & API Tasks"
-    description: "Web scraping, APIs, dashboards, and frontend applications"
+    display_name: Web & API Tasks
+    description: Web scraping, APIs, dashboards, and frontend applications
     tasks:
     - web-scraping
     - rest-api-service
@@ -17,30 +9,27 @@ virtual_categories:
     - web-dashboard
     - landing-page
     - public-api-gateway
-
   auth-users-billing:
-    display_name: "Auth, Users & Billing Tasks"
-    description: "Authentication, user management, and payment processing"
+    display_name: Auth, Users & Billing Tasks
+    description: Authentication, user management, and payment processing
     tasks:
     - auth-basic
     - auth-oauth
     - user-profile-management
     - billing-stripe
     - team-workspaces
-
   background-automation:
-    display_name: "Background Work & Automation Tasks"
-    description: "Background jobs, scheduling, and automation workflows"
+    display_name: Background Work & Automation Tasks
+    description: Background jobs, scheduling, and automation workflows
     tasks:
     - job-queue
     - scheduled-tasks
     - notification-center
     - webhook-consumer
     - file-processing-pipeline
-
   data-analytics-ml:
-    display_name: "Data, Analytics & ML Tasks"
-    description: "Data processing, analytics, machine learning, and forecasting"
+    display_name: Data, Analytics & ML Tasks
+    description: Data processing, analytics, machine learning, and forecasting
     tasks:
     - etl-pipeline
     - analytics-event-pipeline
@@ -49,10 +38,9 @@ virtual_categories:
     - segmentation-clustering
     - ab-test-analysis
     - embedding-index
-
   seo-growth-content:
-    display_name: "SEO / Growth / Content Tasks"
-    description: "SEO optimization, content generation, and marketing automation"
+    display_name: SEO / Growth / Content Tasks
+    description: SEO optimization, content generation, and marketing automation
     tasks:
     - seo-keyword-research
     - seo-onpage-auditor
@@ -60,44 +48,39 @@ virtual_categories:
     - content-brief-generator
     - email-campaign-engine
     - link-monitoring
-
   product-saas:
-    display_name: "Product & SaaS Tasks"
-    description: "SaaS features, product management, and business logic"
+    display_name: Product & SaaS Tasks
+    description: SaaS features, product management, and business logic
     tasks:
     - crud-module
     - admin-panel
     - feature-flags
     - multitenancy
     - audit-logging
-
   devops-reliability:
-    display_name: "DevOps, Reliability & Quality Tasks"
-    description: "DevOps automation, monitoring, and system reliability"
+    display_name: DevOps, Reliability & Quality Tasks
+    description: DevOps automation, monitoring, and system reliability
     tasks:
     - healthchecks-telemetry
     - ci-template
     - error-reporting
     - config-management
     - canary-release
-
   ai-specific:
-    display_name: "AI-Specific Tasks"
-    description: "AI/ML applications, LLM integration, and intelligent automation"
+    display_name: AI-Specific Tasks
+    description: AI/ML applications, LLM integration, and intelligent automation
     tasks:
     - llm-prompt-router
     - rag-pipeline
     - agentic-workflow
     - code-refactor-agent
-
   meta-tooling:
-    display_name: "Meta / Tooling Tasks"
-    description: "Project scaffolding, documentation, and development tools"
+    display_name: Meta / Tooling Tasks
+    description: Project scaffolding, documentation, and development tools
     tasks:
     - project-bootstrap
     - docs-site
     - sample-data-generator
-
 tasks:
   web-scraping:
     description: Scrape pages, parse HTML/JSON, respect robots, store results.
@@ -125,8 +108,7 @@ tasks:
       merge_behavior: create
     - id: WEB-SCRAPING_SERVICE
       target_path: src/web-scraping/service.{ext}
-      universal_template:
-        tasks/web-scraping/universal/code/PIPELINE-SKELETON.tpl.md
+      universal_template: tasks/web-scraping/universal/code/PIPELINE-SKELETON.tpl.md
       merge_behavior: create
     - id: WEB-SCRAPING_DOCS
       target_path: docs/WEB-SCRAPING.md
@@ -134,12 +116,11 @@ tasks:
       merge_behavior: create
     - id: WEB-SCRAPING_TESTS
       target_path: tests/web-scraping/test_web-scraping.{ext}
-      universal_template:
-        tasks/web-scraping/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/web-scraping/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+    invariant: tasks/invariants/task.web-scraping.invariants.yaml
   rest-api-service:
-    description: Standard CRUD API with auth, validation, pagination, rate
-      limits.
+    description: Standard CRUD API with auth, validation, pagination, rate limits.
     categories:
     - api
     - backend
@@ -163,8 +144,7 @@ tasks:
       merge_behavior: create
     - id: REST-API-SERVICE_SERVICE
       target_path: src/rest-api-service/service.{ext}
-      universal_template:
-        tasks/rest-api-service/universal/code/REST-API-SERVICE-SKELETON.tpl.md
+      universal_template: tasks/rest-api-service/universal/code/REST-API-SERVICE-SKELETON.tpl.md
       merge_behavior: create
     - id: REST-API-SERVICE_DOCS
       target_path: docs/REST-API-SERVICE.md
@@ -172,9 +152,9 @@ tasks:
       merge_behavior: create
     - id: REST-API-SERVICE_TESTS
       target_path: tests/rest-api-service/test_rest-api-service.{ext}
-      universal_template:
-        tasks/rest-api-service/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/rest-api-service/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+    invariant: tasks/invariants/task.rest-api-service.invariants.yaml
   graphql-api:
     description: Schema, resolvers, data loaders, field-level auth.
     categories:
@@ -197,8 +177,7 @@ tasks:
       merge_behavior: create
     - id: GRAPHQL-API_SERVICE
       target_path: src/graphql-api/service.{ext}
-      universal_template:
-        tasks/graphql-api/universal/code/GRAPHQL-API-SKELETON.tpl.md
+      universal_template: tasks/graphql-api/universal/code/GRAPHQL-API-SKELETON.tpl.md
       merge_behavior: create
     - id: GRAPHQL-API_DOCS
       target_path: docs/GRAPHQL-API.md
@@ -208,9 +187,9 @@ tasks:
       target_path: tests/graphql-api/test_graphql-api.{ext}
       universal_template: tasks/graphql-api/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+    invariant: tasks/invariants/task.graphql-api.invariants.yaml
   web-dashboard:
-    description: Admin or analytics dashboard with cards, filters, charts,
-      tables.
+    description: Admin or analytics dashboard with cards, filters, charts, tables.
     categories:
     - frontend
     - dashboard
@@ -234,8 +213,7 @@ tasks:
       merge_behavior: create
     - id: WEB-DASHBOARD_SERVICE
       target_path: src/web-dashboard/service.{ext}
-      universal_template:
-        tasks/web-dashboard/universal/code/WEB-DASHBOARD-SKELETON.tpl.md
+      universal_template: tasks/web-dashboard/universal/code/WEB-DASHBOARD-SKELETON.tpl.md
       merge_behavior: create
     - id: WEB-DASHBOARD_DOCS
       target_path: docs/WEB-DASHBOARD.md
@@ -243,22 +221,18 @@ tasks:
       merge_behavior: create
     - id: WEB-DASHBOARD_TESTS
       target_path: tests/web-dashboard/test_web-dashboard.{ext}
-      universal_template:
-        tasks/web-dashboard/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/web-dashboard/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
     - id: WEB-DASHBOARD_COMPONENT
       target_path: src/web-dashboard/component.tsx
-      universal_template:
-        tasks/web-dashboard/universal/code/WEB-DASHBOARD-SKELETON.tpl.md
+      universal_template: tasks/web-dashboard/universal/code/WEB-DASHBOARD-SKELETON.tpl.md
       stack_overrides:
-        nextjs:
-          tasks/web-dashboard/stacks/nextjs/base/code/web_dashboard_component.tpl.tsx
-        react:
-          tasks/web-dashboard/stacks/react/base/code/web_dashboard_component.tpl.tsx
+        nextjs: tasks/web-dashboard/stacks/nextjs/base/code/web_dashboard_component.tpl.tsx
+        react: tasks/web-dashboard/stacks/react/base/code/web_dashboard_component.tpl.tsx
       merge_behavior: create
+    invariant: tasks/invariants/task.web-dashboard.invariants.yaml
   landing-page:
-    description: Marketing page with sections, CTAs, analytics hooks, A/B test
-      ready.
+    description: Marketing page with sections, CTAs, analytics hooks, A/B test ready.
     categories:
     - frontend
     - marketing
@@ -282,8 +256,7 @@ tasks:
       merge_behavior: create
     - id: LANDING-PAGE_SERVICE
       target_path: src/landing-page/service.{ext}
-      universal_template:
-        tasks/landing-page/universal/code/LANDING-PAGE-SKELETON.tpl.md
+      universal_template: tasks/landing-page/universal/code/LANDING-PAGE-SKELETON.tpl.md
       merge_behavior: create
     - id: LANDING-PAGE_DOCS
       target_path: docs/LANDING-PAGE.md
@@ -291,19 +264,16 @@ tasks:
       merge_behavior: create
     - id: LANDING-PAGE_TESTS
       target_path: tests/landing-page/test_landing-page.{ext}
-      universal_template:
-        tasks/landing-page/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/landing-page/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
     - id: LANDING-PAGE_COMPONENT
       target_path: src/landing-page/component.tsx
-      universal_template:
-        tasks/landing-page/universal/code/LANDING-PAGE-SKELETON.tpl.md
+      universal_template: tasks/landing-page/universal/code/LANDING-PAGE-SKELETON.tpl.md
       stack_overrides:
-        nextjs:
-          tasks/landing-page/stacks/nextjs/base/code/landing_page_component.tpl.tsx
-        react:
-          tasks/landing-page/stacks/react/base/code/landing_page_component.tpl.tsx
+        nextjs: tasks/landing-page/stacks/nextjs/base/code/landing_page_component.tpl.tsx
+        react: tasks/landing-page/stacks/react/base/code/landing_page_component.tpl.tsx
       merge_behavior: create
+    invariant: tasks/invariants/task.landing-page.invariants.yaml
   public-api-gateway:
     description: 'Wrap internal services with external-facing secure API: keys, quotas,
       logging.'
@@ -323,24 +293,21 @@ tasks:
     files:
     - id: PUBLIC-API-GATEWAY_CONFIG
       target_path: config/public-api-gateway.{ext}
-      universal_template:
-        tasks/public-api-gateway/universal/code/CONFIG.tpl.yaml
+      universal_template: tasks/public-api-gateway/universal/code/CONFIG.tpl.yaml
       merge_behavior: create
     - id: PUBLIC-API-GATEWAY_SERVICE
       target_path: src/public-api-gateway/service.{ext}
-      universal_template:
-        tasks/public-api-gateway/universal/code/PUBLIC-API-GATEWAY-SKELETON.tpl.md
+      universal_template: tasks/public-api-gateway/universal/code/PUBLIC-API-GATEWAY-SKELETON.tpl.md
       merge_behavior: create
     - id: PUBLIC-API-GATEWAY_DOCS
       target_path: docs/PUBLIC-API-GATEWAY.md
-      universal_template:
-        tasks/public-api-gateway/universal/docs/OVERVIEW.tpl.md
+      universal_template: tasks/public-api-gateway/universal/docs/OVERVIEW.tpl.md
       merge_behavior: create
     - id: PUBLIC-API-GATEWAY_TESTS
       target_path: tests/public-api-gateway/test_public-api-gateway.{ext}
-      universal_template:
-        tasks/public-api-gateway/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/public-api-gateway/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+    invariant: tasks/invariants/task.public-api-gateway.invariants.yaml
   auth-basic:
     description: Email/password, sessions/JWT, password reset.
     categories:
@@ -360,8 +327,7 @@ tasks:
     files:
     - id: AUTH-BASIC_SERVICE
       target_path: src/auth-basic/service.{ext}
-      universal_template:
-        tasks/auth-basic/universal/code/AUTH-BASIC-SKELETON.tpl.md
+      universal_template: tasks/auth-basic/universal/code/AUTH-BASIC-SKELETON.tpl.md
       merge_behavior: create
     - id: AUTH-BASIC_CONFIG
       target_path: config/auth-basic.{ext}
@@ -377,15 +343,13 @@ tasks:
       merge_behavior: create
     - id: AUTH-BASIC_COMPONENT
       target_path: src/auth-basic/component.tsx
-      universal_template:
-        tasks/auth-basic/universal/code/AUTH-BASIC-SKELETON.tpl.md
+      universal_template: tasks/auth-basic/universal/code/AUTH-BASIC-SKELETON.tpl.md
       stack_overrides:
-        nextjs:
-          tasks/auth-basic/stacks/nextjs/base/code/auth_basic_component.tpl.tsx
+        nextjs: tasks/auth-basic/stacks/nextjs/base/code/auth_basic_component.tpl.tsx
       merge_behavior: create
+    invariant: tasks/invariants/task.auth-basic.invariants.yaml
   auth-oauth:
-    description: Google/GitHub/Twitter/etc. login flows, token storage, linking
-      accounts.
+    description: Google/GitHub/Twitter/etc. login flows, token storage, linking accounts.
     categories:
     - auth
     - security
@@ -405,8 +369,7 @@ tasks:
     files:
     - id: AUTH-OAUTH_SERVICE
       target_path: src/auth-oauth/service.{ext}
-      universal_template:
-        tasks/auth-oauth/universal/code/AUTH-OAUTH-SKELETON.tpl.md
+      universal_template: tasks/auth-oauth/universal/code/AUTH-OAUTH-SKELETON.tpl.md
       merge_behavior: create
     - id: AUTH-OAUTH_CONFIG
       target_path: config/auth-oauth.{ext}
@@ -422,14 +385,12 @@ tasks:
       merge_behavior: create
     - id: AUTH-OAUTH_COMPONENT
       target_path: src/auth-oauth/component.tsx
-      universal_template:
-        tasks/auth-oauth/universal/code/AUTH-OAUTH-SKELETON.tpl.md
+      universal_template: tasks/auth-oauth/universal/code/AUTH-OAUTH-SKELETON.tpl.md
       stack_overrides:
-        nextjs:
-          tasks/auth-oauth/stacks/nextjs/base/code/auth_oauth_component.tpl.tsx
-        react:
-          tasks/auth-oauth/stacks/react/base/code/auth_oauth_component.tpl.tsx
+        nextjs: tasks/auth-oauth/stacks/nextjs/base/code/auth_oauth_component.tpl.tsx
+        react: tasks/auth-oauth/stacks/react/base/code/auth_oauth_component.tpl.tsx
       merge_behavior: create
+    invariant: tasks/invariants/task.auth-oauth.invariants.yaml
   user-profile-management:
     description: Profile CRUD, avatars, preferences, settings pages.
     categories:
@@ -451,38 +412,30 @@ tasks:
     files:
     - id: USER-PROFILE-MANAGEMENT_CONFIG
       target_path: config/user-profile-management.{ext}
-      universal_template:
-        tasks/user-profile-management/universal/code/CONFIG.tpl.yaml
+      universal_template: tasks/user-profile-management/universal/code/CONFIG.tpl.yaml
       merge_behavior: create
     - id: USER-PROFILE-MANAGEMENT_SERVICE
       target_path: src/user-profile-management/service.{ext}
-      universal_template:
-        tasks/user-profile-management/universal/code/USER-PROFILE-MANAGEMENT-SKELETON.tpl.md
+      universal_template: tasks/user-profile-management/universal/code/USER-PROFILE-MANAGEMENT-SKELETON.tpl.md
       merge_behavior: create
     - id: USER-PROFILE-MANAGEMENT_DOCS
       target_path: docs/USER-PROFILE-MANAGEMENT.md
-      universal_template:
-        tasks/user-profile-management/universal/docs/OVERVIEW.tpl.md
+      universal_template: tasks/user-profile-management/universal/docs/OVERVIEW.tpl.md
       merge_behavior: create
     - id: USER-PROFILE-MANAGEMENT_TESTS
-      target_path:
-        tests/user-profile-management/test_user-profile-management.{ext}
-      universal_template:
-        tasks/user-profile-management/universal/tests/TEST-STRATEGY.tpl.md
+      target_path: tests/user-profile-management/test_user-profile-management.{ext}
+      universal_template: tasks/user-profile-management/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
     - id: USER-PROFILE-MANAGEMENT_COMPONENT
       target_path: src/user-profile-management/component.tsx
-      universal_template:
-        tasks/user-profile-management/universal/code/USER-PROFILE-MANAGEMENT-SKELETON.tpl.md
+      universal_template: tasks/user-profile-management/universal/code/USER-PROFILE-MANAGEMENT-SKELETON.tpl.md
       stack_overrides:
-        nextjs:
-          tasks/user-profile-management/stacks/nextjs/base/code/user_profile_management_component.tpl.tsx
-        react:
-          tasks/user-profile-management/stacks/react/base/code/user_profile_management_component.tpl.tsx
+        nextjs: tasks/user-profile-management/stacks/nextjs/base/code/user_profile_management_component.tpl.tsx
+        react: tasks/user-profile-management/stacks/react/base/code/user_profile_management_component.tpl.tsx
       merge_behavior: create
+    invariant: tasks/invariants/task.user-profile-management.invariants.yaml
   billing-stripe:
-    description: Plans, subscriptions, metered billing, webhooks handling,
-      invoices.
+    description: Plans, subscriptions, metered billing, webhooks handling, invoices.
     categories:
     - billing
     - integration
@@ -499,8 +452,7 @@ tasks:
     files:
     - id: BILLING-STRIPE_SERVICE
       target_path: src/billing-stripe/service.{ext}
-      universal_template:
-        tasks/billing-stripe/universal/code/BILLING-STRIPE-SKELETON.tpl.md
+      universal_template: tasks/billing-stripe/universal/code/BILLING-STRIPE-SKELETON.tpl.md
       merge_behavior: create
     - id: BILLING-STRIPE_CONFIG
       target_path: config/billing-stripe.{ext}
@@ -512,9 +464,9 @@ tasks:
       merge_behavior: create
     - id: BILLING-STRIPE_TESTS
       target_path: tests/billing-stripe/test_billing-stripe.{ext}
-      universal_template:
-        tasks/billing-stripe/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/billing-stripe/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+    invariant: tasks/invariants/task.billing-stripe.invariants.yaml
   team-workspaces:
     description: Organizations, roles, invitations, member permissions.
     categories:
@@ -537,8 +489,7 @@ tasks:
       merge_behavior: create
     - id: TEAM-WORKSPACES_SERVICE
       target_path: src/team-workspaces/service.{ext}
-      universal_template:
-        tasks/team-workspaces/universal/code/TEAM-WORKSPACES-SKELETON.tpl.md
+      universal_template: tasks/team-workspaces/universal/code/TEAM-WORKSPACES-SKELETON.tpl.md
       merge_behavior: create
     - id: TEAM-WORKSPACES_DOCS
       target_path: docs/TEAM-WORKSPACES.md
@@ -546,22 +497,18 @@ tasks:
       merge_behavior: create
     - id: TEAM-WORKSPACES_TESTS
       target_path: tests/team-workspaces/test_team-workspaces.{ext}
-      universal_template:
-        tasks/team-workspaces/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/team-workspaces/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
     - id: TEAM-WORKSPACES_COMPONENT
       target_path: src/team-workspaces/component.tsx
-      universal_template:
-        tasks/team-workspaces/universal/code/TEAM-WORKSPACES-SKELETON.tpl.md
+      universal_template: tasks/team-workspaces/universal/code/TEAM-WORKSPACES-SKELETON.tpl.md
       stack_overrides:
-        nextjs:
-          tasks/team-workspaces/stacks/nextjs/base/code/team_workspaces_component.tpl.tsx
-        react:
-          tasks/team-workspaces/stacks/react/base/code/team_workspaces_component.tpl.tsx
+        nextjs: tasks/team-workspaces/stacks/nextjs/base/code/team_workspaces_component.tpl.tsx
+        react: tasks/team-workspaces/stacks/react/base/code/team_workspaces_component.tpl.tsx
       merge_behavior: create
+    invariant: tasks/invariants/task.team-workspaces.invariants.yaml
   job-queue:
-    description: Generic job queue with workers, retries, dead-letter queues,
-      metrics.
+    description: Generic job queue with workers, retries, dead-letter queues, metrics.
     categories:
     - automation
     - background
@@ -586,8 +533,7 @@ tasks:
       merge_behavior: create
     - id: JOB-QUEUE_SERVICE
       target_path: src/job-queue/service.{ext}
-      universal_template:
-        tasks/job-queue/universal/code/JOB-QUEUE-SKELETON.tpl.md
+      universal_template: tasks/job-queue/universal/code/JOB-QUEUE-SKELETON.tpl.md
       merge_behavior: create
     - id: JOB-QUEUE_DOCS
       target_path: docs/JOB-QUEUE.md
@@ -597,6 +543,7 @@ tasks:
       target_path: tests/job-queue/test_job-queue.{ext}
       universal_template: tasks/job-queue/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+    invariant: tasks/invariants/task.job-queue.invariants.yaml
   scheduled-tasks:
     description: 'Cron-like jobs: cleanup, syncs, data refresh, email digests.'
     categories:
@@ -622,8 +569,7 @@ tasks:
       merge_behavior: create
     - id: SCHEDULED-TASKS_SERVICE
       target_path: src/scheduled-tasks/service.{ext}
-      universal_template:
-        tasks/scheduled-tasks/universal/code/SCHEDULED-TASKS-SKELETON.tpl.md
+      universal_template: tasks/scheduled-tasks/universal/code/SCHEDULED-TASKS-SKELETON.tpl.md
       merge_behavior: create
     - id: SCHEDULED-TASKS_DOCS
       target_path: docs/SCHEDULED-TASKS.md
@@ -631,9 +577,9 @@ tasks:
       merge_behavior: create
     - id: SCHEDULED-TASKS_TESTS
       target_path: tests/scheduled-tasks/test_scheduled-tasks.{ext}
-      universal_template:
-        tasks/scheduled-tasks/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/scheduled-tasks/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+    invariant: tasks/invariants/task.scheduled-tasks.invariants.yaml
   notification-center:
     description: 'Unified notifications: email, push, in-app, with preferences.'
     categories:
@@ -654,35 +600,30 @@ tasks:
     files:
     - id: NOTIFICATION-CENTER_CONFIG
       target_path: config/notification-center.{ext}
-      universal_template:
-        tasks/notification-center/universal/code/CONFIG.tpl.yaml
+      universal_template: tasks/notification-center/universal/code/CONFIG.tpl.yaml
       merge_behavior: create
     - id: NOTIFICATION-CENTER_SERVICE
       target_path: src/notification-center/service.{ext}
-      universal_template:
-        tasks/notification-center/universal/code/NOTIFICATION-CENTER-SKELETON.tpl.md
+      universal_template: tasks/notification-center/universal/code/NOTIFICATION-CENTER-SKELETON.tpl.md
       merge_behavior: create
     - id: NOTIFICATION-CENTER_DOCS
       target_path: docs/NOTIFICATION-CENTER.md
-      universal_template:
-        tasks/notification-center/universal/docs/OVERVIEW.tpl.md
+      universal_template: tasks/notification-center/universal/docs/OVERVIEW.tpl.md
       merge_behavior: create
     - id: NOTIFICATION-CENTER_TESTS
       target_path: tests/notification-center/test_notification-center.{ext}
-      universal_template:
-        tasks/notification-center/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/notification-center/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
     - id: NOTIFICATION-CENTER_COMPONENT
       target_path: src/notification-center/component.jsx
-      universal_template:
-        tasks/notification-center/universal/code/NOTIFICATION-CENTER-SKELETON.tpl.md
+      universal_template: tasks/notification-center/universal/code/NOTIFICATION-CENTER-SKELETON.tpl.md
       stack_overrides:
-        react:
-          tasks/notification-center/stacks/react/base/code/notification_center_component.tpl.tsx
+        react: tasks/notification-center/stacks/react/base/code/notification_center_component.tpl.tsx
       merge_behavior: create
+    invariant: tasks/invariants/task.notification-center.invariants.yaml
   webhook-consumer:
-    description: Robust handling of third-party webhooks (Stripe, GitHub, etc.),
-      idempotency, logging.
+    description: Robust handling of third-party webhooks (Stripe, GitHub, etc.), idempotency,
+      logging.
     categories:
     - integration
     - webhooks
@@ -704,8 +645,7 @@ tasks:
       merge_behavior: create
     - id: WEBHOOK-CONSUMER_SERVICE
       target_path: src/webhook-consumer/service.{ext}
-      universal_template:
-        tasks/webhook-consumer/universal/code/WEBHOOK-CONSUMER-SKELETON.tpl.md
+      universal_template: tasks/webhook-consumer/universal/code/WEBHOOK-CONSUMER-SKELETON.tpl.md
       merge_behavior: create
     - id: WEBHOOK-CONSUMER_DOCS
       target_path: docs/WEBHOOK-CONSUMER.md
@@ -713,9 +653,9 @@ tasks:
       merge_behavior: create
     - id: WEBHOOK-CONSUMER_TESTS
       target_path: tests/webhook-consumer/test_webhook-consumer.{ext}
-      universal_template:
-        tasks/webhook-consumer/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/webhook-consumer/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+    invariant: tasks/invariants/task.webhook-consumer.invariants.yaml
   file-processing-pipeline:
     description: Upload → validate → transform → store → index.
     categories:
@@ -736,25 +676,21 @@ tasks:
     files:
     - id: FILE-PROCESSING-PIPELINE_CONFIG
       target_path: config/file-processing-pipeline.{ext}
-      universal_template:
-        tasks/file-processing-pipeline/universal/code/CONFIG.tpl.yaml
+      universal_template: tasks/file-processing-pipeline/universal/code/CONFIG.tpl.yaml
       merge_behavior: create
     - id: FILE-PROCESSING-PIPELINE_SERVICE
       target_path: src/file-processing-pipeline/service.{ext}
-      universal_template:
-        tasks/file-processing-pipeline/universal/code/FILE-PROCESSING-PIPELINE-SKELETON.tpl.md
+      universal_template: tasks/file-processing-pipeline/universal/code/FILE-PROCESSING-PIPELINE-SKELETON.tpl.md
       merge_behavior: create
     - id: FILE-PROCESSING-PIPELINE_DOCS
       target_path: docs/FILE-PROCESSING-PIPELINE.md
-      universal_template:
-        tasks/file-processing-pipeline/universal/docs/OVERVIEW.tpl.md
+      universal_template: tasks/file-processing-pipeline/universal/docs/OVERVIEW.tpl.md
       merge_behavior: create
     - id: FILE-PROCESSING-PIPELINE_TESTS
-      target_path:
-        tests/file-processing-pipeline/test_file-processing-pipeline.{ext}
-      universal_template:
-        tasks/file-processing-pipeline/universal/tests/TEST-STRATEGY.tpl.md
+      target_path: tests/file-processing-pipeline/test_file-processing-pipeline.{ext}
+      universal_template: tasks/file-processing-pipeline/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+    invariant: tasks/invariants/task.file-processing-pipeline.invariants.yaml
   etl-pipeline:
     description: Extract → Transform → Load between APIs/DBs/data lakes.
     categories:
@@ -780,8 +716,7 @@ tasks:
       merge_behavior: create
     - id: ETL-PIPELINE_SERVICE
       target_path: src/etl-pipeline/service.{ext}
-      universal_template:
-        tasks/etl-pipeline/universal/code/ETL-PIPELINE-SKELETON.tpl.md
+      universal_template: tasks/etl-pipeline/universal/code/ETL-PIPELINE-SKELETON.tpl.md
       merge_behavior: create
     - id: ETL-PIPELINE_DOCS
       target_path: docs/ETL-PIPELINE.md
@@ -789,9 +724,9 @@ tasks:
       merge_behavior: create
     - id: ETL-PIPELINE_TESTS
       target_path: tests/etl-pipeline/test_etl-pipeline.{ext}
-      universal_template:
-        tasks/etl-pipeline/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/etl-pipeline/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+    invariant: tasks/invariants/task.etl-pipeline.invariants.yaml
   analytics-event-pipeline:
     description: Collect events, batch/stream, aggregate, expose to dashboard.
     categories:
@@ -812,25 +747,21 @@ tasks:
     files:
     - id: ANALYTICS-EVENT-PIPELINE_SERVICE
       target_path: src/analytics-event-pipeline/service.{ext}
-      universal_template:
-        tasks/analytics-event-pipeline/universal/code/ANALYTICS-EVENT-PIPELINE-SKELETON.tpl.md
+      universal_template: tasks/analytics-event-pipeline/universal/code/ANALYTICS-EVENT-PIPELINE-SKELETON.tpl.md
       merge_behavior: create
     - id: ANALYTICS-EVENT-PIPELINE_CONFIG
       target_path: config/analytics-event-pipeline.{ext}
-      universal_template:
-        tasks/analytics-event-pipeline/universal/code/CONFIG.tpl.yaml
+      universal_template: tasks/analytics-event-pipeline/universal/code/CONFIG.tpl.yaml
       merge_behavior: create
     - id: ANALYTICS-EVENT-PIPELINE_DOCS
       target_path: docs/ANALYTICS-EVENT-PIPELINE.md
-      universal_template:
-        tasks/analytics-event-pipeline/universal/docs/OVERVIEW.tpl.md
+      universal_template: tasks/analytics-event-pipeline/universal/docs/OVERVIEW.tpl.md
       merge_behavior: create
     - id: ANALYTICS-EVENT-PIPELINE_TESTS
-      target_path:
-        tests/analytics-event-pipeline/test_analytics-event-pipeline.{ext}
-      universal_template:
-        tasks/analytics-event-pipeline/universal/tests/TEST-STRATEGY.tpl.md
+      target_path: tests/analytics-event-pipeline/test_analytics-event-pipeline.{ext}
+      universal_template: tasks/analytics-event-pipeline/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+    invariant: tasks/invariants/task.analytics-event-pipeline.invariants.yaml
   data-exploration-report:
     description: 'EDA pipeline: load data, clean, generate summary plots and a report.'
     categories:
@@ -851,25 +782,21 @@ tasks:
     files:
     - id: DATA-EXPLORATION-REPORT_CONFIG
       target_path: config/data-exploration-report.{ext}
-      universal_template:
-        tasks/data-exploration-report/universal/code/CONFIG.tpl.yaml
+      universal_template: tasks/data-exploration-report/universal/code/CONFIG.tpl.yaml
       merge_behavior: create
     - id: DATA-EXPLORATION-REPORT_SERVICE
       target_path: src/data-exploration-report/service.{ext}
-      universal_template:
-        tasks/data-exploration-report/universal/code/DATA-EXPLORATION-REPORT-SKELETON.tpl.md
+      universal_template: tasks/data-exploration-report/universal/code/DATA-EXPLORATION-REPORT-SKELETON.tpl.md
       merge_behavior: create
     - id: DATA-EXPLORATION-REPORT_DOCS
       target_path: docs/DATA-EXPLORATION-REPORT.md
-      universal_template:
-        tasks/data-exploration-report/universal/docs/OVERVIEW.tpl.md
+      universal_template: tasks/data-exploration-report/universal/docs/OVERVIEW.tpl.md
       merge_behavior: create
     - id: DATA-EXPLORATION-REPORT_TESTS
-      target_path:
-        tests/data-exploration-report/test_data-exploration-report.{ext}
-      universal_template:
-        tasks/data-exploration-report/universal/tests/TEST-STRATEGY.tpl.md
+      target_path: tests/data-exploration-report/test_data-exploration-report.{ext}
+      universal_template: tasks/data-exploration-report/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+    invariant: tasks/invariants/task.data-exploration-report.invariants.yaml
   forecasting-engine:
     description: 'Time-series forecasting: trends, seasonality, prediction intervals.'
     categories:
@@ -888,24 +815,21 @@ tasks:
     files:
     - id: FORECASTING-ENGINE_CONFIG
       target_path: config/forecasting-engine.{ext}
-      universal_template:
-        tasks/forecasting-engine/universal/code/CONFIG.tpl.yaml
+      universal_template: tasks/forecasting-engine/universal/code/CONFIG.tpl.yaml
       merge_behavior: create
     - id: FORECASTING-ENGINE_SERVICE
       target_path: src/forecasting-engine/service.{ext}
-      universal_template:
-        tasks/forecasting-engine/universal/code/FORECASTING-ENGINE-SKELETON.tpl.md
+      universal_template: tasks/forecasting-engine/universal/code/FORECASTING-ENGINE-SKELETON.tpl.md
       merge_behavior: create
     - id: FORECASTING-ENGINE_DOCS
       target_path: docs/FORECASTING-ENGINE.md
-      universal_template:
-        tasks/forecasting-engine/universal/docs/OVERVIEW.tpl.md
+      universal_template: tasks/forecasting-engine/universal/docs/OVERVIEW.tpl.md
       merge_behavior: create
     - id: FORECASTING-ENGINE_TESTS
       target_path: tests/forecasting-engine/test_forecasting-engine.{ext}
-      universal_template:
-        tasks/forecasting-engine/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/forecasting-engine/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+    invariant: tasks/invariants/task.forecasting-engine.invariants.yaml
   segmentation-clustering:
     description: Cluster users/keywords/products/content into segments.
     categories:
@@ -924,25 +848,21 @@ tasks:
     files:
     - id: SEGMENTATION-CLUSTERING_CONFIG
       target_path: config/segmentation-clustering.{ext}
-      universal_template:
-        tasks/segmentation-clustering/universal/code/CONFIG.tpl.yaml
+      universal_template: tasks/segmentation-clustering/universal/code/CONFIG.tpl.yaml
       merge_behavior: create
     - id: SEGMENTATION-CLUSTERING_SERVICE
       target_path: src/segmentation-clustering/service.{ext}
-      universal_template:
-        tasks/segmentation-clustering/universal/code/SEGMENTATION-CLUSTERING-SKELETON.tpl.md
+      universal_template: tasks/segmentation-clustering/universal/code/SEGMENTATION-CLUSTERING-SKELETON.tpl.md
       merge_behavior: create
     - id: SEGMENTATION-CLUSTERING_DOCS
       target_path: docs/SEGMENTATION-CLUSTERING.md
-      universal_template:
-        tasks/segmentation-clustering/universal/docs/OVERVIEW.tpl.md
+      universal_template: tasks/segmentation-clustering/universal/docs/OVERVIEW.tpl.md
       merge_behavior: create
     - id: SEGMENTATION-CLUSTERING_TESTS
-      target_path:
-        tests/segmentation-clustering/test_segmentation-clustering.{ext}
-      universal_template:
-        tasks/segmentation-clustering/universal/tests/TEST-STRATEGY.tpl.md
+      target_path: tests/segmentation-clustering/test_segmentation-clustering.{ext}
+      universal_template: tasks/segmentation-clustering/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+    invariant: tasks/invariants/task.segmentation-clustering.invariants.yaml
   ab-test-analysis:
     description: Analyze A/B test results, significance, uplift, power.
     categories:
@@ -961,8 +881,7 @@ tasks:
     files:
     - id: AB-TEST-ANALYSIS_SERVICE
       target_path: src/ab-test-analysis/service.{ext}
-      universal_template:
-        tasks/ab-test-analysis/universal/code/AB-TEST-ANALYSIS-SKELETON.tpl.md
+      universal_template: tasks/ab-test-analysis/universal/code/AB-TEST-ANALYSIS-SKELETON.tpl.md
       merge_behavior: create
     - id: AB-TEST-ANALYSIS_CONFIG
       target_path: config/ab-test-analysis.{ext}
@@ -974,9 +893,9 @@ tasks:
       merge_behavior: create
     - id: AB-TEST-ANALYSIS_TESTS
       target_path: tests/ab-test-analysis/test_ab-test-analysis.{ext}
-      universal_template:
-        tasks/ab-test-analysis/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/ab-test-analysis/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+    invariant: tasks/invariants/task.ab-test-analysis.invariants.yaml
   embedding-index:
     description: Create and query vector index for semantic search/retrieval.
     categories:
@@ -1000,8 +919,7 @@ tasks:
       merge_behavior: create
     - id: EMBEDDING-INDEX_SERVICE
       target_path: src/embedding-index/service.{ext}
-      universal_template:
-        tasks/embedding-index/universal/code/EMBEDDING-INDEX-SKELETON.tpl.md
+      universal_template: tasks/embedding-index/universal/code/EMBEDDING-INDEX-SKELETON.tpl.md
       merge_behavior: create
     - id: EMBEDDING-INDEX_DOCS
       target_path: docs/EMBEDDING-INDEX.md
@@ -1009,12 +927,11 @@ tasks:
       merge_behavior: create
     - id: EMBEDDING-INDEX_TESTS
       target_path: tests/embedding-index/test_embedding-index.{ext}
-      universal_template:
-        tasks/embedding-index/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/embedding-index/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+    invariant: tasks/invariants/task.embedding-index.invariants.yaml
   seo-keyword-research:
-    description: Fetch SERPs, extract keywords, cluster by intent, difficulty
-      scoring.
+    description: Fetch SERPs, extract keywords, cluster by intent, difficulty scoring.
     categories:
     - seo
     - research
@@ -1032,27 +949,24 @@ tasks:
     files:
     - id: SEO-KEYWORD-RESEARCH_CONFIG
       target_path: config/seo-keyword-research.{ext}
-      universal_template:
-        tasks/seo-keyword-research/universal/code/CONFIG.tpl.yaml
+      universal_template: tasks/seo-keyword-research/universal/code/CONFIG.tpl.yaml
       merge_behavior: create
     - id: SEO-KEYWORD-RESEARCH_SERVICE
       target_path: src/seo-keyword-research/service.{ext}
-      universal_template:
-        tasks/seo-keyword-research/universal/code/SEO-KEYWORD-RESEARCH-SKELETON.tpl.md
+      universal_template: tasks/seo-keyword-research/universal/code/SEO-KEYWORD-RESEARCH-SKELETON.tpl.md
       merge_behavior: create
     - id: SEO-KEYWORD-RESEARCH_DOCS
       target_path: docs/SEO-KEYWORD-RESEARCH.md
-      universal_template:
-        tasks/seo-keyword-research/universal/docs/OVERVIEW.tpl.md
+      universal_template: tasks/seo-keyword-research/universal/docs/OVERVIEW.tpl.md
       merge_behavior: create
     - id: SEO-KEYWORD-RESEARCH_TESTS
       target_path: tests/seo-keyword-research/test_seo-keyword-research.{ext}
-      universal_template:
-        tasks/seo-keyword-research/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/seo-keyword-research/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+    invariant: tasks/invariants/task.seo-keyword-research.invariants.yaml
   seo-onpage-auditor:
-    description: Analyze title/meta/H1/content, lighthouse-like scores,
-      structured suggestions.
+    description: Analyze title/meta/H1/content, lighthouse-like scores, structured
+      suggestions.
     categories:
     - seo
     - auditing
@@ -1068,34 +982,28 @@ tasks:
     files:
     - id: SEO-ONPAGE-AUDITOR_CONFIG
       target_path: config/seo-onpage-auditor.{ext}
-      universal_template:
-        tasks/seo-onpage-auditor/universal/code/CONFIG.tpl.yaml
+      universal_template: tasks/seo-onpage-auditor/universal/code/CONFIG.tpl.yaml
       merge_behavior: create
     - id: SEO-ONPAGE-AUDITOR_SERVICE
       target_path: src/seo-onpage-auditor/service.{ext}
-      universal_template:
-        tasks/seo-onpage-auditor/universal/code/SEO-ONPAGE-AUDITOR-SKELETON.tpl.md
+      universal_template: tasks/seo-onpage-auditor/universal/code/SEO-ONPAGE-AUDITOR-SKELETON.tpl.md
       merge_behavior: create
     - id: SEO-ONPAGE-AUDITOR_DOCS
       target_path: docs/SEO-ONPAGE-AUDITOR.md
-      universal_template:
-        tasks/seo-onpage-auditor/universal/docs/OVERVIEW.tpl.md
+      universal_template: tasks/seo-onpage-auditor/universal/docs/OVERVIEW.tpl.md
       merge_behavior: create
     - id: SEO-ONPAGE-AUDITOR_TESTS
       target_path: tests/seo-onpage-auditor/test_seo-onpage-auditor.{ext}
-      universal_template:
-        tasks/seo-onpage-auditor/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/seo-onpage-auditor/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
     - id: SEO-ONPAGE-AUDITOR_COMPONENT
       target_path: src/seo-onpage-auditor/component.tsx
-      universal_template:
-        tasks/seo-onpage-auditor/universal/code/SEO-ONPAGE-AUDITOR-SKELETON.tpl.md
+      universal_template: tasks/seo-onpage-auditor/universal/code/SEO-ONPAGE-AUDITOR-SKELETON.tpl.md
       stack_overrides:
-        nextjs:
-          tasks/seo-onpage-auditor/stacks/nextjs/base/code/seo_onpage_auditor_component.tpl.tsx
-        react:
-          tasks/seo-onpage-auditor/stacks/react/base/code/seo_onpage_auditor_component.tpl.tsx
+        nextjs: tasks/seo-onpage-auditor/stacks/nextjs/base/code/seo_onpage_auditor_component.tpl.tsx
+        react: tasks/seo-onpage-auditor/stacks/react/base/code/seo_onpage_auditor_component.tpl.tsx
       merge_behavior: create
+    invariant: tasks/invariants/task.seo-onpage-auditor.invariants.yaml
   seo-rank-tracker:
     description: Track keyword rankings over time per domain, visualize trends.
     categories:
@@ -1121,8 +1029,7 @@ tasks:
       merge_behavior: create
     - id: SEO-RANK-TRACKER_SERVICE
       target_path: src/seo-rank-tracker/service.{ext}
-      universal_template:
-        tasks/seo-rank-tracker/universal/code/SEO-RANK-TRACKER-SKELETON.tpl.md
+      universal_template: tasks/seo-rank-tracker/universal/code/SEO-RANK-TRACKER-SKELETON.tpl.md
       merge_behavior: create
     - id: SEO-RANK-TRACKER_DOCS
       target_path: docs/SEO-RANK-TRACKER.md
@@ -1130,20 +1037,18 @@ tasks:
       merge_behavior: create
     - id: SEO-RANK-TRACKER_TESTS
       target_path: tests/seo-rank-tracker/test_seo-rank-tracker.{ext}
-      universal_template:
-        tasks/seo-rank-tracker/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/seo-rank-tracker/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
     - id: SEO-RANK-TRACKER_COMPONENT
       target_path: src/seo-rank-tracker/component.tsx
-      universal_template:
-        tasks/seo-rank-tracker/universal/code/SEO-RANK-TRACKER-SKELETON.tpl.md
+      universal_template: tasks/seo-rank-tracker/universal/code/SEO-RANK-TRACKER-SKELETON.tpl.md
       stack_overrides:
-        nextjs:
-          tasks/seo-rank-tracker/stacks/nextjs/base/code/seo_rank_tracker_component.tpl.tsx
+        nextjs: tasks/seo-rank-tracker/stacks/nextjs/base/code/seo_rank_tracker_component.tpl.tsx
       merge_behavior: create
+    invariant: tasks/invariants/task.seo-rank-tracker.invariants.yaml
   content-brief-generator:
-    description: Given keyword sets → outline + headings + questions + internal
-      link suggestions.
+    description: Given keyword sets → outline + headings + questions + internal link
+      suggestions.
     categories:
     - content
     - seo
@@ -1159,36 +1064,30 @@ tasks:
     files:
     - id: CONTENT-BRIEF-GENERATOR_CONFIG
       target_path: config/content-brief-generator.{ext}
-      universal_template:
-        tasks/content-brief-generator/universal/code/CONFIG.tpl.yaml
+      universal_template: tasks/content-brief-generator/universal/code/CONFIG.tpl.yaml
       merge_behavior: create
     - id: CONTENT-BRIEF-GENERATOR_SERVICE
       target_path: src/content-brief-generator/service.{ext}
-      universal_template:
-        tasks/content-brief-generator/universal/code/CONTENT-BRIEF-GENERATOR-SKELETON.tpl.md
+      universal_template: tasks/content-brief-generator/universal/code/CONTENT-BRIEF-GENERATOR-SKELETON.tpl.md
       merge_behavior: create
     - id: CONTENT-BRIEF-GENERATOR_DOCS
       target_path: docs/CONTENT-BRIEF-GENERATOR.md
-      universal_template:
-        tasks/content-brief-generator/universal/docs/OVERVIEW.tpl.md
+      universal_template: tasks/content-brief-generator/universal/docs/OVERVIEW.tpl.md
       merge_behavior: create
     - id: CONTENT-BRIEF-GENERATOR_TESTS
-      target_path:
-        tests/content-brief-generator/test_content-brief-generator.{ext}
-      universal_template:
-        tasks/content-brief-generator/universal/tests/TEST-STRATEGY.tpl.md
+      target_path: tests/content-brief-generator/test_content-brief-generator.{ext}
+      universal_template: tasks/content-brief-generator/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
     - id: CONTENT-BRIEF-GENERATOR_COMPONENT
       target_path: src/content-brief-generator/component.tsx
-      universal_template:
-        tasks/content-brief-generator/universal/code/CONTENT-BRIEF-GENERATOR-SKELETON.tpl.md
+      universal_template: tasks/content-brief-generator/universal/code/CONTENT-BRIEF-GENERATOR-SKELETON.tpl.md
       stack_overrides:
-        nextjs:
-          tasks/content-brief-generator/stacks/nextjs/base/code/content_brief_generator_component.tpl.tsx
+        nextjs: tasks/content-brief-generator/stacks/nextjs/base/code/content_brief_generator_component.tpl.tsx
       merge_behavior: create
+    invariant: tasks/invariants/task.content-brief-generator.invariants.yaml
   email-campaign-engine:
-    description: Segment lists, define campaigns, send, track opens/clicks,
-      basic automations.
+    description: Segment lists, define campaigns, send, track opens/clicks, basic
+      automations.
     categories:
     - email
     - marketing
@@ -1208,34 +1107,28 @@ tasks:
     files:
     - id: EMAIL-CAMPAIGN-ENGINE_CONFIG
       target_path: config/email-campaign-engine.{ext}
-      universal_template:
-        tasks/email-campaign-engine/universal/code/CONFIG.tpl.yaml
+      universal_template: tasks/email-campaign-engine/universal/code/CONFIG.tpl.yaml
       merge_behavior: create
     - id: EMAIL-CAMPAIGN-ENGINE_SERVICE
       target_path: src/email-campaign-engine/service.{ext}
-      universal_template:
-        tasks/email-campaign-engine/universal/code/EMAIL-CAMPAIGN-ENGINE-SKELETON.tpl.md
+      universal_template: tasks/email-campaign-engine/universal/code/EMAIL-CAMPAIGN-ENGINE-SKELETON.tpl.md
       merge_behavior: create
     - id: EMAIL-CAMPAIGN-ENGINE_DOCS
       target_path: docs/EMAIL-CAMPAIGN-ENGINE.md
-      universal_template:
-        tasks/email-campaign-engine/universal/docs/OVERVIEW.tpl.md
+      universal_template: tasks/email-campaign-engine/universal/docs/OVERVIEW.tpl.md
       merge_behavior: create
     - id: EMAIL-CAMPAIGN-ENGINE_TESTS
       target_path: tests/email-campaign-engine/test_email-campaign-engine.{ext}
-      universal_template:
-        tasks/email-campaign-engine/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/email-campaign-engine/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
     - id: EMAIL-CAMPAIGN-ENGINE_COMPONENT
       target_path: src/email-campaign-engine/component.tsx
-      universal_template:
-        tasks/email-campaign-engine/universal/code/EMAIL-CAMPAIGN-ENGINE-SKELETON.tpl.md
+      universal_template: tasks/email-campaign-engine/universal/code/EMAIL-CAMPAIGN-ENGINE-SKELETON.tpl.md
       stack_overrides:
-        nextjs:
-          tasks/email-campaign-engine/stacks/nextjs/base/code/email_campaign_engine_component.tpl.tsx
-        react:
-          tasks/email-campaign-engine/stacks/react/base/code/email_campaign_engine_component.tpl.tsx
+        nextjs: tasks/email-campaign-engine/stacks/nextjs/base/code/email_campaign_engine_component.tpl.tsx
+        react: tasks/email-campaign-engine/stacks/react/base/code/email_campaign_engine_component.tpl.tsx
       merge_behavior: create
+    invariant: tasks/invariants/task.email-campaign-engine.invariants.yaml
   link-monitoring:
     description: Track backlinks, broken links, redirects, domain health.
     categories:
@@ -1260,8 +1153,7 @@ tasks:
       merge_behavior: create
     - id: LINK-MONITORING_SERVICE
       target_path: src/link-monitoring/service.{ext}
-      universal_template:
-        tasks/link-monitoring/universal/code/LINK-MONITORING-SKELETON.tpl.md
+      universal_template: tasks/link-monitoring/universal/code/LINK-MONITORING-SKELETON.tpl.md
       merge_behavior: create
     - id: LINK-MONITORING_DOCS
       target_path: docs/LINK-MONITORING.md
@@ -1269,17 +1161,15 @@ tasks:
       merge_behavior: create
     - id: LINK-MONITORING_TESTS
       target_path: tests/link-monitoring/test_link-monitoring.{ext}
-      universal_template:
-        tasks/link-monitoring/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/link-monitoring/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
     - id: LINK-MONITORING_COMPONENT
       target_path: src/link-monitoring/component.tsx
-      universal_template:
-        tasks/link-monitoring/universal/code/LINK-MONITORING-SKELETON.tpl.md
+      universal_template: tasks/link-monitoring/universal/code/LINK-MONITORING-SKELETON.tpl.md
       stack_overrides:
-        nextjs:
-          tasks/link-monitoring/stacks/nextjs/base/code/link_monitoring_component.tpl.tsx
+        nextjs: tasks/link-monitoring/stacks/nextjs/base/code/link_monitoring_component.tpl.tsx
       merge_behavior: create
+    invariant: tasks/invariants/task.link-monitoring.invariants.yaml
   crud-module:
     description: 'Generic CRUD stack: model definition → API → forms → tables → filters.'
     categories:
@@ -1307,8 +1197,7 @@ tasks:
       merge_behavior: create
     - id: CRUD-MODULE_SERVICE
       target_path: src/crud-module/service.{ext}
-      universal_template:
-        tasks/crud-module/universal/code/CRUD-MODULE-SKELETON.tpl.md
+      universal_template: tasks/crud-module/universal/code/CRUD-MODULE-SKELETON.tpl.md
       merge_behavior: create
     - id: CRUD-MODULE_DOCS
       target_path: docs/CRUD-MODULE.md
@@ -1320,14 +1209,12 @@ tasks:
       merge_behavior: create
     - id: CRUD-MODULE_COMPONENT
       target_path: src/crud-module/component.tsx
-      universal_template:
-        tasks/crud-module/universal/code/CRUD-MODULE-SKELETON.tpl.md
+      universal_template: tasks/crud-module/universal/code/CRUD-MODULE-SKELETON.tpl.md
       stack_overrides:
-        nextjs:
-          tasks/crud-module/stacks/nextjs/base/code/crud_module_component.tpl.tsx
-        react:
-          tasks/crud-module/stacks/react/base/code/crud_module_component.tpl.tsx
+        nextjs: tasks/crud-module/stacks/nextjs/base/code/crud_module_component.tpl.tsx
+        react: tasks/crud-module/stacks/react/base/code/crud_module_component.tpl.tsx
       merge_behavior: create
+    invariant: tasks/invariants/task.crud-module.invariants.yaml
   admin-panel:
     description: Superuser UI for managing users, config, logs, feature flags.
     categories:
@@ -1348,8 +1235,7 @@ tasks:
     files:
     - id: ADMIN-PANEL_SERVICE
       target_path: src/admin-panel/service.{ext}
-      universal_template:
-        tasks/admin-panel/universal/code/ADMIN-PANEL-SKELETON.tpl.md
+      universal_template: tasks/admin-panel/universal/code/ADMIN-PANEL-SKELETON.tpl.md
       merge_behavior: create
     - id: ADMIN-PANEL_CONFIG
       target_path: config/admin-panel.{ext}
@@ -1365,14 +1251,12 @@ tasks:
       merge_behavior: create
     - id: ADMIN-PANEL_COMPONENT
       target_path: src/admin-panel/component.tsx
-      universal_template:
-        tasks/admin-panel/universal/code/ADMIN-PANEL-SKELETON.tpl.md
+      universal_template: tasks/admin-panel/universal/code/ADMIN-PANEL-SKELETON.tpl.md
       stack_overrides:
-        nextjs:
-          tasks/admin-panel/stacks/nextjs/base/code/admin_panel_component.tpl.tsx
-        react:
-          tasks/admin-panel/stacks/react/base/code/admin_panel_component.tpl.tsx
+        nextjs: tasks/admin-panel/stacks/nextjs/base/code/admin_panel_component.tpl.tsx
+        react: tasks/admin-panel/stacks/react/base/code/admin_panel_component.tpl.tsx
       merge_behavior: create
+    invariant: tasks/invariants/task.admin-panel.invariants.yaml
   feature-flags:
     description: Toggle features by user, cohort, or environment with UI + SDK.
     categories:
@@ -1397,8 +1281,7 @@ tasks:
       merge_behavior: create
     - id: FEATURE-FLAGS_SERVICE
       target_path: src/feature-flags/service.{ext}
-      universal_template:
-        tasks/feature-flags/universal/code/FEATURE-FLAGS-SKELETON.tpl.md
+      universal_template: tasks/feature-flags/universal/code/FEATURE-FLAGS-SKELETON.tpl.md
       merge_behavior: create
     - id: FEATURE-FLAGS_DOCS
       target_path: docs/FEATURE-FLAGS.md
@@ -1406,19 +1289,16 @@ tasks:
       merge_behavior: create
     - id: FEATURE-FLAGS_TESTS
       target_path: tests/feature-flags/test_feature-flags.{ext}
-      universal_template:
-        tasks/feature-flags/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/feature-flags/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
     - id: FEATURE-FLAGS_COMPONENT
       target_path: src/feature-flags/component.tsx
-      universal_template:
-        tasks/feature-flags/universal/code/FEATURE-FLAGS-SKELETON.tpl.md
+      universal_template: tasks/feature-flags/universal/code/FEATURE-FLAGS-SKELETON.tpl.md
       stack_overrides:
-        nextjs:
-          tasks/feature-flags/stacks/nextjs/base/code/feature_flags_component.tpl.tsx
-        react:
-          tasks/feature-flags/stacks/react/base/code/feature_flags_component.tpl.tsx
+        nextjs: tasks/feature-flags/stacks/nextjs/base/code/feature_flags_component.tpl.tsx
+        react: tasks/feature-flags/stacks/react/base/code/feature_flags_component.tpl.tsx
       merge_behavior: create
+    invariant: tasks/invariants/task.feature-flags.invariants.yaml
   multitenancy:
     description: 'Workspace/tenant isolation: per-tenant data, routing, billing hooks.'
     categories:
@@ -1441,8 +1321,7 @@ tasks:
       merge_behavior: create
     - id: MULTITENANCY_SERVICE
       target_path: src/multitenancy/service.{ext}
-      universal_template:
-        tasks/multitenancy/universal/code/MULTITENANCY-SKELETON.tpl.md
+      universal_template: tasks/multitenancy/universal/code/MULTITENANCY-SKELETON.tpl.md
       merge_behavior: create
     - id: MULTITENANCY_DOCS
       target_path: docs/MULTITENANCY.md
@@ -1450,9 +1329,9 @@ tasks:
       merge_behavior: create
     - id: MULTITENANCY_TESTS
       target_path: tests/multitenancy/test_multitenancy.{ext}
-      universal_template:
-        tasks/multitenancy/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/multitenancy/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+    invariant: tasks/invariants/task.multitenancy.invariants.yaml
   audit-logging:
     description: Who did what, when, on which object, with replayable logs.
     categories:
@@ -1474,8 +1353,7 @@ tasks:
     files:
     - id: AUDIT-LOGGING_SERVICE
       target_path: src/audit-logging/service.{ext}
-      universal_template:
-        tasks/audit-logging/universal/code/AUDIT-LOGGING-SKELETON.tpl.md
+      universal_template: tasks/audit-logging/universal/code/AUDIT-LOGGING-SKELETON.tpl.md
       merge_behavior: create
     - id: AUDIT-LOGGING_CONFIG
       target_path: config/audit-logging.{ext}
@@ -1487,12 +1365,12 @@ tasks:
       merge_behavior: create
     - id: AUDIT-LOGGING_TESTS
       target_path: tests/audit-logging/test_audit-logging.{ext}
-      universal_template:
-        tasks/audit-logging/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/audit-logging/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+    invariant: tasks/invariants/task.audit-logging.invariants.yaml
   healthchecks-telemetry:
-    description: /app/health, metrics endpoints, uptime checks, basic
-      observability wiring.
+    description: /app/health, metrics endpoints, uptime checks, basic observability
+      wiring.
     categories:
     - devops
     - monitoring
@@ -1510,25 +1388,21 @@ tasks:
     files:
     - id: HEALTHCHECKS-TELEMETRY_CONFIG
       target_path: config/healthchecks-telemetry.{ext}
-      universal_template:
-        tasks/healthchecks-telemetry/universal/code/CONFIG.tpl.yaml
+      universal_template: tasks/healthchecks-telemetry/universal/code/CONFIG.tpl.yaml
       merge_behavior: create
     - id: HEALTHCHECKS-TELEMETRY_SERVICE
       target_path: src/healthchecks-telemetry/service.{ext}
-      universal_template:
-        tasks/healthchecks-telemetry/universal/code/HEALTHCHECKS-TELEMETRY-SKELETON.tpl.md
+      universal_template: tasks/healthchecks-telemetry/universal/code/HEALTHCHECKS-TELEMETRY-SKELETON.tpl.md
       merge_behavior: create
     - id: HEALTHCHECKS-TELEMETRY_DOCS
       target_path: docs/HEALTHCHECKS-TELEMETRY.md
-      universal_template:
-        tasks/healthchecks-telemetry/universal/docs/OVERVIEW.tpl.md
+      universal_template: tasks/healthchecks-telemetry/universal/docs/OVERVIEW.tpl.md
       merge_behavior: create
     - id: HEALTHCHECKS-TELEMETRY_TESTS
-      target_path:
-        tests/healthchecks-telemetry/test_healthchecks-telemetry.{ext}
-      universal_template:
-        tasks/healthchecks-telemetry/universal/tests/TEST-STRATEGY.tpl.md
+      target_path: tests/healthchecks-telemetry/test_healthchecks-telemetry.{ext}
+      universal_template: tasks/healthchecks-telemetry/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+    invariant: tasks/invariants/task.healthchecks-telemetry.invariants.yaml
   ci-template:
     description: 'GitHub Actions / GitLab CI / etc: lint → test → build → deploy.'
     categories:
@@ -1545,8 +1419,7 @@ tasks:
     files:
     - id: CI-TEMPLATE_SERVICE
       target_path: src/ci-template/service.{ext}
-      universal_template:
-        tasks/ci-template/universal/code/CI-TEMPLATE-SKELETON.tpl.md
+      universal_template: tasks/ci-template/universal/code/CI-TEMPLATE-SKELETON.tpl.md
       merge_behavior: create
     - id: CI-TEMPLATE_CONFIG
       target_path: config/ci-template.{ext}
@@ -1560,9 +1433,9 @@ tasks:
       target_path: tests/ci-template/test_ci-template.{ext}
       universal_template: tasks/ci-template/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+    invariant: tasks/invariants/task.ci-template.invariants.yaml
   error-reporting:
-    description: Centralized logging + external service integration
-      (Sentry-like).
+    description: Centralized logging + external service integration (Sentry-like).
     categories:
     - devops
     - logging
@@ -1585,8 +1458,7 @@ tasks:
       merge_behavior: create
     - id: ERROR-REPORTING_SERVICE
       target_path: src/error-reporting/service.{ext}
-      universal_template:
-        tasks/error-reporting/universal/code/ERROR-REPORTING-SKELETON.tpl.md
+      universal_template: tasks/error-reporting/universal/code/ERROR-REPORTING-SKELETON.tpl.md
       merge_behavior: create
     - id: ERROR-REPORTING_DOCS
       target_path: docs/ERROR-REPORTING.md
@@ -1594,9 +1466,9 @@ tasks:
       merge_behavior: create
     - id: ERROR-REPORTING_TESTS
       target_path: tests/error-reporting/test_error-reporting.{ext}
-      universal_template:
-        tasks/error-reporting/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/error-reporting/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+    invariant: tasks/invariants/task.error-reporting.invariants.yaml
   config-management:
     description: '12-factor style config: env vars, secrets, per-env files.'
     categories:
@@ -1622,8 +1494,7 @@ tasks:
     files:
     - id: CONFIG-MANAGEMENT_SERVICE
       target_path: src/config-management/service.{ext}
-      universal_template:
-        tasks/config-management/universal/code/CONFIG-MANAGEMENT-SKELETON.tpl.md
+      universal_template: tasks/config-management/universal/code/CONFIG-MANAGEMENT-SKELETON.tpl.md
       merge_behavior: create
     - id: CONFIG-MANAGEMENT_CONFIG
       target_path: config/config-management.{ext}
@@ -1635,17 +1506,15 @@ tasks:
       merge_behavior: create
     - id: CONFIG-MANAGEMENT_TESTS
       target_path: tests/config-management/test_config-management.{ext}
-      universal_template:
-        tasks/config-management/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/config-management/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
     - id: CONFIG-MANAGEMENT_COMPONENT
       target_path: src/config-management/component.tsx
-      universal_template:
-        tasks/config-management/universal/code/CONFIG-MANAGEMENT-SKELETON.tpl.md
+      universal_template: tasks/config-management/universal/code/CONFIG-MANAGEMENT-SKELETON.tpl.md
       stack_overrides:
-        react:
-          tasks/config-management/stacks/react/base/code/config_management_component.tpl.tsx
+        react: tasks/config-management/stacks/react/base/code/config_management_component.tpl.tsx
       merge_behavior: create
+    invariant: tasks/invariants/task.config-management.invariants.yaml
   canary-release:
     description: 'Basic staged rollout logic: canary % routing, rollback script, monitoring
       hooks.'
@@ -1664,8 +1533,7 @@ tasks:
     files:
     - id: CANARY-RELEASE_SERVICE
       target_path: src/canary-release/service.{ext}
-      universal_template:
-        tasks/canary-release/universal/code/CANARY-RELEASE-SKELETON.tpl.md
+      universal_template: tasks/canary-release/universal/code/CANARY-RELEASE-SKELETON.tpl.md
       merge_behavior: create
     - id: CANARY-RELEASE_CONFIG
       target_path: config/canary-release.{ext}
@@ -1677,9 +1545,9 @@ tasks:
       merge_behavior: create
     - id: CANARY-RELEASE_TESTS
       target_path: tests/canary-release/test_canary-release.{ext}
-      universal_template:
-        tasks/canary-release/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/canary-release/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+    invariant: tasks/invariants/task.canary-release.invariants.yaml
   llm-prompt-router:
     description: Given task → choose model, prompt template, tools, temp, etc.
     categories:
@@ -1702,8 +1570,7 @@ tasks:
       merge_behavior: create
     - id: LLM-PROMPT-ROUTER_SERVICE
       target_path: src/llm-prompt-router/service.{ext}
-      universal_template:
-        tasks/llm-prompt-router/universal/code/LLM-PROMPT-ROUTER-SKELETON.tpl.md
+      universal_template: tasks/llm-prompt-router/universal/code/LLM-PROMPT-ROUTER-SKELETON.tpl.md
       merge_behavior: create
     - id: LLM-PROMPT-ROUTER_DOCS
       target_path: docs/LLM-PROMPT-ROUTER.md
@@ -1711,9 +1578,9 @@ tasks:
       merge_behavior: create
     - id: LLM-PROMPT-ROUTER_TESTS
       target_path: tests/llm-prompt-router/test_llm-prompt-router.{ext}
-      universal_template:
-        tasks/llm-prompt-router/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/llm-prompt-router/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+    invariant: tasks/invariants/task.llm-prompt-router.invariants.yaml
   rag-pipeline:
     description: Ingest → chunk → embed → store → query → answer generation.
     categories:
@@ -1735,8 +1602,7 @@ tasks:
       merge_behavior: create
     - id: RAG-PIPELINE_SERVICE
       target_path: src/rag-pipeline/service.{ext}
-      universal_template:
-        tasks/rag-pipeline/universal/code/RAG-PIPELINE-SKELETON.tpl.md
+      universal_template: tasks/rag-pipeline/universal/code/RAG-PIPELINE-SKELETON.tpl.md
       merge_behavior: create
     - id: RAG-PIPELINE_DOCS
       target_path: docs/RAG-PIPELINE.md
@@ -1744,9 +1610,9 @@ tasks:
       merge_behavior: create
     - id: RAG-PIPELINE_TESTS
       target_path: tests/rag-pipeline/test_rag-pipeline.{ext}
-      universal_template:
-        tasks/rag-pipeline/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/rag-pipeline/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+    invariant: tasks/invariants/task.rag-pipeline.invariants.yaml
   agentic-workflow:
     description: 'Multi-step agent orchestration: planner, executor, verifier.'
     categories:
@@ -1763,8 +1629,7 @@ tasks:
     files:
     - id: AGENTIC-WORKFLOW_SERVICE
       target_path: src/agentic-workflow/service.{ext}
-      universal_template:
-        tasks/agentic-workflow/universal/code/AGENTIC-WORKFLOW-SKELETON.tpl.md
+      universal_template: tasks/agentic-workflow/universal/code/AGENTIC-WORKFLOW-SKELETON.tpl.md
       merge_behavior: create
     - id: AGENTIC-WORKFLOW_CONFIG
       target_path: config/agentic-workflow.{ext}
@@ -1776,12 +1641,12 @@ tasks:
       merge_behavior: create
     - id: AGENTIC-WORKFLOW_TESTS
       target_path: tests/agentic-workflow/test_agentic-workflow.{ext}
-      universal_template:
-        tasks/agentic-workflow/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/agentic-workflow/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+    invariant: tasks/invariants/task.agentic-workflow.invariants.yaml
   code-refactor-agent:
-    description: Target repo → plan refactor → create diffs → run tests →
-      produce report.
+    description: Target repo → plan refactor → create diffs → run tests → produce
+      report.
     categories:
     - ai
     - refactoring
@@ -1798,27 +1663,24 @@ tasks:
     files:
     - id: CODE-REFACTOR-AGENT_SERVICE
       target_path: src/code-refactor-agent/service.{ext}
-      universal_template:
-        tasks/code-refactor-agent/universal/code/CODE-REFACTOR-AGENT-SKELETON.tpl.md
+      universal_template: tasks/code-refactor-agent/universal/code/CODE-REFACTOR-AGENT-SKELETON.tpl.md
       merge_behavior: create
     - id: CODE-REFACTOR-AGENT_CONFIG
       target_path: config/code-refactor-agent.{ext}
-      universal_template:
-        tasks/code-refactor-agent/universal/code/CONFIG.tpl.yaml
+      universal_template: tasks/code-refactor-agent/universal/code/CONFIG.tpl.yaml
       merge_behavior: create
     - id: CODE-REFACTOR-AGENT_DOCS
       target_path: docs/CODE-REFACTOR-AGENT.md
-      universal_template:
-        tasks/code-refactor-agent/universal/docs/OVERVIEW.tpl.md
+      universal_template: tasks/code-refactor-agent/universal/docs/OVERVIEW.tpl.md
       merge_behavior: create
     - id: CODE-REFACTOR-AGENT_TESTS
       target_path: tests/code-refactor-agent/test_code-refactor-agent.{ext}
-      universal_template:
-        tasks/code-refactor-agent/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/code-refactor-agent/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+    invariant: tasks/invariants/task.code-refactor-agent.invariants.yaml
   project-bootstrap:
-    description: Given stack + tier + tasks → assemble everything (you already
-      kind of have this).
+    description: Given stack + tier + tasks → assemble everything (you already kind
+      of have this).
     categories:
     - meta
     - bootstrap
@@ -1836,8 +1698,7 @@ tasks:
       merge_behavior: create
     - id: PROJECT-BOOTSTRAP_SERVICE
       target_path: src/project-bootstrap/service.{ext}
-      universal_template:
-        tasks/project-bootstrap/universal/code/PROJECT-BOOTSTRAP-SKELETON.tpl.md
+      universal_template: tasks/project-bootstrap/universal/code/PROJECT-BOOTSTRAP-SKELETON.tpl.md
       merge_behavior: create
     - id: PROJECT-BOOTSTRAP_DOCS
       target_path: docs/PROJECT-BOOTSTRAP.md
@@ -1845,9 +1706,9 @@ tasks:
       merge_behavior: create
     - id: PROJECT-BOOTSTRAP_TESTS
       target_path: tests/project-bootstrap/test_project-bootstrap.{ext}
-      universal_template:
-        tasks/project-bootstrap/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/project-bootstrap/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+    invariant: tasks/invariants/task.project-bootstrap.invariants.yaml
   docs-site:
     description: Autogenerated docs site from markdown/YAML + sidebar + search.
     categories:
@@ -1869,8 +1730,7 @@ tasks:
       merge_behavior: create
     - id: DOCS-SITE_SERVICE
       target_path: src/docs-site/service.{ext}
-      universal_template:
-        tasks/docs-site/universal/code/DOCS-SITE-SKELETON.tpl.md
+      universal_template: tasks/docs-site/universal/code/DOCS-SITE-SKELETON.tpl.md
       merge_behavior: create
     - id: DOCS-SITE_DOCS
       target_path: docs/DOCS-SITE.md
@@ -1882,14 +1742,12 @@ tasks:
       merge_behavior: create
     - id: DOCS-SITE_COMPONENT
       target_path: src/docs-site/component.tsx
-      universal_template:
-        tasks/docs-site/universal/code/DOCS-SITE-SKELETON.tpl.md
+      universal_template: tasks/docs-site/universal/code/DOCS-SITE-SKELETON.tpl.md
       stack_overrides:
-        nextjs:
-          tasks/docs-site/stacks/nextjs/base/code/docs_site_component.tpl.tsx
-        react:
-          tasks/docs-site/stacks/react/base/code/docs_site_component.tpl.tsx
+        nextjs: tasks/docs-site/stacks/nextjs/base/code/docs_site_component.tpl.tsx
+        react: tasks/docs-site/stacks/react/base/code/docs_site_component.tpl.tsx
       merge_behavior: create
+    invariant: tasks/invariants/task.docs-site.invariants.yaml
   sample-data-generator:
     description: Fixtures + realistic fake data for dev/staging environments.
     categories:
@@ -1909,24 +1767,21 @@ tasks:
     files:
     - id: SAMPLE-DATA-GENERATOR_CONFIG
       target_path: config/sample-data-generator.{ext}
-      universal_template:
-        tasks/sample-data-generator/universal/code/CONFIG.tpl.yaml
+      universal_template: tasks/sample-data-generator/universal/code/CONFIG.tpl.yaml
       merge_behavior: create
     - id: SAMPLE-DATA-GENERATOR_SERVICE
       target_path: src/sample-data-generator/service.{ext}
-      universal_template:
-        tasks/sample-data-generator/universal/code/SAMPLE-DATA-GENERATOR-SKELETON.tpl.md
+      universal_template: tasks/sample-data-generator/universal/code/SAMPLE-DATA-GENERATOR-SKELETON.tpl.md
       merge_behavior: create
     - id: SAMPLE-DATA-GENERATOR_DOCS
       target_path: docs/SAMPLE-DATA-GENERATOR.md
-      universal_template:
-        tasks/sample-data-generator/universal/docs/OVERVIEW.tpl.md
+      universal_template: tasks/sample-data-generator/universal/docs/OVERVIEW.tpl.md
       merge_behavior: create
     - id: SAMPLE-DATA-GENERATOR_TESTS
       target_path: tests/sample-data-generator/test_sample-data-generator.{ext}
-      universal_template:
-        tasks/sample-data-generator/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/sample-data-generator/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+    invariant: tasks/invariants/task.sample-data-generator.invariants.yaml
   testing:
     description: Comprehensive testing infrastructure and patterns.
     display_name: Testing Infrastructure
@@ -1955,8 +1810,7 @@ tasks:
       merge_behavior: create
     - id: TESTING_SERVICE
       target_path: src/testing/service.{ext}
-      universal_template:
-        tasks/testing/universal/code/TESTING-SKELETON.tpl.md
+      universal_template: tasks/testing/universal/code/TESTING-SKELETON.tpl.md
       merge_behavior: create
     - id: TESTING_DOCS
       target_path: docs/TESTING.md
@@ -1964,9 +1818,9 @@ tasks:
       merge_behavior: create
     - id: TESTING_TESTS
       target_path: tests/testing/test_testing.{ext}
-      universal_template:
-        tasks/testing/universal/tests/TEST-STRATEGY.tpl.md
+      universal_template: tasks/testing/universal/tests/TEST-STRATEGY.tpl.md
       merge_behavior: create
+    invariant: tasks/invariants/task.testing.invariants.yaml
 task_config:
   merge_strategies:
     create: Create new file, fail if exists

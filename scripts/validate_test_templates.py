@@ -4,12 +4,9 @@ Test Template Validation Script
 Validates syntax and basic structure of all test templates
 """
 
-<<<<<<< ours
 import os
 import re
-=======
 import subprocess
->>>>>>> theirs
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -28,8 +25,8 @@ class ValidationRule:
 
 
 # Template validation rules
-<<<<<<< ours
-VALIDATION_RULES = {
+
+VALIDATION_RULES: Dict[str, Dict[str, object]] = {
     'dart': {
         'extension': '.dart',
         'required_tokens': ['flutter_test', 'test'],
@@ -73,13 +70,6 @@ VALIDATION_RULES = {
 }
 
 _PLACEHOLDER_MARKERS = ["{{", "[[", "{%"]
-
-
-def _detect_file_type(file_path: Path) -> str:
-    suffix = file_path.suffix
-    if suffix.lower() == '.r':
-        return 'r'
-    return suffix.lstrip('.').lower()
 
 
 def _has_any_placeholder(content: str) -> bool:
@@ -171,162 +161,9 @@ def validate_template_syntax(file_path: Path, file_type: str) -> Tuple[bool, Lis
         return len(errors) == 0, errors
     except Exception as e:
         return False, [f"Validation error: {str(e)}"]
-=======
-VALIDATION_RULES: Dict[str, ValidationRule] = {
-    'dart': ValidationRule(
-        extensions=('.dart',),
-        command=['dart', 'analyze'],
-        required_imports=('flutter_test', 'test'),
-    ),
-    'python': ValidationRule(
-        extensions=('.py',),
-        command=[sys.executable, '-m', 'py_compile'],
-        required_imports=('pytest',),
-    ),
-    'javascript': ValidationRule(
-        extensions=('.js', '.jsx'),
-        command=['node', '--check'],
-        required_imports=('jest',),
-    ),
-    'typescript': ValidationRule(
-        extensions=('.ts', '.tsx'),
-        required_imports=('vitest', 'jest'),
-    ),
-    'go': ValidationRule(
-        extensions=('.go',),
-        command=['gofmt', '-l'],
-        required_imports=(),
-    ),
-    'rust': ValidationRule(
-        extensions=('.rs',),
-        required_imports=('use',),
-    ),
-    'sql': ValidationRule(
-        extensions=('.sql',),
-        required_tokens=(),
-    ),
-    'r': ValidationRule(
-        extensions=('.r', '.R'),
-        required_imports=('testthat',),
-    ),
-}
-
-# Fallback mapping to derive a rule from stack names
-STACK_RULE_MAP: Dict[str, str] = {
-    'flutter': 'dart',
-    'react': 'javascript',
-    'react_native': 'javascript',
-    'node': 'javascript',
-    'typescript': 'typescript',
-    'python': 'python',
-    'go': 'go',
-    'rust': 'rust',
-    'sql': 'sql',
-    'r': 'r',
-}
-
-
-def _build_extension_map(rules: Dict[str, ValidationRule]) -> Dict[str, str]:
-    """Create a mapping of extension to validation rule name."""
-
-    extension_map: Dict[str, str] = {}
-    for rule_name, rule in rules.items():
-        for ext in rule.extensions:
-            extension_map[ext.lower()] = rule_name
-    return extension_map
-
-
-EXTENSION_MAP = _build_extension_map(VALIDATION_RULES)
-
-
-def resolve_rule_label(file_path: Path) -> str:
-    """Resolve the validation rule label for a given template path."""
-
-    parts = file_path.parts
-    stack_name = parts[1] if len(parts) > 1 else None
-    ext = file_path.suffix.lower()
-    ignored_extensions = {'.md', '.yml', '.yaml'}
-
-    ext_rule = EXTENSION_MAP.get(ext)
-    stack_rule = STACK_RULE_MAP.get(stack_name) if stack_name else None
-
-    if ext_rule and stack_rule and ext_rule != stack_rule:
-        return stack_rule
-
-    if ext_rule:
-        return ext_rule
-
-    if ext in ignored_extensions:
-        return 'unknown'
-
-    if stack_rule:
-        return stack_rule
-
-    return 'unknown'
-
-def _run_command(command: Iterable[str], file_path: Path) -> Tuple[bool, str]:
-    """Run a syntax check command if it is available."""
-
-    command = list(command)
-    if not which(command[0]):
-        return False, f"Skipping syntax check, command not found: {command[0]}"
-
-    try:
-        result = subprocess.run(
-            command + [str(file_path)],
-            capture_output=True,
-            text=True,
-            timeout=30,
-            check=False,
-        )
-    except subprocess.TimeoutExpired:
-        return False, "Validation timed out"
-    except Exception as exc:  # pragma: no cover - defensive guard
-        return False, f"Validation error: {exc}"
-
-    if result.returncode != 0:
-        message = result.stderr.strip() or result.stdout.strip()
-        if len(message) > 500:
-            message = message[:500] + "... (truncated)"
-        return False, message
-
-    return True, ""
-
-
-def validate_template_syntax(file_path: Path, rule: ValidationRule) -> Tuple[bool, List[str], List[str]]:
-    """Validate template syntax using appropriate tool and content checks."""
-
-    errors: List[str] = []
-    warnings: List[str] = []
-
-    if rule.command:
-        ok, message = _run_command(rule.command, file_path)
-        if not ok and message:
-            # Missing tooling should not fail validation but should be surfaced
-            if message.startswith("Skipping syntax check"):
-                warnings.append(message)
-            else:
-                errors.append(f"Syntax error: {message}")
-
-    try:
-        content = file_path.read_text(encoding='utf-8')
-    except Exception as exc:  # pragma: no cover - defensive guard
-        return False, [f"Unable to read file: {exc}"], warnings
-
-    for required_import in rule.required_imports:
-        if required_import not in content:
-            errors.append(f"Missing required import: {required_import}")
-
-    for token in rule.required_tokens:
-        if token not in content:
-            errors.append(f"Missing template placeholder: {token}")
-
-    return len(errors) == 0, errors, warnings
->>>>>>> theirs
 
 
 def find_test_templates() -> Dict[str, List[Path]]:
-<<<<<<< ours
     """Find all test template files"""
     templates: Dict[str, List[Path]] = {}
 
@@ -366,24 +203,6 @@ def find_test_templates() -> Dict[str, List[Path]]:
                 continue
             file_type = _detect_file_type(file_path)
             templates.setdefault(file_type, []).append(file_path)
-=======
-    """Find all test template files across stacks and tiers."""
-
-    templates: Dict[str, List[Path]] = {name: [] for name in VALIDATION_RULES.keys()}
-    templates['unknown'] = []
-
-    stacks_dir = Path('stacks')
-    if not stacks_dir.exists():
-        print("❌ stacks directory not found")
-        return templates
-
-    for file_path in stacks_dir.rglob('tests/*.tpl.*'):
-        label = resolve_rule_label(file_path)
-        if label in templates:
-            templates[label].append(file_path)
-        else:
-            templates['unknown'].append(file_path)
->>>>>>> theirs
 
     return templates
 
@@ -408,27 +227,19 @@ def main():
         if not files or rule_label == 'unknown':
             continue
 
-        rule = VALIDATION_RULES.get(rule_label)
-        if not rule:
-            continue
-
         print(f"\n🔍 Validating {rule_label.upper()} files...")
 
         for file_path in files:
             print(f"  📄 {file_path.name}")
 
-            is_valid, errors, warnings = validate_template_syntax(file_path, rule)
-
-            for warning in warnings:
-                print(f"    ⚠️  {warning}")
+            is_valid, errors = validate_template_syntax(file_path, rule_label)
 
             if is_valid:
                 print("    ✅ Valid")
             else:
-                print("    ❌ Invalid:")
-                for error in errors:
-                    print(f"       - {error}")
                 all_valid = False
+                for error in errors:
+                    print(f"    ❌ {error}")
 
     if templates.get('unknown'):
         print("\n⚠️  Unknown file extensions detected:")

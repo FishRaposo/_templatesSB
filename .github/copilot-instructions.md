@@ -167,7 +167,7 @@ python scripts/detect_project_tasks.py --description "Project requirements"
 python scripts/list_tasks_by_category.py --summary
 
 # Generate reference projects
-python scripts/generate-reference-projects.py
+python scripts/generate_reference_projects.py
 ```
 
 ### Testing Generated Projects

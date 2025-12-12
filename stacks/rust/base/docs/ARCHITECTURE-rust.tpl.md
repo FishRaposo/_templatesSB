@@ -1,27 +1,38 @@
 <!--
 File: ARCHITECTURE-rust.tpl.md
-Purpose: Template for unknown implementation
-Template Version: 1.0
+Purpose: Architectural guidelines for Rust projects
+Generated for: {{PROJECT_NAME}}
 -->
 
-# Rust Architecture - {{PROJECT_NAME}}
+# Architecture Guide: {{PROJECT_NAME}}
 
-**Tier**: {{TIER}} | **Stack**: Rust
+## Core Philosophy
+This project follows a **Hexagonal (Ports and Adapters)** architecture pattern, leveraging Rust's type system to enforce boundaries.
+The goal is to decouple the core business logic from external concerns like databases, APIs, and UIs.
 
-## Goals
+## Directory Structure
+```
+src/
+├── domain/       # Core business logic (Pure Rust, no I/O)
+│   ├── models/   # Domain structures
+│   └── errors.rs # Domain-level errors
+├── ports/        # Interfaces (Traits) definitions
+│   ├── inbound/  # API definitions (e.g., Service traits)
+│   └── outbound/ # Repository/Adapter traits
+├── adapters/     # Implementation of ports
+│   ├── http/     # Web controllers (Axum/Actix)
+│   ├── db/       # Database implementations (Sqlx/Diesel)
+│   └── external/ # 3rd party APIs
+└── config/       # Configuration loading
+```
 
-- Clear module boundaries
-- Testable units with minimal global state
-- Explicit error handling
+## Key Patterns
+- **Newtype Pattern**: Use tuple structs for strong typing (e.g., `pub struct UserId(Uuid);`).
+- **Error Handling**: Use `thiserror` for library/domain errors and `anyhow` for application/handler errors.
+- **Dependency Injection**: Pass traits (e.g., `Arc<dyn UserRepository>`) to service constructors.
+- **Async Runtime**: Use `tokio` as the default runtime.
 
-## Suggested layering
-
-- `routes/`: transport layer (HTTP, CLI)
-- `services/`: business logic
-- `core/`: shared utilities (error/logging/config)
-
-## Dependency direction
-
-- `routes` depends on `services`
-- `services` depends on `core`
-- `core` should not depend on application layers
+## Testing Strategy
+- **Unit Tests**: Co-located in the same file `mod tests`. Pure business logic testing.
+- **Integration Tests**: In `tests/` directory. Test interaction with database/API.
+- **Property Tests**: Use `proptest` for invariant checking.

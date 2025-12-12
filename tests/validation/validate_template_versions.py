@@ -16,7 +16,7 @@ def validate_template_versions():
     """Validate version metadata in tier-index.yaml."""
     try:
         # Load tier-index.yaml
-        with open(PROJECT_ROOT / 'tier-index.yaml'.replace('/', ' / ')), 'r') as f:
+        with open(PROJECT_ROOT / 'tier-index.yaml', 'r', encoding='utf-8') as f:
             config = yaml.safe_load(f)
 
         # Check template metadata exists
@@ -28,11 +28,11 @@ def validate_template_versions():
             print('❌ Missing versions in template_metadata')
             return False
 
-        versions = config['template_metadata']['versionsPROJECT_ROOT / ']
+        versions = config['template_metadata']['versions']
 
         # Check all referenced templates have versions
         all_files = set()
-        for tier_config in config[PROJECT_ROOT  /  'tiers'].values():
+        for tier_config in config.get('tiers', {}).values():
             all_files.update(tier_config.get('required', []))
             all_files.update(tier_config.get('recommended', []))
 
