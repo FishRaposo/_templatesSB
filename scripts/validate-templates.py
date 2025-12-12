@@ -37,6 +37,12 @@ try:
 except Exception:
     FEATURE_WORKFLOW_TESTS_VALIDATOR_AVAILABLE = False
 
+try:
+    from validate_task_invariants import validate_task_invariants
+    TASK_INVARIANTS_VALIDATOR_AVAILABLE = True
+except Exception:
+    TASK_INVARIANTS_VALIDATOR_AVAILABLE = False
+
 # Ensure consistent UTF-8 output on Windows consoles to avoid encoding errors when printing symbols/emojis
 try:
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -351,22 +357,22 @@ class TemplateValidator:
         for file_path in all_files:
             if file_path == system_map_path:
                 continue
-            
+
             try:
                 with open(file_path, 'r', encoding='utf-8') as f:
                     file_content = f.read()
-                
+
                 if "SYSTEM-MAP" in file_content:
                     if "universal/docs/SYSTEM-MAP.tpl.md" in file_content:
                         self.log_issue("error", file_path, "References old SYSTEM-MAP location")
                     elif "SYSTEM-MAP.md" not in file_content:
                         self.log_issue("warning", file_path, "SYSTEM-MAP reference may be outdated")
-                        
+
             except Exception:
                 continue  # Skip files that can't be read
         
         print("[OK] SYSTEM-MAP.md references validated")
-    
+
     def validate_tier_overlay_counts(self):
         """Validate tier overlay file counts match actual system structure"""
         print("\nValidating Tier Overlay Counts...")
@@ -384,18 +390,24 @@ class TemplateValidator:
                 continue
             
             # Count only actual template files, exclude __pycache__ and compiled files
-            actual_files = [f for f in tier_path.rglob("*.tpl.*") 
-                           if "_archive" not in str(f)
-                           and "__pycache__" not in str(f) 
-                           and not str(f).endswith(".pyc")]
+            actual_files = [
+                f
+                for f in tier_path.rglob("*.tpl.*")
+                if "_archive" not in str(f)
+                and "__pycache__" not in str(f)
+                and not str(f).endswith(".pyc")
+            ]
             actual_count = len(actual_files)
             
             if actual_count != expected_count:
-                self.log_issue("warning", f"tiers/{tier}", 
-                             f"Template file count mismatch: expected {expected_count}, got {actual_count}")
+                self.log_issue(
+                    "warning",
+                    f"tiers/{tier}",
+                    f"Template file count mismatch: expected {expected_count}, got {actual_count}",
+                )
         
         print("[OK] Tier overlay counts validated")
-    
+
     def validate_schema_compliance(self):
         """Validate blueprint and template metadata against pydantic schemas"""
         if not PYDANTIC_AVAILABLE:
@@ -427,7 +439,7 @@ class TemplateValidator:
                                      f"Schema validation failed: {str(e)}")
         
         print("[OK] Schema validation complete")
-    
+
     def validate_features_and_workflows(self):
         if not FEATURES_WORKFLOWS_VALIDATOR_AVAILABLE:
             print("\nSkipping FEATURES/WORKFLOWS validation")
@@ -481,6 +493,20 @@ class TemplateValidator:
             for e in errors:
                 self.log_issue("error", e.file, e.message)
 
+    def validate_task_invariants(self):
+        if not TASK_INVARIANTS_VALIDATOR_AVAILABLE:
+            print("\nSkipping task invariant validation")
+            return
+
+        print("\nValidating task invariants...")
+        print("-" * 40)
+
+        errors, warnings = validate_task_invariants(self.templates_root)
+        for w in warnings:
+            self.log_issue("warning", w.file, w.message)
+        for e in errors:
+            self.log_issue("error", e.file, e.message)
+
     def validate_blueprints(self):
         """Validate blueprint system integrity and configuration"""
         print("\nValidating Blueprint System...")
@@ -509,8 +535,11 @@ class TemplateValidator:
             for file_name in required_files:
                 file_path = blueprint_path / file_name
                 if not file_path.exists():
-                    self.log_issue("error", f"blueprints/{blueprint_id}/{file_name}", 
-                                 f"Required blueprint file missing: {file_name}")
+                    self.log_issue(
+                        "error",
+                        f"blueprints/{blueprint_id}/{file_name}",
+                        f"Required blueprint file missing: {file_name}",
+                    )
                 else:
                     print(f"  [OK] {blueprint_id}/{file_name}")
             
@@ -521,15 +550,18 @@ class TemplateValidator:
             
             # Check overlay structure if specified
             summary = get_blueprint_summary(blueprint_id)
-            if 'stacks' in summary:
-                supported_stacks = summary['stacks'].get('supported', [])
+            if "stacks" in summary:
+                supported_stacks = summary["stacks"].get("supported", [])
                 for stack in supported_stacks:
                     overlay_path = blueprint_path / "overlays" / stack
                     if overlay_path.exists():
                         print(f"  [OK] {blueprint_id}/overlays/{stack}")
                     else:
-                        self.log_issue("warning", f"blueprints/{blueprint_id}/overlays/{stack}", 
-                                     f"Overlay directory missing for supported stack: {stack}")
+                        self.log_issue(
+                            "warning",
+                            f"blueprints/{blueprint_id}/overlays/{stack}",
+                            f"Overlay directory missing for supported stack: {stack}",
+                        )
         
         print("[OK] Blueprint system validated")
     
@@ -615,6 +647,7 @@ def main():
             validator.validate_schema_compliance()
             validator.validate_features_and_workflows()
             validator.validate_feature_and_workflow_tests()
+            validator.validate_task_invariants()
         
         # Generate report
         report = validator.generate_report(args.report)

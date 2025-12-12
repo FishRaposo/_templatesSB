@@ -1,0 +1,2 @@
+-- Generated stub for feature: [[FEATURE_ID]]
+-- TODO: implement feature logic as views/procedures or application-side code.

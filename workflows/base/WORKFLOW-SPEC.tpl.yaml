@@ -1,0 +1,34 @@
+id: workflow.domain.name
+name: "Workflow Name"
+summary: >
+  Describe the user's goal for this journey.
+
+primary_actor: "user"
+
+preconditions:
+  - "precondition 1"
+
+postconditions:
+  - "postcondition 1"
+
+happy_path:
+  - step_id: s1
+    feature_id: feature.module.name
+    description: "User does X"
+
+steps:
+  - step_id: s1
+    description: "Detailed step description"
+    feature_id: feature.module.name
+    system_tasks:
+      - task.example.system_requirement
+    ui_state: "screen_id"
+    inputs: []
+    outputs: []
+
+alternate_flows: []
+
+failure_modes: []
+
+metrics:
+  - name: "metric_name"

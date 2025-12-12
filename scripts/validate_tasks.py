@@ -251,6 +251,15 @@ class TaskValidator:
         # Check description
         if "description" not in task_data:
             self.log_warning(f"Missing description in task index", f"task-index.yaml:{task_name}")
+
+        invariant_path = task_data.get("invariant")
+        if invariant_path is not None:
+            if not isinstance(invariant_path, str) or not invariant_path.strip():
+                self.log_error("Task invariant path must be a non-empty string", f"task-index.yaml:{task_name}")
+            else:
+                full_path = self.templates_root / invariant_path
+                if not full_path.exists():
+                    self.log_error(f"Invariant file not found: {invariant_path}", f"task-index.yaml:{task_name}")
         
         # Check categories
         categories = task_data.get("categories")
