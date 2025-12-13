@@ -1,0 +1,41 @@
+id: data-pipeline
+version: 1
+name: "Modern Data Pipeline"
+category: "data"
+
+description: >
+  Modular ETL framework for building robust data pipelines with pluggable
+  extractors, transformers, and loaders.
+
+type: "pipeline"
+
+stacks:
+  required:
+    - python
+  supported:
+    - python
+
+tier_defaults:
+  overall: core
+  backend: core
+
+tasks:
+  required:
+    - data-processing-batch
+    - background-jobs
+  recommended:
+    - data-validation
+  optional:
+    - ai-data-enrichment
+
+constraints:
+  batch_processing: true
+  idempotent: true
+
+overlays:
+  python:
+    enabled: true
+    mode: "extend"
+    apply_to:
+      - "src/"
+      - "pipelines/"

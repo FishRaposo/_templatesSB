@@ -1,36 +1,22 @@
 # Reference Projects
 
-> Generated reference implementations for the Universal Template System.
+This directory contains auto-generated reference implementations for various technology stacks and tiers.
+These projects serve as validation targets and examples of the template system's output.
 
-## Purpose
+## Directory Structure
 
-This directory contains complete, working reference implementations generated from templates. These serve as:
+Projects are organized by tier and stack:
+- `mvp/` - Minimal Viable Product examples
+- `core/` - Production-ready implementations
+- `enterprise/` - High-scale, compliant architecture
 
-1. **Validation** - Proof that templates generate working code
-2. **Examples** - Complete implementations for developers to learn from
-3. **Testing** - Integration tests for the template system
+## Available Stacks
 
-## Structure
+- **Web**: React, Next.js, Node.js, TypeScript
+- **Mobile**: Flutter, React Native
+- **Backend**: Python, Go, Rust
+- **Data**: SQL, R
 
-```
-reference-projects/
-├── mvp/           # MVP tier reference implementations
-├── core/          # Core tier reference implementations  
-└── enterprise/    # Enterprise tier reference implementations
-```
+## Advanced Blueprints
 
-## Generating Reference Projects
-
-Use the project generation scripts:
-
-```bash
-# Generate reference project
-python scripts/generate_reference_projects.py
-
-# Or use setup-project.py for specific stack/tier
-python scripts/setup-project.py --manual-stack python --manual-tier mvp
-```
-
-## Status
-
-Reference projects are generated on-demand and may not always be present in the repository.
+For curated, complex application patterns (like SaaS API, Data Pipeline), see the `../blueprints/` directory.

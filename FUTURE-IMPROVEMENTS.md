@@ -131,6 +131,11 @@ It is intentionally:
 
 ## P3 — Reference project generation improvements
 
+✅ **COMPLETED** — Created 3 production-ready reference projects:
+- `saas-api/` - FastAPI backend with auth, billing, webhooks
+- `data-pipeline/` - Python ETL framework with extractors, transformers, loaders  
+- `web-dashboard/` - Next.js 14 with data tables, charts, React Query hooks
+
 - **Single canonical generator entrypoint**
   Ensure docs and scripts all point to the same generator.
 
