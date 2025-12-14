@@ -197,8 +197,8 @@ grep -r "affected_class" docs/
 ## 📚 Related Documentation
 
 - [PROMPT-VALIDATION.md](PROMPT-VALIDATION.md) - Prompt validation system
-- [DOCUMENTATION.md](../../blueprints/documentation/overlays/generic/DOCUMENTATION.tpl.md) - Documentation navigation
-- [AGENTS.md](../../blueprints/documentation/overlays/generic/AGENTS.tpl.md) - Developer guidelines
+- [DOCUMENTATION.md](../../blueprints/default-project/overlays/generic/DOCUMENTATION.tpl.md) - Documentation navigation
+- [AGENTS.md](../../blueprints/default-project/overlays/generic/AGENTS.tpl.md) - Developer guidelines
 
 ---
 

@@ -1,6 +1,6 @@
-# Documentation Blueprint
+# Default Project Blueprint
 
-> Universal documentation standards and patterns for the Universal Template System
+> Universal default project baseline for the Universal Template System
 
 ## Overview
 

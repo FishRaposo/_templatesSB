@@ -1,15 +1,15 @@
-id: documentation
+id: default-project
 version: 1
-name: "Documentation Blueprint"
+name: "Default Project Blueprint"
 category: "meta"
 
 description: >
-  Universal documentation standards and patterns for the Universal Template System.
-  Defines agent-specific guides, documentation hierarchy, and style conventions
-  to ensure all coding agents can work effectively with the system.
+  Universal default project baseline for the Universal Template System.
+  Provides comprehensive documentation structure, AI agent guides, repo hygiene,
+  and community health standards that can be used by any project.
 
 # What kind of thing this is
-type: "documentation"  # "app" | "pipeline" | "api" | "agent_system" | "dashboard" | "documentation"
+type: "app"  # "app" | "pipeline" | "api" | "agent_system" | "dashboard" | "documentation"
 
 # Documentation blueprint applies to all stacks
 stacks:
@@ -64,16 +64,35 @@ overlays:
       - "CLAUDE.md"           # Claude quick reference - PRIMARY LLM ENTRYPOINT
       - "AI-QUICK-START.md"   # AI agent setup guide
       - "QUICKSTART-AI.md"    # Comprehensive AI quickstart (42KB)
+      - "AIDER.md"            # Aider guide (root)
+      - "CODEX.md"            # OpenAI GPT/Codex guide (root)
+      - "CODY.md"             # Sourcegraph Cody guide (root)
+      - "COPILOT.md"          # GitHub Copilot guide (root)
+      - "CURSOR.md"           # Cursor IDE guide (root)
+      - "GEMINI.md"           # Google Gemini guide (root)
+      - "WARP.md"             # Warp terminal guide (root)
+      - "WINDSURF.md"         # Windsurf/Codeium guide (root)
       # Project overview files
       - "README.md"           # Project overview
       - "CONTEXT.md"          # Philosophy & architecture
       - "INDEX.md"            # Project navigation
       - "SYSTEM-MAP.md"       # System architecture overview
       - "DOCUMENTATION.md"    # Documentation navigation
+      - "DOCUMENTATION-OVERVIEW.md"   # Documentation overview hub
+      - "DOCUMENTATION-BLUEPRINT.md"  # Documentation templates/guidelines
       # User-facing files
       - "QUICKSTART.md"       # Quick start for users
       - "WORKFLOW.md"         # User workflows
       - "CONTRIBUTING.md"     # Contribution guide
+      # Repo hygiene / community health
+      - "LICENSE.md"
+      - "SECURITY.md"
+      - "CODE_OF_CONDUCT.md"
+      - "SUPPORT.md"
+      # Repo standards
+      - ".gitignore"
+      - ".editorconfig"
+      - ".gitattributes"
       # Status tracking
       - "CHANGELOG.md"        # Version history
       - "TODO.md"             # Task tracking
@@ -86,6 +105,8 @@ overlays:
       - "agents/"
       # .github/ - GitHub Actions workflow TEMPLATES - PROJECT SPECIFIC
       - ".github/"
+      # docs/ - Project-level governance for AI prompts + doc maintenance (referenced by AGENTS.md)
+      - "docs/"
       # Configuration templates
       - "tier-index.yaml"
       - "requirements.txt"
@@ -169,16 +190,35 @@ documentation_structure:
     - CLAUDE.md           # Claude quick reference - PRIMARY LLM ENTRYPOINT
     - AI-QUICK-START.md   # AI agent setup guide
     - QUICKSTART-AI.md    # Comprehensive AI quickstart
+    - AIDER.md
+    - CODEX.md
+    - CODY.md
+    - COPILOT.md
+    - CURSOR.md
+    - GEMINI.md
+    - WARP.md
+    - WINDSURF.md
     # Project overview files
     - README.md           # Project overview
     - CONTEXT.md          # Philosophy & architecture
     - INDEX.md            # Project navigation
     - SYSTEM-MAP.md       # System architecture overview
     - DOCUMENTATION.md    # Documentation navigation
+    - DOCUMENTATION-OVERVIEW.md
+    - DOCUMENTATION-BLUEPRINT.md
     # User-facing files
     - QUICKSTART.md       # Quick start for users
     - WORKFLOW.md         # User workflows
     - CONTRIBUTING.md     # Contribution guide
+    # Repo hygiene / community health
+    - LICENSE.md
+    - SECURITY.md
+    - CODE_OF_CONDUCT.md
+    - SUPPORT.md
+    # Repo standards
+    - .gitignore
+    - .editorconfig
+    - .gitattributes
     # Status tracking
     - CHANGELOG.md        # Version history
     - TODO.md             # Task tracking
@@ -196,6 +236,13 @@ documentation_structure:
     - GEMINI.tpl.md
     - WINDSURF.tpl.md
     - WARP.tpl.md
+
+  # docs/ templates copied to generated projects
+  docs:
+    - PROMPT-VALIDATION.md
+    - PROMPT-VALIDATION-QUICK.md
+    - DOCUMENTATION-MAINTENANCE.md
+    - TOOL-CALL-LIMITS.md
   
   
 # LLM hints

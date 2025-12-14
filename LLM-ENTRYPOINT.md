@@ -4,7 +4,7 @@
 
 **Purpose**: This is the definitive entry point for LLMs to generate projects using the Universal Template System.  
 **Last Updated**: {{LAST_UPDATED_DATE}}  
-**Total Templates**: 27 (in generic overlay) / 746 (system-wide)  
+**Total Templates**: 49 (in default-project blueprint generic overlay) / 746 (system-wide)  
 **System Version**: {{SYSTEM_VERSION}}
 
 ---
@@ -50,11 +50,12 @@ Universal Template System/
 │   ├── GEMINI.md                 # Google Gemini guide
 │   ├── WARP.md                   # Warp terminal guide
 │   └── WINDSURF.md               # Windsurf assistant guide
-├── 📚 blueprints/documentation/  # DOCUMENTATION BLUEPRINT (project templates)
+├── 📚 blueprints/default-project/  # DEFAULT PROJECT BLUEPRINT (project templates)
 │   ├── overlays/generic/         # Universal project templates
-│   │   ├── Root/                 # 16 project documentation files
+│   │   ├── (root templates)      # Default project docs + repo hygiene (30 templates)
 │   │   ├── agents/               # 9 AI agent TEMPLATES (.tpl.md)
-│   │   └── .github/              # 1 workflow template
+│   │   ├── docs/                 # Prompt validation + doc maintenance (4 templates)
+│   │   └── .github/              # Workflows + PR/issue templates (6 templates)
 │   └── overlays/[stack]/         # Stack-specific (python, node, etc.)
 └── 📖 TEMPLATE-MANIFEST.md       # Complete inventory
 ```
@@ -65,9 +66,10 @@ Universal Template System/
 
 | Category | Location | Count | Use When |
 |----------|----------|-------|----------|
-| **Core Files** | `Root/` | 16 | Project setup, LLM entrypoints |
-| **AI Guides** | `agents/` | 9 | Specific AI assistant setup |
-| **GitHub Workflows** | `.github/` | 1 | CI/CD templates |
+| **Core Files** | `blueprints/default-project/overlays/generic/` | 30 | Default project docs + repo hygiene |
+| **AI Guides** | `blueprints/default-project/overlays/generic/agents/` | 9 | Specific AI assistant setup |
+| **Docs Governance** | `blueprints/default-project/overlays/generic/docs/` | 4 | Prompt validation + doc maintenance |
+| **GitHub Templates** | `blueprints/default-project/overlays/generic/.github/` | 6 | Workflows + PR/issue templates |
 
 ---
 

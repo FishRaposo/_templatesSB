@@ -158,7 +158,7 @@ These are templates that get copied to generated projects:
 | `CLAUDE.md` | Project-specific | Claude projects |
 | `README.md` | Project-specific | Every project |
 | `CONTEXT.md` | Project-specific | Every project |
-| [All files in `blueprints/documentation/overlays/generic/`] | Templates | Generation |
+| [All files in `blueprints/default-project/overlays/generic/`] | Templates | Generation |
 
 ### Key Distinction
 - **System docs** stay in `_templates/` repository
@@ -473,7 +473,7 @@ Broken Links: 0
 ```
 Error: Template not found: agents/XYZ.md
 ```
-**Solution**: Check if file exists in `blueprints/documentation/overlays/generic/agents/`
+**Solution**: Check if file exists in `blueprints/default-project/overlays/generic/agents/`
 
 #### Invalid Placeholder
 ```
@@ -561,7 +561,7 @@ python scripts/validate-templates.py --template agents/COPILOT.md
 | Document | Purpose | Link |
 |----------|---------|------|
 | LLM Entry Point | AI agent starting guide | [LLM-ENTRYPOINT.md](LLM-ENTRYPOINT.md) |
-| Template Manifest | Complete template inventory | [blueprints/documentation/overlays/generic/TEMPLATE-MANIFEST.md](blueprints/documentation/overlays/generic/TEMPLATE-MANIFEST.md) |
+| Template Manifest | Complete template inventory | [blueprints/default-project/overlays/generic/TEMPLATE-MANIFEST.md](blueprints/default-project/overlays/generic/TEMPLATE-MANIFEST.md) |
 | Add Blueprints | How to add new blueprints | [ADD-NEW-BLUEPRINT-TEMPLATE.md](ADD-NEW-BLUEPRINT-TEMPLATE.md) |
 | Add Stacks | How to add new stacks | [ADD-NEW-STACK-TEMPLATE.md](ADD-NEW-STACK-TEMPLATE.md) |
 | Add Tasks | How to add new tasks | [ADD-NEW-TASK-TEMPLATE.md](ADD-NEW-TASK-TEMPLATE.md) |
@@ -594,4 +594,4 @@ python scripts/validate-templates.py --template agents/COPILOT.md
 
 ---
 
-*This is meta-documentation about the template system itself. For template documentation that gets copied to projects, see the `blueprints/documentation/overlays/generic/` directory.*
+*This is meta-documentation about the template system itself. For template documentation that gets copied to projects, see the `blueprints/default-project/overlays/generic/` directory.*
