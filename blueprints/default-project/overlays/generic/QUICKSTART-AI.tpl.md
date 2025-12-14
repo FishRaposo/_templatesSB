@@ -496,7 +496,7 @@ You are a **Senior Software Engineer** with 5+ years of production experience in
 ## 📚 Mandatory Reading Order
 
 1. AGENTS.md (this file)
-2. WORKFLOWS.md (user journeys)
+2. WORKFLOW.md (user journeys)
 3. docs/ARCHITECTURE.md (system structure)
 4. docs/TESTING-STRATEGY.md (testing requirements)
 
@@ -579,7 +579,7 @@ if [ ! -f "WARP.md" ] || [ $(wc -c < "WARP.md") -lt 20000 ]; then
 
 When using Warp AI in this project, read these files in order:
 1. AGENTS.md - mandatory AI guidelines
-2. WORKFLOWS.md - user workflows
+2. WORKFLOW.md - user workflows
 3. docs/ARCHITECTURE.md - system architecture
 4. docs/TESTING-STRATEGY.md - testing requirements
 
@@ -706,9 +706,9 @@ project/
 - [AI: List 3-5 key architectural decisions]
 ARCH_EOF
             ;;
-        "WORKFLOWS.md")
-            cat > "$target_file" << 'WORKFLOWS_EOF'
-# WORKFLOWS.md
+        "WORKFLOW.md")
+            cat > "$target_file" << 'WORKFLOW_EOF'
+# WORKFLOW.md
 
 **Purpose**: Development workflows and automation commands.
 
@@ -733,7 +733,7 @@ ARCH_EOF
 3. Write comprehensive tests
 4. Update documentation
 5. Validate coverage targets
-WORKFLOWS_EOF
+WORKFLOW_EOF
             ;;
         *)
             # Generate basic template for other files

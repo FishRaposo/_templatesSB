@@ -176,20 +176,20 @@ files:
       full: "In-depth - complete system design with ADRs"
 
   TODO.md:
-    description: "Action items and phase progress."
-    purpose: "Task tracking and milestone management."
+    description: "Task tracking for development and launches."
+    purpose: "Coordination and planning."
     tier_variations:
-      mvp: "Simple checklist - 3-5 core features"
-      core: "Structured - phase-based with milestones"
-      full: "Comprehensive - multi-phase with dependencies"
+      mvp: "Short - small TODO list"
+      core: "Detailed - near-term + backlog"
+      full: "Roadmap - multi-quarter planning"
 
-  WORKFLOWS.md:
+  WORKFLOW.md:
     description: "Developer and AI workflows, commands, automation."
     purpose: "Process documentation and operational procedures."
     tier_variations:
-      mvp: "Brief - build, run, test commands"
-      core: "Standard - development and deployment workflows"
-      full: "Complete - all workflows including governance"
+      mvp: "Minimal - local dev + tests"
+      core: "Structured - phase-based with milestones"
+      full: "Comprehensive - multi-phase with dependencies"
 
   TESTING.md:
     description: "Testing plan (varying detail by tier)."

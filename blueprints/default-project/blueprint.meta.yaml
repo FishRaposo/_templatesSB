@@ -84,6 +84,7 @@ overlays:
       - "QUICKSTART.md"       # Quick start for users
       - "WORKFLOW.md"         # User workflows
       - "CONTRIBUTING.md"     # Contribution guide
+      - "FEATURES.md"          # Feature inventory and capability matrix
       # Repo hygiene / community health
       - "LICENSE.md"
       - "SECURITY.md"
@@ -210,6 +211,7 @@ documentation_structure:
     - QUICKSTART.md       # Quick start for users
     - WORKFLOW.md         # User workflows
     - CONTRIBUTING.md     # Contribution guide
+    - FEATURES.md          # Feature inventory and capability matrix
     # Repo hygiene / community health
     - LICENSE.md
     - SECURITY.md
@@ -243,6 +245,22 @@ documentation_structure:
     - PROMPT-VALIDATION-QUICK.md
     - DOCUMENTATION-MAINTENANCE.md
     - TOOL-CALL-LIMITS.md
+    - ARCHITECTURE.md
+    - PROJECT-SETUP.md
+    - DEVELOPMENT-GUIDELINES.md
+    - TESTING-STRATEGY.md
+    - DEPLOYMENT-GUIDE.md
+    - API-REFERENCE.md
+    - USER-MANUAL.md
+    - INDEX.md
+    - TEST-REQUIREMENTS.md
+    - TESTING_CHECKLIST.md
+    - LAUNCH_CHECKLIST.md
+    - MAINTENANCE.md
+    - SECURITY.md
+    - FEATURES.md
+    - legal/TERMS_OF_SERVICE.md
+    - legal/PRIVACY_POLICY.md
   
   
 # LLM hints

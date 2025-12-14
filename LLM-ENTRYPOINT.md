@@ -4,7 +4,7 @@
 
 **Purpose**: This is the definitive entry point for LLMs to generate projects using the Universal Template System.  
 **Last Updated**: {{LAST_UPDATED_DATE}}  
-**Total Templates**: 49 (in default-project blueprint generic overlay) / 746 (system-wide)  
+**Total Templates**: 66 (in default-project blueprint generic overlay) / 746 (system-wide)  
 **System Version**: {{SYSTEM_VERSION}}
 
 ---
@@ -24,8 +24,10 @@
 # Single command to generate any project:
 "Generate a {{PROJECT_TYPE}} project using the Universal Template System:
 - Read blueprint.meta.yaml for available templates
+- Always apply the 'default-project' blueprint first (this is the mandatory documentation + repo hygiene baseline)
 - Detect tier as {{TIER}} from project requirements
 - Apply {{STACK}} stack overlay
+- Generate FEATURES.md and docs/FEATURES.md by extracting ALL features from the requirements
 - Follow AI-QUICK-START.md for automated setup"
 ```
 
@@ -52,9 +54,9 @@ Universal Template System/
 │   └── WINDSURF.md               # Windsurf assistant guide
 ├── 📚 blueprints/default-project/  # DEFAULT PROJECT BLUEPRINT (project templates)
 │   ├── overlays/generic/         # Universal project templates
-│   │   ├── (root templates)      # Default project docs + repo hygiene (30 templates)
+│   │   ├── (root templates)      # Default project docs + repo hygiene (31 templates)
 │   │   ├── agents/               # 9 AI agent TEMPLATES (.tpl.md)
-│   │   ├── docs/                 # Prompt validation + doc maintenance (4 templates)
+│   │   ├── docs/                 # Comprehensive project documentation set (20 templates)
 │   │   └── .github/              # Workflows + PR/issue templates (6 templates)
 │   └── overlays/[stack]/         # Stack-specific (python, node, etc.)
 └── 📖 TEMPLATE-MANIFEST.md       # Complete inventory
@@ -66,9 +68,9 @@ Universal Template System/
 
 | Category | Location | Count | Use When |
 |----------|----------|-------|----------|
-| **Core Files** | `blueprints/default-project/overlays/generic/` | 30 | Default project docs + repo hygiene |
+| **Core Files** | `blueprints/default-project/overlays/generic/` | 31 | Default project docs + repo hygiene |
 | **AI Guides** | `blueprints/default-project/overlays/generic/agents/` | 9 | Specific AI assistant setup |
-| **Docs Governance** | `blueprints/default-project/overlays/generic/docs/` | 4 | Prompt validation + doc maintenance |
+| **Docs Governance** | `blueprints/default-project/overlays/generic/docs/` | 20 | Full project documentation set |
 | **GitHub Templates** | `blueprints/default-project/overlays/generic/.github/` | 6 | Workflows + PR/issue templates |
 
 ---
@@ -95,8 +97,8 @@ complexity: "{{mvp|core|enterprise}}"
 ### Phase 2: Generation
 ```bash
 # Process:
-1. Copy templates from overlays/generic/
-2. Apply stack-specific overlays
+1. Copy templates from blueprints/default-project/overlays/generic/ (mandatory baseline)
+2. Apply stack-specific overlays (and any additional blueprints selected)
 3. Replace {{PLACEHOLDERS}} with project values
 4. Generate tier-appropriate file count
 ```
@@ -188,6 +190,7 @@ Before completing project generation:
 - [ ] Applied appropriate stack overlay
 - [ ] Replaced all {{PLACEHOLDERS}}
 - [ ] Generated correct number of files
+- [ ] FEATURES.md and docs/FEATURES.md fully reflect the project requirements (no missing features)
 - [ ] Followed AI-QUICK-START.md
 - [ ] Ran validation script
 - [ ] All tests pass
