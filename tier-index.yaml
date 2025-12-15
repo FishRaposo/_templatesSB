@@ -420,6 +420,54 @@ stack_patterns:
           purpose: "Rust error handling and exception management"
           tiers: ["core", "enterprise"]
 
+  fastapi:
+    base_template: "stacks/fastapi/base/docs/README.tpl.md"
+    base:
+      docs:
+        - file: "README.tpl.md"
+          version: "1.0"
+          purpose: "FastAPI stack setup and documentation"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "ARCHITECTURE-fastapi.tpl.md"
+          version: "1.0"
+          purpose: "FastAPI architecture patterns"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "FRAMEWORK-PATTERNS-fastapi.tpl.md"
+          version: "1.0"
+          purpose: "FastAPI framework patterns and conventions"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "TESTING-EXAMPLES-fastapi.tpl.md"
+          version: "1.0"
+          purpose: "FastAPI testing examples and patterns"
+          tiers: ["mvp", "core", "enterprise"]
+
+  postgresql:
+    base_template: "stacks/postgresql/base/docs/README.tpl.md"
+    base:
+      docs:
+        - file: "README.tpl.md"
+          version: "1.0"
+          purpose: "PostgreSQL stack setup and documentation"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "SCHEMA-DESIGN.tpl.md"
+          version: "1.0"
+          purpose: "PostgreSQL schema design patterns"
+          tiers: ["mvp", "core", "enterprise"]
+        
+        - file: "QUERY-OPTIMIZATION.tpl.md"
+          version: "1.0"
+          purpose: "PostgreSQL query optimization guide"
+          tiers: ["core", "enterprise"]
+        
+        - file: "MIGRATION-PATTERNS.tpl.md"
+          version: "1.0"
+          purpose: "PostgreSQL migration strategies"
+          tiers: ["mvp", "core", "enterprise"]
+
   flutter:
     base_template: "stacks/flutter/base/docs/PROJECT-STRUCTURE.tpl.md"
     base:
@@ -883,7 +931,7 @@ template_metadata:
 
 # Stack Configuration
 stack_configuration:
-  available_stacks: ["flutter", "python", "node", "react", "react_native", "next", "go", "r", "sql", "generic", "typescript", "rust"]
+  available_stacks: ["flutter", "python", "node", "react", "react_native", "next", "go", "r", "sql", "generic", "typescript", "rust", "fastapi", "postgresql"]
   default_stack: "flutter"
   base_templates:
     flutter: "stacks/flutter/base/docs/PROJECT-STRUCTURE.tpl.md"
@@ -898,6 +946,8 @@ stack_configuration:
     generic: "stacks/generic/base/docs/README.tpl.md"
     typescript: "stacks/typescript/base/docs/README.tpl.md"
     rust: "stacks/rust/base/docs/PROJECT-STRUCTURE.tpl.md"
+    fastapi: "stacks/fastapi/base/docs/README.tpl.md"
+    postgresql: "stacks/postgresql/base/docs/README.tpl.md"
   stack_dependencies:
     flutter: []
     python: []
@@ -908,6 +958,8 @@ stack_configuration:
     generic: []  # Technology-agnostic, no dependencies
     typescript: ["node"]  # Builds on Node.js patterns
     rust: []
+    fastapi: ["python"]  # Builds on Python patterns
+    postgresql: []  # Database stack, no dependencies
 
 # Testing Templates Configuration
 testing_templates:

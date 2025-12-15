@@ -5,7 +5,7 @@ Standardizes the list of supported stacks across the template system
 """
 
 # Standard stack list - matches SYSTEM-MAP and generate_reference_projects.py
-STACKS = ['flutter', 'react_native', 'react', 'next', 'node', 'go', 'python', 'r', 'sql', 'generic', 'typescript', 'rust']
+STACKS = ['flutter', 'react_native', 'react', 'next', 'node', 'go', 'python', 'r', 'sql', 'generic', 'typescript', 'rust', 'fastapi', 'postgresql']
 
 # Stack display names for user interfaces
 STACK_DISPLAY_NAMES = {
@@ -20,15 +20,17 @@ STACK_DISPLAY_NAMES = {
     'sql': 'SQL',
     'generic': 'Generic',
     'typescript': 'TypeScript',
-    'rust': 'Rust'
+    'rust': 'Rust',
+    'fastapi': 'FastAPI',
+    'postgresql': 'PostgreSQL'
 }
 
 # Stack categories for organization
 STACK_CATEGORIES = {
     'mobile': ['flutter', 'react_native'],
     'web_frontend': ['react', 'next'],
-    'web_backend': ['node', 'go', 'python', 'typescript', 'rust'],
-    'data': ['r', 'sql'],
+    'web_backend': ['node', 'go', 'python', 'typescript', 'rust', 'fastapi'],
+    'data': ['r', 'sql', 'postgresql'],
     'universal': ['generic']
 }
 
