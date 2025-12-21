@@ -96,6 +96,7 @@ python scripts/validate-templates.py --full
 
 ## 📚 Documentation
 
+- [AGENTS.md](./AGENTS.md) - Multi-agent coordination guide
 - [SYSTEM-MAP.md](./SYSTEM-MAP.md) - Complete architecture
 - [QUICKSTART.md](./QUICKSTART.md) - Getting started
 - [README.md](./README.md) - Main documentation

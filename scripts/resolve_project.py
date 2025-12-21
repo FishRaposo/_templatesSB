@@ -252,6 +252,15 @@ class ProjectResolver:
         if allowed_stacks and stack not in allowed_stacks:
             logger.warning(f"Task {task_name} not officially supported on stack {stack}")
         
+        # Check stack support level
+        stack_support = task_config.get('stack_support', {})
+        support_level = stack_support.get(stack, 'base-fallback')
+        
+        if support_level == 'base-fallback':
+            logger.info(f"Task {task_name} using base-fallback for stack {stack}")
+            # Skip loading task-specific templates, will use base templates only
+            return templates
+        
         # Load task universal templates
         task_universal_dir = self.templates_dir / "tasks" / task_name / "universal"
         if task_universal_dir.exists():
