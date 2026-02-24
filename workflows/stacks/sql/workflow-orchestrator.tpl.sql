@@ -1,0 +1,2 @@
+-- Generated stub for workflow: [[WORKFLOW_ID]]
+-- TODO: orchestrate workflow using stored procedures and transactional boundaries.

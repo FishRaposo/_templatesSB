@@ -1,0 +1,468 @@
+# Machine-Readable Tier Index for Universal Documentation Templates
+# Version: 1.0
+# Last Updated: 2025-12-09
+# Purpose: AI agent source of truth for tier-based template selection
+
+tier_index_version: "1.0"
+
+# Template version tracking for upgrade management
+template_metadata:
+  versions:
+    README.md: "2.0"
+    DOCUMENTATION-BLUEPRINT.md: "2.0"
+    TESTING-STRATEGY.md: "2.0"
+    INTEGRATION-GUIDE.md: "2.0"
+    AGENTS.md: "2.0"
+    TESTING-EXAMPLES.md: "2.0"
+    API-DOCUMENTATION.md: "2.0"
+    FRAMEWORK-PATTERNS.md: "2.0"
+    PROJECT-ROADMAP.md: "2.0"
+    MIGRATION-GUIDE.md: "2.0"
+    QUICKSTART-AI.md: "3.0"
+    CLAUDE.md: "2.0"
+    WARP.md: "2.0"
+    AI-GUIDE.md: "2.0"
+    GITIGNORE-EXAMPLES.md: "2.0"
+    AGENT-ORCHESTRATION.md: "2.0"
+    AGENT-DELEGATION-MATRIX.md: "2.0"
+    AGENT-MEMORY-RULES.md: "2.0"
+    AGENT-FAILURE-MODES.md: "2.0"
+    AGENT-SAFETY-FILTERS.md: "2.0"
+    EXECUTION-ENGINE.md: "2.0"
+    .gitignore: "1.0"
+  
+  compatibility_matrix:
+    "1.0": ["mvp", "core", "full"]
+    "2.0": ["mvp", "core", "full"]
+    "3.0": ["core", "full"]  # QUICKSTART-AI.md 3.0 requires dynamic parsing
+  
+  upgrade_paths:
+    "1.0->2.0": "Minor updates - no breaking changes"
+    "2.0->3.0": "Major QUICKSTART-AI.md rewrite - requires Python dependency"
+
+# Tier definitions with operating mode characteristics
+tiers:
+  mvp:
+    name: "Prototype / Exploration Mode"
+    purpose: "Build fast. Validate idea. Minimum structure."
+    llm_goal: "Produce output cheaply with minimal doc/test overhead."
+    setup_time: "15-30 minutes"
+    file_count: "4-7 files"
+    coverage_target: "0-20% (smoke tests only)"
+    
+    required:
+      - "README.md"
+      - "DOCUMENTATION-BLUEPRINT.md"
+      - "TESTING-STRATEGY.md"
+      - "INTEGRATION-GUIDE.md"
+      - "AGENTS.md"
+      - ".gitignore"
+    
+    recommended:
+      - "TESTING-EXAMPLES.md"
+      - "API-DOCUMENTATION.md"
+      - "FRAMEWORK-PATTERNS.md"
+      - "PROJECT-ROADMAP.md"
+      - "MIGRATION-GUIDE.md"
+    
+    ignored: []
+    
+    ai_command: "Set tier to MVP for [PROJECT_DESCRIPTION]"
+    
+    characteristics:
+      team_size: "Solo developer"
+      timeline: "< 1 month"
+      complexity: "Simple"
+      production_readiness: "Prototype"
+
+  core:
+    name: "Production Baseline for Real Projects"
+    purpose: "Anything you plan to maintain or ship to production."
+    llm_goal: "Enforce structure, test coverage, documentation parity."
+    setup_time: "2-4 hours"
+    file_count: "15-25 files"
+    coverage_target: "85%+ overall (90%+ unit, 80%+ component, 70%+ integration)"
+    
+    required:
+      # All MVP files
+      - "README.md"
+      - "DOCUMENTATION-BLUEPRINT.md"
+      - "TESTING-STRATEGY.md"
+      - "INTEGRATION-GUIDE.md"
+      - "AGENTS.md"
+      - ".gitignore"
+      # Core additions
+      - "TESTING-EXAMPLES.md"
+      - "API-DOCUMENTATION.md"
+      - "FRAMEWORK-PATTERNS.md"
+      - "PROJECT-ROADMAP.md"
+      - "MIGRATION-GUIDE.md"
+      - "QUICKSTART-AI.md"
+    
+    recommended: []
+    
+    ignored: []
+    
+    ai_command: "Set tier to CORE for [PROJECT_DESCRIPTION]"
+    
+    characteristics:
+      team_size: "1-3 developers"
+      timeline: "1-6 months"
+      complexity: "Moderate"
+      production_readiness: "Production ready"
+
+  full:
+    name: "Enterprise / Long-Term / Complex Projects"
+    purpose: "Everything that needs longevity, scale, or team onboarding."
+    llm_goal: "Maximize reflectivity, traceability, extensibility, predictability."
+    setup_time: "1-2 days"
+    file_count: "30-50 files"
+    coverage_target: "95%+ overall (90%+ unit, 85%+ integration, 80%+ E2E)"
+    
+    required:
+      # All Core files
+      - "README.md"
+      - "DOCUMENTATION-BLUEPRINT.md"
+      - "TESTING-STRATEGY.md"
+      - "INTEGRATION-GUIDE.md"
+      - "AGENTS.md"
+      - ".gitignore"
+      - "TESTING-EXAMPLES.md"
+      - "API-DOCUMENTATION.md"
+      - "FRAMEWORK-PATTERNS.md"
+      - "PROJECT-ROADMAP.md"
+      - "MIGRATION-GUIDE.md"
+      - "QUICKSTART-AI.md"
+    
+    recommended:
+      - "CLAUDE.md"
+      - "WARP.md"
+      - "AI-GUIDE.md"
+      - "GITIGNORE-EXAMPLES.md"
+      - "AGENT-ORCHESTRATION.md"
+      - "AGENT-DELEGATION-MATRIX.md"
+      - "AGENT-MEMORY-RULES.md"
+      - "AGENT-FAILURE-MODES.md"
+      - "AGENT-SAFETY-FILTERS.md"
+      # Multi-Agent Execution Layer
+      - "EXECUTION-ENGINE.md"
+    
+    ignored: []
+    
+    ai_command: "Set tier to FULL for [PROJECT_DESCRIPTION]"
+    
+    characteristics:
+      team_size: "3+ developers"
+      timeline: "6+ months"
+      complexity: "Complex"
+      production_readiness: "Enterprise ready"
+
+# File definitions with descriptions and purposes
+files:
+  README.md:
+    description: "Project purpose, features, stack, quickstart."
+    purpose: "Main project entry point and overview."
+    tier_variations:
+      mvp: "Brief - problem, features, quick run (3-5 commands)"
+      core: "Standard - full overview with architecture summary"
+      full: "Comprehensive - complete project documentation"
+
+  ARCHITECTURE.md:
+    description: "High-level architecture, folder structure, data flow."
+    purpose: "System design and structural overview."
+    tier_variations:
+      mvp: "Minimal - 1-2 pages: stack, folders, basic flow"
+      core: "Standard - detailed architecture with patterns"
+      full: "In-depth - complete system design with ADRs"
+
+  TODO.md:
+    description: "Task tracking for development and launches."
+    purpose: "Coordination and planning."
+    tier_variations:
+      mvp: "Short - small TODO list"
+      core: "Detailed - near-term + backlog"
+      full: "Roadmap - multi-quarter planning"
+
+  WORKFLOW.md:
+    description: "Developer and AI workflows, commands, automation."
+    purpose: "Process documentation and operational procedures."
+    tier_variations:
+      mvp: "Minimal - local dev + tests"
+      core: "Structured - phase-based with milestones"
+      full: "Comprehensive - multi-phase with dependencies"
+
+  TESTING.md:
+    description: "Testing plan (varying detail by tier)."
+    purpose: "Testing strategy and requirements."
+    tier_variations:
+      mvp: "Basic - what will be tested later, smoke tests"
+      core: "Full - all layers defined, 85%+ coverage requirements"
+      full: "Comprehensive - complete testing doctrine"
+
+  TESTING-STRATEGY.md:
+    description: "Universal multi-layer testing doctrine."
+    purpose: "In-depth testing philosophy and implementation."
+    tier_variations:
+      mvp: "Not included"
+      core: "Not included"
+      full: "In-depth - all 7 test layers with examples"
+
+  TESTING-EXAMPLES.md:
+    description: "Tech-specific examples that implement the universal strategy."
+    purpose: "Copy-paste test patterns for different stacks."
+    tier_variations:
+      mvp: "Not included"
+      core: "Tech-specific patterns for implemented stack"
+      full: "Complete examples for all supported stacks"
+
+  DOCUMENTATION-BLUEPRINT.md:
+    description: "Template for generating or updating the entire documentation OS."
+    purpose: "Documentation structure and maintenance guide."
+    tier_variations:
+      mvp: "Not included"
+      core: "Project-specific version (5-10 key files)"
+      full: "Complete blueprint (all 20 files)"
+
+  API-DOCUMENTATION.md:
+    description: "Endpoints, schemas, request/response patterns."
+    purpose: "API specification and usage guide."
+    tier_variations:
+      mvp: "Not included (use API-DESIGN.md instead)"
+      core: "Complete endpoints, schemas, error handling"
+      full: "Comprehensive - auth, rate limiting, examples"
+
+  API-DESIGN.md:
+    description: "Brief endpoint list for API projects."
+    purpose: "Simple API overview for MVP projects."
+    tier_variations:
+      mvp: "Brief endpoint list"
+      core: "Not included (use API-DOCUMENTATION.md)"
+      full: "Not included"
+
+  UI-FLOW.md:
+    description: "Screen list and user flow diagram."
+    purpose: "Simple UI/UX overview for MVP projects."
+    tier_variations:
+      mvp: "Screen list, simple flow diagram"
+      core: "Not included (integrated into ARCHITECTURE.md)"
+      full: "Not included"
+
+  FRAMEWORK-PATTERNS.md:
+    description: "Tech-specific architecture patterns and conventions."
+    purpose: "Implementation patterns and best practices."
+    tier_variations:
+      mvp: "Not included"
+      core: "Tech-specific architecture rules"
+      full: "Complete patterns with decision records"
+
+  PROJECT-ROADMAP.md:
+    description: "Phases, milestones, features, timeline."
+    purpose: "Project planning and delivery schedule."
+    tier_variations:
+      mvp: "Not included (use TODO.md instead)"
+      core: "Phase 1+2 with milestones"
+      full: "Phase 1-4 with dependencies"
+
+  INTEGRATION-GUIDE.md:
+    description: "How to integrate documentation templates into a new/existing project."
+    purpose: "Template usage and AI workflow guide."
+    tier_variations:
+      mvp: "Not included"
+      core: "Standard integration guide"
+      full: "Complete guide with advanced workflows"
+
+  AGENTS.md:
+    description: "Agents' roles, workflows, responsibilities."
+    purpose: "AI agent configuration and standards."
+    tier_variations:
+      mvp: "Not included"
+      core: "Final version with project specifics"
+      full: "Comprehensive with multi-agent support"
+
+  QUICKSTART-AI.md:
+    description: "AI-specific bootstrapping and onboarding instructions."
+    purpose: "AI project setup automation."
+    tier_variations:
+      mvp: "Not included"
+      core: "Customized to project"
+      full: "Complete with enterprise features"
+
+  MIGRATION-GUIDE.md:
+    description: "How to migrate major changes safely."
+    purpose: "Change management and migration procedures."
+    tier_variations:
+      mvp: "Not included"
+      core: "Basic structure (even if empty)"
+      full: "Complete with real examples and scripts"
+
+  DEPLOYMENT.md:
+    description: "Build, ship, release, and environment strategy."
+    purpose: "Deployment and release management."
+    tier_variations:
+      mvp: "Not included"
+      core: "Not included"
+      full: "Complete deployment strategy"
+
+  SECURITY.md:
+    description: "Threat model, authentication, permissions."
+    purpose: "Security architecture and guidelines."
+    tier_variations:
+      mvp: "Not included"
+      core: "Not included"
+      full: "Comprehensive security documentation"
+
+  DATA-MODEL.md:
+    description: "Schemas, relationships, invariants."
+    purpose: "Data architecture and modeling."
+    tier_variations:
+      mvp: "Not included"
+      core: "Not included"
+      full: "Complete data model documentation"
+
+  ANALYTICS.md:
+    description: "Tracking, events, KPIs."
+    purpose: "Analytics and monitoring strategy."
+    tier_variations:
+      mvp: "Not included"
+      core: "Optional - basic tracking strategy"
+      full: "Complete analytics implementation"
+
+  CONFIGURATION.md:
+    description: "Environment variables, secrets handling."
+    purpose: "Configuration management."
+    tier_variations:
+      mvp: "Not included"
+      core: "Optional - multi-environment config"
+      full: "Complete configuration management"
+
+  LOCAL-DEV.md:
+    description: "Developer onboarding and environment setup."
+    purpose: "Development environment setup."
+    tier_variations:
+      mvp: "Not included"
+      core: "Optional - developer onboarding"
+      full: "Comprehensive developer setup"
+
+  CI-CD.md:
+    description: "Automation pipelines, code quality, gating."
+    purpose: "Continuous integration and deployment."
+    tier_variations:
+      mvp: "Not included"
+      core: "Not included"
+      full: "Complete CI/CD pipeline"
+
+  .gitignore:
+    description: "Ignored files per tech stack."
+    purpose: "Version control exclusions."
+    tier_variations:
+      mvp: "Tech-specific minimal version"
+      core: "Comprehensive tech-specific version"
+      full: "Enterprise gitignore with security exclusions"
+
+  BLUEPRINT-COMPILER.md:
+    description: "Universal codebase generator and orchestration system."
+    purpose: "Transforms blueprints into complete, documented, tested codebases."
+    tier_variations:
+      mvp: "Not included"
+      core: "Not included"
+      full: "Complete blueprint compiler with agent orchestration"
+
+  AGENT-ORCHESTRATION.md:
+    description: "Multi-agent assembly line protocol for deterministic coordination."
+    purpose: "Coordinates Architect → Builder → Tester → Doc Manager → Validator → Merge phases."
+    tier_variations:
+      mvp: "Not included"
+      core: "Not included"
+      full: "Complete orchestration protocol with handoff artifacts"
+
+  AGENT-DELEGATION-MATRIX.md:
+    description: "Agent delegation rules and trigger conditions."
+    purpose: "Defines who calls whom, when, and how with escalation paths."
+    tier_variations:
+      mvp: "Not included"
+      core: "Not included"
+      full: "Complete delegation matrix with parallel support"
+
+  AGENT-MEMORY-RULES.md:
+    description: "Role-based memory model for agent state management."
+    purpose: "Prevents cross-role contamination with clean handoff tokens."
+    tier_variations:
+      mvp: "Not included"
+      core: "Not included"
+      full: "Complete memory rules with contamination prevention"
+
+  AGENT-FAILURE-MODES.md:
+    description: "Failure detection and recovery protocols for multi-agent systems."
+    purpose: "Comprehensive failure modes with proactive detection and recovery."
+    tier_variations:
+      mvp: "Not included"
+      core: "Not included"
+      full: "Complete failure mode system with learning capabilities"
+
+  AGENT-SAFETY-FILTERS.md:
+    description: "Runaway agent protection system with comprehensive safety filters."
+    purpose: "Prevents destructive autonomy through real-time monitoring and constraints."
+    tier_variations:
+      mvp: "Not included"
+      core: "Not included"
+      full: "Complete safety system with adaptive protection"
+
+  EXECUTION-ENGINE.md:
+    description: "Multi-agent execution engine and orchestration runtime."
+    purpose: "Factory line controller that orchestrates agents with safety checks to produce safe repos/PRs/patches."
+    tier_variations:
+      mvp: "Not included"
+      core: "Not included"
+      full: "Complete execution engine with WorkItem state management and deterministic pipelines"
+
+# Validation rules for AI agents
+validation:
+  completeness_check:
+    required_files_must_exist: true
+    recommended_files_should_exist: true
+    ignored_files_must_not_exist: true
+  
+  tier_upgrade_rules:
+    mvp_to_core:
+      - "Add all CORE required files"
+      - "Expand TESTING.md to full version"
+      - "Add comprehensive API documentation"
+      - "Implement proper test coverage"
+      - "Add PROJECT-ROADMAP with phases"
+    
+    core_to_full:
+      - "Add enterprise documentation (SECURITY, DEPLOYMENT, etc.)"
+      - "Implement comprehensive testing strategy"
+      - "Add multi-phase roadmap"
+      - "Expand all documentation to enterprise level"
+      - "Add team onboarding and process documentation"
+
+# AI agent usage instructions
+usage:
+  new_project:
+    steps:
+      - "Analyze project characteristics"
+      - "Select appropriate tier based on analysis"
+      - "Execute tier-appropriate setup using QUICKSTART-AI.md"
+      - "Validate completeness using this YAML index"
+      - "Report tier selection and rationale"
+  
+  existing_project:
+    steps:
+      - "Scan existing documentation to determine current tier"
+      - "Identify gaps using this YAML index"
+      - "Recommend tier upgrade if project has outgrown current tier"
+      - "Generate missing files following tier requirements"
+      - "Update project configuration to match new tier"
+
+# Metadata
+metadata:
+  schema_version: "1.0"
+  created_date: "2025-12-09"
+  last_updated: "2025-12-09"
+  compatibility:
+    - "Claude Code"
+    - "GPT-4"
+    - "Gemini"
+    - "Warp AI"
+  purpose: "Machine-readable contract for AI agents to determine tier requirements"

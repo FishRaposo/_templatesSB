@@ -1,0 +1,5 @@
+# Template System Dependencies
+# Required for dynamic tier configuration and validation
+
+pyyaml>=6.0
+pathlib2>=2.3.0
