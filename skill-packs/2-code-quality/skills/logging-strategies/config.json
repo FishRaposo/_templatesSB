@@ -1,0 +1,46 @@
+{
+  "agent_support": {
+    "claude": {"min_version": "3.0"},
+    "roo": {"min_version": "1.0"},
+    "cascade": {"min_version": "1.0"},
+    "generic": {"requirements": ["file_access", "code_execution"]}
+  },
+  "triggers": {
+    "keywords": [
+      "logging",
+      "log levels",
+      "structured logging",
+      "correlation ID",
+      "observability",
+      "log aggregation",
+      "console.log",
+      "debug logs",
+      "tracing"
+    ],
+    "patterns": [
+      "add.*logging",
+      "implement.*logging",
+      "structured.*log",
+      "correlation.*id",
+      "log.*level",
+      "replace.*console.log"
+    ]
+  },
+  "requirements": {
+    "tools": [],
+    "permissions": ["file_read", "file_write"],
+    "notes": "Language-agnostic skill. Works with any programming language."
+  },
+  "examples": {
+    "simple": [
+      "Add structured logging to this service",
+      "Replace console.log with proper logging",
+      "What log level should I use here?"
+    ],
+    "complex": [
+      "Implement correlation ID tracking across our microservices",
+      "Design a logging strategy for this distributed system",
+      "Set up log aggregation with ELK stack"
+    ]
+  }
+}

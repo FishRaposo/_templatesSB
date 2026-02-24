@@ -1,0 +1,45 @@
+{
+  "agent_support": {
+    "claude": {"min_version": "3.0"},
+    "roo": {"min_version": "1.0"},
+    "cascade": {"min_version": "1.0"},
+    "generic": {"requirements": ["file_access", "code_execution"]}
+  },
+  "triggers": {
+    "keywords": [
+      "code review",
+      "pull request review",
+      "PR review",
+      "review checklist",
+      "code quality",
+      "quality gate",
+      "review process",
+      "code audit"
+    ],
+    "patterns": [
+      "review.*code",
+      "review.*PR",
+      "code.*quality",
+      "quality.*check",
+      "set up.*review",
+      "review.*checklist"
+    ]
+  },
+  "requirements": {
+    "tools": [],
+    "permissions": ["file_read", "file_write"],
+    "notes": "Language-agnostic skill. Works with any programming language."
+  },
+  "examples": {
+    "simple": [
+      "Review this code for quality issues",
+      "Create a PR review checklist",
+      "Set up automated quality checks"
+    ],
+    "complex": [
+      "Design a code review process for our team",
+      "Set up GitHub Actions quality gates for PRs",
+      "Audit this module for quality and security issues"
+    ]
+  }
+}

@@ -1,0 +1,105 @@
+# Contributing to {{PROJECT_NAME}}
+
+Thank you for contributing. This document covers how to report bugs, propose features, set up your development environment, and get your changes merged.
+
+---
+
+## Reporting Bugs
+
+1. **Search existing issues** at {{ISSUES_URL}} before opening a new one
+2. Use the **bug report template** at `.github/ISSUE_TEMPLATE/bug_report.md`
+3. Include: environment details, reproduction steps, expected vs. actual behavior, and logs
+
+## Proposing Features
+
+1. Open a **feature request** using `.github/ISSUE_TEMPLATE/feature_request.md`
+2. Describe the problem being solved, not just the solution
+3. Wait for maintainer acknowledgment before beginning implementation
+
+---
+
+## Development Setup
+
+### Prerequisites
+
+- {{PREREQ_1}} — {{PREREQ_1_VERSION}}
+- {{PREREQ_2}} — {{PREREQ_2_VERSION}}
+- {{PREREQ_3}} — {{PREREQ_3_VERSION}}
+
+### Setup
+
+```bash
+# Clone the repository
+git clone {{REPO_URL}}
+cd {{PROJECT_NAME}}
+
+# Install dependencies
+{{INSTALL_COMMAND}}
+
+# Run tests to verify setup
+{{TEST_COMMAND}}
+```
+
+---
+
+## Branching and Commit Conventions
+
+### Branches
+
+```
+main          ← stable, protected
+dev           ← integration branch
+feature/name  ← feature work
+fix/name      ← bug fixes
+docs/name     ← documentation-only changes
+```
+
+### Commit Messages
+
+```
+type(scope): short description
+
+types: feat | fix | docs | style | refactor | test | chore
+```
+
+Examples:
+- `feat(auth): add OAuth2 login flow`
+- `fix(api): handle null response from upstream`
+- `docs(readme): update setup instructions`
+
+---
+
+## Pull Request Process
+
+1. Create a branch from `dev` (not `main`)
+2. Make your changes — satisfy all Three Pillars before marking ready
+3. Run the test suite: `{{TEST_COMMAND}}`
+4. Open a PR using the PR template
+5. At least one maintainer approval required before merge
+6. Squash and merge — keep `main` history linear
+
+### Three Pillars Requirement for Contributors
+
+Before marking your PR ready for review:
+
+- **AUTOMATING** — run structure validator, placeholder scanner (`grep -r '{{' .`), link checker, and linter — all exit 0
+- **TESTING** — all tests pass, new code has coverage, examples are runnable
+- **DOCUMENTING** — README/docs updated if behavior changed, CHANGELOG has an entry
+
+---
+
+## Code Style
+
+Follow the conventions established in `AGENTS.md`. Key rules:
+
+- {{STYLE_RULE_1}}
+- {{STYLE_RULE_2}}
+- {{STYLE_RULE_3}}
+
+Run the linter before committing: `{{LINT_COMMAND}}`
+
+---
+
+## Questions?
+
+Open a discussion at {{DISCUSSIONS_URL}} or reach out via {{CONTACT_METHOD}}.

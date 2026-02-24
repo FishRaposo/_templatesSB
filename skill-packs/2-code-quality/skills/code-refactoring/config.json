@@ -1,0 +1,47 @@
+{
+  "agent_support": {
+    "claude": {"min_version": "3.0"},
+    "roo": {"min_version": "1.0"},
+    "cascade": {"min_version": "1.0"},
+    "generic": {"requirements": ["file_access", "code_execution"]}
+  },
+  "triggers": {
+    "keywords": [
+      "refactor",
+      "refactoring",
+      "restructure",
+      "extract method",
+      "code smell",
+      "rename",
+      "inline",
+      "move method",
+      "decompose"
+    ],
+    "patterns": [
+      "refactor.*code",
+      "extract.*function",
+      "restructure.*class",
+      "improve.*structure",
+      "code.*smell",
+      "too.*coupled",
+      "split.*class"
+    ]
+  },
+  "requirements": {
+    "tools": [],
+    "permissions": ["file_read", "file_write"],
+    "notes": "Language-agnostic skill. Works with any programming language."
+  },
+  "examples": {
+    "simple": [
+      "Extract this block into a function",
+      "Rename these variables for clarity",
+      "This class is too large, help me split it"
+    ],
+    "complex": [
+      "Refactor this module to remove circular dependencies",
+      "Replace these conditionals with polymorphism",
+      "Decompose this god class into focused services"
+    ]
+  }
+}

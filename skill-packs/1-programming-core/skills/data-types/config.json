@@ -1,0 +1,62 @@
+{
+  "agent_support": {
+    "claude": {
+      "min_version": "3.0"
+    },
+    "roo": {
+      "min_version": "1.0"
+    },
+    "cascade": {
+      "min_version": "1.0"
+    },
+    "generic": {
+      "requirements": [
+        "file_access",
+        "code_execution"
+      ]
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "type",
+      "data type",
+      "type safety",
+      "type conversion",
+      "type checking",
+      "type guard",
+      "coercion",
+      "generics",
+      "type system"
+    ],
+    "patterns": [
+      "convert.*type",
+      "type.*safe",
+      "validate.*type",
+      "choose.*data.*type",
+      "implement.*generics",
+      "type.*guard"
+    ]
+  },
+  "requirements": {
+    "tools": [],
+    "permissions": [
+      "file_read",
+      "file_write",
+      "execute"
+    ],
+    "memory": "512MB",
+    "notes": "Language-agnostic skill. No specific runtime required."
+  },
+  "examples": {
+    "simple": [
+      "Choose data type",
+      "Convert types",
+      "Validate data types"
+    ],
+    "complex": [
+      "Design a runtime type validation system using Zod schemas for API responses",
+      "Implement type-safe generics for a collection library in TypeScript and Go",
+      "Refactor this loosely-typed codebase to use strict type checking with custom type guards"
+    ]
+  }
+}

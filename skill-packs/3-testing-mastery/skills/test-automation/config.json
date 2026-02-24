@@ -1,0 +1,41 @@
+{
+  "agent_support": {
+    "claude": {},
+    "roo": {},
+    "cascade": {},
+    "generic": {}
+  },
+  "triggers": {
+    "keywords": [
+      "test automation",
+      "ci test",
+      "github actions test",
+      "automated testing",
+      "test pipeline",
+      "ci/cd testing",
+      "test runner",
+      "parallel test"
+    ],
+    "patterns": [
+      "automate.*test",
+      "ci.*test.*(config|setup)",
+      "(github actions|gitlab ci).*test"
+    ]
+  },
+  "requirements": {
+    "tools": [],
+    "permissions": ["file_read", "file_write"]
+  },
+  "examples": {
+    "simple": [
+      "Set up automated testing in CI",
+      "Configure test runner for CI/CD",
+      "Add pre-commit hooks for tests"
+    ],
+    "complex": [
+      "Set up GitHub Actions with parallel test execution",
+      "Configure test automation with coverage reporting",
+      "Build a complete CI test pipeline with multiple stages"
+    ]
+  }
+}

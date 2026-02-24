@@ -1,0 +1,46 @@
+{
+  "agent_support": {
+    "claude": {"min_version": "3.0"},
+    "roo": {"min_version": "1.0"},
+    "cascade": {"min_version": "1.0"},
+    "generic": {"requirements": ["file_access", "code_execution"]}
+  },
+  "triggers": {
+    "keywords": [
+      "legacy code",
+      "migration",
+      "modernize",
+      "strangler fig",
+      "rewrite",
+      "legacy system",
+      "old codebase",
+      "technical migration",
+      "code migration"
+    ],
+    "patterns": [
+      "migrate.*legacy",
+      "modernize.*code",
+      "rewrite.*old",
+      "strangler.*fig",
+      "legacy.*system",
+      "move.*off.*old"
+    ]
+  },
+  "requirements": {
+    "tools": [],
+    "permissions": ["file_read", "file_write"],
+    "notes": "Language-agnostic skill. Works with any programming language."
+  },
+  "examples": {
+    "simple": [
+      "How do I start migrating this legacy module?",
+      "Write characterization tests for this old code",
+      "Wrap this legacy class behind a modern interface"
+    ],
+    "complex": [
+      "Plan a strangler fig migration for our monolith",
+      "Migrate this legacy service to a new architecture without downtime",
+      "Set up shadow mode to compare legacy and modern outputs"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+# Update last activity timestamp
+# Call this whenever there's user activity
+#
+
+WORKSPACE_DIR="/root/.openclaw/workspace"
+LAST_ACTIVE_FILE="${WORKSPACE_DIR}/.last-active"
+
+# Update timestamp
+touch "$LAST_ACTIVE_FILE"

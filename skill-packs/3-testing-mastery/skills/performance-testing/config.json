@@ -1,0 +1,41 @@
+{
+  "agent_support": {
+    "claude": {},
+    "roo": {},
+    "cascade": {},
+    "generic": {}
+  },
+  "triggers": {
+    "keywords": [
+      "performance test",
+      "load test",
+      "stress test",
+      "k6",
+      "locust",
+      "benchmark",
+      "throughput",
+      "latency test"
+    ],
+    "patterns": [
+      "(load|stress|performance).*test",
+      "benchmark.*(api|code)",
+      "measure.*(performance|throughput|latency)"
+    ]
+  },
+  "requirements": {
+    "tools": [],
+    "permissions": ["file_read", "file_write"]
+  },
+  "examples": {
+    "simple": [
+      "Set up load testing with k6",
+      "Create a performance test for this API",
+      "Benchmark this function"
+    ],
+    "complex": [
+      "Design a comprehensive performance testing strategy",
+      "Set up stress testing to find breaking points",
+      "Create soak tests to detect memory leaks"
+    ]
+  }
+}

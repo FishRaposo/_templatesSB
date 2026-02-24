@@ -1,0 +1,48 @@
+{
+  "agent_support": {
+    "claude": {"min_version": "3.0"},
+    "roo": {"min_version": "1.0"},
+    "cascade": {"min_version": "1.0"},
+    "generic": {"requirements": ["file_access", "code_execution"]}
+  },
+  "triggers": {
+    "keywords": [
+      "clean code",
+      "readable",
+      "maintainable",
+      "naming",
+      "readability",
+      "code style",
+      "messy code",
+      "hard to read",
+      "spaghetti",
+      "code clarity"
+    ],
+    "patterns": [
+      "make.*readable",
+      "clean.*up",
+      "improve.*readability",
+      "better.*names",
+      "rename.*variable",
+      "too.*long.*function",
+      "hard.*to.*understand"
+    ]
+  },
+  "requirements": {
+    "tools": [],
+    "permissions": ["file_read", "file_write"],
+    "notes": "Language-agnostic skill. Works with any programming language."
+  },
+  "examples": {
+    "simple": [
+      "Make this function more readable",
+      "Suggest better variable names",
+      "This code is hard to follow"
+    ],
+    "complex": [
+      "Refactor this 200-line function into clean, maintainable code",
+      "Review this module for clean code violations",
+      "Rewrite this with self-documenting patterns"
+    ]
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "agent_support": {
+    "claude": {"min_version": "3.0"},
+    "roo": {"min_version": "1.0"},
+    "cascade": {"min_version": "1.0"},
+    "generic": {"requirements": ["file_access", "code_execution"]}
+  },
+  "triggers": {
+    "keywords": [
+      "error handling",
+      "exception",
+      "try catch",
+      "error management",
+      "error types",
+      "recovery",
+      "retry",
+      "fallback",
+      "fail safe",
+      "crash"
+    ],
+    "patterns": [
+      "handle.*error",
+      "catch.*exception",
+      "error.*recovery",
+      "retry.*logic",
+      "graceful.*failure",
+      "unhandled.*rejection",
+      "error.*boundary"
+    ]
+  },
+  "requirements": {
+    "tools": [],
+    "permissions": ["file_read", "file_write"],
+    "notes": "Language-agnostic skill. Works with any programming language."
+  },
+  "examples": {
+    "simple": [
+      "Add proper error handling to this function",
+      "Create custom error types for this service",
+      "This catch block is empty, fix it"
+    ],
+    "complex": [
+      "Design an error handling strategy for this microservice",
+      "Add retry logic with circuit breaker for external API calls",
+      "Implement a global error boundary for this Express app"
+    ]
+  }
+}
