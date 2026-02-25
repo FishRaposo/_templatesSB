@@ -17,6 +17,7 @@ _Canonical documentation baseline for any software project — synthesized from 
 7. [Implementation Workflow](#7-implementation-workflow)
 8. [Tier Scaling](#8-tier-scaling)
 9. [Quality Standards](#9-quality-standards)
+10. [How the Files Connect](#10-how-the-files-connect)
 
 ---
 
@@ -355,6 +356,56 @@ Required sections: Quick Validation (4-check pass/fail) · Standard Validation (
 See `prompt-validation/SKILL.md` for the full protocol if the skill is available in the repo; otherwise use the template as a starting point.  
 Template: `templates/PROMPT-VALIDATION.md.tpl.md`
 
+### WORKFLOW.md
+
+Required sections: branching strategy (with rules) · development cycle (starting work, during development, opening a PR, merging) · release process and checklist · commit message convention · CI / automation table (check, trigger, command).
+
+Full tier only. Defines the team's branching, release, and merge conventions.  
+Template: `templates/WORKFLOW.md.tpl.md`
+
+### EVALS.md
+
+Required sections: output quality standards table (criterion, minimum, target, how to measure) · task completion criteria (functional + Three Pillars + agent-specific) · evaluation rubric (dimension × score scale) · benchmark tasks table · regression baselines table.
+
+Full tier only. Defines quality gates and acceptance criteria for both agents and humans.  
+Template: `templates/EVALS.md.tpl.md`
+
+### DOCUMENTATION-OVERVIEW.md
+
+Required sections: root-level documents table (document, purpose, audience, tier) · docs/ directory table · memory system table · AI agent files table · API reference table (if applicable) · ADR table (if applicable) · documentation health checklist.
+
+Full tier only. Single index of every document in the project.  
+Template: `templates/DOCUMENTATION-OVERVIEW.md.tpl.md`
+
+### CODE_OF_CONDUCT.md
+
+Required sections: our pledge · our standards (expected + unacceptable behavior) · responsibilities · enforcement (contact channel) · attribution.
+
+Full tier only. Adapted from the Contributor Covenant.  
+Template: `templates/CODE_OF_CONDUCT.md.tpl.md`
+
+### LICENSE.md
+
+Required sections: license name and SPDX identifier · full license text · copyright notice with year and holder.
+
+Full tier only. Choose an OSI-approved license or proprietary notice as appropriate.  
+Template: `templates/LICENSE.md.tpl.md`
+
+### .github/ Templates
+
+**.github/PULL_REQUEST_TEMPLATE.md** — Required sections: summary · changes list · related issues/events · Three Pillars checklist (AUTOMATING, TESTING, DOCUMENTING) · screenshots/output · notes for reviewer.
+
+**.github/ISSUE_TEMPLATE/bug_report.md** — Required sections: describe the bug · to reproduce (numbered steps) · expected behavior · actual behavior · environment table · additional context · possible fix.
+
+**.github/ISSUE_TEMPLATE/feature_request.md** — Required sections: problem statement · proposed solution · alternatives considered · acceptance criteria · Three Pillars impact · additional context · implementation notes.
+
+**.github/ISSUE_TEMPLATE/config.yml** — Enables blank issues and links to external resources (e.g. discussions, security reporting).
+
+**.github/CODEOWNERS** — Maps file paths to responsible reviewers.
+
+Full tier only.  
+Templates: `templates/github/`
+
 ### AI Tool Files (CLAUDE.md, WINDSURF.md, etc.)
 
 Required sections: tool-specific launch instructions · relevant MCP tools or extensions · project-specific hints · link to AGENTS.md for all behavioral rules.
@@ -389,7 +440,7 @@ Template: `templates/AI-TOOL.md.tpl.md`
 
 ### Phase 4: Full Tier (if applicable)
 
-13. Copy and fill remaining root files: `WORKFLOW.md`, `CODE_OF_CONDUCT.md`, `LICENSE.md`
+13. Copy and fill remaining root files: `WORKFLOW.md`, `CODE_OF_CONDUCT.md`, `LICENSE.md`, `EVALS.md`, `DOCUMENTATION-OVERVIEW.md`
 14. Create `.github/` directory and copy issue/PR templates
 15. Copy and fill AI agent files: `CLAUDE.md`, `WINDSURF.md`, etc.
 16. Run Three Pillars checklist on all files
@@ -462,6 +513,91 @@ Before declaring any task complete:
 - [ ] CHANGELOG.md has event for this change
 - [ ] All affected docs updated to match implementation
 - [ ] Memory layers (graph.md, context.md) regenerated
+
+---
+
+## 10. How the Files Connect
+
+Understanding the relationship between files prevents confusion about what to read and what to update.
+
+### Information Flow
+
+```text
+Human / External Request
+    │
+    ▼
+AGENTS.md  ◄── Read first. Defines what agents can and cannot do.
+    │
+    ▼
+.memory/context.md  ◄── Read second. "What is happening right now?"
+    │                     (ephemeral — regenerated from L1 + L2)
+    ▼
+CHANGELOG.md  ◄── Source of truth. "What happened and when?"
+    │                (append-only event log)
+    ▼
+.memory/graph.md  ◄── Derived from CHANGELOG. "How do entities relate?"
+    │
+    ▼
+Execute Task  ──► Update affected files ──► Append event to CHANGELOG
+    │
+    ▼
+Shutdown: Materialize graph ──► Regenerate context ──► Commit ──► Die
+```
+
+### What Each File Answers
+
+| Question | Answer Source |
+|----------|--------------|
+| "What can agents do and not do?" | `AGENTS.md` |
+| "What is this project?" | `README.md` |
+| "What changed and when?" | `CHANGELOG.md` |
+| "What's left to do?" | `TODO.md` |
+| "How do I set up and run this?" | `QUICKSTART.md` |
+| "How do I contribute?" | `CONTRIBUTING.md` |
+| "How do I report a vulnerability?" | `SECURITY.md` |
+| "What does the architecture look like?" | `docs/SYSTEM-MAP.md` |
+| "Is this prompt safe to execute?" | `docs/PROMPT-VALIDATION.md` |
+| "What matters right now?" | `.memory/context.md` |
+| "How do entities relate?" | `.memory/graph.md` |
+| "What's the branching/release process?" | `WORKFLOW.md` |
+| "Is the output good enough?" | `EVALS.md` |
+| "Where is all the documentation?" | `DOCUMENTATION-OVERVIEW.md` |
+| "How do I use [specific AI tool]?" | `CLAUDE.md`, `WINDSURF.md`, etc. |
+
+### File Dependency Graph
+
+Files are layered by trust and derivation. Higher files never depend on lower ones.
+
+```text
+              ┌─────────────┐
+              │  AGENTS.md  │  L0 — Constitution (immutable at runtime)
+              └──────┬──────┘
+                     │ governs
+              ┌──────▼──────┐
+              │ CHANGELOG.md│  L1 — Event log (append-only, source of truth)
+              └──┬───────┬──┘
+      materializes│       │derives
+          ┌───────▼──┐ ┌──▼──────────┐
+          │ graph.md │ │ context.md  │  L2/L3 — Derived views
+          └──────────┘ └─────────────┘
+
+    ┌──────────────────────────────────────────────┐
+    │  Standalone files — updated by event trigger  │
+    │  README · QUICKSTART · CONTRIBUTING · SECURITY│
+    │  SYSTEM-MAP · TODO · WORKFLOW · EVALS         │
+    └──────────────────────────────────────────────┘
+```
+
+### Update Cascade
+
+When a change occurs, the documentation parity table (§5) determines which files need updating. The cascade always flows:
+
+1. **Do the work** — code, config, architecture, whatever changed
+2. **Append event** to `CHANGELOG.md` (L1)
+3. **Update affected files** per the parity table (README, SYSTEM-MAP, QUICKSTART, etc.)
+4. **Materialize** new event into `.memory/graph.md` (L2)
+5. **Regenerate** `.memory/context.md` from L1 + L2 (L3)
+6. **Commit** all changes as one atomic transaction
 
 ---
 

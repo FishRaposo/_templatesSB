@@ -57,6 +57,7 @@ AGENTS.md  >  CHANGELOG.md  >  .memory/graph.md  >  .memory/context.md
 | `CODE_OF_CONDUCT.md` | | | ✅ |
 | `LICENSE.md` | | | ✅ |
 | `EVALS.md` | | | ✅ |
+| `DOCUMENTATION-OVERVIEW.md` | | | ✅ |
 | `.github/` templates | | | ✅ |
 | AI tool files (CLAUDE.md, etc.) | | ✅ | ✅ |
 
@@ -102,6 +103,21 @@ Event types: `decision` `create` `modify` `delete` `test` `fix` `dependency` `bl
 | Dependency | CONTRIBUTING, QUICKSTART, CHANGELOG |
 | Security fix | SECURITY, CHANGELOG |
 | Architecture | SYSTEM-MAP, AGENTS if behavioral, CHANGELOG |
+
+## What Each File Answers
+
+| Question | File |
+|----------|------|
+| What can agents do? | `AGENTS.md` |
+| What happened? | `CHANGELOG.md` |
+| What is this project? | `README.md` |
+| What's happening now? | `.memory/context.md` |
+| How do entities relate? | `.memory/graph.md` |
+| How do I set up? | `QUICKSTART.md` |
+| How do I contribute? | `CONTRIBUTING.md` |
+| What's the architecture? | `docs/SYSTEM-MAP.md` |
+
+**Update cascade**: Do work → Append event (L1) → Update affected files → Materialize graph (L2) → Regenerate context (L3) → Commit
 
 ## When In Doubt
 

@@ -34,8 +34,8 @@ cd {{PROJECT_NAME}}
 # 3. Configure environment (remove this block if the project has no .env file)
 cp {{ENV_EXAMPLE_FILE}} {{ENV_FILE}}
 # Edit {{ENV_FILE}} — set required values:
-#   {{ENV_VAR_1}} — {{ENV_VAR_1_DESCRIPTION}}
-#   {{ENV_VAR_2}} — {{ENV_VAR_2_DESCRIPTION}}
+#   {{ENV_VAR_1}}
+#   {{ENV_VAR_2}}
 
 # 4. Initialize (database migrations, build steps, etc. — remove if not applicable)
 {{INIT_COMMAND}}

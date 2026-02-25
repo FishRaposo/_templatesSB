@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security Vulnerabilities
+    url: "{{SECURITY_REPORTING_URL}}"
+    about: Report security vulnerabilities privately — do not open a public issue
+  - name: Questions & Discussions
+    url: "{{DISCUSSIONS_URL}}"
+    about: Ask questions, share ideas, or start a discussion

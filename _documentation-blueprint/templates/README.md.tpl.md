@@ -26,9 +26,9 @@ Visit {{LOCAL_URL}} to see it running.
 
 ## Key Features
 
-- **{{FEATURE_1}}** — {{FEATURE_1_DESCRIPTION}}
-- **{{FEATURE_2}}** — {{FEATURE_2_DESCRIPTION}}
-- **{{FEATURE_3}}** — {{FEATURE_3_DESCRIPTION}}
+- **{{FEATURE_1}}**
+- **{{FEATURE_2}}**
+- **{{FEATURE_3}}**
 
 ## Documentation
 
@@ -42,9 +42,9 @@ Visit {{LOCAL_URL}} to see it running.
 
 ## Tech Stack
 
-- **{{TECH_1}}** — {{TECH_1_ROLE}}
-- **{{TECH_2}}** — {{TECH_2_ROLE}}
-- **{{TECH_3}}** — {{TECH_3_ROLE}}
+- **{{TECH_1}}**
+- **{{TECH_2}}**
+- **{{TECH_3}}**
 
 ## License
 

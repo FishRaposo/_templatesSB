@@ -1,0 +1,25 @@
+# CODEOWNERS — {{PROJECT_NAME}}
+#
+# Each line maps a file pattern to one or more GitHub usernames or teams.
+# The last matching pattern takes precedence.
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owner for everything
+*                       @{{DEFAULT_OWNER}}
+
+# Documentation
+*.md                    @{{DOCS_OWNER}}
+docs/                   @{{DOCS_OWNER}}
+
+# AI agent configuration
+AGENTS.md               @{{PROJECT_LEAD}}
+CLAUDE.md               @{{PROJECT_LEAD}}
+WINDSURF.md             @{{PROJECT_LEAD}}
+CURSOR.md               @{{PROJECT_LEAD}}
+
+# CI / GitHub config
+.github/                @{{DEVOPS_OWNER}}
+
+# Source code (add per-module owners as the project grows)
+# src/auth/             @{{AUTH_OWNER}}
+# src/api/              @{{API_OWNER}}
