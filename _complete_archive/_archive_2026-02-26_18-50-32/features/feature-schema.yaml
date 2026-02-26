@@ -1,0 +1,77 @@
+version: 1
+schema:
+  id: feature
+  type: object
+  required:
+    - id
+    - name
+    - summary
+    - user_story
+    - acceptance_criteria
+    - tier_impact
+    - stacks
+    - tasks
+    - inputs
+    - outputs
+  properties:
+    id:
+      type: string
+      pattern: '^feature\\.[a-z0-9_]+\\.[a-z0-9_]+$'
+    name:
+      type: string
+    summary:
+      type: string
+    user_story:
+      type: string
+    acceptance_criteria:
+      type: array
+      items:
+        type: string
+    tier_impact:
+      type: object
+      properties:
+        mvp: { type: string }
+        core: { type: string }
+        enterprise: { type: string }
+    stacks:
+      type: object
+      properties:
+        frontend:
+          type: array
+          items: { type: string }
+        backend:
+          type: array
+          items: { type: string }
+        data:
+          type: array
+          items: { type: string }
+    tasks:
+      type: array
+      items:
+        type: string
+    inputs:
+      type: array
+      items:
+        type: string
+    outputs:
+      type: array
+      items:
+        type: string
+    dependencies:
+      type: array
+      items:
+        type: string
+    edge_cases:
+      type: array
+      items:
+        type: string
+    security_notes:
+      type: array
+      items:
+        type: string
+    telemetry:
+      type: array
+      items:
+        type: object
+        properties:
+          event: { type: string }

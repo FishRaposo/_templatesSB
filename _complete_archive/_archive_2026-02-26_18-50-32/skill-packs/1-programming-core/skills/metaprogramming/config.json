@@ -1,0 +1,62 @@
+{
+  "agent_support": {
+    "claude": {
+      "min_version": "3.0"
+    },
+    "roo": {
+      "min_version": "1.0"
+    },
+    "cascade": {
+      "min_version": "1.0"
+    },
+    "generic": {
+      "requirements": [
+        "file_access",
+        "code_execution"
+      ]
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "metaprogramming",
+      "reflection",
+      "proxy",
+      "decorator",
+      "code generation",
+      "macro",
+      "AST",
+      "dynamic dispatch",
+      "introspection"
+    ],
+    "patterns": [
+      "generate.*code",
+      "create.*decorator",
+      "implement.*proxy",
+      "use.*reflection",
+      "build.*code.*generator",
+      "dynamic.*dispatch"
+    ]
+  },
+  "requirements": {
+    "tools": [],
+    "permissions": [
+      "file_read",
+      "file_write",
+      "execute"
+    ],
+    "memory": "512MB",
+    "notes": "Language-agnostic skill. No specific runtime required."
+  },
+  "examples": {
+    "simple": [
+      "Implement metaprogramming",
+      "Create proxy",
+      "Add decorators"
+    ],
+    "complex": [
+      "Build a validation decorator system that auto-generates runtime checks from TypeScript types",
+      "Create a code generator that scaffolds CRUD endpoints from a schema definition",
+      "Implement a Proxy-based ORM that lazily loads relations and tracks dirty fields"
+    ]
+  }
+}

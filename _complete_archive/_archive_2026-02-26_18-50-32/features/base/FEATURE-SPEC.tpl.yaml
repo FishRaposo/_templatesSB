@@ -1,0 +1,40 @@
+id: feature.module.name
+name: "Feature Name"
+summary: "1-2 line description of the user-facing capability."
+
+user_story: >
+  As a <role>, I want <goal> so that <value>.
+
+acceptance_criteria:
+  - "Condition 1"
+  - "Condition 2"
+
+tier_impact:
+  mvp: required
+  core: required
+  enterprise: optional
+
+stacks:
+  frontend: []
+  backend: []
+  data: []
+
+tasks:
+  - task.example.system_requirement
+
+inputs:
+  - input_1
+
+outputs:
+  - output_1
+
+dependencies: []
+
+edge_cases:
+  - "edge case 1"
+
+security_notes:
+  - "security constraint 1"
+
+telemetry:
+  - event: "event_name"

@@ -1,0 +1,62 @@
+{
+  "agent_support": {
+    "claude": {
+      "min_version": "3.0"
+    },
+    "roo": {
+      "min_version": "1.0"
+    },
+    "cascade": {
+      "min_version": "1.0"
+    },
+    "generic": {
+      "requirements": [
+        "file_access",
+        "code_execution"
+      ]
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "complexity",
+      "big-o",
+      "big o",
+      "time complexity",
+      "space complexity",
+      "efficiency",
+      "performance",
+      "analysis",
+      "bottleneck"
+    ],
+    "patterns": [
+      "analyze.*complexity",
+      "what.*big.*o",
+      "time.*complexity.*of",
+      "space.*complexity.*of",
+      "optimize.*performance",
+      "find.*bottleneck"
+    ]
+  },
+  "requirements": {
+    "tools": [],
+    "permissions": [
+      "file_read",
+      "file_write",
+      "execute"
+    ],
+    "memory": "512MB",
+    "notes": "Language-agnostic skill. No specific runtime required."
+  },
+  "examples": {
+    "simple": [
+      "Analyze time complexity",
+      "Optimize this code",
+      "Compare algorithms"
+    ],
+    "complex": [
+      "Compare the time complexity of these three sorting approaches and recommend the best one",
+      "Analyze this nested loop solution and find a way to reduce it from O(n²) to O(n log n)",
+      "Profile this function's space complexity and suggest optimizations for memory-constrained environments"
+    ]
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "agent_support": {
+    "claude": {},
+    "roo": {},
+    "cascade": {},
+    "generic": {}
+  },
+  "triggers": {
+    "keywords": [
+      "unit test",
+      "test function",
+      "test class",
+      "jest",
+      "pytest",
+      "test coverage",
+      "assert",
+      "test case"
+    ],
+    "patterns": [
+      "write.*unit.*test",
+      "test.*(function|class|method)",
+      "add.*test.*(for|coverage)"
+    ]
+  },
+  "requirements": {
+    "tools": [],
+    "permissions": ["file_read", "file_write"]
+  },
+  "examples": {
+    "simple": [
+      "Write unit tests for this function",
+      "Add test coverage for this class",
+      "Create tests using Jest/pytest"
+    ],
+    "complex": [
+      "Write comprehensive unit tests with edge cases and error handling",
+      "Set up parameterized tests for this algorithm",
+      "Achieve 80% test coverage for this module"
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "agent_support": {
+    "claude": {},
+    "roo": {},
+    "cascade": {},
+    "generic": {}
+  },
+  "triggers": {
+    "keywords": [
+      "integration test",
+      "api test",
+      "database test",
+      "e2e test",
+      "end to end",
+      "test containers",
+      "service test"
+    ],
+    "patterns": [
+      "test.*(integration|api|database)",
+      "integration.*test",
+      "e2e.*test"
+    ]
+  },
+  "requirements": {
+    "tools": [],
+    "permissions": ["file_read", "file_write"]
+  },
+  "examples": {
+    "simple": [
+      "Write an integration test for this API",
+      "Set up database integration tests",
+      "Test the order workflow end-to-end"
+    ],
+    "complex": [
+      "Create integration tests with test containers for Postgres",
+      "Set up API integration tests with proper test data",
+      "Test microservice communication with real HTTP calls"
+    ]
+  }
+}

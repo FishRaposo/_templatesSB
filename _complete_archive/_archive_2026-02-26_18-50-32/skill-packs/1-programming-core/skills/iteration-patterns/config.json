@@ -1,0 +1,62 @@
+{
+  "agent_support": {
+    "claude": {
+      "min_version": "3.0"
+    },
+    "roo": {
+      "min_version": "1.0"
+    },
+    "cascade": {
+      "min_version": "1.0"
+    },
+    "generic": {
+      "requirements": [
+        "file_access",
+        "code_execution"
+      ]
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "loop",
+      "iterate",
+      "iterator",
+      "for each",
+      "generator",
+      "lazy evaluation",
+      "pagination",
+      "streaming",
+      "batch processing"
+    ],
+    "patterns": [
+      "optimize.*loop",
+      "iterate.*over",
+      "implement.*iterator",
+      "batch.*process",
+      "paginate.*results",
+      "lazy.*evaluation"
+    ]
+  },
+  "requirements": {
+    "tools": [],
+    "permissions": [
+      "file_read",
+      "file_write",
+      "execute"
+    ],
+    "memory": "512MB",
+    "notes": "Language-agnostic skill. No specific runtime required."
+  },
+  "examples": {
+    "simple": [
+      "Optimize this loop",
+      "Implement iteration",
+      "Pattern for iteration"
+    ],
+    "complex": [
+      "Implement a lazy iterator that processes a 10GB file line-by-line without loading it into memory",
+      "Design a paginated API client with cursor-based iteration and automatic retry",
+      "Convert this nested loop with O(n³) complexity to a more efficient iteration pattern"
+    ]
+  }
+}

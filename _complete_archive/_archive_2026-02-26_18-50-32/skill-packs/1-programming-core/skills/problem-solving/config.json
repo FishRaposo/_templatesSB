@@ -1,0 +1,62 @@
+{
+  "agent_support": {
+    "claude": {
+      "min_version": "3.0"
+    },
+    "roo": {
+      "min_version": "1.0"
+    },
+    "cascade": {
+      "min_version": "1.0"
+    },
+    "generic": {
+      "requirements": [
+        "file_access",
+        "code_execution"
+      ]
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "solve",
+      "problem",
+      "approach",
+      "solution",
+      "debug",
+      "decompose",
+      "troubleshoot",
+      "root cause",
+      "strategy"
+    ],
+    "patterns": [
+      "solve.*problem",
+      "debug.*issue",
+      "find.*root.*cause",
+      "break.*down.*problem",
+      "approach.*this",
+      "troubleshoot.*error"
+    ]
+  },
+  "requirements": {
+    "tools": [],
+    "permissions": [
+      "file_read",
+      "file_write",
+      "execute"
+    ],
+    "memory": "512MB",
+    "notes": "Language-agnostic skill. No specific runtime required."
+  },
+  "examples": {
+    "simple": [
+      "Solve this coding problem",
+      "Debug this issue",
+      "Design a solution"
+    ],
+    "complex": [
+      "This system has intermittent failures — help me systematically identify the root cause",
+      "Break down this complex business requirement into implementable sub-problems",
+      "Design a solution for a rate-limited API that must handle 10K concurrent users with graceful degradation"
+    ]
+  }
+}

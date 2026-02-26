@@ -1,0 +1,55 @@
+# File: CONFIG.tpl.yaml
+# Purpose: Template for llm-prompt-router implementation
+# Generated for: {{PROJECT_NAME}}
+
+# Llm Prompt Router Configuration
+# Generated for {{PROJECT_NAME}} using {{STACK}} stack
+
+# Service Configuration
+service:
+  name: "{{PROJECT_NAME}}-llm-prompt-router"
+  version: "1.0.0"
+  enabled: true
+
+# Task-Specific Settings
+llm-prompt-router:
+  # Core configuration options
+  timeout: 30
+  retry_attempts: 3
+  retry_delay: 1
+  
+  # Performance Settings
+  max_concurrent: 10
+  batch_size: 100
+  
+  # Stack-Specific Defaults
+  {% if STACK == "python" %}
+  framework: "fastapi"
+  {% elif STACK == "go" %}
+  framework: "net/http"
+  {% elif STACK == "node" %}
+  framework: "express"
+  {% elif STACK == "nextjs" %}
+  framework: "next.js"
+  {% elif STACK == "react" %}
+  framework: "react"
+  {% elif STACK == "flutter" %}
+  framework: "flutter"
+  {% endif %}
+
+# Logging Configuration
+logging:
+  level: "info"
+  format: "json"
+  
+# Monitoring
+monitoring:
+  enabled: true
+  metrics_port: 9090
+  health_check: "/health"
+
+# Security
+security:
+  auth_required: false
+  rate_limit: 100
+  cors_enabled: true

@@ -1,0 +1,18 @@
+# Ignore backup archives and long path files
+_complete_archive/
+_archive/
+backups/
+*.tar.gz
+*.zip
+
+# Ignore temp files
+*.tmp
+.tmp/
+temp/
+
+# Node
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db

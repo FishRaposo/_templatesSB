@@ -1,0 +1,62 @@
+{
+  "agent_support": {
+    "claude": {
+      "min_version": "3.0"
+    },
+    "roo": {
+      "min_version": "1.0"
+    },
+    "cascade": {
+      "min_version": "1.0"
+    },
+    "generic": {
+      "requirements": [
+        "file_access",
+        "code_execution"
+      ]
+    }
+  },
+  "triggers": {
+    "keywords": [
+      "data structure",
+      "array",
+      "linked list",
+      "tree",
+      "graph",
+      "stack",
+      "queue",
+      "hash map",
+      "heap"
+    ],
+    "patterns": [
+      "implement.*data.*structure",
+      "choose.*data.*structure",
+      "design.*with.*tree",
+      "build.*hash.*map",
+      "when.*to.*use.*stack",
+      "graph.*traversal"
+    ]
+  },
+  "requirements": {
+    "tools": [],
+    "permissions": [
+      "file_read",
+      "file_write",
+      "execute"
+    ],
+    "memory": "512MB",
+    "notes": "Language-agnostic skill. No specific runtime required."
+  },
+  "examples": {
+    "simple": [
+      "Implement a binary tree",
+      "Create a hash map",
+      "Design a stack"
+    ],
+    "complex": [
+      "Implement an LRU cache using a hash map and doubly linked list with O(1) operations",
+      "Design a trie-based autocomplete system that handles prefix matching efficiently",
+      "Choose the right data structure for a task scheduler with priority and dependency support"
+    ]
+  }
+}

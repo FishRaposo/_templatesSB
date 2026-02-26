@@ -1,0 +1,87 @@
+id: mins
+version: 1
+name: "MINS – Minimalist Income Niche SaaS"
+category: "micro_saas"
+
+description: >
+  A single-purpose freemium mobile app pattern: narrow feature set,
+  opinionated UX, and monetization baked in (one-time + upgrades).
+
+# What kind of thing this is
+type: "app"                     # "app" | "pipeline" | "api" | "agent_system" | "dashboard"
+
+# Which stacks this blueprint is designed for
+stacks:
+  required:
+    - flutter                   # MUST be present
+  recommended:
+    - python                    # optional but preferred (backend)
+  supported:
+    - node
+    - go
+
+# Tier recommendations
+tier_defaults:
+  overall: core                 # default if user doesn't specify
+  frontend: mvp                 # e.g. mobile UI can be lighter tier
+  backend: core
+
+# Which tasks this blueprint expects
+tasks:
+  required:                     # always enabled if available
+    - auth-basic
+    - crud-module
+    - analytics-event-pipeline
+  recommended:                  # auto-on, user can disable
+    - notification-center
+    - billing-stripe
+  optional:                     # shown in UI as extra checkboxes
+    - seo-keyword-research
+    - web-scraping
+    - email-campaign-engine
+
+# Constraints / invariants this blueprint enforces
+constraints:
+  single_primary_feature: true
+  monetization:
+    model: ["one_time", "freemium"]
+  offline_first: true
+  platforms:
+    - android
+    - ios
+
+# Which templates/overlays to apply on top of base stack templates
+overlays:
+  flutter:
+    enabled: true
+    mode: "extend"          # "extend" | "override"
+    apply_to:
+      - "lib/screens/"
+      - "lib/widgets/"
+      - "lib/routing/"
+  python:
+    enabled: true
+    mode: "extend"
+    apply_to:
+      - "api/"
+      - "services/"
+      - "billing/"
+
+# Hooks for the compiler/agents
+hooks:
+  pre_scaffold:
+    - "scripts/blueprints/mins/pre_scaffold.py"
+  post_scaffold:
+    - "scripts/blueprints/mins/post_scaffold.py"
+
+# LLM hints
+llm:
+  prompt_preamble: |
+    You are generating a MINS-style micro-SaaS: single-purpose, narrow,
+    clean UX, with monetization built-in (freemium + one-time).
+    Maintain simplicity and avoid feature creep.
+  architectural_keywords:
+    - "single feature"
+    - "minimal onboarding"
+    - "low cognitive load"
+    - "paywall core extension"

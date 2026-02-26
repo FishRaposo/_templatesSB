@@ -1,0 +1,43 @@
+id: saas-api
+version: 1
+name: "SaaS API Backend"
+category: "backend"
+
+description: >
+  Production-ready FastAPI backend with authentication, multi-tenancy,
+  billing integration (Stripe), and comprehensive security.
+
+type: "api"
+
+stacks:
+  required:
+    - python
+  supported:
+    - python
+
+tier_defaults:
+  overall: core
+  backend: core
+
+tasks:
+  required:
+    - auth-basic
+    - billing-stripe
+    - crud-module
+  recommended:
+    - notification-center
+    - background-jobs
+  optional:
+    - ai-llm-integration
+
+constraints:
+  security_levels: ["high"]
+  multi_tenant: true
+
+overlays:
+  python:
+    enabled: true
+    mode: "extend"
+    apply_to:
+      - "app/"
+      - "tests/"

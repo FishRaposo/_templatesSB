@@ -1,0 +1,40 @@
+{
+  "agent_support": {
+    "claude": {},
+    "roo": {},
+    "cascade": {},
+    "generic": {}
+  },
+  "triggers": {
+    "keywords": [
+      "test data",
+      "test factory",
+      "fixture",
+      "faker",
+      "seed data",
+      "test database",
+      "data isolation"
+    ],
+    "patterns": [
+      "create.*test.*data",
+      "(factory|fixture).*test",
+      "test.*database.*(setup|teardown)"
+    ]
+  },
+  "requirements": {
+    "tools": [],
+    "permissions": ["file_read", "file_write"]
+  },
+  "examples": {
+    "simple": [
+      "Create a test data factory",
+      "Set up test fixtures",
+      "Manage test database state"
+    ],
+    "complex": [
+      "Build a comprehensive factory system with relations",
+      "Set up database isolation for tests",
+      "Generate realistic test data at scale"
+    ]
+  }
+}
