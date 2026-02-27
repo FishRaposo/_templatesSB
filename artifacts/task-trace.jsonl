@@ -1,2 +1,0 @@
-{"task_id": "task.web-scraping", "type": "event.emit", "name": "crawl.start", "ts": 1.0}
-{"task_id": "task.web-scraping", "type": "task.return", "keys": ["items", "errors"], "ts": 2.0}

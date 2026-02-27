@@ -1,3 +1,0 @@
--- feature_notes_save__happy_path
--- feature_notes_save__validation
--- feature_notes_save__failure

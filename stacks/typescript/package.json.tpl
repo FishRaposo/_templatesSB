@@ -1,9 +1,0 @@
-{
-  "name": "{{PROJECT_NAME}}",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "test": "jest"
-  }
-}

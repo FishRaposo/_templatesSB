@@ -2,27 +2,141 @@
 
 Event-sourced multi-agent cognition — pure markdown implementation.
 
-## What This Is
-
 A 4-layer memory system that turns AI agents into stateless workers operating on shared, immutable state. No runtime, no database, no JSON — just markdown files deployed to a `.memory/` folder.
 
+---
+
+## Directory Structure
+
+```
+memory-system/
+├── README.md                     # This file — comprehensive documentation
+├── templates/                    # Deployable files
+│   ├── changelog.md              # → deploys as CHANGELOG.md (project root)
+│   ├── graph.md                  # → deploys as .memory/graph.md
+│   ├── context.md                # → deploys as .memory/context.md
+│   ├── context.md.tpl.md         # Jinja2 template with variables
+│   └── graph.md.tpl.md           # Jinja2 template with variables
+├── skill/                        # Implementation skill (for AI agents)
+│   ├── SKILL.md                  # Step-by-step deployment instructions
+│   ├── config.json               # Skill triggers and configuration
+│   └── README.md                 # Skill overview
+├── docs/                         # Supporting documentation
+│   ├── ARCHITECTURE-AUDIT.md     # Architecture audit & gap analysis
+│   ├── VALIDATION-SCRIPT.md      # Validation script reference
+│   └── INITIALIZATION-SCRIPT.md  # Initialization script reference
+└── _examples/                    # Usage examples
+    └── worked-example.md         # 8 events flowing through all 4 layers
+```
+
+### Deployed Structure
+
+When deployed to a target project:
+
+```
+target-project/
+├── AGENTS.md                     # Layer 0: Behavioral Core
+├── CHANGELOG.md                  # Layer 1: Event Log (from templates/changelog.md)
+├── TODO.md                       # Layer 1 Extension (Full tier only)
+└── .memory/                      # Derived views
+    ├── graph.md                  # Layer 2: Knowledge Graph (Full tier)
+    └── context.md                # Layer 3: Narrative (Core/Full tier)
+```
+
+---
+
 ## The Four Layers
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  Layer 3: NARRATIVE (context.md)                        │
+│  Derived projection — "what matters right now"          │
+│  Ephemeral. Rebuilt from Layer 1 + Layer 2.             │
+├─────────────────────────────────────────────────────────┤
+│  Layer 2: KNOWLEDGE GRAPH (graph.md)                    │
+│  Materialized view — entities, relations, states        │
+│  Queryable. Updated only by materialization from L1.    │
+├─────────────────────────────────────────────────────────┤
+│  Layer 1: EVENT LOG (CHANGELOG.md)                      │
+│  Source of truth — every decision, change, result       │
+│  Append-only. Immutable once committed.                 │
+├─────────────────────────────────────────────────────────┤
+│  Layer 0: BEHAVIORAL CORE (AGENTS.md)                   │
+│  Constitution — rules, constraints, Three Pillars       │
+│  Immutable during execution. Read at boot only.         │
+└─────────────────────────────────────────────────────────┘
+```
 
 | Layer | File | Role | Rule |
 |-------|------|------|------|
 | **L0** | `AGENTS.md` | Behavioral Core | Immutable during execution |
-| **L1** | `CHANGELOG.md` (root) | Event Log | Append-only |
-| **L2** | `.memory/graph.md` | Knowledge Graph | Updated only from L1 |
+| **L1** | `CHANGELOG.md` (root) | Event Log | Append-only, source of truth |
+| **L2** | `.memory/graph.md` | Knowledge Graph | Materialized from L1 only |
 | **L3** | `.memory/context.md` | Narrative | Regenerated from L1 + L2 |
 
-## Quick Start
+### Design Principles
 
-1. Copy `changelog.md` to your project root as `CHANGELOG.md` (Layer 1)
-2. Copy `graph.md` and `context.md` into your project's `.memory/` folder
-3. Your `AGENTS.md` is Layer 0 — it already exists
-4. Start appending events to `CHANGELOG.md` as you work
-5. Update `.memory/graph.md` when events create or change entities
-6. Regenerate `.memory/context.md` when starting a new session
+| Principle | Description |
+|-----------|-------------|
+| **Memory is infrastructure** | Agents read files, no internal state |
+| **Append-only truth** | Events never edited once committed |
+| **One-way data flow** | L1 → L2 → L3, never backward |
+| **Stateless agents** | Boot from files, execute, write, die |
+| **Git is the database** | Commits are transactions |
+| **Pure markdown** | No JSON runtime, no tooling required |
+
+### Trust Hierarchy
+
+When layers conflict, resolve by trust order:
+
+```
+L0 (AGENTS.md)    → Highest authority — behavioral rules always win
+L1 (CHANGELOG.md) → Source of truth for all facts
+L2 (graph.md)     → Must match L1 — if not, rematerialize
+L3 (context.md)   → Must match L1+L2 — if not, regenerate
+```
+
+---
+
+## Tiers
+
+Not every project needs all four layers:
+
+| Signal | MVP | Core | Full |
+|--------|-----|------|------|
+| Solo developer, < 1 month | ✅ | | |
+| Multiple agents/developers, 1–6 months | | ✅ | |
+| Complex dependencies, 6+ months, multi-agent | | | ✅ |
+
+| Tier | Files Deployed |
+|------|---------------|
+| **MVP** | `CHANGELOG.md` only |
+| **Core** | `CHANGELOG.md` + `.memory/context.md` |
+| **Full** | `CHANGELOG.md` + `TODO.md` + `.memory/graph.md` + `.memory/context.md` |
+
+### Quick Start by Tier
+
+**MVP**:
+```bash
+cp templates/changelog.md CHANGELOG.md
+```
+
+**Core**:
+```bash
+cp templates/changelog.md CHANGELOG.md
+mkdir -p .memory
+cp templates/context.md .memory/context.md
+```
+
+**Full**:
+```bash
+cp templates/changelog.md CHANGELOG.md
+mkdir -p .memory
+cp templates/graph.md .memory/graph.md
+cp templates/context.md .memory/context.md
+```
+
+---
 
 ## Agent Lifecycle
 
@@ -32,7 +146,7 @@ EXECUTE:  Work within constraints → Append events to CHANGELOG.md
 SHUTDOWN: Append → Update graph → Regenerate context → Commit
 ```
 
-## Core Rules
+### Core Rules
 
 1. **Append-only** — never edit existing events in the changelog
 2. **One-way flow** — changelog → graph → context; never backward
@@ -41,9 +155,9 @@ SHUTDOWN: Append → Update graph → Regenerate context → Commit
 
 ---
 
-## Event Format
+## Layer 1: Event Log
 
-Copy this template for each new event appended to `changelog.md`:
+### Event Format
 
 ```markdown
 ### evt-NNN | YYYY-MM-DD HH:MM | agent-name | type
@@ -62,17 +176,17 @@ Copy this template for each new event appended to `changelog.md`:
 
 | Type | When to Use |
 |------|-------------|
-| `decision` | Architectural or design choice made |
-| `create` | New file, component, or entity created |
-| `modify` | Existing code or config changed |
-| `delete` | File or component removed |
-| `test` | Test executed or result recorded |
-| `fix` | Bug fixed |
-| `dependency` | External dependency added or changed |
-| `blocker` | Something is blocking progress |
-| `milestone` | Significant threshold reached |
-| `escalation` | Issue escalated to human |
-| `handoff` | Pipeline handoff between agents |
+| `decision` | Architectural or design choice — include `from`, `to`, `rationale` |
+| `create` | New file/component/entity — include `entity`, `path`, `purpose` |
+| `modify` | Existing code changed — include `entity`, `changes` |
+| `delete` | File/component removed — include `entity`, `reason` |
+| `test` | Test executed — include `target`, `result` |
+| `fix` | Bug fixed — include `symptom`, `root_cause`, `resolution` |
+| `dependency` | External dep added/changed — include `entity`, `version` |
+| `blocker` | Progress blocked — include `blocked_entity`, `blocking_entity` |
+| `milestone` | Significant threshold — include `name`, `criteria_met` |
+| `escalation` | Escalated to human — include `reason`, `requested_action` |
+| `handoff` | Pipeline handoff — include `from_agent`, `to_agent` |
 
 ### Event Rules
 
@@ -84,9 +198,11 @@ Copy this template for each new event appended to `changelog.md`:
 
 ---
 
-## Materialization Rules
+## Layer 2: Knowledge Graph
 
-After appending events to `changelog.md`, update `graph.md` using these rules:
+### Materialization Rules
+
+After appending events to `CHANGELOG.md`, update `graph.md`:
 
 | Event Type | Graph Update |
 |-----------|-------------|
@@ -105,28 +221,24 @@ After appending events to `changelog.md`, update `graph.md` using these rules:
 
 1. **Never edit graph.md without a corresponding changelog event** — every change traces to an event
 2. **Never delete rows** — set Status to `deprecated` instead
-3. **If inconsistent** — regenerate the graph by replaying all events from `changelog.md`
+3. **If inconsistent** — regenerate the graph by replaying all events from `CHANGELOG.md`
 
-### Node Types
+### Graph Schema
 
-`component` | `task` | `dependency` | `decision` | `document` | `milestone`
-
-### Node Statuses
-
-`active` | `blocked` | `completed` | `deprecated` | `planned`
-
-### Edge Relations
-
-`depends_on` | `blocks` | `implements` | `tests` | `documents` | `contains` | `precedes` | `related_to`
+- **Node Types**: `component` | `task` | `dependency` | `decision` | `document` | `milestone`
+- **Node Statuses**: `active` | `blocked` | `completed` | `deprecated` | `planned`
+- **Edge Relations**: `depends_on` | `blocks` | `implements` | `tests` | `documents` | `contains` | `precedes` | `related_to`
 
 ---
 
-## Context Regeneration
+## Layer 3: Context Narrative
+
+### Regeneration Algorithm
 
 Regenerate `context.md` at the start of every new session:
 
 1. Read `graph.md` — list all nodes with Status = `active` or `blocked`
-2. Read `changelog.md` — read events from the last 48 hours or last 20 events (whichever is more)
+2. Read `CHANGELOG.md` — read events from the last 48 hours or last 20 events (whichever is more)
 3. Fill in each section mechanically — do not editorialize or speculate:
    - **Active Mission** — from most recent milestone or decision events
    - **Current Sprint** — from graph task nodes with status = active
@@ -138,7 +250,7 @@ Regenerate `context.md` at the start of every new session:
 
 ### Staleness Check
 
-Compare the `Event horizon` comment in `context.md` with the last event in `changelog.md`:
+Compare the `Event horizon` comment in `context.md` with the last event in `CHANGELOG.md`:
 - **Match** → context is fresh, use directly
 - **Mismatch** → context is stale, regenerate before proceeding
 - **Missing** → generate from scratch
@@ -147,44 +259,32 @@ Compare the `Event horizon` comment in `context.md` with the last event in `chan
 
 ## Archival Protocol
 
-When `changelog.md` exceeds **50 events**, archive older events to prevent the file from becoming unwieldy.
+When `CHANGELOG.md` exceeds **50 events**, archive older events.
 
 ### When to Archive
 
-- **Trigger**: changelog.md has more than 50 events
+- **Trigger**: changelog has more than 50 events
 - **Frequency**: At milestone boundaries (natural breakpoints)
-- **Retain in changelog.md**: The last 20 events + all events referenced by active graph nodes
+- **Retain**: The last 20 events + all events referenced by active graph nodes
 
 ### How to Archive
 
-1. Identify the archive boundary — the oldest event that is still referenced by an active graph node or is within the last 20 events
-2. Move all events **before** the boundary from `changelog.md` to `changelog-archive.md`
-3. Add an archive marker at the top of the moved events section in `changelog-archive.md`
-4. Add a reference comment in `changelog.md` noting what was archived
-5. **Do not modify** the archived events after moving them — they remain append-only
-6. Append an `archive` event to `changelog.md` recording the archival action
+1. Identify the archive boundary — the oldest event still referenced by an active graph node or within the last 20 events
+2. Move all events **before** the boundary to `changelog-archive.md`
+3. Add an archive marker: `## Archive: evt-001 through evt-NNN | Archived YYYY-MM-DD`
+4. Add a reference comment in `CHANGELOG.md` noting what was archived
+5. Append an `archive` event to `CHANGELOG.md` recording the archival action
 
-### Archive Marker Format
-
-In `changelog-archive.md`, prefix each batch:
-
-```markdown
----
-## Archive: evt-001 through evt-030 | Archived YYYY-MM-DD
-<!-- Archived at milestone: [milestone name] -->
----
-```
-
-### Rules
+### Archival Rules
 
 1. **Never delete events** — archiving means moving, not removing
-2. **Archived events are still valid refs** — agents can read the archive if they need historical context
-3. **The graph is not affected** — it already materialized these events; the nodes/edges remain
+2. **Archived events are still valid refs** — agents can read the archive for historical context
+3. **The graph is not affected** — it already materialized these events; nodes/edges remain
 4. **Context regeneration** only reads recent events — archived events are already reflected in the graph
 
 ---
 
-## Task Management
+## Task Management (Full Tier)
 
 `TODO.md` (at project root) tracks tasks:
 
@@ -197,19 +297,65 @@ Every task completion should have a corresponding event in `CHANGELOG.md`.
 
 ---
 
+## AGENTS.md Integration
+
+Add this to a project's AGENTS.md to integrate the memory system:
+
+```markdown
+## Memory System Protocol
+
+This project uses an event-sourced memory system. See `.memory/` for live state.
+
+- **Layer 0 — Behavioral Core** (`AGENTS.md`): Immutable during execution. Read at boot only.
+- **Layer 1 — Event Log** (`CHANGELOG.md`): Append-only source of truth.
+- **Layer 2 — Knowledge Graph** (`.memory/graph.md`): Materialized view of entities and relations.
+- **Layer 3 — Narrative** (`.memory/context.md`): Derived projection. Regenerate when stale.
+
+### Core Rules
+1. Append-only — if it is not in the event log, it did not happen
+2. One-way data flow — Event Log → Graph → Narrative; never backward
+3. Stateless agents — boot from files, execute, write results, die
+4. Rebuild, don't repair — regenerate derived layers from upstream when inconsistent
+```
+
+---
+
 ## Templates
 
-| Template | Deploys As | Layer | Purpose |
-|----------|-----------|-------|---------|
-| `changelog.md` | `CHANGELOG.md` (root) | L1 | Event log — append-only, source of truth |
-| `graph.md` | `.memory/graph.md` | L2 | Knowledge graph — nodes and edges, materialized from L1 |
-| `context.md` | `.memory/context.md` | L3 | Current narrative — derived projection, regenerated per session |
+| Template | Deploys As | Layer |
+|----------|-----------|-------|
+| `templates/changelog.md` | `CHANGELOG.md` (root) | L1 — Event log |
+| `templates/graph.md` | `.memory/graph.md` | L2 — Knowledge graph |
+| `templates/context.md` | `.memory/context.md` | L3 — Narrative |
+| `templates/graph.md.tpl.md` | `.memory/graph.md` | L2 — Jinja2 with variables |
+| `templates/context.md.tpl.md` | `.memory/context.md` | L3 — Jinja2 with variables |
+
+---
+
+## Validation Checklist
+
+When auditing a deployed memory system:
+
+- [ ] `CHANGELOG.md` exists at project root with `## Event Log` section
+- [ ] Events use correct format: `### evt-NNN | YYYY-MM-DD HH:MM | agent | type`
+- [ ] Every event has **Scope** and **Summary** fields
+- [ ] No existing events have been modified (append-only)
+- [ ] Event IDs are sequential
+- [ ] `.memory/` directory exists (Core/Full tier)
+- [ ] `.memory/graph.md` event horizon matches last event in `CHANGELOG.md` (Full tier)
+- [ ] `.memory/context.md` event horizon matches last event in `CHANGELOG.md` (Core/Full tier)
+- [ ] `TODO.md` exists at project root (Full tier)
+- [ ] `AGENTS.md` includes a Memory System Protocol section
+
+---
 
 ## Examples
 
-- **`_examples/worked-example.md`** — Complete walkthrough: 8 events flowing through all 4 layers
+See `_examples/worked-example.md` for a complete walkthrough: 8 events flowing through all 4 layers for an authentication module.
 
-## Related
+## Further Reading
 
-- `MEMORY-SYSTEM-PROTOCOL.md` — Full protocol specification (includes ACID guarantees, multi-agent coordination, tier scaling)
-- `_complete_archive/PROJECT-MEMORY-SYSTEM-REFERENCE.md` — Archive's original memory system (predecessor)
+- `docs/ARCHITECTURE-AUDIT.md` — Architecture deep-dive with Mermaid diagrams and gap analysis
+- `docs/VALIDATION-SCRIPT.md` — Automated validation script reference
+- `docs/INITIALIZATION-SCRIPT.md` — Project initialization script reference
+- `skill/SKILL.md` — Step-by-step skill for AI agents deploying the memory system

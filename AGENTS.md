@@ -1,263 +1,83 @@
 # AGENTS.md
 
-## Agent Operational Principles
+## Project Overview
 
-**How agents should work on this project:**
+This repository is a **unified AI development ecosystem** built on five types of agentic assets:
 
-### Right Tool for the Job
+1. **Blueprints** — What to build (product archetypes)
+2. **Tasks** — How to implement a feature (implementation units)
+3. **Recipes** — Feature combinations (bundles of Tasks + Skills)
+4. **Agent Personas** — Who does the work (configured workers)
+5. **Skills** — How to do it well (capabilities, best practices)
 
-| Task Type | Tool to Use |
-|-----------|-------------|
-| Single file, simple edit | `edit` with exact text |
-| Pattern matching across files | `run_command` with `sed` or `python` |
-| Multi-file batch changes | `skill` tool with sub-agent |
-| Complex logic (parsing, generation) | `run_command` with Python script |
-| Small file rewrite | `write_to_file` entire file |
-| Repository-wide refactoring | Spawn specialized sub-agent |
+**"Templates"** refers collectively to all five asset types.
 
-### Prioritize Sub-Agents Over Direct Work
+See `AGENTIC-ASSETS-FRAMEWORK.md` for complete definitions and relationships.
 
-**Always spawn sub-agents when:**
-- Processing multiple files (>3 files)
-- Running verification tasks across skills
-- Generating reference files (Three-Phase Process)
-- Cross-referencing and link validation
-- Any task that can run in parallel
-
-**Pattern:**
-```
-You: "Do X, Y, and Z"
-Me: "Spawning 3 sub-agents to work in parallel..."
-[Spawn X-agent, Y-agent, Z-agent simultaneously]
-"All 3 running. I'll update as they complete."
-```
-
-### Write to Files, Not Mental Notes
-
-**If it's worth remembering, write it:**
-- Skill decisions → Update relevant SKILL.md
-- Project changes → Append to CHANGELOG.md
-- Conventions learned → Update this AGENTS.md
-- Cross-references found → Update INDEX.md
-- Task completion → Update TODO.md
-
-**Rule:** Text > Brain. If you think "I should remember this," write it to a file immediately.
-
-### Spawn and Forget (Keep Conversation Flowing)
-
-**Don't block the conversation waiting for work:**
-1. Spawn sub-agent with the task
-2. Report to user: "Started, will update when done"
-3. Continue the conversation
-4. Report back when sub-agent completes
-
-**Anti-pattern:**
-❌ "Let me work on this for 10 minutes..."
-
-**Correct pattern:**
-✅ "Spawning sub-agent to handle this. While that's running, what else are we working on?"
-
-### Batching Rules
-
-**Parallel (no waiting):**
-- Independent skill edits
-- Multiple documentation updates
-- Cross-reference validations
-- File searches and queries
-
-**Serial (must wait):**
-- CHANGELOG.md updates (append-only, order matters)
-- PACK.md updates after skill creation
-- INDEX.md updates after reference file generation
-- Any task with dependencies
-
-### Memory System Integration
-
-**Before every task:**
-1. Read `AGENTS.md` (this file) — behavioral constraints
-2. Check `CHANGELOG.md` — what happened recently
-3. Read `.memory/context.md` — current trajectory
-4. Query `.memory/graph.md` — find related entities
-
-**After every task:**
-1. Append event to `CHANGELOG.md`
-2. Update derived views (graph.md, context.md)
-3. Commit with descriptive message
-4. Update this AGENTS.md if conventions changed
-
-### Text > Brain — No Mental Notes
-
-- **"Remember this"** → Write to `memory/YYYY-MM-DD.md`
-- **"This is important"** → Update `MEMORY.md`
-- **"I learned X"** → Update relevant SKILL.md or AGENTS.md
-- **"Made a mistake"** → Document in CHANGELOG.md so future agents don't repeat
+**Statistics**:
+- **766 skills** across **60 planned packs** (2 completed)
+- **47 tasks** across **9 categories**
+- **12 technology stacks** with **3 complexity tiers** (MVP, Core, Enterprise)
+- **Multi-file types**: Markdown, JSON, Python, YAML, Jinja2
 
 ---
 
-## Project Overview
+## Build/Test/Lint Commands
 
-This is a **Skills Repository** — a curated collection of AI agent skill packs organized by domain. Skills are reusable instruction packages (Markdown + JSON) that enable AI coding agents to perform specialized tasks. There is no application code, no build system, and no runtime — the entire project is structured documentation.
+### Skills (Markdown + JSON)
+```bash
+# Validate JSON syntax
+find . -name "*.json" -exec python -m json.tool {} \; > /dev/null
 
-- **766 skills** across **60 planned packs** (2 completed, 58 pending)
-- **14 categories** covering programming fundamentals through industry verticals
-- All content is **Markdown files** and **JSON config files**
-- Target audience: AI coding agents (Claude, Copilot, Cursor, Windsurf, Codex, etc.)
+# Check for broken cross-references
+grep -r "\[.*\](.*)" --include="*.md" . | grep -v "http" | head -20
 
-## Project Structure
-
-```
-_templates/
-├── AGENTS.md                     ← You are here (Layer 0: Behavioral Core)
-├── CHANGELOG.md                  ← Layer 1: Event Log (append-only, source of truth)
-├── TODO.md                       ← Layer 1 Extension: Task Tracker
-├── .memory/                      ← Derived views (knowledge graph, narrative)
-│   ├── graph.md                  ← Layer 2: Knowledge Graph (materialized from L1)
-│   └── context.md                ← Layer 3: Narrative (derived, regenerate per session)
-├── README.md                     ← Repo overview
-├── SKILLS_MASTER_LIST.md         ← Single source of truth: 766 skills, 60 packs, 14 categories
-├── AGENT_SKILLS_GUIDE.md         ← Comprehensive guide to building agent skills
-├── ARCHIVE_INDEX.md              ← Index of archived source material
-├── skill-packs/
-│   ├── HOW_TO_CREATE_SKILL_PACKS.md  ← Step-by-step pack creation guide
-│   ├── TASKS-TEMPLATE.md             ← Template for writing verification tasks
-│   ├── 1-programming-core/           ← Pack 1: 12 skills, 19 reference files (COMPLETED)
-│   │   ├── PACK.md
-│   │   ├── QUICK_REFERENCE.md
-│   │   ├── <skill>/SKILL.md, config.json, README.md, examples/
-│   │   └── reference-files/INDEX.md, TASKS.md, *.md, task-outputs/
-│   └── 2-code-quality/               ← Pack 2: 12 skills, 19 reference files (COMPLETED)
-│       ├── PACK.md
-│       ├── QUICK_REFERENCE.md
-│       ├── <skill>/SKILL.md, config.json, README.md, examples/
-│       └── reference-files/INDEX.md, TASKS.md, *.md, task-outputs/
-├── skill-builder/                ← Standalone skill: creating/editing/converting AI agent skills
-│   ├── SKILL.md, config.json, README.md
-│   ├── templates/, reference/, scripts/
-│   └── _examples/complete-skill-*.md
-├── generating-agents-md/         ← Standalone skill: generating and auditing AGENTS.md files
-│   ├── SKILL.md, config.json, README.md
-│   └── _examples/basic-examples.md, three-pillars-reference.md
-├── MEMORY-SYSTEM-PROTOCOL.md     ← Required protocol: event-sourced memory system for multi-agent cognition
-├── memory-system/                ← Standalone skill + templates: deploying event-sourced memory to any project
-│   ├── SKILL.md, config.json, README.md
-│   ├── changelog.md, graph.md, context.md  ← Deployable templates
-│   └── _examples/worked-example.md
-├── PROMPT-VALIDATION-PROTOCOL.md ← Required protocol: all agents must validate prompts before execution
-└── _complete_archive/            ← Previous repo content preserved for reference
-    ├── ARCHIVE-DOCUMENTATION-INDEX.md  ← Index of all documentation templates, blueprints, and instructions in the archive
-    ├── PROMPT-VALIDATION-SYSTEM-REFERENCE.md  ← Complete reference for the archive's validation system (8 scripts, 4 specs, 3 reports)
-    └── PROJECT-MEMORY-SYSTEM-REFERENCE.md  ← Complete reference for the archive's memory, context, state tracking, and project awareness system
+# Count skills and packs
+find skill-packs -name "SKILL.md" | wc -l
 ```
 
-## Do
+### Tasks, Blueprints & Other Templates (Python)
+```bash
+# Full template system validation (CRITICAL - run before commits)
+python scripts/validate-templates.py --full
 
-- Follow the exact directory structure defined in `skill-packs/HOW_TO_CREATE_SKILL_PACKS.md`
-- Use `1-programming-core/` as the gold-standard reference when creating new packs
-- Keep all skill descriptions **action-oriented** — focus on what the agent can DO
-- Use **minimal YAML frontmatter** in SKILL.md files: only `name` and `description`
-- Provide **multi-language examples** (JavaScript, Python, Go minimum) in SKILL.md and examples
-- Use **before/after format** (❌/✅) for code examples in `_examples/basic-examples.md`
-- Keep config.json **language-agnostic**: always set `"tools": []`
-- Use **lowercase with hyphens** for skill names: `data-structures`, `problem-solving`
-- Add `<!-- Generated from task-outputs/task-NN-name.md -->` header to reference files
-- Preserve all code snippets and technical content when converting task outputs to reference files
-- Cross-link reference files from `PACK.md` and `QUICK_REFERENCE.md`
-- Keep README.md files under 80 lines — quick-start only, not the full skill definition
-- Use `_examples/` (with underscore prefix) for example directories inside skill directories
-- Use `_reference-files/` (with underscore prefix) for the reference files directory
-- **Update this AGENTS.md** in the same commit when you change project structure, conventions, or add new files/directories
-- **Update related documentation** (README.md, SKILLS_MASTER_LIST.md, PACK.md, INDEX.md) when your changes affect their content
+# Blueprint validation
+python -c "from scripts.blueprint_config import validate_blueprint; print(validate_blueprint('mins'))"
 
-## Don't
+# Task validation
+python -c "from scripts.task_resolver import validate_task; print(validate_task('auth-basic'))"
 
-- Do not add **curriculum or educational content**: no prerequisites, learning paths, estimated times, phases, schedules, assessments, or "after completing this" sections
-- Do not add version, tags, or category fields to SKILL.md frontmatter — those are curriculum artifacts
-- Do not include theory explanations, history, or background in SKILL.md files
-- Do not create overlapping skills — merge or clearly differentiate similar concepts
-- Do not use generic skill names like `design` — prefer `api-design`
-- Do not include generation scripts, utility files, or build tools in operational packs
-- Do not delete raw task outputs in `task-outputs/` — keep them permanently as history
-- Do not modify files in `_complete_archive/` — that content is preserved as-is
-- Do not add new top-level files or directories without explicit approval
-- Do not use educational language like "learn", "study", "practice" — use "invoke", "apply", "use"
-- Do not skip documentation updates because "it's a small change" — small drift compounds into major inconsistencies
-- Do not rewrite AGENTS.md sections unrelated to your current change
-- Do not remove existing rules from this AGENTS.md without explicit approval
+# Autonomous project generation
+python scripts/setup-project.py --auto --name "MyProject" --description "project description"
 
-## File Types and Conventions
-
-**This project contains only two file types:**
-- `.md` — Markdown files (all content, guides, skills, references, examples)
-- `.json` — JSON config files (one `config.json` per skill)
-
-**Naming conventions:**
-- Skill directories: `kebab-case` (e.g., `clean-code`, `error-handling`)
-- Pack directories: `{number}-{kebab-case}` (e.g., `1-programming-core`, `2-code-quality`)
-- Reference files: `descriptive-kebab-case.md` (e.g., `sorting-algorithms.md`, `clean-code-patterns.md`)
-- Task outputs: `task-{NN}-{skill-name}.md` (e.g., `task-01-clean-code.md`)
-- Pack-level files: `UPPER_CASE.md` (e.g., `PACK.md`, `QUICK_REFERENCE.md`, `INDEX.md`, `TASKS.md`)
-
-## Key File Roles
-
-| File | Purpose | One Per |
-|------|---------|---------|
-| `SKILLS_MASTER_LIST.md` | Single source of truth for all 766 skills | Repo |
-| `HOW_TO_CREATE_SKILL_PACKS.md` | Step-by-step pack creation instructions | Repo |
-| `TASKS-TEMPLATE.md` | Template for writing verification tasks | Repo |
-| `PACK.md` | Pack overview, skill list, relationships, structure tree | Pack |
-| `QUICK_REFERENCE.md` | Decision tree, scenarios, skill selection guidance | Pack |
-| `SKILL.md` | Full skill definition with instructions and examples | Skill |
-| `config.json` | Cross-platform config with triggers and keywords | Skill |
-| `README.md` | Quick-start guide (under 80 lines) | Skill |
-| `_examples/basic-examples.md` | Runnable before/after code snippets | Skill |
-| `_reference-files/INDEX.md` | Categorized index of all reference files | Pack |
-| `_reference-files/TASKS.md` | Verification tasks to generate references | Pack |
-
-## Workflows
-
-### Creating a New Skill Pack
-
-Follow `skill-packs/HOW_TO_CREATE_SKILL_PACKS.md` exactly:
-
-1. Create `PACK.md` with overview, skills list, relationships, structure tree, reference files table
-2. Create `QUICK_REFERENCE.md` with decision tree, scenarios, skill relationships
-3. Create `_examples/skill-integrations.md` showing skills working together
-4. For each skill: create `SKILL.md`, `config.json`, `README.md`, `_examples/basic-examples.md`
-5. Write verification tasks using `TASKS-TEMPLATE.md` (individual + combined + capstone)
-6. Run all tasks, save raw outputs to `_reference-files/task-outputs/`
-7. Convert each output into standalone reference file in `_reference-files/`
-8. Create `_reference-files/INDEX.md`
-9. Cross-link reference files from `PACK.md` and `QUICK_REFERENCE.md`
-
-### Generating Reference Files (Three-Phase Process)
-
-**Phase 1** — Run tasks as fresh agent conversations, save raw outputs to `task-outputs/`
-**Phase 2** — Convert each output: remove task language, rename descriptively, rewrite intro, add header comment, save alongside INDEX.md
-**Phase 3** — Create/update INDEX.md, cross-link from PACK.md and QUICK_REFERENCE.md
-
-### Creating a SKILL.md
-
+# Python syntax check
+python -m py_compile scripts/*.py
 ```
+
+---
+
+## Code Style Guidelines
+
+### Skills (Markdown + JSON)
+
+**SKILL.md Structure:**
+```yaml
 ---
 name: skill-name
 description: Use this skill when {specific scenarios}. This includes {capabilities}.
 ---
 
 # Skill Title
-
 I'll help you {primary benefit}...
 
 # Core Approach
-# Step-by-Step Instructions (with multi-language examples)
+# Step-by-Step Instructions (JS/Python/Go examples)
 # Best Practices
 # Validation Checklist
-# Troubleshooting
-# Supporting Files
 ## Related Skills
 ```
 
-### Creating a config.json
-
+**config.json Structure:**
 ```json
 {
   "agent_support": { "claude": {}, "roo": {}, "cascade": {}, "generic": {} },
@@ -267,142 +87,288 @@ I'll help you {primary benefit}...
 }
 ```
 
-## Completed Packs (Use as Reference)
+**DO:**
+- Use action-oriented descriptions ("I'll help you...")
+- Provide multi-language examples (JS/Python/Go minimum)
+- Use ❌/✅ format for before/after code examples
+- Keep YAML frontmatter minimal: only `name` and `description`
+- Set `"tools": []` in config.json (language-agnostic)
+- Keep README.md under 80 lines
+- Use `kebab-case` for skill names
+- Use underscore prefix for `_examples/` and `_reference-files/`
 
-- **`1-programming-core/`** — 12 skills, 19 reference files, multi-language (JS/Python/Go/Rust). **Gold standard.**
-- **`2-code-quality/`** — 12 skills, 19 reference files, multi-language (JS/Python/Go).
+**DON'T:**
+- Add curriculum/educational content (prerequisites, learning paths)
+- Include theory, history, or background in SKILL.md files
+- Use educational language ("learn", "study", "practice")
+- Delete raw task outputs in `task-outputs/`
+- Modify files in `_complete_archive/`
 
-## Boundaries
+### Templates (Python + YAML + Jinja2)
 
-- ✅ **Always**: Follow the pack structure in `HOW_TO_CREATE_SKILL_PACKS.md`, use Pack 1 as the reference template, keep content action-oriented, **satisfy all Three Pillars (AUTOMATING, TESTING, DOCUMENTING) before considering a task complete**
-- ⚠️ **Ask first**: Creating new packs, modifying `SKILLS_MASTER_LIST.md`, changing pack structure conventions, adding new top-level files
-- 🚫 **Never**: Add curriculum content, modify `_complete_archive/`, delete task outputs, add build tools or runtime dependencies
+**Naming Conventions:**
+- Task directories: `kebab-case` (e.g., `web-scraping`, `auth-basic`)
+- Template files: `.tpl.{ext}` extension
+- Blueprint files: `blueprint.meta.yaml` + `BLUEPRINT.md`
+- Stack directories: lowercase (e.g., `python/`, `flutter/`)
+
+**Template Structure:**
+```python
+"""
+# {Template Name} ({Tier} Tier - {Stack})
+
+## Purpose
+Provides {tier-specific} {stack} code structure for {task}.
+
+## Usage
+- {specific use cases}
+
+## Structure
+```{language}
+{template code with {{placeholders}}}
+```
+"""
+```
+
+**Python Code Style:**
+- Follow PEP 8, max line length 100
+- Use type hints for function parameters
+- Use pathlib for cross-platform paths
+- Use f-strings for string formatting
+
+### Blueprints (YAML)
+
+**blueprint.meta.yaml Structure:**
+```yaml
+blueprint:
+  id: "blueprint-id"
+  version: "1.0.0"
+  name: "Blueprint Name"
+  stacks:
+    required: ["flutter"]
+    recommended: ["python"]
+    supported: ["node", "go"]
+  tier_defaults:
+    flutter: "mvp"
+    python: "core"
+  tasks:
+    required: ["auth-basic", "crud-module"]
+    recommended: ["analytics-event-pipeline"]
+```
+
+---
+
+## Repository Structure
+
+```
+_templates/
+├── AGENTS.md                     # This file - behavioral constraints
+├── AGENTIC-ASSETS-FRAMEWORK.md   # Five asset types definitions
+├── CHANGELOG.md                  # Event log (append-only)
+├── README.md                     # Repository overview
+├── SKILLS_MASTER_LIST.md         # 766 skills catalog
+│
+├── blueprints/                   # 📋 BLUEPRINTS
+│   └── mins/
+│       ├── BLUEPRINT.md          # Human-readable docs
+│       ├── blueprint.meta.yaml   # Machine-readable config
+│       └── overlays/             # Stack-specific extensions
+│           ├── flutter/
+│           ├── python/
+│           └── ...
+│
+├── tasks/                        # 🏗️ TASKS
+│   ├── task-index.yaml           # Unified task definitions
+│   └── <task-name>/
+│       ├── TASK.md               # Task documentation
+│       ├── config.yaml           # Task configuration
+│       ├── universal/            # Universal implementations
+│       └── stacks/               # Stack-specific implementations
+│           ├── python/
+│           ├── node/
+│           └── ...
+│
+├── recipes/                      # 🍳 RECIPES
+│   └── <recipe-name>/
+│       ├── recipe.yaml           # Recipe configuration
+│       └── RECIPE.md             # Human-readable docs
+│
+├── agent-personas/               # 🤖 AGENT PERSONAS
+│   └── <persona-name>/
+│       ├── persona.yaml          # Agent configuration
+│       ├── PERSONA.md            # Human-readable docs
+│       └── workflows/            # Workflow definitions
+│
+├── skill-packs/                  # 🧠 SKILLS
+│   ├── HOW_TO_CREATE_SKILL_PACKS.md
+│   ├── 1-programming-core/       # 12 skills (COMPLETED)
+│   │   ├── PACK.md
+│   │   ├── QUICK_REFERENCE.md
+│   │   └── <skill>/
+│   │       ├── SKILL.md
+│   │       ├── config.json
+│   │       ├── README.md
+│   │       └── _examples/
+│   └── 2-code-quality/           # 12 skills (COMPLETED)
+│
+├── scripts/                      # 🔧 AUTOMATION
+│   ├── setup-project.py          # Blueprint-driven setup
+│   ├── validate-templates.py     # Template validation
+│   ├── blueprint_config.py       # Blueprint management
+│   └── task_resolver.py          # Task resolution
+│
+├── stacks/                       # Stack configurations
+├── tiers/                        # Tier configurations
+│
+└── _complete_archive/            # PRESERVED HISTORY
+```
+
+---
 
 ## Memory System Protocol
 
-**All agents MUST follow the memory system defined in `MEMORY-SYSTEM-PROTOCOL.md`.** This project uses the memory system — `CHANGELOG.md` is the event log, `.memory/` has the derived knowledge graph and narrative.
+Follow `MEMORY-SYSTEM-PROTOCOL.md`:
 
-- **Layer 0 — Behavioral Core** (`AGENTS.md`): Immutable during execution. Read at boot only.
-- **Layer 1 — Event Log** (`CHANGELOG.md`): Append-only source of truth. Every decision, change, and result.
-- **Layer 2 — Knowledge Graph** (`.memory/graph.md`): Materialized view of entities and relations. Queryable.
-- **Layer 3 — Narrative** (`.memory/context.md`): Derived projection of current trajectory. Ephemeral.
+**Before every task:**
+1. Read `AGENTS.md` (this file) — behavioral constraints
+2. Check `CHANGELOG.md` — what happened recently
+3. Read `.memory/context.md` — current trajectory
 
-### Agent Lifecycle (Every Task)
+**After every task:**
+1. Append event to `CHANGELOG.md`
+2. Update derived views (graph.md, context.md)
+3. Update this AGENTS.md if conventions changed
 
-```
-BOOT:     Read AGENTS.md → Read context.md → Check staleness → Query graph
-EXECUTE:  Work within constraints → Append events to CHANGELOG.md
-SHUTDOWN: Append → Materialize → Regenerate → Commit → Handoff → Die
-```
+---
 
-### Core Rules
-
-1. **Append-only** — if it is not in the event log, it did not happen
-2. **One-way data flow** — Event Log → Graph → Narrative; never backward
-3. **Stateless agents** — boot from files, execute, write results, die; no retained state
-4. **Rebuild, don't repair** — regenerate derived layers from upstream when inconsistent
-
-See `MEMORY-SYSTEM-PROTOCOL.md` for complete schemas, tier scaling, handoff payloads, ACID guarantees, and validation rules.
-
-## Prompt Validation Protocol
-
-**All agents MUST validate user prompts before execution** using `PROMPT-VALIDATION-PROTOCOL.md`. This ensures clarity, completeness, security, and effectiveness.
-
-### Quick Reference
-
-Before any task, run these 4 checks from the protocol:
-
-1. **Purpose in first line** — Can you state what the prompt wants in one sentence?
-2. **All variables defined** — Are all `{{`, `[`, `{` placeholders defined?
-3. **No dangerous patterns** — No `eval`, `exec`, `rm -rf`, `DROP TABLE`, `sudo`, secrets
-4. **Output format specified** — Does the prompt say what output should look like?
-
-If ANY fail, ask for clarification before proceeding.
-
-### Full Protocol
-
-See `PROMPT-VALIDATION-PROTOCOL.md` for:
-- Validation Levels (PERMISSIVE / STANDARD / STRICT)
-- 27 Security Patterns (blocked injection vectors)
-- 5-Dimension Scoring (Clarity, Completeness, Structure, Security, Effectiveness)
-- 3-Dimension Checklist (Content, Structure, Technical)
-- Type-Specific Checks (Code Gen, Refactoring, Documentation, Analysis, Conversion, Testing, Configuration)
-- 4-Step Validation Process
-- Common Failures & Fix Patterns
-- Validation Log Template
-- Grade Calculation (A-F)
-- Escalation Criteria
-- Integration with Three Pillars
-
-### Integration with Three Pillars
-
-- **AUTOMATING**: Validate prompts before any automated task execution
-- **TESTING**: Verify prompt clarity and completeness before starting work
-- **DOCUMENTING**: Log validation results when prompts need clarification
-
-## Three Pillars — Every Task Must Satisfy All Three
+## Three Pillars — Task Completion Checklist
 
 A task is **not complete** until all three pillars are satisfied:
 
-1. ✅ **AUTOMATING** — Content validates against the project's structural rules
-2. ✅ **TESTING** — Skill verification tasks pass, examples are runnable, cross-references resolve
-3. ✅ **DOCUMENTING** — This AGENTS.md and related docs are updated if the change affects them
+1. ✅ **AUTOMATING** — Content validates against structural rules
+   - Blueprints: YAML valid, metadata complete
+   - Tasks: Task structure valid, implementations complete
+   - Recipes: Recipe configuration valid, dependencies resolve
+   - Agent Personas: persona.yaml valid, workflows defined
+   - Skills: SKILL.md frontmatter valid, config.json valid
 
-Skipping any pillar = incomplete work.
+2. ✅ **TESTING** — Verification passes
+   - Blueprints: Resolution confidence ≥ 1.00
+   - Tasks: All stack variants work, examples are runnable
+   - Recipes: All bundled tasks resolve correctly
+   - Agent Personas: Workflows execute correctly
+   - Skills: Trigger keywords work, examples are runnable
 
-### Pillar 1: AUTOMATING
+3. ✅ **DOCUMENTING** — Related docs updated
+   - New blueprint: Update blueprint index, integration guides
+   - New task: Update `task-index.yaml`, relevant docs
+   - New recipe: Update recipe registry, cross-reference tasks
+   - New agent persona: Update persona registry, add examples
+   - New skill: Update `SKILLS_MASTER_LIST.md`, pack's `PACK.md`
 
-After every content change, verify:
-- SKILL.md has only `name` and `description` in frontmatter (no curriculum fields)
-- config.json is valid JSON with `"tools": []`
-- Directory structure matches `HOW_TO_CREATE_SKILL_PACKS.md`
-- Reference files have `<!-- Generated from task-outputs/task-NN-name.md -->` headers
-- README.md files are under 80 lines
-- No educational language ("learn", "study", "practice") — use "invoke", "apply", "use"
+---
 
-### Pillar 2: TESTING
+## Workflows
 
-After every content change, verify:
-- **New skills**: Skill can be invoked with the trigger keywords in config.json
-- **New reference files**: Code snippets are syntactically correct and multi-language (JS/Python/Go)
-- **New tasks**: Tasks produce outputs that can be converted to standalone reference files
-- **Changed examples**: Before/after code examples are accurate and follow ❌/✅ format
-- **Cross-references**: All file paths in `PACK.md`, `QUICK_REFERENCE.md`, and `INDEX.md` point to existing files
+### Adding a Blueprint
+1. Create `blueprints/<name>/` directory
+2. Create `blueprint.meta.yaml` with constraints
+3. Create `BLUEPRINT.md` with human-readable docs
+4. Create `overlays/<stack>/` for stack-specific extensions
+5. Validate: `python -c "from scripts.blueprint_config import validate_blueprint; print(validate_blueprint('name'))"`
+6. Update documentation
 
-### Pillar 3: DOCUMENTING
+### Adding a Task
+1. Create `tasks/<task-name>/` directory
+2. Create `TASK.md` with documentation
+3. Create `config.yaml` with task configuration
+4. Add `universal/` implementation (applies to all stacks)
+5. Add `stacks/<stack>/` implementations (stack-specific)
+6. Update `tasks/task-index.yaml`
+7. Run `python scripts/validate-templates.py --full`
 
-After completing any task, check whether your changes require documentation updates:
+### Adding a Recipe
+1. Create `recipes/<recipe-name>/` directory
+2. Create `recipe.yaml` with task bundles and skills
+3. Create `RECIPE.md` with human-readable docs
+4. Validate recipe configuration
+5. Update recipe registry
+6. Update documentation
 
-| Change Type | Update These |
-|-------------|-------------|
-| New skill pack or standalone skill | This AGENTS.md (Project Structure), `SKILLS_MASTER_LIST.md`, `README.md` |
-| New skill in existing pack | Pack's `PACK.md`, `QUICK_REFERENCE.md`, `reference-files/INDEX.md` |
-| New reference file | Pack's `reference-files/INDEX.md` |
-| Completed pack | This AGENTS.md (Completed Packs), `SKILLS_MASTER_LIST.md` |
-| New top-level file | This AGENTS.md (Project Structure) |
-| Changed conventions | This AGENTS.md (Do/Don't), `HOW_TO_CREATE_SKILL_PACKS.md` |
-| New file type or naming convention | This AGENTS.md (File Types and Conventions) |
-| New key file role | This AGENTS.md (Key File Roles table) |
-| Changed workflow step | This AGENTS.md (Workflows section) |
+### Adding an Agent Persona
+1. Create `agent-personas/<name>/` directory
+2. Create `persona.yaml` with skills, blueprints, and workflows
+3. Create `PERSONA.md` with human-readable docs
+4. Create `workflows/` with defined workflow automations
+5. Validate persona configuration
+6. Update documentation
 
-**How to update:**
-1. After completing your primary task, review what changed
-2. Update the relevant section(s) in the same commit
-3. Keep updates minimal and factual — match the existing style
-4. Do not rewrite sections unrelated to your change
+### Creating a Skill Pack
+1. Create `PACK.md` with overview, skills list, relationships
+2. Create `QUICK_REFERENCE.md` with decision tree
+3. For each skill: `SKILL.md`, `config.json`, `README.md`, `_examples/`
+4. Write verification tasks per `TASKS-TEMPLATE.md`
+5. Run tasks, convert outputs to reference files
+6. Create `_reference-files/INDEX.md`
+
+### Autonomous Project Generation
+```bash
+python scripts/setup-project.py --auto --name "ProjectName" --description "project description"
+```
+
+---
+
+## Tool Selection
+
+| Task Type | Tool to Use |
+|-----------|-------------|
+| Single file edit | `edit` with exact text |
+| Pattern matching | `bash` with `sed`/`python` |
+| Multi-file changes | `task` tool with sub-agent |
+| Complex logic | `bash` with Python script |
+| Repo-wide refactoring | Spawn specialized sub-agent |
+
+---
+
+## Key References
+
+### Asset Types Framework
+- `AGENTIC-ASSETS-FRAMEWORK.md` — Complete definitions of the five asset types
+
+### Blueprints
+- `blueprints/mins/` — Example blueprint
+- `blueprints/` directory — Product archetypes
+
+### Tasks
+- `tasks/task-index.yaml` — Unified task definitions
+- `tasks/` directory — Implementation units
+
+### Recipes
+- `recipes/` directory — Feature combinations (proposed)
+
+### Agent Personas
+- `agent-personas/` directory — Configured workers (proposed)
+
+### Skills
+- `SKILLS_MASTER_LIST.md` — 766 skills catalog
+- `HOW_TO_CREATE_SKILL_PACKS.md` — Pack creation guide
+- `1-programming-core/` — Gold standard reference pack
+
+### System & Tools
+- `scripts/setup-project.py` — Project generation
+- `scripts/validate-templates.py` — Validation
+- `PROMPT-VALIDATION-PROTOCOL.md` — Validate before execution
+- `MEMORY-SYSTEM-PROTOCOL.md` — Event-sourced memory
+
+---
 
 ## When Stuck
 
-- **Before starting any task**: Run prompt validation using `PROMPT-VALIDATION-PROTOCOL.md` — if it fails the 4 must-pass checks, ask for clarification
-- Consult `skill-packs/HOW_TO_CREATE_SKILL_PACKS.md` for structural questions
-- Consult `AGENT_SKILLS_GUIDE.md` for skill design principles
-- Use `1-programming-core/` as a concrete example of a completed pack
-- Use `SKILLS_MASTER_LIST.md` to find which skills belong to which packs
-- Use `ARCHIVE_INDEX.md` to locate source material for building new packs
-- Use `_complete_archive/ARCHIVE-DOCUMENTATION-INDEX.md` for documentation templates, blueprints, and agent instruction patterns from the archive
-- Use `PROMPT-VALIDATION-PROTOCOL.md` for the comprehensive prompt validation protocol (27 security patterns, 5-dimension scoring, 3-dimension checklist, 4-step validation process)
-- Use `_complete_archive/PROMPT-VALIDATION-SYSTEM-REFERENCE.md` for the original 8-script validation system (Python implementation details)
-- Use `MEMORY-SYSTEM-PROTOCOL.md` for the event-sourced memory system: 4-layer architecture, event log schemas, knowledge graph, agent lifecycle, handoff protocols, ACID guarantees
-- Use `_complete_archive/PROJECT-MEMORY-SYSTEM-REFERENCE.md` for the archive's original memory system (predecessor): agent memory rules, execution engine, CONTEXT.md, CHANGELOG.md, TODO.md, WORKFLOW.md, EVALS.md templates
-- Use `agents-setup/_examples/three-pillars-reference.md` for Three Pillars multi-stack templates, adaptation patterns, and failure modes
-- If unsure about a convention, check how Pack 1 handles it before proposing alternatives
+- **Blueprints**: Study `blueprints/mins/` example
+- **Tasks**: Review `tasks/web-scraping/` structure
+- **Recipes**: See examples in `AGENTIC-ASSETS-FRAMEWORK.md`
+- **Agent Personas**: See examples in `AGENTIC-ASSETS-FRAMEWORK.md`
+- **Skills**: Check `1-programming-core/clean-code/` as reference
+- **Framework**: Read `AGENTIC-ASSETS-FRAMEWORK.md` for complete definitions
+- **Guidelines**: Read `HOW_TO_CREATE_SKILL_PACKS.md`
+- **Validation**: Run `python scripts/validate-templates.py --full`
