@@ -1,0 +1,55 @@
+{
+  "agent_support": {
+    "claude": {"min_version": "3.0"},
+    "roo": {"min_version": "1.0"},
+    "cascade": {"min_version": "1.0"},
+    "generic": {"requirements": ["file_access", "code_execution"]}
+  },
+  "triggers": {
+    "keywords": [
+      "AGENTS.md",
+      "agents md",
+      "agent instructions",
+      "agent rules",
+      "coding agent config",
+      "CLAUDE.md",
+      "cursorrules",
+      "agent guidance",
+      "repo instructions for AI",
+      "three pillars",
+      "task completion enforcement",
+      "prompt validation",
+      "validate prompts"
+    ],
+    "patterns": [
+      "create.*agents.*md",
+      "generate.*agents.*md",
+      "write.*agents.*md",
+      "improve.*agents.*md",
+      "update.*agents.*md",
+      "set.*up.*agent.*instructions",
+      "configure.*coding.*agent",
+      "enforce.*three.*pillars",
+      "agent.*ships.*untested",
+      "add.*prompt.*validation"
+    ]
+  },
+  "requirements": {
+    "tools": [],
+    "permissions": ["file_read", "file_write"],
+    "notes": "Language-agnostic skill. Works with any project type — analyzes the codebase to generate tailored AGENTS.md content."
+  },
+  "examples": {
+    "simple": [
+      "Create an AGENTS.md for this project",
+      "Improve my existing AGENTS.md",
+      "What should I put in my AGENTS.md?"
+    ],
+    "complex": [
+      "Analyze this monorepo and generate AGENTS.md files for each package with nested overrides",
+      "Audit my AGENTS.md against the six core areas and fill in the gaps",
+      "Set up AGENTS.md with cross-tool compatibility for Claude, Cursor, and Windsurf",
+      "Add the Three Pillars framework to my AGENTS.md so agents verify, test, and document their work"
+    ]
+  }
+}
