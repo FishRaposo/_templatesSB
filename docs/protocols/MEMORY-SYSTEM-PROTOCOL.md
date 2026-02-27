@@ -23,6 +23,8 @@ This protocol transforms AI agents from stateful, hallucinating oracles into sta
 13. [Tier Scaling](#13-tier-scaling)
 14. [Three Pillars Integration](#14-three-pillars-integration)
 
+For step-by-step deployment (tier choice, file layout, templates, AGENTS.md integration), use the **Memory System Setup** skill (`memory-system/memory-system-setup/SKILL.md`, name: memory-system-setup), which maps each protocol section to skill steps.
+
 ---
 
 ## 1. Architecture
@@ -39,7 +41,7 @@ Four layers separate **behavior**, **history**, **structure**, and **trajectory*
 │  Materialized view — entities, relations, states        │
 │  Queryable. Updated only by materialization from L1.    │
 ├─────────────────────────────────────────────────────────┤
-│  Layer 1: EVENT LOG (changelog.md)                      │
+│  Layer 1: EVENT LOG (CHANGELOG.md)                      │
 │  Source of truth — every decision, change, result       │
 │  Append-only. Immutable once committed.                 │
 ├─────────────────────────────────────────────────────────┤
@@ -120,7 +122,7 @@ When an agent reads `AGENTS.md`, it accepts a binding contract:
 
 ### Event Format
 
-Each event is a markdown section appended to the `## Events` area:
+Each event is a markdown section appended to the `## Event Log` area:
 
 ```markdown
 ### evt-NNN | YYYY-MM-DD HH:MM | agent-name | type
@@ -182,12 +184,12 @@ Each event is a markdown section appended to the `## Events` area:
 
 ### Archival Protocol
 
-When `changelog.md` exceeds **50 events**, archive older events:
+When `CHANGELOG.md` exceeds **50 events**, archive older events:
 
 1. **Boundary**: Identify the oldest event still referenced by an active graph node or within the last 20 events
-2. **Move**: Transfer all events before the boundary to `changelog-archive.md`
+2. **Move**: Transfer all events before the boundary to `CHANGELOG-archive.md`
 3. **Mark**: Prefix each archived batch with `## Archive: evt-001 through evt-NNN | Archived YYYY-MM-DD`
-4. **Log**: Append an `archive` event to `changelog.md` recording the action
+4. **Log**: Append an `archive` event to `CHANGELOG.md` recording the action
 5. **Never delete** — archiving means moving, not removing; archived events are still valid refs
 6. **Graph unaffected** — nodes/edges from archived events remain; they were already materialized
 
@@ -249,9 +251,9 @@ When `changelog.md` exceeds **50 events**, archive older events:
 
 ### Materialization Rules
 
-The graph is **never edited directly**. It is updated only by processing new events from `changelog.md`.
+The graph is **never edited directly**. It is updated only by processing new events from `CHANGELOG.md`.
 
-**When to materialize**: After appending events to `changelog.md`.
+**When to materialize**: After appending events to `CHANGELOG.md`.
 
 **How to materialize** — for each new event since Meta's event horizon:
 
@@ -272,9 +274,9 @@ The graph is **never edited directly**. It is updated only by processing new eve
 
 ### Graph Rules
 
-1. **Never edit graph.md without a corresponding changelog event** — every change traces to an event
+1. **Never edit graph.md without a corresponding CHANGELOG event** — every change traces to an event
 2. **Never delete rows** — set Status to `deprecated` instead
-3. **If inconsistent** — regenerate the graph by replaying all events from `changelog.md`
+3. **If inconsistent** — regenerate the graph by replaying all events from `CHANGELOG.md`
 
 ### Query Patterns
 
@@ -314,16 +316,16 @@ The narrative contains 7 fill-in sections, each derived mechanically from L1 + L
 ### Generation Algorithm
 
 1. Read `graph.md` — list all nodes with Status = `active` or `blocked`
-2. Read `changelog.md` — read events from the last 48 hours or last 20 events (whichever is more)
+2. Read `CHANGELOG.md` — read events from the last 48 hours or last 20 events (whichever is more)
 3. Fill in each section mechanically — do not editorialize or speculate
 
 ### Staleness Rules
 
-- **Fresh**: Event horizon in `context.md` matches last event in `changelog.md` — use directly
+- **Fresh**: Event horizon in `context.md` matches last event in `CHANGELOG.md` — use directly
 - **Stale**: Event horizons do not match — regenerate before proceeding
 - **Missing**: File does not exist — generate from scratch before proceeding
 
-**Staleness check**: Compare the `Event horizon` comment in `context.md` with the last event ID in `changelog.md`. If they differ, the narrative is stale.
+**Staleness check**: Compare the `Event horizon` comment in `context.md` with the last event ID in `CHANGELOG.md`. If they differ, the narrative is stale.
 
 ---
 
@@ -350,9 +352,9 @@ Every agent, every task, every time:
 
 During task execution, agents:
 - **Can** read any layer at any time
-- **Can** append to `changelog.md` (Layer 1)
+- **Can** append to `CHANGELOG.md` (Layer 1)
 - **Cannot** edit `graph.md` directly (Layer 2 — materialization only)
-- **Cannot** edit existing events in `changelog.md` (Layer 1 — append-only)
+- **Cannot** edit existing events in `CHANGELOG.md` (Layer 1 — append-only)
 - **Cannot** modify `AGENTS.md` (Layer 0 — immutable during execution)
 - **Can** regenerate `context.md` (Layer 3 — it is a projection)
 
@@ -361,7 +363,7 @@ During task execution, agents:
 After task completion, before the agent terminates:
 
 ```
-1. APPEND        All decisions and changes to changelog.md     (Layer 1)
+1. APPEND        All decisions and changes to CHANGELOG.md     (Layer 1)
 2. MATERIALIZE   New events into graph.md                     (Layer 2)
 3. REGENERATE    context.md from updated L1 + L2              (Layer 3)
 4. COMMIT        All changes in a single git commit
@@ -375,8 +377,8 @@ After task completion, before the agent terminates:
 
 When an agent boots and detects inconsistency:
 
-1. **Trust Layer 1** — `changelog.md` is always the source of truth
-2. **Rebuild Layer 2** — Regenerate `graph.md` by replaying all events from `changelog.md`
+1. **Trust Layer 1** — `CHANGELOG.md` is always the source of truth
+2. **Rebuild Layer 2** — Regenerate `graph.md` by replaying all events from `CHANGELOG.md`
 3. **Rebuild Layer 3** — Regenerate `context.md` from the rebuilt graph + recent events
 4. **Verify Layer 0** — Confirm `AGENTS.md` has not been modified
 5. **Resume** — Continue with the original task using clean state
@@ -384,6 +386,8 @@ When an agent boots and detects inconsistency:
 ---
 
 ## 8. Handoff Protocol
+
+**Tier scope:** Handoff events and pipeline coordination apply in **Core** and **Full** tiers. Graph-based coordination (querying "what blocks what?", task nodes) applies in **Full** tier only; Core tier uses `context.md` and the event log only.
 
 When agents operate in a pipeline (e.g., Architect → Builder → Tester → Doc Manager → Validator), handoffs transfer scoped context forward.
 
@@ -437,7 +441,7 @@ Information propagates in **one direction only**:
 ```
 Agent Action
     ↓ (append)
-Layer 1: Event Log (changelog.md)
+Layer 1: Event Log (CHANGELOG.md)
     ↓ (materialize)
 Layer 2: Knowledge Graph (graph.md)
     ↓ (project)
@@ -447,19 +451,19 @@ CHANGELOG.md (human-readable)
 ```
 
 **No reverse flow**. An agent cannot:
-- Edit the graph to "fix" the changelog → append a corrective event instead
+- Edit the graph to "fix" the CHANGELOG → append a corrective event instead
 - Edit the narrative to change the graph → append an event, rematerialize, regenerate
-- Edit the changelog to match the narrative → the narrative is wrong; regenerate it
+- Edit the CHANGELOG to match the narrative → the narrative is wrong; regenerate it
 
 ### Anti-Drift Mechanisms
 
 | Threat | Defense |
 |--------|---------|
 | Agent hallucinates a past decision | Changelog has no such event; graph has no such node/edge; ground truth wins |
-| Agent modifies graph directly | Detected: graph.md event horizon does not match last event in changelog; rematerialize |
+| Agent modifies graph directly | Detected: graph.md event horizon does not match last event in CHANGELOG.md; rematerialize |
 | Narrative drifts from reality | Detected: staleness check fails; regenerate from L1 + L2 |
 | Agent retains state from previous task | Impossible: agent died and rebooted; no memory persists outside files |
-| Two agents record conflicting decisions | Git merge conflict on changelog.md; resolved by commit order (see §10) |
+| Two agents record conflicting decisions | Git merge conflict on CHANGELOG.md; resolved by commit order (see §10) |
 | AGENTS.md modified during execution | Detected: git status shows uncommitted changes to AGENTS.md; halt and escalate |
 
 ### Ground Truth Hierarchy
@@ -468,7 +472,7 @@ When layers conflict, resolve by trust order:
 
 ```
 Layer 0 (AGENTS.md)     → Highest authority — behavioral rules always win
-Layer 1 (changelog.md)   → Source of truth for all facts
+Layer 1 (CHANGELOG.md)   → Source of truth for all facts
 Layer 2 (graph.md)       → Must match Layer 1 — if not, rematerialize
 Layer 3 (context.md)     → Must match L1+L2 — if not, regenerate
 CHANGELOG.md             → Must match Layer 1 — if not, regenerate
@@ -478,19 +482,21 @@ CHANGELOG.md             → Must match Layer 1 — if not, regenerate
 
 ## 10. Multi-Agent Coordination
 
+**Tier scope:** Full coordination features (graph-based blocking, task nodes, pipeline phases) require **Full** tier. In **Core** tier, agents coordinate via the event log and `context.md` only.
+
 ### Shared Substrate
 
 All agents read from the same files. No message passing between agents.
 
 - **Read**: Any number of agents can read any layer concurrently
-- **Write**: Only to `changelog.md` (append) and derived files (materialize/regenerate)
+- **Write**: Only to `CHANGELOG.md` (append) and derived files (materialize/regenerate)
 - **Coordination**: Via state changes in the graph, not via direct communication
 
 ### Write Serialization
 
 Concurrent writes are serialized by **git**:
 
-1. Agent A appends event to `changelog.md` and commits
+1. Agent A appends event to `CHANGELOG.md` and commits
 2. Agent B appends a different event and attempts to commit
 3. If conflict: Agent B pulls, rebases (append-only guarantees no semantic conflict), re-commits
 4. Both events appear in the log in commit order
@@ -522,16 +528,16 @@ This system provides database-grade guarantees for AI cognition:
 
 | Property | Implementation |
 |----------|---------------|
-| **Atomicity** | Each changelog entry + its git commit is a single indivisible transaction. Either the event is committed or it is not. |
-| **Consistency** | The graph is always a valid materialization of the changelog. Validation checks (§12) enforce structural rules. Layer 0 constraints are checked at boot. |
+| **Atomicity** | Each CHANGELOG entry + its git commit is a single indivisible transaction. Either the event is committed or it is not. |
+| **Consistency** | The graph is always a valid materialization of the CHANGELOG. Validation checks (§12) enforce structural rules. Layer 0 constraints are checked at boot. |
 | **Isolation** | Agents work on local git working copies. Conflicts are resolved at commit time (push/rebase), not during execution. No agent sees another's uncommitted work. |
 | **Durability** | Git history is immutable. No committed event can be lost or secretly altered. Force-pushes are detectable and prohibited by branch protection. |
 
 ### Ungameability
 
 - **Cannot forget constraints** — `AGENTS.md` is read-only at boot; modifying it requires human approval
-- **Cannot hallucinate history** — the changelog is append-only; fabricated events have no commit hash
-- **Cannot fake dependencies** — every graph edge traces to a changelog event ID
+- **Cannot hallucinate history** — the CHANGELOG is append-only; fabricated events have no commit hash
+- **Cannot fake dependencies** — every graph edge traces to a CHANGELOG event ID
 - **Cannot bypass validation** — the validator agent checks graph consistency as the final pipeline phase
 - **Cannot silently drift** — staleness checks detect narrative/graph divergence from the event log
 
@@ -547,7 +553,7 @@ This system provides database-grade guarantees for AI cognition:
 - All referenced protocol files exist
 
 #### Layer 1 Validation
-- `changelog.md` exists and has an `## Events` section
+- `CHANGELOG.md` exists and has a `## Event Log` section
 - Every event has the required heading format: `### evt-NNN | YYYY-MM-DD HH:MM | agent | type`
 - Every event has **Scope** and **Summary** fields
 - Event IDs are unique and sequential
@@ -557,7 +563,7 @@ This system provides database-grade guarantees for AI cognition:
 
 #### Layer 2 Validation
 - `graph.md` has Nodes table, Edges table, and Meta section
-- Meta event horizon matches an actual event ID in the changelog
+- Meta event horizon matches an actual event ID in the CHANGELOG
 - Every node's Created and Last Event columns reference valid event IDs
 - Every edge's Created column references a valid event ID
 - No orphan edges (both From and To nodes exist in the Nodes table)
@@ -572,7 +578,7 @@ This system provides database-grade guarantees for AI cognition:
 
 | Check | How |
 |-------|-----|
-| L1 ↔ L2 consistency | Replay all events from changelog.md; compare resulting graph with stored graph.md |
+| L1 ↔ L2 consistency | Replay all events from CHANGELOG.md; compare resulting graph with stored graph.md |
 | L2 ↔ L3 consistency | Regenerate context.md from graph; compare with stored context.md |
 | L0 ↔ L1 | Verify no event violates AGENTS.md behavioral rules |
 
@@ -597,9 +603,9 @@ Not every project needs all four layers. Scale the memory system to match projec
 - Layer 0: `AGENTS.md` — behavioral constraints
 - Layer 1: `CHANGELOG.md` — event log (append-only)
 - Layer 2: Not used — scope is small enough to track mentally
-- Layer 3: Not used — the changelog IS the narrative
+- Layer 3: Not used — the CHANGELOG IS the narrative
 
-**Upgrade trigger**: When you need to track dependencies between components, or when the changelog exceeds 30 events and you lose track of what connects to what.
+**Upgrade trigger**: When you need to track dependencies between components, or when the CHANGELOG exceeds 30 events and you lose track of what connects to what.
 
 ### Core Tier (Team, 1-6 months, real project)
 
@@ -642,7 +648,8 @@ Not every project needs all four layers. Scale the memory system to match projec
 
 ### AUTOMATING
 
-- **Event log append**: Every automated action appends its result to `changelog.md`
+- **Prefer scripts over manual steps**: If a task can be done with a script (especially a reusable one), use the script instead of doing it manually.
+- **Event log append**: Every automated action appends its result to `CHANGELOG.md`
 - **Materialization**: Graph updates are a deterministic function of the event log — automatable
 - **Projection**: `context.md` and `CHANGELOG.md` generation is algorithmic — automatable
 - **Validation**: All consistency checks can run as pre-commit hooks or CI steps
@@ -670,7 +677,7 @@ Not every project needs all four layers. Scale the memory system to match projec
 
 ```
 BOOT:    Read AGENTS.md → Read context.md → Check staleness → Query graph → Verify constraints
-EXECUTE: Work within boundaries → Append events to changelog.md
+EXECUTE: Work within boundaries → Append events to CHANGELOG.md
 SHUTDOWN: Append → Materialize → Regenerate → Commit → Handoff → Die
 RECOVER: Trust L1 → Rebuild L2 → Rebuild L3 → Resume
 ```
@@ -678,14 +685,14 @@ RECOVER: Trust L1 → Rebuild L2 → Rebuild L3 → Resume
 ### File Trust Order
 
 ```
-AGENTS.md  >  changelog.md  >  graph.md  >  context.md
+AGENTS.md  >  CHANGELOG.md  >  graph.md  >  context.md
 (immutable)   (source of truth) (derived)   (ephemeral)
 ```
 
 ### Data Flow Direction
 
 ```
-Agent → changelog.md → graph.md → context.md
+Agent → CHANGELOG.md → graph.md → context.md
        (append only)   (materialize) (regenerate)
 ```
 

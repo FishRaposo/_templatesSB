@@ -1,0 +1,46 @@
+{
+  "agent_support": {
+    "claude": true,
+    "roo": true,
+    "cascade": true,
+    "cursor": true,
+    "generic": true
+  },
+  "triggers": {
+    "keywords": [
+      "recipe",
+      "recipes",
+      "recipe.yaml",
+      "RECIPE.md",
+      "feature combination",
+      "task bundle",
+      "create recipe",
+      "add recipe",
+      "compatible blueprints",
+      "template type"
+    ],
+    "patterns": [
+      "create.*recipe",
+      "add.*recipe",
+      "recipe.*(yaml|tasks|skills)",
+      "bundle.*tasks"
+    ],
+    "file_types": [".yaml", ".yml", ".md"]
+  },
+  "requirements": {
+    "tools": [],
+    "permissions": ["file_read", "file_write"],
+    "memory": false
+  },
+  "examples": {
+    "simple": [
+      "Create a recipe for a SaaS starter",
+      "Add a new recipe that bundles auth-basic and billing",
+      "Audit recipes/ and fix broken task references"
+    ],
+    "complex": [
+      "Create an e-commerce recipe with tasks and skills and compatible blueprints",
+      "Update recipe.yaml with configuration overrides per task and validate"
+    ]
+  }
+}

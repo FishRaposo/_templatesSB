@@ -6,18 +6,19 @@
 
 | System | Main Document | Location | Purpose |
 |--------|---------------|----------|---------|
-| **Agent Framework** | AGENTS.md | `core/` | AI agent operating instructions |
+| **Agent Framework** | AGENTS.md | **Project root** (`../`) | AI agent operating instructions |
 | **Memory System** | MEMORY-SYSTEM-PROTOCOL.md | `protocols/` | Memory management protocol |
 | **Documentation Blueprint** | DOCUMENTATION-BLUEPRINT.tpl.md | `templates/` | Complete documentation system |
-| **Skill Builder** | SKILL.md | `../skill-builder/` | Skill creation system |
+| **Skill Builder** | SKILL.md | `../.agents/skills/skill-builder/` | Skill creation system |
+| **Archive reference (template types)** | ARCHIVE-REFERENCE-FOR-TEMPLATE-TYPES.md | `ARCHIVE-REFERENCE-FOR-TEMPLATE-TYPES.md` | Where to look in the archive for each template type (Rules, Blueprints, Tasks, Recipes, Subagents, Skills, Memory); read-only reference |
 
 ## Core Documentation (`core/`)
 
 ### AGENTS.md
 - **Content**: Complete AI agent operating instructions
+- **Location**: **Project root** (`../AGENTS.md`), not in docs/core/
 - **Framework**: Three Pillars (Automating, Testing, Documenting)
-- **Size**: 21.4KB
-- **Related**: `AGENTIC-RULES.md`, `../agents-setup/`
+- **Related**: `AGENTIC-RULES.md` (this directory), `../.agents/skills/rules-setup/`
 
 ### AGENTIC-RULES.md
 - **Content**: Agent rules and constraints
@@ -45,8 +46,7 @@
 
 ### MEMORY-SYSTEM-PROTOCOL.md
 - **Content**: Complete memory system protocol
-- **Size**: 30.0KB
-- **Related**: `../memory-system/`, `../.memory/`
+- **Related**: `memory-system/` (this docs folder), `../.memory/` (project root when in use)
 
 ### PROMPT-VALIDATION-PROTOCOL.md
 - **Content**: Prompt validation system
@@ -64,31 +64,32 @@
 ## Supporting Directories
 
 ### Existing Structure
-- **`examples/`** (7 files) - Example implementations
-- **`technical/`** (19 files) - Technical documentation
-- **`universal/`** (14 files) - Universal templates
-- **`MEMORY_SYSTEM.md`** - Memory system overview
+- **`examples/`** - Example implementations
+- **`technical/`** - Technical documentation
+- **`universal/`** - Universal templates
+- **`memory-system/`** - Memory system docs, templates, scripts (see also protocols/MEMORY-SYSTEM-PROTOCOL.md)
+- **`MEMORY_SYSTEM.md`** - Memory system overview (when present)
 - **`THREE_PILLARS.md`** - Three Pillars framework
 
 ## Navigation
 
 ### For New Users
-1. Start with `core/AGENTS.md` for agent framework
-2. Use `templates/DOCUMENTATION-BLUEPRINT.tpl.md` for new projects
+1. Start with **project root** `AGENTS.md` for agent framework (not in docs/core/)
+2. Use `templates/DOCUMENTATION-BLUEPRINT.tpl.md` for new projects when applicable
 3. Follow `guides/AGENT_SKILLS_GUIDE.md` for skill development
 
 ### For System Integration
 1. Implement `protocols/MEMORY-SYSTEM-PROTOCOL.md` for memory
-2. Use `protocols/PROMPT-VALIDATION-PROTOCOL.md` for validation
-3. Follow `guides/TEMPLATE-SYSTEM-GUIDE.md` for templates
+2. Use `memory-system/` and `.agents/skills/memory-system-setup/` for memory setup
+3. Use `protocols/PROMPT-VALIDATION-PROTOCOL.md` for validation
+4. Follow `guides/TEMPLATE-SYSTEM-GUIDE.md` for templates
 
 ### For Development
-1. Use `skill-builder/` system for skill creation
-2. Reference `guides/ADD-NEW-*-TEMPLATE.md` for new templates
+1. Use `../.agents/skills/skill-builder/` for skill creation
+2. Reference `guides/ADD-NEW-*-TEMPLATE.md` for new templates when applicable
 3. Follow `core/AGENTIC-RULES.md` for agent constraints
 
 ---
 
 *Documentation organized: 2026-02-26*  
-*Total core documents: 11 files*  
-*Supporting directories: 6*
+*See project root `CURRENT-REPOSITORY-STATE.md` for full repository inventory.*

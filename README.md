@@ -1,6 +1,6 @@
 # Unified AI Development Ecosystem
 
-A comprehensive repository built on **four types of agentic assets** for AI-assisted software development.
+A comprehensive repository built on **six template types** for AI-assisted software development.
 
 **Last Updated**: 2025  
 **Status**: Active Development
@@ -9,120 +9,70 @@ See `AGENTIC-ASSETS-FRAMEWORK.md` for complete framework documentation.
 
 ---
 
-## 🎯 Five-Pillar Architecture
+## 🎯 Six-Pillar Architecture
 
-This repository is organized around five complementary asset types:
+This repository is organized around **six complementary template types**:
 
-### 1. 📋 Blueprints
-**What to build** — Product archetypes (YAML + Markdown)
-- Product pattern definitions (MINS, SaaS API, etc.)
-- Drive automated project generation
-- Stack constraints and tier defaults
-- 7-step resolution algorithm (1.00 confidence target)
+### 1. 📜 Rules
+**How agents must behave** — Tool- and audience-specific constraints (Markdown)
+- **AGENTS.md** — Canonical, tool-agnostic rules (start here)
+- **CLAUDE.md** — Claude Code guide
+- **CURSOR.md** — Cursor AI guide
+- **WINDSURF.md** — Windsurf AI guide
+- Same project, different entry points per tool; Subagents and Skills run within these Rules
 
-### 2. 🏗️ Tasks
-**How to implement** — Feature implementation units (Code + Config)
-- **47 tasks** across **9 development categories**
-- **12 technology stacks** with **3 complexity tiers** (MVP/Core/Enterprise)
-- Complete feature implementations (not just code snippets)
-- Stack-specific and tier-specific variants
+### 2. 📋 Blueprints
+**What to build** — Product archetypes (YAML + Markdown). Defined in the framework; implementations in this repo are **archived**.
 
-### 3. 🍳 Recipes
-**Feature combinations** — Bundles of Tasks + Skills (YAML + Markdown)
-- Pre-configured feature sets for common scenarios
-- E-commerce, SaaS starter, Analytics platform, etc.
-- Stack/tier-agnostic (inherits from Tasks)
-- Curated best practices via Skills
+### 3. 🏗️ Tasks
+**How to implement** — Feature implementation units. Defined in the framework; implementations in this repo are **archived**.
 
-### 4. 🤖 Agent Personas
-**Who does the work** — Configured workers (YAML + Markdown)
-- Curated skill bundles for specific domains
-- Defined workflows and automations
-- Compatible blueprints and recipes
-- Deployable AI workers (Code Reviewer, Tester, Architect, etc.)
+### 4. 🍳 Recipes
+**Feature combinations** — Bundles of Tasks + Skills. Defined in the framework; implementations in this repo are **archived**.
 
-### 5. 🧠 Skills
+### 5. 🤖 Subagents
+**Who does the work** — Configured workers. Defined in the framework; implementations in this repo are **archived**.
+
+### 6. 🧠 Skills
 **How to do it well** — Capabilities & best practices (Markdown + JSON)
-- **766 skills** across **60 planned packs** (2 completed)
-- **14 categories** covering programming through industry verticals
-- Multi-language examples (JavaScript, Python, Go, Rust)
-- Action-oriented instruction packages
+- **Current skills in this repo**: **memory-system-setup**, **rules-setup**, **skill-builder**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup** (under `.agents/skills/`)
+- Use `.agents/skills/skill-builder/` to create or improve skills; `.agents/skills/rules-setup/` for the four rule files; `.agents/skills/memory-system-setup/` for the memory system
+- Legacy skill-packs (e.g. 1-programming-core, 2-code-quality) are **archived**
 
-**"Templates"** refers collectively to all five asset types — the complete reusable system.
+**"Templates"** refers to all six types (Rules, Blueprints, Tasks, Recipes, Subagents, Skills).
 
 ---
 
 ## 📁 Repository Structure
 
 ```
-_templates/
-├── AGENTS.md                      # Behavioral constraints for all agents
-├── AGENTIC-ASSETS-FRAMEWORK.md    # Five asset types definitions
-├── CLAUDE.md                      # Claude Code guide
-├── Windsurf.md                    # Windsurf AI guide
+<project root>/
+├── AGENTS.md                      # 📜 RULES — Canonical
+├── CLAUDE.md                      # 📜 RULES — Claude
+├── CURSOR.md                      # 📜 RULES — Cursor
+├── WINDSURF.md                    # 📜 RULES — Windsurf
+├── AGENTIC-ASSETS-FRAMEWORK.md    # Six template types definitions
 ├── CHANGELOG.md                   # Event log (append-only)
 ├── README.md                      # This file
-├── SKILLS_MASTER_LIST.md          # 766 skills catalog
+├── CURRENT-REPOSITORY-STATE.md    # Repository inventory
 │
-├── blueprints/                    # 📋 BLUEPRINTS
-│   └── mins/
-│       ├── BLUEPRINT.md           # Human-readable docs
-│       ├── blueprint.meta.yaml    # Machine-readable config
-│       └── overlays/              # Stack-specific extensions
-│           ├── flutter/
-│           ├── python/
-│           └── ...
+├── .agents/
+│   └── skills/                    # 🧠 SKILLS (seven skills)
+│       ├── memory-system-setup/
+│       ├── rules-setup/
+│       ├── skill-builder/
+│       ├── blueprints-setup/
+│       ├── tasks-setup/
+│       ├── recipes-setup/
+│       └── subagents-setup/
 │
-├── tasks/                         # 🏗️ TASKS
-│   ├── task-index.yaml            # Unified task definitions
-│   └── <task-name>/
-│       ├── TASK.md                # Task documentation
-│       ├── config.yaml            # Task configuration
-│       ├── universal/             # Universal implementations
-│       └── stacks/                # Stack-specific implementations
-│           ├── python/
-│           ├── node/
-│           └── ...
+├── .memory/                       # Memory system data (when in use)
+├── docs/                          # Documentation & protocols
+├── plans/                         # Planning artifacts (when present)
+├── _documentation-blueprint/      # Documentation blueprint
 │
-├── recipes/                       # 🍳 RECIPES (proposed)
-│   └── <recipe-name>/
-│       ├── recipe.yaml            # Recipe configuration
-│       └── RECIPE.md              # Human-readable docs
-│
-├── agent-personas/                # 🤖 AGENT PERSONAS (proposed)
-│   └── <persona-name>/
-│       ├── persona.yaml           # Agent configuration
-│       ├── PERSONA.md             # Human-readable docs
-│       └── workflows/             # Workflow definitions
-│
-├── skill-packs/                   # 🧠 SKILLS
-│   ├── HOW_TO_CREATE_SKILL_PACKS.md
-│   ├── 1-programming-core/        # 12 skills (COMPLETED)
-│   │   ├── PACK.md
-│   │   ├── QUICK_REFERENCE.md
-│   │   └── <skill>/
-│   │       ├── SKILL.md
-│   │       ├── config.json
-│   │       ├── README.md
-│   │       └── _examples/
-│   └── 2-code-quality/            # 12 skills (COMPLETED)
-│
-├── scripts/                       # 🔧 AUTOMATION
-│   ├── setup-project.py           # Blueprint-driven setup
-│   ├── validate-templates.py      # Template validation
-│   ├── blueprint_config.py        # Blueprint management
-│   └── task_resolver.py           # Task resolution
-│
-├── stacks/                        # Stack configurations
-├── tiers/                         # Tier configurations
-├── docs/                          # Documentation
-│   ├── protocols/
-│   │   ├── MEMORY-SYSTEM-PROTOCOL.md
-│   │   └── PROMPT-VALIDATION-PROTOCOL.md
-│   └── guides/
-├── memory-system/                 # Memory system implementation
-├── skill-builder/                 # Skill creation tools
-└── _complete_archive/             # Preserved history
+├── blueprints/, tasks/, recipes/, subagents/, scripts/  # Not at root; see framework or _complete_archive/
+└── _complete_archive/             # Preserved history (incl. legacy skill-packs)
 ```
 
 ---
@@ -134,41 +84,36 @@ _templates/
 # Validate JSON (skills)
 find . -name "*.json" -exec python -m json.tool {} \; > /dev/null
 
-# Validate templates & blueprints (CRITICAL before commits)
+# When the project includes a scripts/ directory with template automation:
 python scripts/validate-templates.py --full
 ```
 
 ### Generate a Project
 ```bash
+# When the project includes scripts/setup-project.py (e.g. from framework or archive):
 # Autonomous blueprint-driven setup
 python scripts/setup-project.py --auto --name "MyApp" --description "minimalist mobile app"
-
-# Output example:
-# 🤖 Blueprint: mins
-# 📊 Resolution Confidence: 1.00
-# 🔧 Stacks: flutter, python
-# 📈 Tiers: {'flutter': 'mvp', 'python': 'core'}
-# 📋 Tasks: 5 total
+# This repo does not currently ship this script.
 ```
 
 ### Create a Skill
-1. See `skill-packs/HOW_TO_CREATE_SKILL_PACKS.md`
-2. Use `1-programming-core/` as gold standard
+1. Use `.agents/skills/skill-builder/` for creating or improving skills
+2. Follow the SKILL.md and config.json patterns (see any of the seven skills in `.agents/skills/`)
 3. Follow Three Pillars framework
 
 ### Create a Blueprint
-1. Create `blueprints/<name>/` directory
+1. Create `blueprints/<name>/` directory (when the project adopts blueprints)
 2. Add `blueprint.meta.yaml` and `BLUEPRINT.md`
 3. Create overlay templates in `overlays/<stack>/`
-4. Validate: `python -c "from scripts.blueprint_config import validate_blueprint; print(validate_blueprint('name'))"`
+4. Validate: `python -c "from scripts.blueprint_config import validate_blueprint; print(validate_blueprint('name'))"` (when scripts/ is present)
 
 ### Create a Task
-1. Create `tasks/<task-name>/` directory
+1. Create `tasks/<task-name>/` directory (when the project adopts tasks)
 2. Add `TASK.md` with documentation and `config.yaml` with configuration
 3. Add `universal/` implementation (applies to all stacks)
 4. Add `stacks/<stack>/` implementations (stack-specific)
 5. Update `tasks/task-index.yaml`
-6. Run `python scripts/validate-templates.py --full`
+6. Run `python scripts/validate-templates.py --full` when scripts/ is present
 
 ### Create a Recipe
 1. Create `recipes/<recipe-name>/` directory
@@ -178,10 +123,10 @@ python scripts/setup-project.py --auto --name "MyApp" --description "minimalist 
 5. Update recipe registry
 6. Update documentation
 
-### Create an Agent Persona
-1. Create `agent-personas/<name>/` directory
-2. Add `persona.yaml` with skills, blueprints, and workflows
-3. Create `PERSONA.md` and `workflows/` definitions
+### Create a Subagent
+1. Create `subagents/<name>/` directory
+2. Add `subagent.yaml` with skills, blueprints, and workflows
+3. Create `SUBAGENT.md` and `workflows/` definitions
 4. See `AGENTIC-ASSETS-FRAMEWORK.md` for examples
 
 ---
@@ -190,26 +135,24 @@ python scripts/setup-project.py --auto --name "MyApp" --description "minimalist 
 
 Every task must satisfy all three pillars:
 
-1. **AUTOMATING** — Content validates against structural rules
+1. **AUTOMATING** — Content validates against structural rules; prefer scripts over manual steps
+   - If a task can be done with a script (especially a reusable one in `scripts/`), use the script instead of doing it manually.
    - Blueprints: YAML valid, metadata complete
    - Tasks: Task structure valid, implementations complete
    - Recipes: Recipe configuration valid, dependencies resolve
-   - Agent Personas: persona.yaml valid, workflows defined
+   - Subagents: subagent.yaml valid, workflows defined
    - Skills: SKILL.md frontmatter valid, config.json valid
 
 2. **TESTING** — Verification passes
    - Blueprints: Resolution confidence ≥ 1.00
    - Tasks: All stack variants work, examples are runnable
    - Recipes: All bundled tasks resolve correctly
-   - Agent Personas: Workflows execute correctly
+   - Subagents: Workflows execute correctly
    - Skills: Trigger keywords work, examples are runnable
 
 3. **DOCUMENTING** — Related docs updated
-   - New blueprint: Update blueprint index, integration guides
-   - New task: Update `task-index.yaml`, relevant docs
-   - New recipe: Update recipe registry, cross-reference tasks
-   - New agent persona: Update persona registry, add examples
-   - New skill: Update `SKILLS_MASTER_LIST.md`, pack's `PACK.md`
+   - New skill (in `.agents/skills/`): Update AGENTS.md or a skills index if present
+   - (When adopted: blueprint index, task-index.yaml, recipe registry, subagent registry)
 
 ---
 
@@ -217,14 +160,15 @@ Every task must satisfy all three pillars:
 
 | File | Purpose |
 |------|---------|
-| `AGENTIC-ASSETS-FRAMEWORK.md` | **Five asset types** — Complete framework definitions |
-| `AGENTS.md` | **Start here** — Behavioral constraints for all agents |
-| `CLAUDE.md` | Claude Code comprehensive guide |
-| `Windsurf.md` | Windsurf AI quick reference |
-| `SKILLS_MASTER_LIST.md` | Complete catalog of 766 skills |
-| `HOW_TO_CREATE_SKILL_PACKS.md` | Creation guide for all asset types |
-| `MEMORY-SYSTEM-PROTOCOL.md` | Event-sourced memory system |
-| `PROMPT-VALIDATION-PROTOCOL.md` | Prompt validation rules |
+| `AGENTIC-ASSETS-FRAMEWORK.md` | **Six template types** — Complete framework definitions |
+| `AGENTS.md` | **📜 Rules** — Canonical behavioral constraints (start here) |
+| `CLAUDE.md` | **📜 Rules** — Claude Code guide |
+| `CURSOR.md` | **📜 Rules** — Cursor AI guide |
+| `WINDSURF.md` | **📜 Rules** — Windsurf AI guide |
+| `CURRENT-REPOSITORY-STATE.md` | Repository inventory and directory overview |
+| `.agents/skills/` | **🧠 Skills** — memory-system-setup, rules-setup, skill-builder, blueprints-setup, tasks-setup, recipes-setup, subagents-setup |
+| `docs/protocols/MEMORY-SYSTEM-PROTOCOL.md` | Event-sourced memory system |
+| `docs/protocols/PROMPT-VALIDATION-PROTOCOL.md` | Prompt validation rules |
 
 ---
 
@@ -251,9 +195,9 @@ Every task must satisfy all three pillars:
 - Versioned combinations
 - Tested configurations
 
-### Agent Personas (YAML + Markdown)
-- **persona.yaml**: Skills, blueprints, workflows configuration
-- **PERSONA.md**: Human-readable documentation
+### Subagents (YAML + Markdown)
+- **subagent.yaml**: Skills, blueprints, workflows configuration
+- **SUBAGENT.md**: Human-readable documentation
 - **workflows/**: Defined automation workflows
 
 ### Blueprints (YAML)
@@ -271,7 +215,7 @@ Every task must satisfy all three pillars:
 find . -name "*.json" -exec python -m json.tool {} \; > /dev/null
 grep -r "\[.*\](.*)" --include="*.md" . | grep -v "http" | head -20
 
-# Tasks, Blueprints & Other Templates
+# When the project includes scripts/ with template automation:
 python scripts/validate-templates.py --full
 python -c "from scripts.blueprint_config import validate_blueprint; print(validate_blueprint('mins'))"
 python -c "from scripts.task_resolver import validate_task; print(validate_task('auth-basic'))"
@@ -280,30 +224,26 @@ python -m py_compile scripts/*.py
 
 ---
 
-## 📊 Statistics
+## 📊 Current Implementation
 
-| Asset Type | Count | Status |
-|------------|-------|--------|
-| **Blueprints** | Multiple archetypes | MINS, SaaS API, etc. |
-| **Tasks** | 47 across 9 categories | 655+ code templates |
-| **Recipes** | Proposed | E-commerce, SaaS starter, etc. |
-| **Agent Personas** | Proposed | Code reviewer, tester, architect |
-| **Skills** | 766 across 60 packs | 2 completed packs (24 skills) |
-| **Stacks** | 12 supported | Python, Node, Go, Flutter, React, etc. |
-| **Tiers** | 3 complexity levels | MVP, Core, Enterprise |
+| Asset Type | In this repo | Notes |
+|------------|--------------|-------|
+| **Rules** | ✅ Active | AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md |
+| **Skills** | ✅ Active (7) | memory-system-setup, rules-setup, skill-builder, blueprints-setup, tasks-setup, recipes-setup, subagents-setup in `.agents/skills/` |
+| **Blueprints** | Archived | Framework defined; see `AGENTIC-ASSETS-FRAMEWORK.md` |
+| **Tasks** | Archived | Framework defined |
+| **Recipes** | Archived | Framework defined |
+| **Subagents** | Archived | Framework defined |
 
 ---
 
 ## 🆘 When Stuck
 
 - **Framework**: Read `AGENTIC-ASSETS-FRAMEWORK.md` for complete definitions
-- **Blueprints**: Study `blueprints/mins/` example
-- **Tasks**: Review `tasks/web-scraping/` structure
-- **Recipes**: See examples in `AGENTIC-ASSETS-FRAMEWORK.md`
-- **Agent Personas**: See examples in `AGENTIC-ASSETS-FRAMEWORK.md`
-- **Skills**: Check `1-programming-core/clean-code/` as reference
-- **Validation**: Run `python scripts/validate-templates.py --full --detailed`
-- **Guidelines**: Read `HOW_TO_CREATE_SKILL_PACKS.md`
+- **Rules**: AGENTS.md is canonical; use `.agents/skills/rules-setup/` for setting up the four rule files
+- **Skills**: Use `.agents/skills/rules-setup/`, `.agents/skills/memory-system-setup/`, or `.agents/skills/skill-builder/`; see `.agents/skills/skill-builder/` for creating skills
+- **Blueprints, Tasks, Recipes, Subagents**: Defined in the framework; implementations in this repo are archived
+- **Validation**: When the project includes `scripts/validate-templates.py`, run it when templates/scripts are in use.
 
 ---
 

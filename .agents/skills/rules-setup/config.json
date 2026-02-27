@@ -1,0 +1,62 @@
+{
+  "agent_support": {
+    "claude": { "min_version": "3.0" },
+    "roo": { "min_version": "1.0" },
+    "cascade": { "min_version": "1.0" },
+    "generic": { "requirements": ["file_access", "code_execution"] }
+  },
+  "triggers": {
+    "keywords": [
+      "AGENTS.md",
+      "CLAUDE.md",
+      "CURSOR.md",
+      "WINDSURF.md",
+      "rule files",
+      "rules setup",
+      "Rules template",
+      "agent instructions",
+      "agent rules",
+      "coding agent config",
+      "agent guidance",
+      "repo instructions for AI",
+      "three pillars",
+      "task completion enforcement",
+      "prompt validation",
+      "validate prompts",
+      "four rule files"
+    ],
+    "patterns": [
+      "create.*AGENTS.md",
+      "generate.*rule.*file",
+      "write.*AGENTS.md",
+      "improve.*AGENTS.md",
+      "update.*rule.*file",
+      "set.*up.*rule.*file",
+      "configure.*coding.*agent",
+      "enforce.*three.*pillars",
+      "agent.*ships.*untested",
+      "add.*prompt.*validation",
+      "CURSOR.md",
+      "WINDSURF.md"
+    ]
+  },
+  "requirements": {
+    "tools": [],
+    "permissions": ["file_read", "file_write"],
+    "memory": false,
+    "notes": "Language-agnostic. Creates/updates the Rules template type: AGENTS.md (canonical) + CLAUDE.md, CURSOR.md, WINDSURF.md (ALL CAPS). Fits six-template-types framework."
+  },
+  "examples": {
+    "simple": [
+      "Create an AGENTS.md for this project",
+      "Set up the four rule files (AGENTS, CLAUDE, CURSOR, WINDSURF)",
+      "Improve my existing AGENTS.md"
+    ],
+    "complex": [
+      "Analyze this monorepo and generate AGENTS.md plus CLAUDE.md, CURSOR.md, WINDSURF.md with thin pointers",
+      "Audit my rule files against the six core areas and fill in the gaps",
+      "Add the Three Pillars (with prefer scripts) and four rule files in ALL CAPS",
+      "Rework our agent rules to match the six-template-types framework"
+    ]
+  }
+}

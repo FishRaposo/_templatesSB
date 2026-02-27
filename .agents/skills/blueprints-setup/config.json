@@ -1,0 +1,49 @@
+{
+  "agent_support": {
+    "claude": true,
+    "roo": true,
+    "cascade": true,
+    "cursor": true,
+    "generic": true
+  },
+  "triggers": {
+    "keywords": [
+      "blueprint",
+      "blueprints",
+      "blueprint.meta.yaml",
+      "BLUEPRINT.md",
+      "product archetype",
+      "what to build",
+      "create blueprint",
+      "add blueprint",
+      "overlays",
+      "stacks",
+      "tier defaults",
+      "template type"
+    ],
+    "patterns": [
+      "create.*blueprint",
+      "add.*blueprint",
+      "edit.*blueprint",
+      "blueprint.*(yaml|meta)",
+      "overlays/.*stack"
+    ],
+    "file_types": [".yaml", ".yml", ".md"]
+  },
+  "requirements": {
+    "tools": [],
+    "permissions": ["file_read", "file_write"],
+    "memory": false
+  },
+  "examples": {
+    "simple": [
+      "Create a new blueprint for a data pipeline",
+      "Add blueprint.meta.yaml for the existing BLUEPRINT.md",
+      "Audit blueprints/ against the framework"
+    ],
+    "complex": [
+      "Add a blueprint with flutter and python stacks and required auth-basic task",
+      "Create overlays for a new blueprint and validate resolution"
+    ]
+  }
+}

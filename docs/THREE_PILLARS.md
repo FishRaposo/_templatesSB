@@ -6,7 +6,7 @@ _Every task must satisfy all three pillars_
 
 A task is **not complete** until all three pillars are satisfied:
 
-1. ✅ **AUTOMATING** — Content validates against structural rules
+1. ✅ **AUTOMATING** — Content validates against structural rules; prefer scripts over manual steps (if something can be done with a script, especially a reusable one, use it)
 2. ✅ **TESTING** — Verification passes, examples are runnable
 3. ✅ **DOCUMENTING** — This AGENTS.md and related docs are updated
 
@@ -15,6 +15,8 @@ Skipping any pillar = incomplete work.
 ---
 
 ## Pillar 1: AUTOMATING
+
+**Principle:** Prefer scripts over manual steps. If a task can be done with a script (especially a reusable one in `scripts/`), use the script instead of doing it manually.
 
 After every content change, verify:
 
@@ -34,10 +36,10 @@ After every content change, verify:
 
 ### Structure Validation
 
-- [ ] Directory structure matches `HOW_TO_CREATE_SKILL_PACKS.md`
+- [ ] Directory structure matches project conventions (e.g. `skills/<skill-name>/` with SKILL.md, config.json, README.md)
 - [ ] Naming conventions followed (kebab-case, etc.)
 - [ ] README.md under 80 lines
-- [ ] Reference files have `<!-- Generated from... -->` headers
+- [ ] Reference files have `<!-- Generated from... -->` headers when applicable
 
 ### Code Example Validation
 
@@ -90,12 +92,11 @@ After completing any task, check whether documentation updates are needed:
 
 | Change Type | Update These Files |
 |-------------|-------------------|
-| New skill pack or standalone skill | AGENTS.md (Project Structure), SKILLS_MASTER_LIST.md, README.md |
-| New skill in existing pack | Pack's PACK.md, QUICK_REFERENCE.md, reference-files/INDEX.md |
-| New reference file | Pack's reference-files/INDEX.md |
-| Completed pack | AGENTS.md (Completed Packs), SKILLS_MASTER_LIST.md |
+| New standalone skill (in `skills/`) | AGENTS.md (Key References / Skills), README if present |
+| New skill in existing pack | Pack's PACK.md, QUICK_REFERENCE.md, reference-files/INDEX.md (when project uses packs) |
+| New reference file | Pack's reference-files/INDEX.md (when project uses packs) |
 | New top-level file | AGENTS.md (Project Structure) |
-| Changed conventions | AGENTS.md (Do/Don't), HOW_TO_CREATE_SKILL_PACKS.md |
+| Changed conventions | AGENTS.md (Do/Don't) |
 | New file type or naming convention | AGENTS.md (File Types and Conventions) |
 | New key file role | AGENTS.md (Key File Roles table) |
 | Changed workflow step | AGENTS.md (Workflows section) |
@@ -113,7 +114,7 @@ After completing any task, check whether documentation updates are needed:
 
 ### With Prompt Validation
 
-- **BEFORE starting:** Validate prompt using PROMPT-VALIDATION-PROTOCOL.md
+- **BEFORE starting:** Validate prompt using `docs/protocols/PROMPT-VALIDATION-PROTOCOL.md` (or PROMPT-VALIDATION-PROTOCOL.md at project root if present)
 - **DURING:** Follow Three Pillars as you work
 - **AFTER:** Verify all three pillars satisfied before declaring complete
 
@@ -169,7 +170,7 @@ Requirements:
 
 Ask yourself:
 
-1. **AUTOMATING:** Would a linter for our conventions pass this?
+1. **AUTOMATING:** Would a linter for our conventions pass this? Did I use scripts instead of manual steps where possible?
 2. **TESTING:** Have I actually run the examples I provided?
 3. **DOCUMENTING:** If someone looks for this later, will they find it?
 

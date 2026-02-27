@@ -1,32 +1,37 @@
-# Windsurf.md - Unified AI Development Guide
+# WINDSURF.md - Unified AI Development Guide
 
-**Purpose**: Windsurf AI guide for five agentic asset types.  
+**Purpose**: Windsurf AI guide for the six template types (Rules, Blueprints, Tasks, Recipes, Subagents, Skills).  
 **Last Updated**: 2025
 
 See `AGENTIC-ASSETS-FRAMEWORK.md` for complete framework documentation.
+
+**Rule files**: This project uses four rule files—**AGENTS.md** (canonical), **CLAUDE.md**, **CURSOR.md**, **WINDSURF.md** (this file)—one per tool or audience. All are examples of the **Rules** template type. **AGENTS.md** is the full source: Tech Stack, Commands (prefer scripts), Testing, Code Style, Repository Structure, Boundaries, **Safety and Permissions**, Git Workflow, Memory System, Prompt Validation (4 checks), Three Pillars (with change-type doc table), Workflows, Tool Selection, **Subagents for execution**, **Right tool for the job**, Key References.
 
 ---
 
 ## Quick Start
 
-This repository is built on **five asset types**:
-1. **Blueprints** — What to build (product archetypes)
-2. **Tasks** — How to implement (feature units)
-3. **Recipes** — Feature combinations (bundles)
-4. **Agent Personas** — Who does the work (configured workers)
-5. **Skills** — How to do it well (capabilities)
+This repository is built on **six template types**:
+1. **Rules** — How agents must behave (AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md)
+2. **Blueprints** — What to build (product archetypes)
+3. **Tasks** — How to implement (feature units)
+4. **Recipes** — Feature combinations (bundles)
+5. **Subagents** — Who does the work (configured sub-agents)
+6. **Skills** — How to do it well (capabilities)
 
-**"Templates"** = all five types together
+**"Templates"** = all six types (Rules, Blueprints, Tasks, Recipes, Subagents, Skills). **In this repo** only **Rules** and **seven Skills** are active: **memory-system-setup**, **rules-setup**, **skill-builder**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup** (under `.agents/skills/`). Other template-type implementations are archived.
 
 ```bash
 # Validate JSON (skills)
 find . -name "*.json" -exec python -m json.tool {} \; > /dev/null
 
+# When the project includes scripts/ with template automation:
 # Validate templates & blueprints (CRITICAL before commits)
 python scripts/validate-templates.py --full
 
 # Generate project
 python scripts/setup-project.py --auto --name "Project" --description "desc"
+# This repo does not currently ship these scripts.
 ```
 
 ---
@@ -34,37 +39,12 @@ python scripts/setup-project.py --auto --name "Project" --description "desc"
 ## Repository Structure
 
 ```
-├── blueprints/               # 📋 BLUEPRINTS (YAML)
-│   └── mins/
-│       ├── blueprint.meta.yaml
-│       └── overlays/
-│
-├── tasks/                    # 🏗️ TASKS (Python/YAML/Jinja2)
-│   ├── task-index.yaml
-│   └── <task>/
-│       ├── TASK.md
-│       ├── config.yaml
-│       ├── universal/
-│       └── stacks/
-│
-├── recipes/                  # 🍳 RECIPES (proposed)
-│   └── <recipe>/
-│       ├── recipe.yaml
-│       └── RECIPE.md
-│
-├── agent-personas/           # 🤖 AGENT PERSONAS (proposed)
-│   └── <persona>/
-│       ├── persona.yaml
-│       ├── PERSONA.md
-│       └── workflows/
-│
-├── skill-packs/              # 🧠 SKILLS (Markdown + JSON)
-│   ├── 1-programming-core/   # 12 skills
-│   └── 2-code-quality/       # 12 skills
-│
-└── scripts/                  # 🔧 AUTOMATION
-    ├── setup-project.py
-    └── validate-templates.py
+├── AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md   # 📜 RULES
+├── AGENTIC-ASSETS-FRAMEWORK.md
+├── .agents/skills/            # 🧠 SKILLS (seven)
+├── .memory/, docs/, plans/, _documentation-blueprint/
+├── blueprints/, tasks/, recipes/, subagents/      # When present or archived
+└── scripts/                  # When present (framework/archive)
 ```
 
 ---
@@ -185,11 +165,12 @@ python -c "from scripts.blueprint_config import validate_blueprint; print(valida
 
 Every task must satisfy:
 
-1. **AUTOMATING** — Content validates
+1. **AUTOMATING** — Content validates; prefer scripts over manual steps
+   - If something can be done with a script (especially reusable in `scripts/`), use the script.
    - Blueprints: YAML valid
    - Tasks: Structure valid
    - Recipes: Config valid
-   - Agent Personas: persona.yaml valid
+   - Subagents: subagent.yaml valid
    - Skills: Frontmatter/JSON valid
 
 2. **TESTING** — Verification passes
@@ -197,15 +178,12 @@ Every task must satisfy:
    - Blueprints: Resolution ≥ 1.00
    - Tasks: All variants work
    - Recipes: Bundles resolve
-   - Agent Personas: Workflows execute
+   - Subagents: Workflows execute
    - Skills: Triggers work
 
 3. **DOCUMENTING** — Docs updated
-   - Blueprints → Index
-   - Tasks → `task-index.yaml`
-   - Recipes → Registry
-   - Agent Personas → Registry
-   - Skills → `SKILLS_MASTER_LIST.md`
+   - New skill (in `.agents/skills/`): Update AGENTS.md or skills index if present.
+   - (When adopted: Blueprints → Index; Tasks → task-index.yaml; Recipes/Subagents → Registry.)
 
 ---
 
@@ -237,10 +215,10 @@ Every task must satisfy:
 3. Create `overlays/<stack>/`
 4. Validate resolution
 
-### Add Agent Persona
-1. Create `agent-personas/<name>/`
-2. Add `persona.yaml` with skills, workflows
-3. Create `PERSONA.md`, `workflows/`
+### Add Subagent
+1. Create `subagents/<name>/`
+2. Add `subagent.yaml` with skills, workflows
+3. Create `SUBAGENT.md`, `workflows/`
 4. See `AGENTIC-ASSETS-FRAMEWORK.md` for examples
 
 ### Generate Project
@@ -254,16 +232,14 @@ python scripts/setup-project.py --auto --name "MyApp" --description "mobile app"
 
 | File | Purpose |
 |------|---------|
-| `AGENTIC-ASSETS-FRAMEWORK.md` | **Five asset types** — Complete framework |
-| `AGENTS.md` | Main guide |
-| `blueprints/mins/` | Blueprint example |
-| `tasks/task-index.yaml` | Task definitions |
-| `recipes/` | Recipes (proposed) |
-| `agent-personas/` | Agent Personas (proposed) |
-| `SKILLS_MASTER_LIST.md` | 766 skills |
-| `HOW_TO_CREATE_SKILL_PACKS.md` | Creation guide |
-| `scripts/validate-templates.py` | Validation |
-| `1-programming-core/` | Gold standard |
+| `AGENTIC-ASSETS-FRAMEWORK.md` | **Six template types** — Complete framework |
+| `AGENTS.md` | 📜 **Rules** — Canonical (main guide) |
+| `CLAUDE.md` | 📜 **Rules** — Claude entry |
+| `CURSOR.md` | 📜 **Rules** — Cursor entry |
+| `WINDSURF.md` | 📜 **Rules** — This file (Windsurf entry) |
+| `.agents/skills/` | 🧠 **Skills** — memory-system-setup, rules-setup, skill-builder, blueprints-setup, tasks-setup, recipes-setup, subagents-setup |
+| `scripts/validate-templates.py` | Validation (when project includes scripts/) |
+| `scripts/setup-project.py` | Project generation (when blueprints in use) |
 
 ---
 
@@ -277,7 +253,6 @@ python scripts/setup-project.py --auto --name "MyApp" --description "mobile app"
 
 ## When Stuck
 
-- Skills: `1-programming-core/clean-code/`
-- Templates: `tasks/web-scraping/`
-- Blueprints: `blueprints/mins/`
-- Validation: `python scripts/validate-templates.py --full`
+- **Skills**: Use `.agents/skills/rules-setup/`, `.agents/skills/memory-system-setup/`, or `.agents/skills/skill-builder/`; see `.agents/skills/skill-builder/` for creating skills.
+- **Blueprints, Tasks, Recipes, Subagents**: See `AGENTIC-ASSETS-FRAMEWORK.md`; implementations in this repo are archived.
+- **Validation**: When the project includes `scripts/validate-templates.py`, run it when templates/scripts are in use.

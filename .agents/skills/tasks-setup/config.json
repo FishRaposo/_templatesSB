@@ -1,0 +1,50 @@
+{
+  "agent_support": {
+    "claude": true,
+    "roo": true,
+    "cascade": true,
+    "cursor": true,
+    "generic": true
+  },
+  "triggers": {
+    "keywords": [
+      "task",
+      "tasks",
+      "TASK.md",
+      "task-index.yaml",
+      "implementation unit",
+      "create task",
+      "add task",
+      "universal",
+      "stacks",
+      "MVP",
+      "Core",
+      "Enterprise",
+      "template type"
+    ],
+    "patterns": [
+      "create.*task",
+      "add.*task",
+      "task-index",
+      "tasks/.*config",
+      "stacks/.*implementation"
+    ],
+    "file_types": [".yaml", ".yml", ".md", ".py", ".js", ".ts"]
+  },
+  "requirements": {
+    "tools": [],
+    "permissions": ["file_read", "file_write"],
+    "memory": false
+  },
+  "examples": {
+    "simple": [
+      "Create a new task for auth-basic",
+      "Add a Python stack implementation to an existing task",
+      "Register the new task in task-index.yaml"
+    ],
+    "complex": [
+      "Add a full task with universal and python/node stacks and MVP tier",
+      "Audit all tasks against the framework and fix task-index.yaml"
+    ]
+  }
+}

@@ -4,27 +4,62 @@
 **Last Updated**: 2025  
 **Status**: Active
 
-This document defines the five types of agentic assets that comprise the unified AI development ecosystem.
+This document defines the **six types of templates** that comprise the unified AI development ecosystem: **Rules**, Blueprints, Tasks, Recipes, Subagents, and Skills. Rules (e.g. AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md) are one template type among six.
+
+**Implementation status in this repo**: Only **Rules** (the four rule files) and **Skills** are actively implemented. The seven current skills are **memory-system-setup**, **rules-setup**, **skill-builder**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup** (under `.agents/skills/`). Blueprints, Tasks, Recipes, Subagents, and legacy skill-packs (e.g. 1-programming-core, 2-code-quality) are **archived**; the framework describes all six types for reference and future use.
 
 ---
 
 ## Overview
 
-The repository is organized around **five complementary asset types** that work together to enable AI-assisted software development:
+The repository is organized around **six complementary template types** that work together to enable AI-assisted software development:
 
-1. **Blueprints** — What to build (product archetypes)
-2. **Tasks** — How to implement a feature (implementation units)
-3. **Recipes** — Feature combinations (bundles of Tasks + Skills)
-4. **Agent Personas** — Who does the work (configured workers)
-5. **Skills** — How to do it well (capabilities, best practices)
+1. **Rules** — How agents must behave (tool- and audience-specific constraints)
+2. **Blueprints** — What to build (product archetypes)
+3. **Tasks** — How to implement a feature (implementation units)
+4. **Recipes** — Feature combinations (bundles of Tasks + Skills)
+5. **Subagents** — Who does the work (configured sub-agents)
+6. **Skills** — How to do it well (capabilities, best practices)
 
-**"Templates"** refers collectively to all five asset types—the entire system of reusable, composable assets.
+**Rules** are one template type: Markdown files at project root (or in `.cursor/rules/`) that each tool or audience reads at agent boot. **AGENTS.md**, **CLAUDE.md**, **CURSOR.md**, and **WINDSURF.md** are examples of Rules—same project, different entry points. Skills and Subagents operate within whatever Rules the active tool loads. See [Rules, Skills, and Subagents](#rules-skills-and-subagents) below.
+
+**"Templates"** refers collectively to **all six types**—Rules, Blueprints, Tasks, Recipes, Subagents, and Skills—the complete reusable system.
 
 ---
 
-## The Five Asset Types
+## The Six Template Types
 
-### 1. BLUEPRINTS — What to Build
+### 1. RULES — How Agents Must Behave
+
+**Definition**: Tool- or audience-specific behavioral constraints that govern how agents and subagents behave. Rules are Markdown files read at agent boot; they define conventions, guardrails, and what agents must or must not do.
+
+**Purpose**: Ensure consistent behavior across tools (Cursor, Claude, Windsurf, etc.) by providing a single project worldview—with one canonical source (e.g. AGENTS.md) and tool-specific entry points that point to it or adapt it.
+
+**Format**: Markdown (optionally with YAML frontmatter for metadata)
+
+**Location**: Project root and, for Cursor, `.cursor/rules/` (one rule per file, e.g. `RULE.md` or named `.md` files). **Naming**: Rule files at project root use **ALL CAPS** filenames (AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md).
+
+**Key Files (examples of Rules)**:
+- **AGENTS.md** — Canonical, tool-agnostic rules (build/test/lint, conventions, memory, three pillars). Reference this from tool-specific rules when possible.
+- **CLAUDE.md** — Claude-specific entry: overview, commands, structure, memory. Points to `AGENTIC-ASSETS-FRAMEWORK.md` and AGENTS.md.
+- **CURSOR.md** — Cursor-specific entry: same framework, Cursor-oriented commands and paths. Points to framework and AGENTS.md.
+- **WINDSURF.md** — Windsurf-specific entry: same framework, Windsurf-oriented quick start and structure. Points to framework and AGENTS.md.
+- **.cursor/rules/*.md** — Cursor rule files (file- or scope-specific). Can reference AGENTS.md for project-wide behavior.
+
+**Characteristics**:
+- Rule files at project root are named in **ALL CAPS** (AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md).
+- One project, multiple rule files: AGENTS.md (source of truth) + CLAUDE.md, CURSOR.md, WINDSURF.md (tool-specific views).
+- Read at agent/subagent boot; not modified during execution.
+- Skills and Subagents run *within* the Rules loaded by the active tool.
+- Keep constraints explicit and testable; reference the template system (blueprints, tasks, recipes, subagents, skills) where relevant.
+
+**When to Use**: For every project using this framework. Prefer one AGENTS.md and thin tool-specific files (CLAUDE.md, CURSOR.md, WINDSURF.md) that point to it and add tool-specific commands or structure.
+
+**Question Answered**: "What must agents do or avoid, and how is this project set up for this tool?"
+
+---
+
+### 2. BLUEPRINTS — What to Build
 
 **Definition**: Product archetypes that define what kind of application to build and how to architect it.
 
@@ -86,7 +121,7 @@ blueprint:
 
 ---
 
-### 2. TASKS — How to Implement a Feature
+### 3. TASKS — How to Implement a Feature
 
 **Definition**: Implementation units that contain all code, configuration, and documentation needed to implement a specific feature across technology stacks and complexity tiers.
 
@@ -151,7 +186,7 @@ tasks/
 
 ---
 
-### 3. RECIPES — Feature Combinations
+### 4. RECIPES — Feature Combinations
 
 **Definition**: Pre-configured bundles that combine Tasks and Skills for common development scenarios.
 
@@ -248,30 +283,30 @@ recipe:
 
 ---
 
-### 4. AGENT PERSONAS — Who Does the Work
+### 5. SUBAGENTS — Who Does the Work
 
-**Definition**: Pre-configured agent workers with curated skills, compatible blueprints, and defined workflows for specific domains.
+**Definition**: Pre-configured sub-agents with curated skills, compatible blueprints, and defined workflows for specific domains.
 
-**Purpose**: Provide ready-to-use AI workers optimized for specific development workflows.
+**Purpose**: Provide ready-to-use AI sub-agents optimized for specific development workflows (e.g. code review, testing, architecture).
 
 **Format**: YAML (configuration) + Markdown (documentation)
 
-**Location**: `agent-personas/`
+**Location**: `subagents/`
 
 **Key Files**:
-- `persona.yaml` — Agent configuration
-- `PERSONA.md` — Human-readable documentation
+- `subagent.yaml` — Subagent configuration
+- `SUBAGENT.md` — Human-readable documentation
 - `workflows/` — Defined workflow automations
 
 **Examples**:
 
-#### Code Reviewer
+#### Code Reviewer Subagent
 ```yaml
-# agent-personas/code-reviewer/persona.yaml
-persona:
+# subagents/code-reviewer/subagent.yaml
+subagent:
   id: "code-reviewer"
-  name: "Code Review Agent"
-  description: "Specialized agent for comprehensive code reviews"
+  name: "Code Review Subagent"
+  description: "Subagent for comprehensive code reviews"
   
   skills:
     primary:
@@ -306,13 +341,13 @@ persona:
     - "check pull request"
 ```
 
-#### Testing Specialist
+#### Testing Specialist Subagent
 ```yaml
-# agent-personas/testing-agent/persona.yaml
-persona:
-  id: "testing-agent"
-  name: "Testing Specialist"
-  description: "Agent focused on comprehensive test coverage"
+# subagents/testing-specialist/subagent.yaml
+subagent:
+  id: "testing-specialist"
+  name: "Testing Specialist Subagent"
+  description: "Subagent focused on comprehensive test coverage"
   
   skills:
     primary:
@@ -346,13 +381,13 @@ persona:
 - Domain-specific knowledge
 - Can apply recipes automatically
 
-**When to Use**: When you need a specialized AI worker for a specific domain or repetitive workflow.
+**When to Use**: When you need a specialized sub-agent for a specific domain or repetitive workflow.
 
-**Question Answered**: "Which agent should I use for [task]?"
+**Question Answered**: "Which subagent should I use for [task]?"
 
 ---
 
-### 5. SKILLS — How to Do It Well
+### 6. SKILLS — How to Do It Well
 
 **Definition**: Reusable AI instruction packages that teach best practices and capabilities.
 
@@ -360,7 +395,9 @@ persona:
 
 **Format**: Markdown + JSON
 
-**Location**: `skill-packs/`
+**Location**: `.agents/skills/` (in this repo). Skills may also live in `~/.cursor/skills/` or `.cursor/skills/` for Cursor. Legacy structure used `skill-packs/` (archived).
+
+**Current skills in this repo**: **memory-system-setup**, **rules-setup**, **skill-builder**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup**. Use `.agents/skills/skill-builder/` to create or improve skills; `.agents/skills/rules-setup/` for the four rule files; `.agents/skills/memory-system-setup/` for the memory system.
 
 **Key Files**:
 - `SKILL.md` — Main definition with YAML frontmatter
@@ -368,11 +405,10 @@ persona:
 - `README.md` — Quick-start guide (< 80 lines)
 - `_examples/basic-examples.md` — Before/after code examples
 
-**Examples**:
-- `clean-code` — Code quality best practices
-- `error-handling` — Exception handling patterns
-- `web-scraping` — Data extraction techniques
-- `unit-testing` — Test writing methodologies
+**Examples (in this repo)**:
+- `memory-system-setup` — Memory system setup
+- `rules-setup` — Rules template type (four rule files)
+- `skill-builder` — Skill creation and improvement
 
 **SKILL.md Structure**:
 ```yaml
@@ -428,16 +464,32 @@ resp, err := http.Get("/api/data")
 
 ## Asset Relationships
 
+### Rules, Skills, and Subagents
+
+**Rules**, **Skills**, and **Subagents** work together as the agent-execution layer:
+
+| Layer | Purpose | Where it lives | When it applies |
+|-------|---------|----------------|-----------------|
+| **Rules** | Constrain behavior — what agents must or must not do, conventions, guardrails | **AGENTS.md**, **CLAUDE.md**, **CURSOR.md**, **WINDSURF.md** (project root); `.cursor/rules/*.md` | Read at agent/subagent boot; tool loads its rule file (e.g. Cursor → CURSOR.md or .cursor/rules) |
+| **Skills** | Add capability — how to do something well, on demand | `.agents/skills/` (this repo: seven skills); `~/.cursor/skills/`, `.cursor/skills/` | Invoked when trigger keywords match or agent selects the skill |
+| **Subagents** | Who does the work — configured workers with curated skills and workflows | `subagents/` | Selected for a domain task; load their skills and run within project rules |
+
+**Flow**: Rules are loaded first (e.g. from `AGENTS.md`). Subagents reference Skills and run within Rules. Skills do not override Rules; they add know-how. When a subagent runs, it obeys the project’s Rules and uses its configured Skills.
+
+**Practical use**: Put project-wide constraints in **AGENTS.md**; add **CLAUDE.md**, **CURSOR.md**, **WINDSURF.md** as tool-specific entries that point to it. Use **Skills** for reusable capabilities; use **Subagents** for dedicated workers that bundle Skills and run under the same Rules.
+
 ### Hierarchy
 
 ```
 ┌────────────────────────────────────────────────────────────────────┐
-│                    TEMPLATES (All 5 Asset Types)                    │
-│                    The Complete Reusable System                     │
+│  SIX TEMPLATE TYPES: Rules, Blueprints, Tasks, Recipes, Subagents, Skills │
+│  Rule files: AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md           │
 ├────────────────────────────────────────────────────────────────────┤
+│  RULES (loaded by tool) → constrain SUBAGENTS and agents;            │
+│  SUBAGENTS use SKILLS within those rules                            │
 │                                                                    │
 │  ┌─────────────────────────────────────────────────────────────┐  │
-│  │                 AGENT PERSONAS                               │  │
+│  │                 SUBAGENTS                                    │  │
 │  │           (The Workers — Apply Recipes + Tasks)              │  │
 │  └────────────────────┬────────────────────────────────────────┘  │
 │                       │                                            │
@@ -474,10 +526,10 @@ User Request
       │
       ▼
 ┌──────────────────────────────────────────┐
-│         AGENT PERSONA                     │
-│  (Who does the work)                      │
-│  ──▶ Selects appropriate Recipe or        │
-│  ──▶ Loads compatible Blueprints          │
+│         SUBAGENT                         │
+│  (Who does the work)                     │
+│  ──▶ Selects appropriate Recipe or       │
+│  ──▶ Loads compatible Blueprints        │
 └──────────────┬───────────────────────────┘
                │
          ┌─────┴──────┐
@@ -514,30 +566,30 @@ User Request
 
 ## Asset Type Comparison
 
-| Aspect | Blueprints | Tasks | Recipes | Agent Personas | Skills |
-|--------|------------|-------|---------|----------------|--------|
-| **Question** | "What to build?" | "How to implement?" | "What features?" | "Who does it?" | "How to do well?" |
-| **Purpose** | Define products | Implement features | Bundle features | Deploy workers | Teach capabilities |
-| **Format** | YAML + Markdown | Code + Config | YAML + Markdown | YAML + Markdown | Markdown + JSON |
-| **Scope** | Complete product | Single feature | Feature set | Domain worker | Capability |
-| **Contains** | Architecture, constraints | Code, tests, config | Tasks + Skills | Skills + Workflows | Instructions, examples |
-| **Composed Of** | Tasks + Overlays | Skills + Templates | Tasks + Skills | Skills + Recipes/Blueprints | N/A |
-| **Examples** | mins, saas-api | auth-basic, crud | ecommerce, saas-starter | code-reviewer, tester | clean-code, testing |
-| **Location** | `blueprints/` | `tasks/` | `recipes/` | `agent-personas/` | `skill-packs/` |
+| Aspect | Rules | Blueprints | Tasks | Recipes | Subagents | Skills |
+|--------|--------|------------|-------|---------|----------------|--------|
+| **Question** | "What must agents do/avoid?" | "What to build?" | "How to implement?" | "What features?" | "Who does it?" | "How to do well?" |
+| **Purpose** | Constrain behavior | Define products | Implement features | Bundle features | Deploy workers | Teach capabilities |
+| **Format** | Markdown | YAML + Markdown | Code + Config | YAML + Markdown | YAML + Markdown | Markdown + JSON |
+| **Scope** | Project / file | Complete product | Single feature | Feature set | Domain worker | Capability |
+| **Location** | AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md, .cursor/rules/ | `blueprints/` | `tasks/` | `recipes/` | `subagents/` | `.agents/skills/` (this repo: seven skills) |
+
+*All six are template types.*
 
 ---
 
 ## Terminology
 
-### "Templates" (Umbrella Term)
-**"Templates" refers collectively to all five asset types**—the entire system of reusable, composable assets:
+### "Templates" (All Six Types)
+**"Templates"** refers collectively to **all six template types**—the complete reusable system:
+- Rule templates (AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md, .cursor/rules)
 - Blueprint templates
 - Task templates  
 - Recipe templates
-- Agent Persona templates
+- Subagent templates
 - Skill templates
 
-When we say "the template system," we mean the entire ecosystem of all five asset types working together.
+When we say "the template system," we mean all six types working together.
 
 ### Implementation Detail: `.tpl` Files
 Inside **Tasks**, you'll find `.tpl.{ext}` files (e.g., `auth-service.tpl.py`). These are:
@@ -569,11 +621,11 @@ Common scenario → Select Recipe → Auto-configure Tasks + Skills → Fast set
 ```
 **Example**: "Build e-commerce" → Use `ecommerce` recipe → All features pre-configured
 
-### Pattern 4: Persona-Enabled Workflows
+### Pattern 4: Subagent-Enabled Workflows
 ```
-Domain task → Select Agent Persona → Apply Recipe/Task → Automated execution
+Domain task → Select Subagent → Apply Recipe/Task → Automated execution
 ```
-**Example**: "Review this PR" → Invoke `code-reviewer` persona → Automated code review
+**Example**: "Review this PR" → Invoke `code-reviewer` subagent → Automated code review
 
 ### Pattern 5: Skill-First Learning
 ```
@@ -583,20 +635,28 @@ Learn technique → Invoke Skill → Apply knowledge → Improve code
 
 ### Pattern 6: Complete Project Automation
 ```
-Product idea → Architect Persona → Blueprint → Recipe → Tasks + Skills → Working code
+Product idea → Architect Subagent → Blueprint → Recipe → Tasks + Skills → Working code
 ```
-**Example**: "Build analytics dashboard" → Architecture Agent → `web-dashboard` blueprint → `saas-starter` recipe → Tasks + Skills → Full implementation
+**Example**: "Build analytics dashboard" → Architecture Subagent → `web-dashboard` blueprint → `saas-starter` recipe → Tasks + Skills → Full implementation
 
 ---
 
 ## File Organization
 
+**Rules** are at project root (and in `.cursor/rules/` for Cursor). The rest of the framework lives under the repository root, often in a `_templates/` or project directory.
+
 ```
-_templates/
-├── AGENTS.md                          # Behavioral constraints
+<project root>
+├── AGENTS.md                          # 📜 RULES — Canonical (tool-agnostic)
+├── CLAUDE.md                          # 📜 RULES — Claude entry
+├── CURSOR.md                          # 📜 RULES — Cursor entry
+├── WINDSURF.md                        # 📜 RULES — Windsurf entry
 ├── AGENTIC-ASSETS-FRAMEWORK.md        # This document — Asset definitions
 ├── CHANGELOG.md                       # Event log
 ├── README.md                          # Repository overview
+│
+├── .cursor/rules/                     # 📜 RULES — Cursor rule files (optional)
+│   └── *.md
 │
 ├── blueprints/                        # 📋 BLUEPRINTS
 │   ├── mins/
@@ -619,18 +679,16 @@ _templates/
 │   │   └── RECIPE.md
 │   └── saas-starter/
 │
-├── agent-personas/                    # 🤖 AGENT PERSONAS
+├── subagents/                       # 🤖 SUBAGENTS (archived in this repo)
 │   ├── code-reviewer/
-│   │   ├── persona.yaml
-│   │   ├── PERSONA.md
-│   │   └── workflows/
-│   ├── testing-agent/
-│   └── architecture-agent/
+│   ├── testing-specialist/
+│   └── architecture-subagent/
 │
-├── skill-packs/                       # 🧠 SKILLS
-│   ├── 1-programming-core/
-│   ├── 2-code-quality/
-│   └── HOW_TO_CREATE_SKILL_PACKS.md
+├── .agents/
+│   └── skills/                   # 🧠 SKILLS (current: seven skills)
+│   ├── memory-system-setup/
+│   ├── rules-setup/
+│   └── skill-builder/
 │
 ├── scripts/                           # 🔧 AUTOMATION
 │   ├── setup-project.py
@@ -644,6 +702,12 @@ _templates/
 ---
 
 ## Best Practices
+
+### For Rules (AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md, .cursor/rules)
+- Keep one canonical source (AGENTS.md) and thin tool-specific files that point to it.
+- List the four rule files (AGENTS, CLAUDE, Cursor, WINDSURF) in framework docs so contributors know they are equal examples of Rules.
+- Keep constraints explicit and testable; reference the template system where relevant.
+- Document memory system and validation requirements when the project uses them.
 
 ### For Blueprints
 - Define clear constraints
@@ -666,7 +730,7 @@ _templates/
 - Provide configuration examples
 - Test the complete bundle
 
-### For Agent Personas
+### For Subagents
 - Curate complementary skills
 - Define clear workflows
 - Specify compatible blueprints/recipes
@@ -684,16 +748,17 @@ _templates/
 
 ## Summary
 
-The five asset types create a complete ecosystem:
+The six template types create a complete ecosystem:
 
-1. **Blueprints** provide the vision (what to build)
-2. **Tasks** provide the implementation (how to build features)
-3. **Recipes** provide the combinations (what features to include)
-4. **Agent Personas** provide the workers (who does the work)
-5. **Skills** provide the expertise (how to do it well)
+1. **Rules** define how agents must behave (AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md, .cursor/rules).
+2. **Blueprints** provide the vision (what to build).
+3. **Tasks** provide the implementation (how to build features).
+4. **Recipes** provide the combinations (what features to include).
+5. **Subagents** provide the workers (who does the work).
+6. **Skills** provide the expertise (how to do it well).
 
-**"Templates"** refers to all five types together—the complete reusable system for AI-assisted software development.
+**"Templates"** refers to all six types together—the complete reusable system for AI-assisted software development. Subagents and Skills operate within whatever Rules the active tool loads.
 
 ---
 
-*See also: `AGENTS.md` for behavioral constraints, `README.md` for repository overview*
+*See also: AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md (Rules); README.md for repository overview*

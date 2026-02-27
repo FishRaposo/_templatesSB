@@ -1,0 +1,47 @@
+{
+  "agent_support": {
+    "claude": true,
+    "roo": true,
+    "cascade": true,
+    "cursor": true,
+    "generic": true
+  },
+  "triggers": {
+    "keywords": [
+      "subagent",
+      "subagents",
+      "subagent.yaml",
+      "SUBAGENT.md",
+      "who does the work",
+      "configured sub-agent",
+      "create subagent",
+      "add subagent",
+      "workflows",
+      "primary skills",
+      "template type"
+    ],
+    "patterns": [
+      "create.*subagent",
+      "add.*subagent",
+      "subagent.*(yaml|skills|workflows)",
+      "workflows/.*subagent"
+    ],
+    "file_types": [".yaml", ".yml", ".md"]
+  },
+  "requirements": {
+    "tools": [],
+    "permissions": ["file_read", "file_write"],
+    "memory": false
+  },
+  "examples": {
+    "simple": [
+      "Create a code-reviewer subagent",
+      "Add a new subagent with primary skills for testing",
+      "Audit subagents/ and fix workflow references"
+    ],
+    "complex": [
+      "Create a subagent with primary and secondary skills and workflow definitions",
+      "Update subagent.yaml for blueprint compatibility and validate workflows"
+    ]
+  }
+}
