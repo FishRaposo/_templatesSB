@@ -637,3 +637,16 @@ Each new skill includes SKILL.md (Core Approach, Step-by-Step, Validation Checkl
 
 **Refs**: evt-012
 **Tags**: documentation, blueprint, core-tier, system-map, workflow, graph, agents
+
+### evt-014 | 2026-02-28 | agent | create
+
+**Scope**: .agents/skills/flutter-setup, AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md, AGENTIC-ASSETS-FRAMEWORK.md
+**Summary**: Added flutter-setup skill; updated rule files and framework to eleven skills.
+
+**Details**:
+- New skill: `.agents/skills/flutter-setup/` — SKILL.md (project creation, structure, pubspec, flutter_lints, state management, testing, run/build, DevTools), config.json (triggers, examples), README.md, _examples/project-structure-and-commands.md.
+- AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md: "ten/nine skills" → "eleven skills"; added flutter-setup to skill lists and Key References; CLAUDE.md directory tree updated with all eleven skills.
+- AGENTIC-ASSETS-FRAMEWORK.md: "nine" → "eleven" skills; added flutter-setup to current skills list and Location table; directory tree comment updated.
+
+**Refs**: evt-013
+**Tags**: skills, flutter-setup, documentation, rules

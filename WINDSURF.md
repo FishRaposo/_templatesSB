@@ -20,7 +20,7 @@ This repository is built on **seven template types**:
 6. **Skills** — How to do it well (capabilities)
 7. **Protocols** — How processes are defined (e.g. prompt validation, memory; in `docs/protocols/`)
 
-**"Templates"** = all seven types (Rules, Blueprints, Tasks, Recipes, Subagents, Skills, Protocols). **In this repo** only **Rules**, **Protocols** (in `docs/protocols/`), and **nine Skills** are active: **memory-system-setup**, **rules-setup**, **skill-setup**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup**, **prompt-validation-setup**, **protocol-setup** (under `.agents/skills/`). Other template-type implementations are archived.
+**"Templates"** = all seven types (Rules, Blueprints, Tasks, Recipes, Subagents, Skills, Protocols). **In this repo** only **Rules**, **Protocols** (in `docs/protocols/`), and **eleven Skills** are active: **memory-system-setup**, **rules-setup**, **skill-setup**, **agents-md-setup**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup**, **prompt-validation-setup**, **protocol-setup**, **flutter-setup** (under `.agents/skills/`). Other template-type implementations are archived.
 
 ```bash
 # Validate JSON (skills)
@@ -239,7 +239,7 @@ python scripts/setup-project.py --auto --name "MyApp" --description "mobile app"
 | `CLAUDE.md` | 📜 **Rules** — Claude entry |
 | `CURSOR.md` | 📜 **Rules** — Cursor entry |
 | `WINDSURF.md` | 📜 **Rules** — This file (Windsurf entry) |
-| `.agents/skills/` | 🧠 **Skills** — memory-system-setup, rules-setup, skill-setup, blueprints-setup, tasks-setup, recipes-setup, subagents-setup, prompt-validation-setup, protocol-setup |
+| `.agents/skills/` | 🧠 **Skills** — memory-system-setup, rules-setup, skill-setup, agents-md-setup, blueprints-setup, tasks-setup, recipes-setup, subagents-setup, prompt-validation-setup, protocol-setup, flutter-setup |
 | `docs/protocols/` | 📋 **Protocols** — Process definitions (prompt validation, memory) |
 | `.agents/skills/prompt-validation-setup/` | Install/maintain Prompt Validation Protocol |
 | `.agents/skills/protocol-setup/` | Create/audit Protocols template type |
@@ -260,6 +260,6 @@ Full protocol: `docs/protocols/MEMORY-SYSTEM-PROTOCOL.md`.
 
 ## When Stuck
 
-- **Skills**: Use `.agents/skills/rules-setup/`, `.agents/skills/memory-system-setup/`, `.agents/skills/prompt-validation-setup/`, `.agents/skills/protocol-setup/`, or `.agents/skills/skill-setup/`; see `.agents/skills/skill-setup/` for creating skills.
+- **Skills**: Use `.agents/skills/rules-setup/`, `.agents/skills/memory-system-setup/`, `.agents/skills/prompt-validation-setup/`, `.agents/skills/protocol-setup/`, or `.agents/skills/skill-setup/`; see `.agents/skills/skill-setup/` for creating skills; use `.agents/skills/flutter-setup/` for Flutter/Dart projects.
 - **Blueprints, Tasks, Recipes, Subagents**: See `AGENTIC-ASSETS-FRAMEWORK.md`; implementations in this repo are archived.
 - **Validation**: When the project includes `scripts/validate-templates.py`, run it when templates/scripts are in use.

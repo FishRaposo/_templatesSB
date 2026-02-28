@@ -21,7 +21,7 @@ This repository is built on **seven template types**:
 6. **Skills** — How to do it well (capabilities)
 7. **Protocols** — How processes are defined (e.g. prompt validation, memory; in `docs/protocols/`)
 
-**"Templates"** = all seven types (Rules, Blueprints, Tasks, Recipes, Subagents, Skills, Protocols). **Rules** are loaded by Cursor from this file or from `.cursor/rules/`. **In this repo** only **Rules**, **Protocols** (in `docs/protocols/`), and **nine Skills** are active: **memory-system-setup**, **rules-setup**, **skill-setup**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup**, **prompt-validation-setup**, **protocol-setup** (under `.agents/skills/`). Other template-type implementations are archived.
+**"Templates"** = all seven types (Rules, Blueprints, Tasks, Recipes, Subagents, Skills, Protocols). **Rules** are loaded by Cursor from this file or from `.cursor/rules/`. **In this repo** only **Rules**, **Protocols** (in `docs/protocols/`), and **eleven Skills** are active: **memory-system-setup**, **rules-setup**, **skill-setup**, **agents-md-setup**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup**, **prompt-validation-setup**, **protocol-setup**, **flutter-setup** (under `.agents/skills/`). Other template-type implementations are archived.
 
 ```bash
 # Validate JSON (skills)

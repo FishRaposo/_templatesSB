@@ -6,7 +6,7 @@
 
 This document defines the **seven types of templates** that comprise the unified AI development ecosystem: **Rules**, Blueprints, Tasks, Recipes, Subagents, Skills, and **Protocols**. Rules (e.g. AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md) are one template type among seven.
 
-**Implementation status in this repo**: Only **Rules** (the four rule files), **Protocols** (in `docs/protocols/`), and **Skills** are actively implemented. The nine current skills are **memory-system-setup**, **rules-setup**, **skill-setup**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup**, **prompt-validation-setup**, **protocol-setup** (under `.agents/skills/`). Blueprints, Tasks, Recipes, Subagents, and legacy skill-packs (e.g. 1-programming-core, 2-code-quality) are **archived**; the framework describes all seven types for reference and future use.
+**Implementation status in this repo**: Only **Rules** (the four rule files), **Protocols** (in `docs/protocols/`), and **Skills** are actively implemented. The eleven current skills are **memory-system-setup**, **rules-setup**, **skill-setup**, **agents-md-setup**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup**, **prompt-validation-setup**, **protocol-setup**, **flutter-setup** (under `.agents/skills/`). Blueprints, Tasks, Recipes, Subagents, and legacy skill-packs (e.g. 1-programming-core, 2-code-quality) are **archived**; the framework describes all seven types for reference and future use.
 
 ---
 
@@ -398,7 +398,7 @@ subagent:
 
 **Location**: `.agents/skills/` (in this repo). Skills may also live in `~/.cursor/skills/` or `.cursor/skills/` for Cursor. Legacy structure used `skill-packs/` (archived).
 
-**Current skills in this repo**: **memory-system-setup**, **rules-setup**, **skill-setup**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup**, **prompt-validation-setup**, **protocol-setup**. Use `.agents/skills/skill-setup/` to create or improve skills; `.agents/skills/rules-setup/` for the four rule files; `.agents/skills/memory-system-setup/` for the memory system; `.agents/skills/prompt-validation-setup/` to install and maintain the Prompt Validation Protocol; `.agents/skills/protocol-setup/` to create or audit the Protocols template type.
+**Current skills in this repo**: **memory-system-setup**, **rules-setup**, **skill-setup**, **agents-md-setup**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup**, **prompt-validation-setup**, **protocol-setup**, **flutter-setup**. Use `.agents/skills/skill-setup/` to create or improve skills; `.agents/skills/rules-setup/` for the four rule files; `.agents/skills/memory-system-setup/` for the memory system; `.agents/skills/prompt-validation-setup/` to install and maintain the Prompt Validation Protocol; `.agents/skills/protocol-setup/` to create or audit the Protocols template type; `.agents/skills/flutter-setup/` for Flutter/Dart projects.
 
 **Key Files**:
 - `SKILL.md` — Main definition with YAML frontmatter
@@ -498,7 +498,7 @@ resp, err := http.Get("/api/data")
 | Layer | Purpose | Where it lives | When it applies |
 |-------|---------|----------------|-----------------|
 | **Rules** | Constrain behavior — what agents must or must not do, conventions, guardrails | **AGENTS.md**, **CLAUDE.md**, **CURSOR.md**, **WINDSURF.md** (project root); `.cursor/rules/*.md` | Read at agent/subagent boot; tool loads its rule file (e.g. Cursor → CURSOR.md or .cursor/rules) |
-| **Skills** | Add capability — how to do something well, on demand | `.agents/skills/` (this repo: nine skills); `~/.cursor/skills/`, `.cursor/skills/` | Invoked when trigger keywords match or agent selects the skill |
+| **Skills** | Add capability — how to do something well, on demand | `.agents/skills/` (this repo: eleven skills); `~/.cursor/skills/`, `.cursor/skills/` | Invoked when trigger keywords match or agent selects the skill |
 | **Subagents** | Who does the work — configured workers with curated skills and workflows | `subagents/` | Selected for a domain task; load their skills and run within project rules |
 
 **Flow**: Rules are loaded first (e.g. from `AGENTS.md`). Rules reference **Protocols** (e.g. `docs/protocols/PROMPT-VALIDATION-PROTOCOL.md`) for process definitions. Subagents reference Skills and run within Rules. Skills do not override Rules; they add know-how. **Protocol skills** (e.g. prompt-validation-setup) install and maintain Protocol files; they do not replace Rules. When a subagent runs, it obeys the project’s Rules and uses its configured Skills.
@@ -604,7 +604,7 @@ User Request
 | **Purpose** | Constrain behavior | Define products | Implement features | Bundle features | Deploy workers | Teach capabilities | Define processes |
 | **Format** | Markdown | YAML + Markdown | Code + Config | YAML + Markdown | YAML + Markdown | Markdown + JSON | Markdown |
 | **Scope** | Project / file | Complete product | Single feature | Feature set | Domain worker | Capability | Process |
-| **Location** | AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md, .cursor/rules/ | `blueprints/` | `tasks/` | `recipes/` | `subagents/` | `.agents/skills/` (this repo: nine skills) | `docs/protocols/` |
+| **Location** | AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md, .cursor/rules/ | `blueprints/` | `tasks/` | `recipes/` | `subagents/` | `.agents/skills/` (this repo: eleven skills) | `docs/protocols/` |
 
 *All seven are template types.*
 
@@ -723,7 +723,7 @@ Product idea → Architect Subagent → Blueprint → Recipe → Tasks + Skills 
 │   └── architecture-subagent/
 │
 ├── .agents/
-│   └── skills/                   # 🧠 SKILLS (current: nine skills)
+│   └── skills/                   # 🧠 SKILLS (current: eleven skills)
 │   ├── memory-system-setup/
 │   ├── rules-setup/
 │   ├── skill-setup/

@@ -19,6 +19,7 @@
 | skill-setup | component | active | evt-007 | evt-007 | path: .agents/skills/skill-setup/, renamed from skill-builder |
 | documentation-blueprint | component | active | evt-011 | evt-013 | path: _documentation-blueprint/, v3.0; blueprint ↔ current |
 | docs-core | component | active | evt-012 | evt-012 | path: docs/, SYSTEM-MAP, PROMPT-VALIDATION, INDEX; root QUICKSTART, CONTRIBUTING, SECURITY, WORKFLOW |
+| flutter-setup | component | active | evt-014 | evt-014 | path: .agents/skills/flutter-setup/, Flutter/Dart project setup skill |
 
 ## Edges
 
@@ -35,10 +36,11 @@
 | skill-setup | _templatesSB | contains | evt-007 | |
 | documentation-blueprint | _templatesSB | contains | evt-011 | |
 | docs-core | _templatesSB | contains | evt-012 | |
+| flutter-setup | _templatesSB | contains | evt-014 | |
 
 ## Meta
 
-- **Last updated**: 2026-02-27
-- **Event horizon**: evt-013
-- **Nodes**: 9
-- **Edges**: 9
+- **Last updated**: 2026-02-28
+- **Event horizon**: evt-014
+- **Nodes**: 10
+- **Edges**: 10

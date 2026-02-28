@@ -16,7 +16,7 @@ This repository is a **unified AI development ecosystem** built on **seven templ
 
 See `AGENTIC-ASSETS-FRAMEWORK.md` for complete definitions and relationships.
 
-**Current implementation in this repo**: Only **Rules** (this file and the four rule files), **Protocols** (in `docs/protocols/`), and **ten Skills** are actively maintained: **memory-system-setup**, **rules-setup**, **skill-setup**, **agents-md-setup**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup**, **prompt-validation-setup**, **protocol-setup** (under `.agents/skills/`). Blueprints, Tasks, Recipes, Subagents, and legacy skill-packs are archived; the framework defines all seven types for reference and future use.
+**Current implementation in this repo**: Only **Rules** (this file and the four rule files), **Protocols** (in `docs/protocols/`), and **eleven Skills** are actively maintained: **memory-system-setup**, **rules-setup**, **skill-setup**, **agents-md-setup**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup**, **prompt-validation-setup**, **protocol-setup**, **flutter-setup** (under `.agents/skills/`). Blueprints, Tasks, Recipes, Subagents, and legacy skill-packs are archived; the framework defines all seven types for reference and future use.
 
 **Tech stack (this repo)**:
 - **Languages**: Markdown, JSON, Python, YAML, Jinja2
@@ -343,7 +343,7 @@ A task is **not complete** until all three pillars are satisfied:
 
 ## Workflows
 
-The following workflows describe how to add each template type when a project adopts it. **In this repo**, only **Rules**, **Protocols** (in `docs/protocols/`), and the **ten skills** in `.agents/skills/` (memory-system-setup, rules-setup, skill-setup, agents-md-setup, blueprints-setup, tasks-setup, recipes-setup, subagents-setup, prompt-validation-setup, protocol-setup) are active; Blueprints, Tasks, Recipes, and Subagents are defined in the framework but their implementations here are archived.
+The following workflows describe how to add each template type when a project adopts it. **In this repo**, only **Rules**, **Protocols** (in `docs/protocols/`), and the **eleven skills** in `.agents/skills/` (memory-system-setup, rules-setup, skill-setup, agents-md-setup, blueprints-setup, tasks-setup, recipes-setup, subagents-setup, prompt-validation-setup, protocol-setup, flutter-setup) are active; Blueprints, Tasks, Recipes, and Subagents are defined in the framework but their implementations here are archived.
 
 ### Adding a Rule File
 1. Create the rule file at project root (e.g. `MYTOOL.md`). **Use ALL CAPS for the filename** (e.g. AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md).
@@ -471,7 +471,7 @@ Use this order instead of brute force:
 - `docs/protocols/` directory — Process definitions (e.g. PROMPT-VALIDATION-PROTOCOL.md, MEMORY-SYSTEM-PROTOCOL.md). Installed and maintained by **protocol skills** (e.g. `.agents/skills/prompt-validation-setup/`).
 
 ### Skills
-- `.agents/skills/` directory — Current skills: **memory-system-setup**, **rules-setup**, **skill-setup**, **agents-md-setup**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup**, **prompt-validation-setup**, **protocol-setup**
+- `.agents/skills/` directory — Current skills: **memory-system-setup**, **rules-setup**, **skill-setup**, **agents-md-setup**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup**, **prompt-validation-setup**, **protocol-setup**, **flutter-setup**
 - Use `.agents/skills/skill-setup/` when creating or improving skills
 - Use `.agents/skills/rules-setup/` when setting up the four rule files (AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md)
 - Use `.agents/skills/agents-md-setup/` when creating or editing AGENTS.md as the primary rule (canonical source)
@@ -479,6 +479,7 @@ Use this order instead of brute force:
 - Use `.agents/skills/prompt-validation-setup/` when installing or maintaining the Prompt Validation Protocol
 - Use `.agents/skills/protocol-setup/` when creating or auditing the Protocols template type
 - Use `.agents/skills/blueprints-setup/`, `.agents/skills/tasks-setup/`, `.agents/skills/recipes-setup/`, `.agents/skills/subagents-setup/` when creating or auditing those template types
+- Use `.agents/skills/flutter-setup/` when creating, configuring, or maintaining Flutter/Dart projects
 
 ### System & Tools
 - `scripts/setup-project.py` — Project generation (when project includes it)
@@ -492,6 +493,6 @@ Use this order instead of brute force:
 
 - **Rules**: AGENTS.md (this file) is canonical; CLAUDE.md, CURSOR.md, WINDSURF.md are tool entries. See `AGENTIC-ASSETS-FRAMEWORK.md` → "Rules, Skills, and Subagents."
 - **Blueprints, Tasks, Recipes, Subagents**: Defined in `AGENTIC-ASSETS-FRAMEWORK.md`; implementations in this repo are archived.
-- **Skills**: Use `.agents/skills/rules-setup/`, `.agents/skills/agents-md-setup/`, `.agents/skills/memory-system-setup/`, `.agents/skills/prompt-validation-setup/`, `.agents/skills/protocol-setup/`, or `.agents/skills/skill-setup/` as reference; use `.agents/skills/blueprints-setup/`, `.agents/skills/tasks-setup/`, `.agents/skills/recipes-setup/`, `.agents/skills/subagents-setup/` for those template types; see `.agents/skills/skill-setup/` for creating new skills.
+- **Skills**: Use `.agents/skills/rules-setup/`, `.agents/skills/agents-md-setup/`, `.agents/skills/memory-system-setup/`, `.agents/skills/prompt-validation-setup/`, `.agents/skills/protocol-setup/`, or `.agents/skills/skill-setup/` as reference; use `.agents/skills/blueprints-setup/`, `.agents/skills/tasks-setup/`, `.agents/skills/recipes-setup/`, `.agents/skills/subagents-setup/`, `.agents/skills/flutter-setup/` for those template types; see `.agents/skills/skill-setup/` for creating new skills.
 - **Framework**: Read `AGENTIC-ASSETS-FRAMEWORK.md` for complete definitions
 - **Validation**: When the project includes `scripts/validate-templates.py`, run `python scripts/validate-templates.py --full` when templates or scripts exist and are in use.

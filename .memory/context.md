@@ -1,12 +1,12 @@
 # Current Context
 
 <!-- LAYER 3: Derived projection. Ephemeral. Regenerate from CHANGELOG.md + graph.md when stale. -->
-<!-- Last generated: 2026-02-27 | Event horizon: evt-013 -->
+<!-- Last generated: 2026-02-28 | Event horizon: evt-014 -->
 <!-- Staleness: compare Event horizon above with last event in CHANGELOG.md. Mismatch = regenerate. -->
 
 ## Active Mission
 
-Unified AI development ecosystem: Rules (four rule files), **Protocols** (docs/protocols/), **nine Skills** (memory-system-setup, rules-setup, skill-setup, blueprints-setup, tasks-setup, recipes-setup, subagents-setup, prompt-validation-setup, protocol-setup), and memory system. Seven template types. Maintain documentation accuracy and protocol alignment; use memory system for event-sourced trajectory.
+Unified AI development ecosystem: Rules (four rule files), **Protocols** (docs/protocols/), **eleven Skills** (memory-system-setup, rules-setup, skill-setup, agents-md-setup, blueprints-setup, tasks-setup, recipes-setup, subagents-setup, prompt-validation-setup, protocol-setup, flutter-setup), and memory system. Seven template types. Maintain documentation accuracy and protocol alignment; use memory system for event-sourced trajectory.
 
 ## Current Sprint
 
@@ -26,6 +26,7 @@ Unified AI development ecosystem: Rules (four rule files), **Protocols** (docs/p
 
 ## Recent Changes
 
+- 2026-02-28 — Added flutter-setup skill; rule files and framework updated to eleven skills — evt-014
 - 2026-02-27 — Implemented all blueprint→current and current→blueprint improvements; Core tier docs + blueprint v3.0 — evt-013
 - 2026-02-27 — Full comparison and bidirectional improvements doc (blueprint ↔ current system) — evt-012
 - 2026-02-27 — Documentation blueprint vs current setup comparison added (docs/DOCUMENTATION-BLUEPRINT-VS-CURRENT-SETUP.md); gaps and recommendations — evt-011

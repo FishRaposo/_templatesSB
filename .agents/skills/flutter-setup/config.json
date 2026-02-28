@@ -1,0 +1,69 @@
+{
+  "agent_support": {
+    "claude": {},
+    "roo": {},
+    "cascade": {},
+    "cursor": {},
+    "generic": {}
+  },
+  "triggers": {
+    "keywords": [
+      "flutter",
+      "dart",
+      "pubspec",
+      "pubspec.yaml",
+      "analysis_options",
+      "widget",
+      "Bloc",
+      "Riverpod",
+      "Provider",
+      "GetX",
+      "MaterialApp",
+      "CupertinoApp",
+      "run app",
+      "build apk",
+      "build web",
+      "integration_test",
+      "flutter test",
+      "flutter create",
+      "Flutter project",
+      "flutter_lints",
+      "Dart 3",
+      "flutter clean",
+      "hot reload",
+      "pub get",
+      "flutter doctor",
+      "flutter pub"
+    ],
+    "patterns": [
+      "create.*flutter",
+      "flutter.*(project|app)",
+      "pubspec",
+      "analysis_options",
+      "state management.*flutter",
+      "flutter (run|build|test|clean|doctor|pub)",
+      "flutter create",
+      "hot (reload|restart)",
+      "add.*flutter.*dependency"
+    ],
+    "file_types": [".dart", "pubspec.yaml", "analysis_options.yaml"]
+  },
+  "requirements": {
+    "tools": [],
+    "permissions": ["file_read", "file_write"],
+    "memory": false
+  },
+  "examples": {
+    "simple": [
+      "Create a new Flutter project with flutter_lints",
+      "Add Riverpod and set up a feature folder",
+      "Fix analysis_options for this Flutter app",
+      "Add flutter_lints and fix analyzer errors"
+    ],
+    "complex": [
+      "Set up a scalable Flutter app with feature-based structure, analysis_options, and integration tests",
+      "Configure Flutter project for web and mobile with env-based config",
+      "Migrate an existing Flutter app to Dart 3 with null safety"
+    ]
+  }
+}
