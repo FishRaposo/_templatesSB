@@ -25,7 +25,7 @@ Project maintainers are responsible for clarifying the standards of acceptable b
 
 ## Enforcement
 
-Instances of unacceptable behavior may be reported by contacting the project team at **{{CONTACT_EMAIL}}**. All complaints will be reviewed and investigated promptly and fairly.
+Instances of unacceptable behavior may be reported by contacting the project team at **{{SECURITY_EMAIL}}**. All complaints will be reviewed and investigated promptly and fairly.
 
 Project maintainers who do not follow or enforce this Code of Conduct in good faith may face temporary or permanent repercussions as determined by other members of the project's leadership.
 

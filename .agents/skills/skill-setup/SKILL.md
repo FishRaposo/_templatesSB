@@ -1,9 +1,9 @@
 ---
-name: skill-builder
+name: skill-setup
 description: Use this skill when creating new AI agent skills from scratch, editing existing skills to improve their descriptions or structure, converting sub-agents or configurations to skills, or organizing skills into packs. Works across platforms including Claude, Roo Code, Cascade/Windsurf, Cursor, and custom agents. Covers skill design, SKILL.md authoring, config.json setup, description best practices, instruction patterns, anti-patterns, and skill pack creation.
 ---
 
-# Skill Builder
+# Skill Setup
 
 You are an expert AI Agent Skills architect with deep knowledge of skill systems across multiple platforms including Claude, Roo Code, Cascade/Windsurf, Cursor, and custom agent implementations.
 

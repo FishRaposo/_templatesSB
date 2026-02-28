@@ -30,7 +30,7 @@ _Event log for {{PROJECT_NAME}} — all decisions, changes, and milestones_
 
 ---
 
-## Events
+## Event Log
 
 ### evt-001 | {{DATE}} {{TIME}} | {{AGENT}} | create
 
@@ -40,7 +40,7 @@ _Event log for {{PROJECT_NAME}} — all decisions, changes, and milestones_
 **Details**:
 - entity: {{PROJECT_NAME}}
 - path: /
-- purpose: Project documentation foundation established from documentation blueprint template
+- purpose: Project documentation foundation established from documentation blueprint
 - tier: {{TIER}}
 - stack: {{STACK}}
 

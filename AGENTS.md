@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This repository is a **unified AI development ecosystem** built on **six template types**:
+This repository is a **unified AI development ecosystem** built on **seven template types**:
 
 1. **Rules** — How agents must behave (tool- and audience-specific). **AGENTS.md**, **CLAUDE.md**, **CURSOR.md**, and **WINDSURF.md** are examples of Rules—same project, different entry points.
 2. **Blueprints** — What to build (product archetypes)
@@ -10,16 +10,17 @@ This repository is a **unified AI development ecosystem** built on **six templat
 4. **Recipes** — Feature combinations (bundles of Tasks + Skills)
 5. **Subagents** — Who does the work (configured sub-agents)
 6. **Skills** — How to do it well (capabilities, best practices)
+7. **Protocols** — How processes are defined (repeatable procedures in `docs/protocols/` that Rules and agents reference)
 
-**"Templates"** refers collectively to **all six types**—Rules, Blueprints, Tasks, Recipes, Subagents, and Skills. **Rules** (this file, CLAUDE.md, CURSOR.md, WINDSURF.md, .cursor/rules) govern behavior; agents and subagents operate within them and use Skills for capability. See `AGENTIC-ASSETS-FRAMEWORK.md` → "Rules, Skills, and Subagents."
+**"Templates"** refers collectively to **all seven types**—Rules, Blueprints, Tasks, Recipes, Subagents, Skills, and Protocols. **Rules** (this file, CLAUDE.md, CURSOR.md, WINDSURF.md, .cursor/rules) govern behavior; agents and subagents operate within them and use Skills for capability. **Protocols** are installed and maintained by **protocol skills** (e.g. prompt-validation-setup). See `AGENTIC-ASSETS-FRAMEWORK.md` → "Rules, Skills, and Subagents" and "Protocols."
 
 See `AGENTIC-ASSETS-FRAMEWORK.md` for complete definitions and relationships.
 
-**Current implementation in this repo**: Only **Rules** (this file and the four rule files) and **seven Skills** are actively maintained: **memory-system-setup**, **rules-setup**, **skill-builder**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup** (under `.agents/skills/`). Blueprints, Tasks, Recipes, Subagents, and legacy skill-packs are archived; the framework defines all six types for reference and future use.
+**Current implementation in this repo**: Only **Rules** (this file and the four rule files), **Protocols** (in `docs/protocols/`), and **ten Skills** are actively maintained: **memory-system-setup**, **rules-setup**, **skill-setup**, **agents-md-setup**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup**, **prompt-validation-setup**, **protocol-setup** (under `.agents/skills/`). Blueprints, Tasks, Recipes, Subagents, and legacy skill-packs are archived; the framework defines all seven types for reference and future use.
 
 **Tech stack (this repo)**:
 - **Languages**: Markdown, JSON, Python, YAML, Jinja2
-- **Framework**: Six template types (Rules, Blueprints, Tasks, Recipes, Subagents, Skills) — see `AGENTIC-ASSETS-FRAMEWORK.md`
+- **Framework**: Seven template types (Rules, Blueprints, Tasks, Recipes, Subagents, Skills, Protocols) — see `AGENTIC-ASSETS-FRAMEWORK.md`
 - **Validation**: When the project includes template automation, run `scripts/validate-templates.py` (Python 3). This repo does not currently include a top-level `scripts/` with that script; it is part of the framework reference or archived content.
 - **Key tools**: Python for scripts; JSON for skill configs; YAML for blueprints, tasks, recipes, subagents
 
@@ -191,17 +192,21 @@ blueprint:
 ├── CURRENT-REPOSITORY-STATE.md   # Repository inventory (when present)
 │
 ├── .agents/                      # Agent assets (skills)
-│   └── skills/                  # 🧠 SKILLS (seven skills)
+│   └── skills/                  # 🧠 SKILLS (nine skills)
 │       ├── memory-system-setup/
 │       ├── rules-setup/
-│       ├── skill-builder/
+│       ├── skill-setup/
 │       ├── blueprints-setup/
 │       ├── tasks-setup/
 │       ├── recipes-setup/
-│       └── subagents-setup/
+│       ├── subagents-setup/
+│       ├── prompt-validation-setup/
+│       ├── protocol-setup/
+│       └── agents-md-setup/
 │
 ├── .memory/                      # Memory system data (when in use)
 ├── docs/                         # Documentation & protocols (incl. memory-system, protocols)
+│   └── protocols/                # 📋 PROTOCOLS — Process definitions (e.g. PROMPT-VALIDATION-PROTOCOL.md)
 ├── plans/                        # Planning artifacts (when present)
 ├── _documentation-blueprint/     # Documentation blueprint (when present)
 │
@@ -252,9 +257,9 @@ This project uses an event-sourced memory system. See `.memory/` for live state.
 - **Layer 3** (`.memory/context.md`): Derived projection. Regenerate when stale.
 
 ### Agent lifecycle
-BOOT:   Read AGENTS.md → Read context.md → Check staleness → Query graph
-EXECUTE: Work within constraints → Append events to CHANGELOG.md
-SHUTDOWN: Append → Materialize → Regenerate → Commit
+BOOT:   Read AGENTS.md → Read .memory/context.md → Check staleness (Event horizon vs last evt in CHANGELOG) → If stale/missing, regenerate context (and graph) → Optionally run relevant_events.py for recent index
+EXECUTE: Work within constraints → Append events to CHANGELOG.md (Event Log section)
+SHUTDOWN: (1) Append event(s) to CHANGELOG.md (## Event Log) → (2) Materialize .memory/graph.md (event horizon = last evt-NNN) → (3) Regenerate .memory/context.md from L1+L2 → (4) Commit all changes. Never edit graph or context backward to match an older event.
 
 ### Core rules
 1. Append-only — if it is not in the event log, it did not happen
@@ -266,15 +271,18 @@ SHUTDOWN: Append → Materialize → Regenerate → Commit
 
 Follow `docs/protocols/MEMORY-SYSTEM-PROTOCOL.md`:
 
-**Before every task:**
+**Before every task (load memory):**
 1. Read `AGENTS.md` (this file) — behavioral constraints
-2. Check `CHANGELOG.md` — what happened recently
-3. Read `.memory/context.md` — current trajectory
+2. Read `.memory/context.md` — current trajectory (if missing, create from CHANGELOG + graph per protocol)
+3. **Check staleness:** Compare the "Event horizon" line in `.memory/context.md` with the last event ID in `CHANGELOG.md` (under `## Event Log`). If they differ or context is missing, regenerate `.memory/context.md` (and `.memory/graph.md` if in use) from the event log before proceeding
+4. Optionally: when `docs/memory-system/scripts/relevant_events.py` exists, run it for a compact recent-events index to inject at session start
 
 **After every task:**
-1. Append event to `CHANGELOG.md`
-2. Update derived views (graph.md, context.md)
-3. Update this AGENTS.md if conventions changed
+1. Append event to `CHANGELOG.md` (under `## Event Log`, next evt-NNN).
+2. **Materialize** `.memory/graph.md`: update nodes/edges/meta so event horizon equals the new last event ID; never edit graph backward.
+3. **Regenerate** `.memory/context.md` from CHANGELOG + graph (event horizon = last evt).
+4. Commit all changes (CHANGELOG, graph, context, and any other modified files) in one atomic commit.
+5. Update this AGENTS.md if conventions changed.
 
 ---
 
@@ -302,6 +310,7 @@ A task is **not complete** until all three pillars are satisfied:
    - Recipes: Recipe configuration valid, dependencies resolve
    - Subagents: subagent.yaml valid, workflows defined
    - Skills: SKILL.md frontmatter valid, config.json valid
+   - Protocols: Protocol document in `docs/protocols/` valid; Rules reference correct path
 
 2. ✅ **TESTING** — Verification passes
    - Blueprints: Resolution confidence ≥ 1.00
@@ -309,6 +318,7 @@ A task is **not complete** until all three pillars are satisfied:
    - Recipes: All bundled tasks resolve correctly
    - Subagents: Workflows execute correctly
    - Skills: Trigger keywords work, examples are runnable
+   - Protocols: Protocol file present where referenced; protocol skill used for install when applicable
 
 3. ✅ **DOCUMENTING** — Related docs updated
 
@@ -316,12 +326,15 @@ A task is **not complete** until all three pillars are satisfied:
 
    | Change type | Update these |
    |-------------|--------------|
+   | New feature or module | README.md, docs/SYSTEM-MAP.md or CURRENT-REPOSITORY-STATE.md, CHANGELOG.md |
    | New rule file | AGENTIC-ASSETS-FRAMEWORK.md → Key Files; Key References in AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md |
-   | New skill (in `.agents/skills/`) | AGENTS.md (Key References / Skills) or skills index; README or cross-links as needed |
+   | New protocol | `docs/protocols/` protocol file; AGENTS.md or Rules reference if needed; protocol skill or docs/INDEX.md |
+   | New skill (in `.agents/skills/`) | AGENTS.md (Key References / Skills) or skills index; README or cross-links as needed; docs/INDEX.md |
    | New blueprint | Blueprint index, integration guides (when adopted) |
    | New task | `tasks/task-index.yaml`, relevant docs (when adopted) |
    | New recipe | Recipe registry, cross-reference tasks (when adopted) |
    | New subagent | Subagent registry, examples (when adopted) |
+   | Repository structure change | CURRENT-REPOSITORY-STATE.md, docs/INDEX.md, docs/SYSTEM-MAP.md if applicable, CHANGELOG.md |
    | Conventions or structure change | AGENTS.md and other rule files if affected |
 
    **How to update:** After completing the primary task, update the relevant section(s) in the same commit; keep updates minimal and factual. If you add or change a rule file, update all four rule files' Key References.
@@ -330,13 +343,19 @@ A task is **not complete** until all three pillars are satisfied:
 
 ## Workflows
 
-The following workflows describe how to add each template type when a project adopts it. **In this repo**, only **Rules** and the **seven skills** in `.agents/skills/` (memory-system-setup, rules-setup, skill-builder, blueprints-setup, tasks-setup, recipes-setup, subagents-setup) are active; Blueprints, Tasks, Recipes, and Subagents are defined in the framework but their implementations here are archived.
+The following workflows describe how to add each template type when a project adopts it. **In this repo**, only **Rules**, **Protocols** (in `docs/protocols/`), and the **ten skills** in `.agents/skills/` (memory-system-setup, rules-setup, skill-setup, agents-md-setup, blueprints-setup, tasks-setup, recipes-setup, subagents-setup, prompt-validation-setup, protocol-setup) are active; Blueprints, Tasks, Recipes, and Subagents are defined in the framework but their implementations here are archived.
 
 ### Adding a Rule File
 1. Create the rule file at project root (e.g. `MYTOOL.md`). **Use ALL CAPS for the filename** (e.g. AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md).
 2. Add it to `AGENTIC-ASSETS-FRAMEWORK.md` → Rules section "Key Files (examples of Rules)".
 3. Add a row to the Key Files / Key References table in AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md (and the new file's own references).
 4. Keep content aligned with AGENTS.md (canonical); tool-specific files can be thin and point to it.
+
+### Adding a Protocol
+1. Create or adopt a protocol document (e.g. `PROMPT-VALIDATION-PROTOCOL.md`). Use a **protocol skill** (e.g. `.agents/skills/prompt-validation-setup/`) to install it into a project, or use **protocol-setup** to create/audit the Protocols template type.
+2. Ensure `docs/protocols/` exists; place the protocol file there (or at project root if minimal).
+3. Reference the protocol from AGENTS.md (e.g. "Prompt Validation — Before Every Task" section pointing to `docs/protocols/PROMPT-VALIDATION-PROTOCOL.md`).
+4. Update framework and rule files if adding a new protocol type or protocol skill.
 
 ### Adding a Blueprint
 1. Create `blueprints/<name>/` directory
@@ -372,7 +391,7 @@ The following workflows describe how to add each template type when a project ad
 6. Update documentation
 
 ### Creating a Skill Pack
-(When the project adopts skill packs: create PACK.md, QUICK_REFERENCE.md, per-skill SKILL.md/config.json/README.md/_examples, run verification tasks, create reference-files/INDEX.md. See `.agents/skills/skill-builder/` for creating individual skills.)
+(When the project adopts skill packs: create PACK.md, QUICK_REFERENCE.md, per-skill SKILL.md/config.json/README.md/_examples, run verification tasks, create reference-files/INDEX.md. See `.agents/skills/skill-setup/` for creating individual skills.)
 
 ### Autonomous Project Generation
 ```bash
@@ -428,7 +447,7 @@ Use this order instead of brute force:
 ## Key References
 
 ### Template Types Framework
-- `AGENTIC-ASSETS-FRAMEWORK.md` — Complete definitions of the six template types (Rules, Blueprints, Tasks, Recipes, Subagents, Skills)
+- `AGENTIC-ASSETS-FRAMEWORK.md` — Complete definitions of the seven template types (Rules, Blueprints, Tasks, Recipes, Subagents, Skills, Protocols)
 
 ### Rule Files (same project, different tools)
 - `AGENTS.md` — This file (canonical)
@@ -448,17 +467,23 @@ Use this order instead of brute force:
 ### Subagents
 - `subagents/` directory — Configured sub-agents (archived; framework defines the type)
 
+### Protocols
+- `docs/protocols/` directory — Process definitions (e.g. PROMPT-VALIDATION-PROTOCOL.md, MEMORY-SYSTEM-PROTOCOL.md). Installed and maintained by **protocol skills** (e.g. `.agents/skills/prompt-validation-setup/`).
+
 ### Skills
-- `.agents/skills/` directory — Current skills: **memory-system-setup**, **rules-setup**, **skill-builder**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup**
-- Use `.agents/skills/skill-builder/` when creating or improving skills
+- `.agents/skills/` directory — Current skills: **memory-system-setup**, **rules-setup**, **skill-setup**, **agents-md-setup**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup**, **prompt-validation-setup**, **protocol-setup**
+- Use `.agents/skills/skill-setup/` when creating or improving skills
 - Use `.agents/skills/rules-setup/` when setting up the four rule files (AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md)
+- Use `.agents/skills/agents-md-setup/` when creating or editing AGENTS.md as the primary rule (canonical source)
 - Use `.agents/skills/memory-system-setup/` when setting up the memory system
+- Use `.agents/skills/prompt-validation-setup/` when installing or maintaining the Prompt Validation Protocol
+- Use `.agents/skills/protocol-setup/` when creating or auditing the Protocols template type
 - Use `.agents/skills/blueprints-setup/`, `.agents/skills/tasks-setup/`, `.agents/skills/recipes-setup/`, `.agents/skills/subagents-setup/` when creating or auditing those template types
 
 ### System & Tools
 - `scripts/setup-project.py` — Project generation (when project includes it)
 - `scripts/validate-templates.py` — Validation (when project includes it)
-- `docs/protocols/PROMPT-VALIDATION-PROTOCOL.md` — Validate before execution
+- `docs/protocols/PROMPT-VALIDATION-PROTOCOL.md` — Validate before execution (install via prompt-validation-setup skill)
 - `docs/protocols/MEMORY-SYSTEM-PROTOCOL.md` — Event-sourced memory
 
 ---
@@ -467,6 +492,6 @@ Use this order instead of brute force:
 
 - **Rules**: AGENTS.md (this file) is canonical; CLAUDE.md, CURSOR.md, WINDSURF.md are tool entries. See `AGENTIC-ASSETS-FRAMEWORK.md` → "Rules, Skills, and Subagents."
 - **Blueprints, Tasks, Recipes, Subagents**: Defined in `AGENTIC-ASSETS-FRAMEWORK.md`; implementations in this repo are archived.
-- **Skills**: Use `.agents/skills/rules-setup/`, `.agents/skills/memory-system-setup/`, or `.agents/skills/skill-builder/` as reference; use `.agents/skills/blueprints-setup/`, `.agents/skills/tasks-setup/`, `.agents/skills/recipes-setup/`, `.agents/skills/subagents-setup/` for those template types; see `.agents/skills/skill-builder/` for creating new skills.
+- **Skills**: Use `.agents/skills/rules-setup/`, `.agents/skills/agents-md-setup/`, `.agents/skills/memory-system-setup/`, `.agents/skills/prompt-validation-setup/`, `.agents/skills/protocol-setup/`, or `.agents/skills/skill-setup/` as reference; use `.agents/skills/blueprints-setup/`, `.agents/skills/tasks-setup/`, `.agents/skills/recipes-setup/`, `.agents/skills/subagents-setup/` for those template types; see `.agents/skills/skill-setup/` for creating new skills.
 - **Framework**: Read `AGENTIC-ASSETS-FRAMEWORK.md` for complete definitions
 - **Validation**: When the project includes `scripts/validate-templates.py`, run `python scripts/validate-templates.py --full` when templates or scripts exist and are in use.

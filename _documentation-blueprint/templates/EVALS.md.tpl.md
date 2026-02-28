@@ -8,7 +8,7 @@ _Quality benchmarks and acceptance criteria for agents and human reviewers_
 
 | Criterion | Minimum | Target | How to Measure |
 |-----------|---------|--------|----------------|
-| Test coverage | {{MIN_COVERAGE}}% | {{TARGET_COVERAGE}}% | `{{COVERAGE_COMMAND}}` |
+| Test coverage | 70% | 90% | `{{TEST_COMMAND}} --cov` |
 | Build success | 100% | 100% | `{{BUILD_COMMAND}}` |
 | Lint errors | 0 | 0 | `{{LINT_COMMAND}}` |
 | Documentation parity | All changes covered | All changes covered | Three Pillars checklist |
@@ -64,8 +64,8 @@ Tasks used to verify the system is working correctly:
 
 | Benchmark | Description | Expected Result | Last Run |
 |-----------|-------------|-----------------|----------|
-| {{BENCHMARK_1}} | {{BENCHMARK_1_DESCRIPTION}} | {{BENCHMARK_1_EXPECTED}} | {{DATE}} |
-| {{BENCHMARK_2}} | {{BENCHMARK_2_DESCRIPTION}} | {{BENCHMARK_2_EXPECTED}} | {{DATE}} |
+| Documentation scaffold | Generate docs with scaffold.py | All files created, no placeholders | {{DATE}} |
+| Validation pass | Run validate.py on scaffolded output | 0 errors | {{DATE}} |
 
 ---
 
@@ -75,9 +75,9 @@ Key metrics tracked over time. Update after each release.
 
 | Metric | Baseline | Current | Delta |
 |--------|----------|---------|-------|
-| Test count | {{BASELINE_TEST_COUNT}} | — | — |
-| Coverage % | {{BASELINE_COVERAGE}} | — | — |
-| Build time | {{BASELINE_BUILD_TIME}} | — | — |
+| Test count | — | — | — |
+| Coverage % | — | — | — |
+| Build time | — | — | — |
 
 ---
 

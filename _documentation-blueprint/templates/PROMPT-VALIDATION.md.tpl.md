@@ -11,7 +11,7 @@ Run before starting any task. If any check fails, stop and ask for clarification
 | # | Check | Pass Condition |
 |---|-------|---------------|
 | 1 | **Purpose in first line** | Can you state the task in one sentence? |
-| 2 | **All variables defined** | No undefined `{{PLACEHOLDER}}` or `[VARIABLE]` in the prompt? |
+| 2 | **All variables defined** | No undefined `{{` + `PLACEHOLDER` + `}}` or `[VARIABLE]` in the prompt? |
 | 3 | **No dangerous patterns** | No script injection, command injection, path traversal, or secrets? |
 | 4 | **Output format specified** | Does the prompt define what the output should look like? |
 
@@ -26,7 +26,7 @@ Use for any non-trivial task. Score each dimension 0–100. Weighted total must 
 | **Clarity** — unambiguous intent, clear subject | 25% | | |
 | **Completeness** — all required context provided | 25% | | |
 | **Structure** — logical flow, well-organized | 15% | | |
-| **Security** — no dangerous patterns (see §3) | 20% | | |
+| **Security** — no dangerous patterns | 20% | | |
 | **Effectiveness** — likely to produce correct output | 15% | | |
 | **Total** | 100% | — | /100 |
 
@@ -71,7 +71,7 @@ Reject any prompt containing these patterns:
 
 - [ ] Specific code identified (file + function/class)
 - [ ] Behavior to preserve stated explicitly
-- [ ] Improvement goal clearly described (performance / readability / structure)
+- [ ] Improvement goal clearly described
 - [ ] Tests exist to verify behavior is preserved
 
 ### Analysis
@@ -83,31 +83,4 @@ Reject any prompt containing these patterns:
 
 ---
 
-## Validation Report Template
-
-```
-Prompt: [one-line description of what is being validated]
-Date:   YYYY-MM-DD
-Agent:  [agent name]
-
-Quick Validation:
-  [PASS/FAIL] Purpose in first line
-  [PASS/FAIL] All variables defined
-  [PASS/FAIL] No dangerous patterns
-  [PASS/FAIL] Output format specified
-
-Standard Scoring (if required):
-  Clarity:        XX/100 × 0.25 = XX
-  Completeness:   XX/100 × 0.25 = XX
-  Structure:      XX/100 × 0.15 = XX
-  Security:       XX/100 × 0.20 = XX
-  Effectiveness:  XX/100 × 0.15 = XX
-  Total:          XX/100 — Grade: [A/B/C/D/F]
-
-Decision: [PROCEED / REVISE / REJECT]
-Notes:    [optional clarifying notes]
-```
-
----
-
-_If the `prompt-validation` skill is available in this repo, use `prompt-validation/SKILL.md` for the full 7-type protocol and adversarial testing procedures._
+_If the `prompt-validation` skill is available in this repo, use it for the full 7-type protocol._

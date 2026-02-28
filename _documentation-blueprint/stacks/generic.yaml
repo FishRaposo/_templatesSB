@@ -1,0 +1,20 @@
+name: Generic
+primary_language: "TODO: specify"
+
+commands:
+  install: "TODO: specify install command"
+  run: "TODO: specify run command"
+  test: "TODO: specify test command"
+  lint: "TODO: specify lint command"
+  build: "TODO: specify build command"
+
+local_url: "http://localhost:3000"
+
+prerequisites: []
+
+tech_stack_default: []
+
+style_rules:
+  - "Follow the project's established conventions"
+  - "Write clear, self-documenting code"
+  - "Document public APIs"

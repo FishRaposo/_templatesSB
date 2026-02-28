@@ -1,0 +1,53 @@
+{
+  "agent_support": {
+    "claude": true,
+    "roo": true,
+    "cascade": true,
+    "cursor": true,
+    "generic": true
+  },
+  "triggers": {
+    "keywords": [
+      "protocol",
+      "protocols",
+      "docs/protocols",
+      "create protocol",
+      "add protocol",
+      "edit protocol",
+      "modify protocol",
+      "protocol setup",
+      "protocol template",
+      "process document",
+      "PROTOCOL.md",
+      "protocol type",
+      "protocol skill"
+    ],
+    "patterns": [
+      "create.*protocol",
+      "add.*protocol",
+      "edit.*protocol",
+      "modify.*protocol",
+      "protocol.*(setup|template|type)",
+      "docs/protocols",
+      "protocol.*skill"
+    ],
+    "file_types": [".md"]
+  },
+  "requirements": {
+    "tools": [],
+    "permissions": ["file_read", "file_write"],
+    "memory": false
+  },
+  "examples": {
+    "simple": [
+      "Create a new protocol for security review",
+      "Add docs/protocols/ and a protocol document",
+      "Audit protocols against the framework"
+    ],
+    "complex": [
+      "Add a protocol and a protocol skill to install it in new projects",
+      "Create a protocol document and ensure AGENTS.md references it",
+      "Set up the Protocols template type for this repo"
+    ]
+  }
+}

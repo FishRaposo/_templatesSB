@@ -6,7 +6,7 @@ Thank you for contributing. This document covers how to report bugs, propose fea
 
 ## Reporting Bugs
 
-1. **Search existing issues** at {{ISSUES_URL}} before opening a new one
+1. **Search existing issues** at {{REPO_URL}}/issues before opening a new one
 2. Use the **bug report template** at `.github/ISSUE_TEMPLATE/bug_report.md`
 3. Include: environment details, reproduction steps, expected vs. actual behavior, and logs
 
@@ -24,7 +24,6 @@ Thank you for contributing. This document covers how to report bugs, propose fea
 
 - {{PREREQ_1}} — {{PREREQ_1_VERSION}}
 - {{PREREQ_2}} — {{PREREQ_2_VERSION}}
-- {{PREREQ_3}} — {{PREREQ_3_VERSION}}
 
 ### Setup
 
@@ -48,7 +47,6 @@ cd {{PROJECT_NAME}}
 
 ```
 main          ← stable, protected
-dev           ← integration branch
 feature/name  ← feature work
 fix/name      ← bug fixes
 docs/name     ← documentation-only changes
@@ -71,18 +69,17 @@ Examples:
 
 ## Pull Request Process
 
-1. Create a branch from `dev` (not `main`)
+1. Create a branch from `main`
 2. Make your changes — satisfy all Three Pillars before marking ready
 3. Run the test suite: `{{TEST_COMMAND}}`
 4. Open a PR using the PR template
 5. At least one maintainer approval required before merge
-6. Squash and merge — keep `main` history linear
 
 ### Three Pillars Requirement for Contributors
 
 Before marking your PR ready for review:
 
-- **AUTOMATING** — run structure validator, placeholder scanner (`grep -r '{{' .`), link checker, and linter — all exit 0
+- **AUTOMATING** — run placeholder scanner (`grep -r '{{' .`), link checker, and linter — all exit 0
 - **TESTING** — all tests pass, new code has coverage, examples are runnable
 - **DOCUMENTING** — README/docs updated if behavior changed, CHANGELOG has an entry
 
@@ -102,4 +99,4 @@ Run the linter before committing: `{{LINT_COMMAND}}`
 
 ## Questions?
 
-Open a discussion at {{DISCUSSIONS_URL}} or reach out via {{CONTACT_METHOD}}.
+Open a discussion at {{REPO_URL}}/discussions or check existing documentation.

@@ -44,7 +44,7 @@
     "tools": [],
     "permissions": ["file_read", "file_write"],
     "memory": false,
-    "notes": "Language-agnostic. Creates/updates the Rules template type: AGENTS.md (canonical) + CLAUDE.md, CURSOR.md, WINDSURF.md (ALL CAPS). Fits six-template-types framework."
+    "notes": "Language-agnostic. Creates/updates the Rules template type: AGENTS.md (canonical) + CLAUDE.md, CURSOR.md, WINDSURF.md (ALL CAPS). Fits seven-template-types framework."
   },
   "examples": {
     "simple": [
@@ -56,7 +56,7 @@
       "Analyze this monorepo and generate AGENTS.md plus CLAUDE.md, CURSOR.md, WINDSURF.md with thin pointers",
       "Audit my rule files against the six core areas and fill in the gaps",
       "Add the Three Pillars (with prefer scripts) and four rule files in ALL CAPS",
-      "Rework our agent rules to match the six-template-types framework"
+      "Rework our agent rules to match the seven-template-types framework"
     ]
   }
 }

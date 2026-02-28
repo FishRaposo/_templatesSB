@@ -1,0 +1,25 @@
+name: Go
+primary_language: Go
+
+commands:
+  install: "go mod download"
+  run: "go run ./cmd/server"
+  test: "go test ./..."
+  lint: "golangci-lint run"
+  build: "go build ./..."
+
+local_url: "http://localhost:8080"
+
+prerequisites:
+  - name: Go
+    version: "1.21+"
+    check: "go version"
+    install_url: "https://go.dev/doc/install"
+
+tech_stack_default:
+  - "Go 1.21"
+
+style_rules:
+  - "Follow Effective Go guidelines"
+  - "Use gofmt for formatting"
+  - "Write comments for exported functions and types"

@@ -97,7 +97,7 @@ The archive does not contain a `subagents/` directory with subagent.yaml; use th
 | How to create packs | `_archive_2026-02-26_18-50-32/skill-packs/HOW_TO_CREATE_SKILL_PACKS.md` | Pack creation guide (legacy format) |
 | Universal skill standards | `_complete_archive/_supporting-files/UNIVERSAL_SKILL_STANDARDS.md` (if present) | Progressive disclosure, config schema |
 
-Use **skill-builder** skill for creating skills; reference archive for pack layout and 1-programming-core / 2-code-quality as gold standards.
+Use **skill-setup** skill for creating skills; reference archive for pack layout and 1-programming-core / 2-code-quality as gold standards.
 
 ---
 
@@ -123,7 +123,8 @@ Use **memory-system-setup** skill; archive holds the full reference doc.
 | Tasks | tasks-setup | task-index.yaml, ADD-NEW-TASK-TEMPLATE.md, tasks/auth-basic/ |
 | Recipes | recipes-setup | AGENTIC-ASSETS-FRAMEWORK.md (Recipes section) |
 | Subagents | subagents-setup | AGENTIC-ASSETS-FRAMEWORK.md (Subagents), workflows/ |
-| Skills | skill-builder | skill-packs/1-programming-core/, 2-code-quality/ (in archive). In this repo: `.agents/skills/` |
+| Skills | skill-setup | skill-packs/1-programming-core/, 2-code-quality/ (in archive). In this repo: `.agents/skills/` |
+| Protocols | protocol-setup, prompt-validation-setup | docs/protocols/ (current). In this repo: `docs/protocols/` |
 | Memory | memory-system-setup | PROJECT-MEMORY-SYSTEM-REFERENCE.md |
 
 ---

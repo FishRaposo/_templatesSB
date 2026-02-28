@@ -1,0 +1,29 @@
+name: Python
+primary_language: Python
+
+commands:
+  install: "pip install -r requirements.txt"
+  run: "python main.py"
+  test: "pytest"
+  lint: "ruff check ."
+  build: "python -m build"
+
+local_url: "http://localhost:8000"
+
+prerequisites:
+  - name: Python
+    version: "3.11+"
+    check: "python --version"
+    install_url: "https://python.org/downloads/"
+  - name: pip
+    version: "23+"
+    check: "pip --version"
+    install_url: "https://pip.pypa.io/en/stable/installation/"
+
+tech_stack_default:
+  - "Python 3.11"
+
+style_rules:
+  - "Follow PEP 8 conventions"
+  - "Use type hints for all public functions"
+  - "Write docstrings for modules, classes, and public functions"

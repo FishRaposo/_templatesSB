@@ -4,15 +4,15 @@
 **Last Updated**: 2025  
 **Status**: Active
 
-This document defines the **six types of templates** that comprise the unified AI development ecosystem: **Rules**, Blueprints, Tasks, Recipes, Subagents, and Skills. Rules (e.g. AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md) are one template type among six.
+This document defines the **seven types of templates** that comprise the unified AI development ecosystem: **Rules**, Blueprints, Tasks, Recipes, Subagents, Skills, and **Protocols**. Rules (e.g. AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md) are one template type among seven.
 
-**Implementation status in this repo**: Only **Rules** (the four rule files) and **Skills** are actively implemented. The seven current skills are **memory-system-setup**, **rules-setup**, **skill-builder**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup** (under `.agents/skills/`). Blueprints, Tasks, Recipes, Subagents, and legacy skill-packs (e.g. 1-programming-core, 2-code-quality) are **archived**; the framework describes all six types for reference and future use.
+**Implementation status in this repo**: Only **Rules** (the four rule files), **Protocols** (in `docs/protocols/`), and **Skills** are actively implemented. The nine current skills are **memory-system-setup**, **rules-setup**, **skill-setup**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup**, **prompt-validation-setup**, **protocol-setup** (under `.agents/skills/`). Blueprints, Tasks, Recipes, Subagents, and legacy skill-packs (e.g. 1-programming-core, 2-code-quality) are **archived**; the framework describes all seven types for reference and future use.
 
 ---
 
 ## Overview
 
-The repository is organized around **six complementary template types** that work together to enable AI-assisted software development:
+The repository is organized around **seven complementary template types** that work together to enable AI-assisted software development:
 
 1. **Rules** — How agents must behave (tool- and audience-specific constraints)
 2. **Blueprints** — What to build (product archetypes)
@@ -20,14 +20,15 @@ The repository is organized around **six complementary template types** that wor
 4. **Recipes** — Feature combinations (bundles of Tasks + Skills)
 5. **Subagents** — Who does the work (configured sub-agents)
 6. **Skills** — How to do it well (capabilities, best practices)
+7. **Protocols** — How processes are defined (repeatable procedures agents and rules reference)
 
-**Rules** are one template type: Markdown files at project root (or in `.cursor/rules/`) that each tool or audience reads at agent boot. **AGENTS.md**, **CLAUDE.md**, **CURSOR.md**, and **WINDSURF.md** are examples of Rules—same project, different entry points. Skills and Subagents operate within whatever Rules the active tool loads. See [Rules, Skills, and Subagents](#rules-skills-and-subagents) below.
+**Rules** are one template type: Markdown files at project root (or in `.cursor/rules/`) that each tool or audience reads at agent boot. **AGENTS.md**, **CLAUDE.md**, **CURSOR.md**, and **WINDSURF.md** are examples of Rules—same project, different entry points. Skills and Subagents operate within whatever Rules the active tool loads. **Protocols** are standalone process documents (e.g. in `docs/protocols/`) that Rules and agents reference; they are installed and maintained by **protocol skills** (e.g. prompt-validation-setup, memory-system-setup). See [Rules, Skills, and Subagents](#rules-skills-and-subagents) below.
 
-**"Templates"** refers collectively to **all six types**—Rules, Blueprints, Tasks, Recipes, Subagents, and Skills—the complete reusable system.
+**"Templates"** refers collectively to **all seven types**—Rules, Blueprints, Tasks, Recipes, Subagents, Skills, and Protocols—the complete reusable system.
 
 ---
 
-## The Six Template Types
+## The Seven Template Types
 
 ### 1. RULES — How Agents Must Behave
 
@@ -397,7 +398,7 @@ subagent:
 
 **Location**: `.agents/skills/` (in this repo). Skills may also live in `~/.cursor/skills/` or `.cursor/skills/` for Cursor. Legacy structure used `skill-packs/` (archived).
 
-**Current skills in this repo**: **memory-system-setup**, **rules-setup**, **skill-builder**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup**. Use `.agents/skills/skill-builder/` to create or improve skills; `.agents/skills/rules-setup/` for the four rule files; `.agents/skills/memory-system-setup/` for the memory system.
+**Current skills in this repo**: **memory-system-setup**, **rules-setup**, **skill-setup**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup**, **prompt-validation-setup**, **protocol-setup**. Use `.agents/skills/skill-setup/` to create or improve skills; `.agents/skills/rules-setup/` for the four rule files; `.agents/skills/memory-system-setup/` for the memory system; `.agents/skills/prompt-validation-setup/` to install and maintain the Prompt Validation Protocol; `.agents/skills/protocol-setup/` to create or audit the Protocols template type.
 
 **Key Files**:
 - `SKILL.md` — Main definition with YAML frontmatter
@@ -408,7 +409,7 @@ subagent:
 **Examples (in this repo)**:
 - `memory-system-setup` — Memory system setup
 - `rules-setup` — Rules template type (four rule files)
-- `skill-builder` — Skill creation and improvement
+- `skill-setup` — Skill creation and improvement
 
 **SKILL.md Structure**:
 ```yaml
@@ -462,6 +463,32 @@ resp, err := http.Get("/api/data")
 
 ---
 
+### 7. PROTOCOLS — How Processes Are Defined
+
+**Definition**: Standalone process documents that define repeatable procedures—validation, memory, safety, or other cross-cutting behaviors—that agents and Rules reference before or during execution.
+
+**Purpose**: Provide a single source of truth for how a process works (e.g. prompt validation, memory lifecycle). Rules (e.g. AGENTS.md) reference protocols by path; protocol **skills** install and maintain the protocol files in a project.
+
+**Format**: Markdown (optionally with YAML frontmatter for metadata)
+
+**Location**: `docs/protocols/` (or project root for minimal setups). **Naming**: `PROTOCOL-NAME-PROTOCOL.md` or `PROTOCOL-NAME.md` (e.g. `PROMPT-VALIDATION-PROTOCOL.md`, `MEMORY-SYSTEM-PROTOCOL.md`).
+
+**Key Files (examples of Protocols)**:
+- **PROMPT-VALIDATION-PROTOCOL.md** — Full validation process (4 checks, security patterns, scoring). Installed by the **prompt-validation-setup** skill. Referenced by AGENTS.md "Prompt Validation — Before Every Task."
+- **MEMORY-SYSTEM-PROTOCOL.md** — Event-sourced memory lifecycle (layers, boot, append, regenerate). Installed or referenced by the **memory-system-setup** skill. Referenced by AGENTS.md "Memory System Protocol."
+
+**Characteristics**:
+- One document per process; agents and Rules reference by path.
+- Installed and updated by **protocol skills** (e.g. `.agents/skills/prompt-validation-setup/`, `.agents/skills/memory-system-setup/`).
+- Rules do not duplicate protocol content; they link to it and summarize the minimal gate (e.g. 4 checks for prompt validation).
+- Protocols can live at project root or under `docs/protocols/`; the framework recommends `docs/protocols/` for consistency.
+
+**When to Use**: When defining a repeatable process that agents must follow and that deserves a single, versionable document. Use a **protocol skill** to install the protocol into a new project.
+
+**Question Answered**: "How is [process] defined and where do I find it?"
+
+---
+
 ## Asset Relationships
 
 ### Rules, Skills, and Subagents
@@ -471,21 +498,21 @@ resp, err := http.Get("/api/data")
 | Layer | Purpose | Where it lives | When it applies |
 |-------|---------|----------------|-----------------|
 | **Rules** | Constrain behavior — what agents must or must not do, conventions, guardrails | **AGENTS.md**, **CLAUDE.md**, **CURSOR.md**, **WINDSURF.md** (project root); `.cursor/rules/*.md` | Read at agent/subagent boot; tool loads its rule file (e.g. Cursor → CURSOR.md or .cursor/rules) |
-| **Skills** | Add capability — how to do something well, on demand | `.agents/skills/` (this repo: seven skills); `~/.cursor/skills/`, `.cursor/skills/` | Invoked when trigger keywords match or agent selects the skill |
+| **Skills** | Add capability — how to do something well, on demand | `.agents/skills/` (this repo: nine skills); `~/.cursor/skills/`, `.cursor/skills/` | Invoked when trigger keywords match or agent selects the skill |
 | **Subagents** | Who does the work — configured workers with curated skills and workflows | `subagents/` | Selected for a domain task; load their skills and run within project rules |
 
-**Flow**: Rules are loaded first (e.g. from `AGENTS.md`). Subagents reference Skills and run within Rules. Skills do not override Rules; they add know-how. When a subagent runs, it obeys the project’s Rules and uses its configured Skills.
+**Flow**: Rules are loaded first (e.g. from `AGENTS.md`). Rules reference **Protocols** (e.g. `docs/protocols/PROMPT-VALIDATION-PROTOCOL.md`) for process definitions. Subagents reference Skills and run within Rules. Skills do not override Rules; they add know-how. **Protocol skills** (e.g. prompt-validation-setup) install and maintain Protocol files; they do not replace Rules. When a subagent runs, it obeys the project’s Rules and uses its configured Skills.
 
-**Practical use**: Put project-wide constraints in **AGENTS.md**; add **CLAUDE.md**, **CURSOR.md**, **WINDSURF.md** as tool-specific entries that point to it. Use **Skills** for reusable capabilities; use **Subagents** for dedicated workers that bundle Skills and run under the same Rules.
+**Practical use**: Put project-wide constraints in **AGENTS.md**; add **CLAUDE.md**, **CURSOR.md**, **WINDSURF.md** as tool-specific entries that point to it. Use **Protocols** in `docs/protocols/` for defined processes (prompt validation, memory); use **protocol skills** to install them. Use **Skills** for reusable capabilities; use **Subagents** for dedicated workers that bundle Skills and run under the same Rules.
 
 ### Hierarchy
 
 ```
 ┌────────────────────────────────────────────────────────────────────┐
-│  SIX TEMPLATE TYPES: Rules, Blueprints, Tasks, Recipes, Subagents, Skills │
+│  SEVEN TEMPLATE TYPES: Rules, Blueprints, Tasks, Recipes, Subagents, Skills, Protocols │
 │  Rule files: AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md           │
 ├────────────────────────────────────────────────────────────────────┤
-│  RULES (loaded by tool) → constrain SUBAGENTS and agents;            │
+│  RULES (loaded by tool) → reference PROTOCOLS, constrain SUBAGENTS and agents;        │
 │  SUBAGENTS use SKILLS within those rules                            │
 │                                                                    │
 │  ┌─────────────────────────────────────────────────────────────┐  │
@@ -514,8 +541,13 @@ resp, err := http.Get("/api/data")
 │            │     SKILLS      │                                     │
 │            │  (Best Practices)│                                    │
 │            │  How to do it well│                                   │
-│            └─────────────────┘                                     │
-│                                                                    │
+│            └────────┬────────┘                                     │
+│                     │                                              │
+│  ┌──────────────────┴──────────────────┐                           │
+│  │     PROTOCOLS (docs/protocols/)     │                           │
+│  │  Process definitions (prompt validation, memory, etc.)          │
+│  │  Installed by protocol skills (prompt-validation-setup, etc.)   │
+│  └─────────────────────────────────────┘                           │
 └────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -566,30 +598,31 @@ User Request
 
 ## Asset Type Comparison
 
-| Aspect | Rules | Blueprints | Tasks | Recipes | Subagents | Skills |
-|--------|--------|------------|-------|---------|----------------|--------|
-| **Question** | "What must agents do/avoid?" | "What to build?" | "How to implement?" | "What features?" | "Who does it?" | "How to do well?" |
-| **Purpose** | Constrain behavior | Define products | Implement features | Bundle features | Deploy workers | Teach capabilities |
-| **Format** | Markdown | YAML + Markdown | Code + Config | YAML + Markdown | YAML + Markdown | Markdown + JSON |
-| **Scope** | Project / file | Complete product | Single feature | Feature set | Domain worker | Capability |
-| **Location** | AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md, .cursor/rules/ | `blueprints/` | `tasks/` | `recipes/` | `subagents/` | `.agents/skills/` (this repo: seven skills) |
+| Aspect | Rules | Blueprints | Tasks | Recipes | Subagents | Skills | Protocols |
+|--------|--------|------------|-------|---------|----------------|--------|------------|
+| **Question** | "What must agents do/avoid?" | "What to build?" | "How to implement?" | "What features?" | "Who does it?" | "How to do well?" | "How is [process] defined?" |
+| **Purpose** | Constrain behavior | Define products | Implement features | Bundle features | Deploy workers | Teach capabilities | Define processes |
+| **Format** | Markdown | YAML + Markdown | Code + Config | YAML + Markdown | YAML + Markdown | Markdown + JSON | Markdown |
+| **Scope** | Project / file | Complete product | Single feature | Feature set | Domain worker | Capability | Process |
+| **Location** | AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md, .cursor/rules/ | `blueprints/` | `tasks/` | `recipes/` | `subagents/` | `.agents/skills/` (this repo: nine skills) | `docs/protocols/` |
 
-*All six are template types.*
+*All seven are template types.*
 
 ---
 
 ## Terminology
 
-### "Templates" (All Six Types)
-**"Templates"** refers collectively to **all six template types**—the complete reusable system:
+### "Templates" (All Seven Types)
+**"Templates"** refers collectively to **all seven template types**—the complete reusable system:
 - Rule templates (AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md, .cursor/rules)
 - Blueprint templates
 - Task templates  
 - Recipe templates
 - Subagent templates
 - Skill templates
+- Protocol templates (e.g. docs/protocols/PROMPT-VALIDATION-PROTOCOL.md)
 
-When we say "the template system," we mean all six types working together.
+When we say "the template system," we mean all seven types working together.
 
 ### Implementation Detail: `.tpl` Files
 Inside **Tasks**, you'll find `.tpl.{ext}` files (e.g., `auth-service.tpl.py`). These are:
@@ -643,7 +676,7 @@ Product idea → Architect Subagent → Blueprint → Recipe → Tasks + Skills 
 
 ## File Organization
 
-**Rules** are at project root (and in `.cursor/rules/` for Cursor). The rest of the framework lives under the repository root, often in a `_templates/` or project directory.
+**Rules** are at project root (and in `.cursor/rules/` for Cursor). **Protocols** live in `docs/protocols/` and are installed by protocol skills. The rest of the framework lives under the repository root, often in a `_templates/` or project directory.
 
 ```
 <project root>
@@ -657,6 +690,11 @@ Product idea → Architect Subagent → Blueprint → Recipe → Tasks + Skills 
 │
 ├── .cursor/rules/                     # 📜 RULES — Cursor rule files (optional)
 │   └── *.md
+│
+├── docs/
+│   └── protocols/                    # 📋 PROTOCOLS — Process definitions (prompt validation, memory, etc.)
+│       ├── PROMPT-VALIDATION-PROTOCOL.md
+│       └── MEMORY-SYSTEM-PROTOCOL.md
 │
 ├── blueprints/                        # 📋 BLUEPRINTS
 │   ├── mins/
@@ -685,10 +723,16 @@ Product idea → Architect Subagent → Blueprint → Recipe → Tasks + Skills 
 │   └── architecture-subagent/
 │
 ├── .agents/
-│   └── skills/                   # 🧠 SKILLS (current: seven skills)
+│   └── skills/                   # 🧠 SKILLS (current: nine skills)
 │   ├── memory-system-setup/
 │   ├── rules-setup/
-│   └── skill-builder/
+│   ├── skill-setup/
+│   ├── blueprints-setup/
+│   ├── tasks-setup/
+│   ├── recipes-setup/
+│   ├── subagents-setup/
+│   ├── prompt-validation-setup/
+│   └── protocol-setup/
 │
 ├── scripts/                           # 🔧 AUTOMATION
 │   ├── setup-project.py
@@ -737,6 +781,11 @@ Product idea → Architect Subagent → Blueprint → Recipe → Tasks + Skills 
 - Document trigger phrases
 - Include domain knowledge
 
+### For Protocols (docs/protocols/)
+- Keep one document per process; reference by path from Rules (e.g. AGENTS.md).
+- Use a **protocol skill** (e.g. prompt-validation-setup) to install the protocol file in a new project.
+- Do not duplicate full protocol content in Rules; link to the protocol and summarize the minimal gate (e.g. 4 checks).
+
 ### For Skills
 - Keep descriptions action-oriented
 - Provide multi-language examples
@@ -748,7 +797,7 @@ Product idea → Architect Subagent → Blueprint → Recipe → Tasks + Skills 
 
 ## Summary
 
-The six template types create a complete ecosystem:
+The seven template types create a complete ecosystem:
 
 1. **Rules** define how agents must behave (AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md, .cursor/rules).
 2. **Blueprints** provide the vision (what to build).
@@ -756,8 +805,9 @@ The six template types create a complete ecosystem:
 4. **Recipes** provide the combinations (what features to include).
 5. **Subagents** provide the workers (who does the work).
 6. **Skills** provide the expertise (how to do it well).
+7. **Protocols** provide process definitions (how validation, memory, and other procedures work); they live in `docs/protocols/` and are installed by protocol skills.
 
-**"Templates"** refers to all six types together—the complete reusable system for AI-assisted software development. Subagents and Skills operate within whatever Rules the active tool loads.
+**"Templates"** refers to all seven types together—the complete reusable system for AI-assisted software development. Subagents and Skills operate within whatever Rules the active tool loads. Rules reference Protocols for process definitions.
 
 ---
 

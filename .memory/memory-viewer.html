@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Memory System Viewer</title>
+<style>
+body { font-family: system-ui, sans-serif; max-width: 900px; margin: 1rem auto; padding: 0 1rem; }
+h1 { font-size: 1.25rem; }
+h2 { font-size: 1rem; margin-top: 1.5rem; }
+.event { margin: 1rem 0; padding: 0.5rem; border-left: 3px solid #ccc; }
+pre { white-space: pre-wrap; font-size: 0.875rem; }
+a { color: #06c; }
+nav { margin: 1rem 0; }
+</style>
+</head>
+<body>
+<h1>Memory System Viewer</h1>
+<nav><a href="#events">Event Log</a> | <a href="#graph">Graph</a> | <a href="#context">Context</a></nav>
+
+<h2 id="events">Event Log</h2>
+<div id="evt-001" class="event"><pre>### evt-001 | 2026-02-26 12:00 | human | milestone
+
+
+**Scope**: memory-system, skill, scripts
+**Summary**: Memory System Setup skill and automation scripts; gaps closed; skill renamed to memory-system-setup.
+
+**Details**:
+- skill: name memory-system-setup; setup-only; Option A (script) / Option B (manual)
+- scripts: validate-memory.py, initialize-memory.py under memory-system/scripts/
+- docs: ARCHITECTURE-AUDIT.md G1–G4 resolved; README script usage; protocol references skill name
+- CHANGELOG: Event Log section added for memory-system compliance
+
+**Refs**: none
+**Tags**: memory-system, skill, automation, gap-fix</pre></div>
+
+
+<h2 id="graph">Graph</h2>
+<pre># Knowledge Graph
+
+&lt;!-- LAYER 2: Materialized view. Updated only from the Event Log. Never edited directly. --&gt;
+&lt;!-- See memory-system/README.md for materialization rules, node types, edge relations. --&gt;
+
+## Nodes
+
+&lt;!-- Node Types: component, task, dependency, decision, document, milestone --&gt;
+&lt;!-- Statuses: active, blocked, completed, deprecated, planned --&gt;
+
+| Node | Type | Status | Created (evt) | Last Event | Attributes |
+|------|------|--------|---------------|------------|------------|
+| _templatesSB | component | active | evt-001 | evt-001 | path: /, tier: full |
+| memory-system-setup | component | active | evt-001 | evt-001 | path: skills/memory-system-setup/, memory system setup skill |
+| memory-system | component | active | evt-001 | evt-001 | path: memory-system/, scripts + protocol + skill refs |
+
+## Edges
+
+&lt;!-- Relations: depends_on, blocks, implements, tests, documents, contains, precedes, related_to --&gt;
+
+| From | To | Relation | Created (evt) | Attributes |
+|------|----|----------|---------------|------------|
+| memory-system-setup | _templatesSB | contains | evt-001 | |
+| memory-system | _templatesSB | contains | evt-001 | |
+
+## Meta
+
+- **Last updated**: 2026-02-26
+- **Event horizon**: evt-001
+- **Nodes**: 3
+- **Edges**: 2
+</pre>
+
+<h2 id="context">Context</h2>
+<pre># Current Context
+
+&lt;!-- LAYER 3: Derived projection. Ephemeral. Regenerate from CHANGELOG.md + graph.md when stale. --&gt;
+&lt;!-- Last generated: 2026-02-26 12:00 | Event horizon: evt-001 --&gt;
+&lt;!-- Staleness: compare Event horizon above with last event in CHANGELOG.md. Mismatch = regenerate. --&gt;
+
+## Active Mission
+
+Unified AI development ecosystem: Rules (four rule files), seven Skills (memory-system-setup, rules-setup, skill-builder, blueprints-setup, tasks-setup, recipes-setup, subagents-setup), and memory system. Maintain documentation accuracy and protocol alignment; use memory system for event-sourced trajectory.
+
+## Current Sprint
+
+| Task | Priority | Assignee | Status | Blockers |
+|------|----------|----------|--------|----------|
+| — | — | — | — | — |
+
+## Active Constraints
+
+- Append-only CHANGELOG Event Log; regenerate context when stale — evt-001
+- Prefer scripts over manual steps (AUTOMATING pillar)
+- Three Pillars (AUTOMATING, TESTING, DOCUMENTING) before task complete
+
+## Blockers
+
+- (none)
+
+## Recent Changes
+
+- 2026-02-26 — Memory System Setup skill and automation scripts; gaps closed; skill renamed to memory-system-setup — evt-001
+
+## Key Dependencies
+
+- (none yet)
+
+## Next Actions
+
+1. Regenerate this context when new events are appended to CHANGELOG.md
+2. Use memory-system/scripts/validate-memory.py when changing memory files
+</pre>
+</body>
+</html>

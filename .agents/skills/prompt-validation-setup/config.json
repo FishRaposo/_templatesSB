@@ -1,0 +1,49 @@
+{
+  "agent_support": {
+    "claude": true,
+    "roo": true,
+    "cascade": true,
+    "cursor": true,
+    "generic": true
+  },
+  "triggers": {
+    "keywords": [
+      "install prompt validation",
+      "setup prompt validation",
+      "add prompt validation protocol",
+      "install prompt validation protocol",
+      "prompt validation new project",
+      "docs/protocols prompt validation",
+      "PROMPT-VALIDATION-PROTOCOL",
+      "prompt validation protocol setup",
+      "install protocol prompt validation",
+      "add protocol prompt validation"
+    ],
+    "patterns": [
+      "install.*prompt.*validation",
+      "setup.*prompt.*validation.*(protocol)?",
+      "add.*prompt.*validation.*(protocol)?",
+      "prompt.*validation.*(protocol)?.*(install|setup|add)",
+      "create.*docs/protocols.*prompt",
+      "protocol.*prompt.*validation"
+    ],
+    "file_types": [".md"]
+  },
+  "requirements": {
+    "tools": [],
+    "permissions": ["file_read", "file_write"],
+    "memory": false
+  },
+  "examples": {
+    "simple": [
+      "Install the Prompt Validation Protocol in this project",
+      "Set up prompt validation for this repo",
+      "Add docs/protocols/PROMPT-VALIDATION-PROTOCOL.md to this project"
+    ],
+    "complex": [
+      "Install the Prompt Validation Protocol and ensure AGENTS.md references it",
+      "Set up the prompt validation protocol in docs/protocols/ and add the 4-check section to our rule file",
+      "Add the Prompt Validation Protocol as a Protocol template and wire it into AGENTS.md"
+    ]
+  }
+}

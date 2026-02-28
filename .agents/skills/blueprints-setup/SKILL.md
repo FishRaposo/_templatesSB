@@ -1,11 +1,21 @@
 ---
 name: blueprints-setup
-description: Use this skill when creating, editing, or auditing Blueprints — the template type that defines what to build (product archetypes). This includes blueprint.meta.yaml (stacks, tiers, tasks, overlays), BLUEPRINT.md, overlays per stack, and validating resolution. Fits the six-template-types framework (Rules, Blueprints, Tasks, Recipes, Subagents, Skills).
+description: Use this skill when creating, editing, or auditing Blueprints — the template type that defines what to build (product archetypes). This includes blueprint.meta.yaml (stacks, tiers, tasks, overlays), BLUEPRINT.md, overlays per stack, and validating resolution. Fits the seven-template-types framework (Rules, Blueprints, Tasks, Recipes, Subagents, Skills, Protocols).
 ---
 
 # Blueprints Setup Skill
 
-This skill creates and maintains **Blueprints**: product archetypes that define what kind of application to build and how to architect it. Blueprints drive automated project generation via stacks, tiers, and required tasks. When invoked, it can add a new blueprint, update an existing one, or audit structure and resolution against the framework.
+This skill creates and maintains **Blueprints**: the template type that defines **what to build** (product archetypes). Blueprints are YAML + Markdown artifacts under `blueprints/<name>/` with stacks, tiers, tasks, and overlay templates.
+
+## Your Role
+
+Help users **create** and **modify** Blueprints through:
+
+1. **Creating New Blueprints** — Add a new blueprint directory with `blueprint.meta.yaml`, `BLUEPRINT.md`, and overlays per stack
+2. **Editing Existing Blueprints** — Update `blueprint.meta.yaml` (stacks, tier_defaults, tasks, overlays), revise `BLUEPRINT.md`, or add/edit overlay templates
+3. **Auditing Blueprints** — Check structure and resolution (e.g. confidence ≥ 1.00 when a validation script exists); fix missing or invalid references
+
+When invoked, produce or update blueprint files so they conform to the framework. Validate resolution when the project includes `scripts/validate-templates.py` or equivalent.
 
 ## Core Approach
 
@@ -48,6 +58,16 @@ Under `overlays/<stack>/`, add `.tpl.*` files that extend or generate stack-spec
 
 When the project includes `scripts/validate-templates.py`, run blueprint validation (e.g. resolution check). Ensure resolution confidence meets project thresholds (e.g. ≥ 1.00).
 
+## Editing Blueprints
+
+When modifying an existing blueprint:
+
+- **blueprint.meta.yaml** — Update `stacks`, `tier_defaults`, `tasks`, or `overlays`; keep YAML valid and IDs consistent with `tasks/task-index.yaml` when Tasks are adopted
+- **BLUEPRINT.md** — Revise purpose, usage, or stack/tier documentation to match changes
+- **overlays/** — Add, remove, or edit `.tpl.*` files under `overlays/<stack>/`; ensure paths in `blueprint.meta.yaml` match
+
+Re-run validation after edits when the project has a validation script.
+
 ## Best Practices
 
 - Start with a minimal `blueprint.meta.yaml` and expand; keep overlays focused per stack.
@@ -72,7 +92,7 @@ When the project includes `scripts/validate-templates.py`, run blueprint validat
 
 - **rules-setup** — When adding or updating AGENTS.md or rule files that reference blueprints
 - **tasks-setup** — When defining or changing tasks referenced by blueprints
-- **skill-builder** — When creating or editing skills used in the same ecosystem
+- **skill-setup** — When creating or editing skills used in the same ecosystem
 
 ## Supporting Files
 

@@ -1,5 +1,38 @@
 # CHANGELOG
 
+## 2026-02-27 - Suggestions for new templates document
+
+### Summary
+- Added a document with concrete suggestions for new templates across all seven types: Skills, Tasks, Blueprints, Subagents, Rules, Recipes, and Protocols.
+
+### Added
+- **docs/SUGGESTIONS-FOR-NEW-TEMPLATES.md** — Suggestions for: Skills (changelog, git, API design, testing, security, refactor, docs, dependencies); Tasks (billing, email, upload, rate limit, audit, feature flags, search, multi-tenant, health, OpenAPI); Blueprints (API-first, mobile+API, internal tools, data consumer, docs site, event-driven); Subagents (code reviewer, testing, docs, devops, security, refactor); Rules (extra tool entries, frontend/backend/docs/security scopes); Recipes (observability, payments, content/notifications, multi-tenant, search, launch-readiness); Protocols (security review, changelog/events, branching/release, documentation, rollback/incident). Includes cross-type summary and suggested implementation order.
+
+### Changed
+- **docs/INDEX.md**: Quick Reference row and Core Documentation section for SUGGESTIONS-FOR-NEW-TEMPLATES.md.
+
+### Rationale
+- Single place for contributors and adopters to find ideas when extending the template ecosystem; covers all seven types and points to skill-setup and framework docs.
+
+---
+
+## 2026-02-27 - Templates system overview document
+
+### Summary
+- Added a single-document full overview of all seven template types and linked it from the docs index. Corrected framework wording from "six" to "seven" template types.
+
+### Added
+- **docs/TEMPLATES-SYSTEM-OVERVIEW.md** — Overview of Rules, Blueprints, Tasks, Recipes, Subagents, Skills, Protocols: purpose, format, location, key files, when to use, question answered; relationship diagram; comparison table; file layout; implementation status in this repo; quick reference by need.
+
+### Changed
+- **AGENTIC-ASSETS-FRAMEWORK.md**: "six complementary template types" → "seven complementary template types" in Overview.
+- **docs/INDEX.md**: Quick Reference table row for TEMPLATES-SYSTEM-OVERVIEW.md; new section "TEMPLATES-SYSTEM-OVERVIEW.md" under Core Documentation with purpose and related docs.
+
+### Rationale
+- One place to see all seven types and how they fit together without reading the full framework. Supports contributors and adopters; DOCUMENTING pillar satisfied.
+
+---
+
 ## 2026-02-26 - Documentation accuracy pass
 
 ### Summary
@@ -440,3 +473,167 @@ Each new skill includes SKILL.md (Core Approach, Step-by-Step, Validation Checkl
 
 **Refs**: none
 **Tags**: memory-system, skill, automation, gap-fix
+
+### evt-002 | 2026-02-27 02:00 | human | milestone
+
+**Scope**: memory-system, scripts, docs, protocol, skill
+**Summary**: Claude-mem–style retrieval tools implemented; protocol §15, README, CLAUDE-MEM-IMPROVEMENTS, and memory-system-setup skill updated.
+
+**Details**:
+- scripts: get_event.py (resolve evt-ID, normalize 1→evt-001), search_events.py (keyword/timeline/list-ids), suggest_event.py (--from-git/--from-stdin), summarize_events.py, relevant_events.py, generate_memory_viewer.py; _events_common.py shared parsing; privacy (private/sensitive tags) in search/summary/viewer
+- protocol: MEMORY-SYSTEM-PROTOCOL.md §15 Retrieval and Tools (resolve, search, progressive disclosure, suggester, summarize, relevant at boot, viewer, privacy convention)
+- docs: memory-system README Retrieval and Tools table and script list; CLAUDE-MEM-IMPROVEMENTS.md items marked Implemented with Implementation refs; memory-system-setup SKILL.md step 9 (After setup — retrieval), Supporting Files and README updated
+
+**Refs**: evt-001
+**Tags**: memory-system, retrieval, documentation, skill
+
+### evt-003 | 2026-02-27 02:15 | human | modify
+
+**Scope**: AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md, memory-system-setup
+**Summary**: Rule files updated so agents load the memory system properly: explicit staleness check, CURSOR.md memory section, agents-integration-snippet aligned.
+
+**Details**:
+- AGENTS.md: Before every task — read context.md, check staleness (Event horizon vs last evt in CHANGELOG Event Log), regenerate if stale/missing; optional relevant_events.py; lifecycle BOOT line includes staleness and script
+- CLAUDE.md: Same load sequence and staleness check; link to full protocol
+- CURSOR.md: New Memory System section (load context, check staleness, regenerate if needed, optional relevant_events.py); Key References add MEMORY-SYSTEM-PROTOCOL.md
+- WINDSURF.md: Before/After include staleness check and protocol link
+- agents-integration-snippet.md: Staleness check and Event Log evt-NNN in snippet for new projects
+
+**Refs**: evt-002
+**Tags**: memory-system, rules, agent-boot
+
+### evt-004 | 2026-02-27 02:25 | human | modify
+
+**Scope**: .agents/skills/memory-system-setup, global Cursor skills
+**Summary**: Memory system skill updated locally and synced to global; snippet and load-memory guidance clarified.
+
+**Details**:
+- Local skill (.agents/skills/memory-system-setup): SKILL.md step 7 and Troubleshooting note that agents-integration-snippet includes load-memory sequence and staleness check; Supporting Files note snippet ensures agents boot correctly; README added line on snippet and load-memory for all rule files
+- Global skill: synced from repo via robocopy to C:\Users\vinic\.cursor\skills\memory-system-setup so Cursor uses same content
+- Snippet (already updated in evt-003) provides Before/After every task with staleness check for projects that add it to AGENTS.md
+
+**Refs**: evt-003
+**Tags**: memory-system, skill, global-install
+
+### evt-005 | 2026-02-27 02:35 | human | create
+
+**Scope**: docs/memory-system, documentation
+**Summary**: Added MEMORY-SYSTEM-OVERVIEW.md — single full overview of how the memory system works.
+
+**Details**:
+- New doc: docs/memory-system/MEMORY-SYSTEM-OVERVIEW.md — purpose and principles, four layers, file layout, event format and types, agent lifecycle (boot/execute/shutdown), staleness and regeneration, retrieval tools (get_event, search_events, relevant_events, summarize, suggest_event, viewer), privacy, archival, tiers, data flow, and pointers to protocol/skill/scripts
+- README: link to overview at top and in Further Reading
+
+**Refs**: evt-004
+**Tags**: memory-system, documentation
+
+### evt-006 | 2026-02-27 | agent | milestone
+
+**Scope**: framework, protocols, skills, rules
+**Summary**: Protocols added as seventh template type; prompt-validation-setup skill created; full integration across framework, rule files, and docs.
+
+**Details**:
+- AGENTIC-ASSETS-FRAMEWORK.md: Seven template types (Rules, Blueprints, Tasks, Recipes, Subagents, Skills, **Protocols**). Protocols defined as process documents in docs/protocols/, installed by protocol skills; hierarchy, comparison table, file org, Flow/Practical use, terminology, best practices, summary updated. Implementation status: Protocols + eight skills (incl. prompt-validation-setup).
+- AGENTS.md: Seven template types; Protocols in list and structure; docs/protocols/ and prompt-validation-setup in repo tree; Three Pillars AUTOMATING/TESTING include Protocols; DOCUMENTING change-type "New protocol"; workflow "Adding a Protocol"; Key References Protocols + prompt-validation-setup; System & Tools protocol path note.
+- CLAUDE.md, CURSOR.md, WINDSURF.md: Seven template types; Protocols; eight skills and prompt-validation-setup; docs/protocols/ in structure; Key References/Key Files add Protocols and prompt-validation-setup.
+- New skill: .agents/skills/prompt-validation-setup/ — SKILL.md (install protocol to docs/protocols/, ensure Rules reference), config.json, README.md, templates/PROMPT-VALIDATION-PROTOCOL.md (full protocol copy). Prompt validation protocol is now installable via this skill.
+- rules-setup: Supporting Files note protocol installed by prompt-validation-setup skill; Related Skills add prompt-validation-setup.
+- docs/protocols/PROMPT-VALIDATION-PROTOCOL.md: Intro line updated to mention prompt-validation-setup and docs/protocols/ placement.
+- CURRENT-REPOSITORY-STATE.md: Seven template types, eight skills, Protocols (docs/protocols/), prompt-validation-setup; protocols/ and prompt-validation-setup referenced throughout.
+- docs/INDEX.md: Protocols as template type; PROMPT-VALIDATION-PROTOCOL install via prompt-validation-setup; For System Integration step 3 updated.
+
+**Refs**: evt-005
+**Tags**: protocols, template-type, skill, prompt-validation, framework
+
+### evt-007 | 2026-02-27 | agent | milestone
+
+**Scope**: skills, protocols, naming
+**Summary**: protocol-setup skill added (Protocols template type); skill-builder renamed to skill-setup; nine skills total.
+
+**Details**:
+- New skill: .agents/skills/protocol-setup/ — SKILL.md (create/edit/audit Protocols, docs/protocols/, protocol skills, Rules references), config.json, README.md. Aligned with other *-setup skills (rules-setup, blueprints-setup, etc.).
+- Renamed .agents/skills/skill-builder/ → .agents/skills/skill-setup/; updated name/description/title and package.json; kept "skill builder" in config triggers for backward compatibility.
+- All references to skill-builder updated to skill-setup across AGENTSIC-ASSETS-FRAMEWORK.md, AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md, CURRENT-REPOSITORY-STATE.md, docs/INDEX.md, .memory/context.md, rules-setup, blueprints-setup, memory-system-setup, prompt-validation-setup. protocol-setup added to skills lists and Key References; skill count updated to nine (memory-system-setup, rules-setup, skill-setup, blueprints-setup, tasks-setup, recipes-setup, subagents-setup, prompt-validation-setup, protocol-setup).
+
+**Refs**: evt-006
+**Tags**: protocol-setup, skill-setup, rename, naming-convention
+
+### evt-008 | 2026-02-27 | agent | modify
+
+**Scope**: protocols, memory-system-setup, prompt-validation-setup, docs/protocols
+**Summary**: Memory system and prompt validation set up as Protocols; both skills updated as protocol skills.
+
+**Details**:
+- memory-system-setup: Framed as **protocol skill** for the Memory System Protocol (Protocols template type). Added step 1 to install protocol document (create docs/protocols/, copy from skill templates/MEMORY-SYSTEM-PROTOCOL.md to docs/protocols/MEMORY-SYSTEM-PROTOCOL.md). Added templates/MEMORY-SYSTEM-PROTOCOL.md (copy of docs/protocols version). Renumbered steps 2–10. Validation checklist and Supporting Files now require/reference protocol file; agents-integration-snippet adds "Full protocol: docs/protocols/MEMORY-SYSTEM-PROTOCOL.md" and closing line to follow protocol. Related Skills add protocol-setup; description and README updated. config.json: added keywords "install memory protocol", "MEMORY-SYSTEM-PROTOCOL", "docs/protocols memory" and complex example for installing the protocol.
+- prompt-validation-setup: Core Approach states it is the protocol skill for the Prompt Validation Protocol; Validation Checklist and Related Skills explicitly reference protocol-setup and memory-system-setup as same pattern.
+- docs/protocols/MEMORY-SYSTEM-PROTOCOL.md: Intro updated to state it is a Protocol template placed in docs/protocols/ by memory-system-setup; deployment sentence updated to reference .agents/skills/memory-system-setup/.
+- protocol-setup: Supporting Files list both prompt-validation-setup and memory-system-setup as example protocol skills.
+
+**Refs**: evt-008
+**Tags**: protocols, memory-system, prompt-validation, protocol-skills
+
+### evt-009 | 2026-02-27 | agent | modify
+
+**Scope**: documentation accuracy (CURRENT-REPOSITORY-STATE, README, AGENTS, rules-setup, subagents-setup, ARCHIVE-REFERENCE)
+**Summary**: Documentation audit — corrected skill count (eight→nine), six→seven template types, skill-builder→skill-setup, and added Protocols where missing.
+
+**Details**:
+- CURRENT-REPOSITORY-STATE.md: "Current skills (eight)" → "(nine)"; "8 skills" → "9 skills"; footer "eight Skills" → "nine Skills".
+- README.md: "six template types" → "seven"; "Six-Pillar" → "Seven Template Types"; Skills list and tree updated to nine skills (skill-setup, prompt-validation-setup, protocol-setup); added Protocols section; Key Documentation and Current Implementation tables; When Stuck skill-setup.
+- AGENTS.md: Structure tree "seven skills" → "nine skills".
+- .agents/skills/rules-setup/SKILL.md: "six-template-types" → "seven-template-types" (frontmatter, body, workflow paragraph); "six template types" → "seven template types".
+- .agents/skills/rules-setup/README.md: skill-builder → skill-setup in Related.
+- .agents/skills/subagents-setup/SKILL.md: skill-builder → skill-setup in Related Skills.
+- docs/ARCHIVE-REFERENCE-FOR-TEMPLATE-TYPES.md: "skill-builder" → "skill-setup" in text and table; added Protocols row (protocol-setup, prompt-validation-setup; docs/protocols/).
+
+**Refs**: evt-008
+**Tags**: documentation, accuracy, skills-count, template-types, skill-setup
+
+### evt-010 | 2026-02-27 | agent | modify
+
+**Scope**: global Cursor skills (%USERPROFILE%\.cursor\skills\)
+**Summary**: Synced all nine local skills to global; installed missing prompt-validation-setup and protocol-setup; removed legacy skill-builder.
+
+**Details**:
+- Synced repo `.agents/skills/` → `%USERPROFILE%\.cursor\skills\` for all nine skills (blueprints-setup, memory-system-setup, prompt-validation-setup, protocol-setup, recipes-setup, rules-setup, skill-setup, subagents-setup, tasks-setup).
+- Installed globally: prompt-validation-setup, protocol-setup (were missing).
+- Removed legacy `skill-builder` folder from global (replaced by skill-setup).
+
+**Refs**: evt-009
+**Tags**: skills, global-install, sync, cursor
+
+### evt-011 | 2026-02-27 | agent | create
+
+**Scope**: docs, documentation blueprint
+**Summary**: Added DOCUMENTATION-BLUEPRINT-VS-CURRENT-SETUP.md comparing blueprint tiers to current repo; documented gaps and recommendations.
+
+**Details**:
+- New doc: docs/DOCUMENTATION-BLUEPRINT-VS-CURRENT-SETUP.md — Blueprint MVP/Core/Full vs current root, docs/, .memory/, .github/; status table for each required file; note that .memory/graph.md event horizon is stale (evt-001 vs evt-010); recommendations for Core alignment (QUICKSTART, CONTRIBUTING, SECURITY, docs/SYSTEM-MAP.md, graph materialization) and optional Full tier.
+- docs/INDEX.md: Quick Reference and Core Documentation entries for DOCUMENTATION-BLUEPRINT-VS-CURRENT-SETUP.md.
+
+**Refs**: evt-010
+**Tags**: documentation, blueprint, comparison
+
+### evt-012 | 2026-02-27 | agent | create
+
+**Scope**: docs, documentation blueprint
+**Summary**: Added BLUEPRINT-AND-CURRENT-SYSTEM-FULL-COMPARISON.md with full comparison and bidirectional improvements (current → blueprint, blueprint → current).
+
+**Details**:
+- New doc: docs/BLUEPRINT-AND-CURRENT-SYSTEM-FULL-COMPARISON.md — Part I full comparison (tiers, root/docs/memory/.github, alignment summary); Part II how current system can improve the blueprint (Protocols as first-class, docs/INDEX alternative, template-types reference, event log naming, staleness rule, repo state doc, protocol skills in AUTOMATING, AI file length exception); Part III how blueprint can improve current (QUICKSTART/CONTRIBUTING/SECURITY, SYSTEM-MAP, prompt validation pointer, graph materialization, DOCUMENTING table, tier and Full-tier items, section specs, shutdown sequence); Part IV summary tables.
+- docs/INDEX.md: Quick Reference and Core Documentation entries for BLUEPRINT-AND-CURRENT-SYSTEM-FULL-COMPARISON.md.
+
+**Refs**: evt-011
+**Tags**: documentation, blueprint, comparison, bidirectional
+
+### evt-013 | 2026-02-27 | agent | milestone
+
+**Scope**: documentation blueprint, current system, Core tier, AGENTS.md, memory
+**Summary**: Implemented all blueprint→current improvements; rebuilt Documentation Blueprint (v3.0) with current-system→blueprint improvements.
+
+**Details**:
+- **Current system (blueprint→current)**: Added root QUICKSTART.md, CONTRIBUTING.md, SECURITY.md, WORKFLOW.md. Added docs/SYSTEM-MAP.md (overview, components, data flow, dependencies, decisions). Added docs/PROMPT-VALIDATION.md as pointer to docs/protocols/PROMPT-VALIDATION-PROTOCOL.md. Regenerated .memory/graph.md (event horizon evt-012; nodes/edges for components). AGENTS.md: explicit shutdown sequence (append → materialize graph → regenerate context → commit); DOCUMENTING table extended (New feature/module, Repository structure change, docs/INDEX for skills). README and CURRENT-REPOSITORY-STATE: tier stated (MVP + Core); root and docs file lists updated. docs/INDEX.md: SYSTEM-MAP and PROMPT-VALIDATION entries.
+- **Documentation Blueprint (current→blueprint)**: Version 3.0. Added ecosystem alignment (template types, protocol skills). AUTOMATING: protocol skills for installing/updating docs/protocols/. §3: Protocols optional (docs/protocols/, protocol skills); repository state doc optional; PROMPT-VALIDATION.md or protocols path; DOCUMENTATION-OVERVIEW or docs/INDEX.md alternative; AI file ≤60 lines exception. §4: CHANGELOG section "## Events" or "## Event Log"; evt-NNN. §5 Boot: explicit staleness rule (compare event horizon to last CHANGELOG event; regenerate L2/L3 from L1); Shutdown: event horizon = last evt, never edit backward. §6 CHANGELOG: Events or Event Log; PROMPT-VALIDATION: pointer when using protocol skills; DOCUMENTATION-OVERVIEW: docs/INDEX.md alternative. §9: Staleness check wording aligned.
+
+**Refs**: evt-012
+**Tags**: documentation, blueprint, core-tier, system-map, workflow, graph, agents

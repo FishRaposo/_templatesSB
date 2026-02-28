@@ -8,12 +8,10 @@ _Branching strategy, release process, and team conventions_
 
 ```
 main          ← stable, always deployable, protected
-dev           ← integration branch — PRs merge here first
-feature/name  ← new features (branch from dev)
-fix/name      ← bug fixes (branch from dev or main for hotfixes)
+feature/name  ← new features (branch from main)
+fix/name      ← bug fixes (branch from main)
 docs/name     ← documentation-only changes
-release/x.y   ← release preparation (branch from dev)
-hotfix/name   ← critical production fixes (branch from main)
+release/x.y   ← release preparation
 ```
 
 **Rules**:
@@ -29,10 +27,10 @@ hotfix/name   ← critical production fixes (branch from main)
 ### Starting Work
 
 ```bash
-# Always branch from the latest dev
-git checkout dev
-git pull origin dev
-git checkout -b feature/{{FEATURE_NAME}}
+# Always branch from the latest main
+git checkout main
+git pull origin main
+git checkout -b feature/your-feature-name
 ```
 
 ### During Development
@@ -43,14 +41,14 @@ git checkout -b feature/{{FEATURE_NAME}}
 
 ### Opening a Pull Request
 
-1. Push your branch: `git push origin feature/{{FEATURE_NAME}}`
-2. Open PR against `dev` using the PR template
+1. Push your branch: `git push origin feature/your-feature-name`
+2. Open PR against `main` using the PR template
 3. Complete the Three Pillars checklist before marking ready
-4. Request review from `{{DEFAULT_REVIEWERS}}`
+4. Request review from relevant team members
 
 ### Merging
 
-- At least **{{REQUIRED_APPROVALS}}** approval(s) required
+- At least one approval required
 - All CI checks must pass
 - Resolve all review comments before merging
 - Squash and merge — delete branch after merge
@@ -62,22 +60,22 @@ git checkout -b feature/{{FEATURE_NAME}}
 ### Creating a Release
 
 ```bash
-git checkout dev && git pull
-git checkout -b release/{{VERSION}}
+git checkout main && git pull
+git checkout -b release/x.y.z
 # Update version references, run final checks
-git push origin release/{{VERSION}}
-# Open PR: release/{{VERSION}} → main
+git push origin release/x.y.z
+# Open PR: release/x.y.z → main
 ```
 
 ### Release Checklist
 
-- [ ] All features for this release merged to `dev`
-- [ ] Version bumped in `{{VERSION_FILE}}`
+- [ ] All features for this release merged to `main`
+- [ ] Version bumped in version file
 - [ ] CHANGELOG.md updated with `milestone` event
 - [ ] All tests pass: `{{TEST_COMMAND}}`
 - [ ] Documentation reflects this version
 - [ ] PR approved and merged to `main`
-- [ ] Tag created: `git tag v{{VERSION}} && git push --tags`
+- [ ] Tag created: `git tag vx.y.z && git push --tags`
 
 ---
 
@@ -99,10 +97,9 @@ type(scope): short description (≤72 chars)
 
 | Check | Trigger | Command |
 |-------|---------|---------|
-| Tests | PR, push to dev/main | `{{TEST_COMMAND}}` |
-| Lint | PR, push to dev/main | `{{LINT_COMMAND}}` |
+| Tests | PR, push to main | `{{TEST_COMMAND}}` |
+| Lint | PR, push to main | `{{LINT_COMMAND}}` |
 | Build | Push to main | `{{BUILD_COMMAND}}` |
-| Deploy | Tag on main | `{{DEPLOY_COMMAND}}` |
 
 ---
 

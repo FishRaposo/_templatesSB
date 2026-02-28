@@ -9,7 +9,7 @@
   "triggers": {
     "keywords": [
       "skill", "create skill", "edit skill", "skill pack", "convert sub-agent",
-      "SKILL.md", "config.json", "agent skills", "skill from scratch", "skill builder"
+      "SKILL.md", "config.json", "agent skills", "skill from scratch", "skill-setup","skill builder"
     ],
     "patterns": [
       "create.*skill", "edit.*skill", "convert.*to.*skill", "skill.*pack",

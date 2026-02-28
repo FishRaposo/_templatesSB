@@ -1,11 +1,21 @@
 ---
 name: tasks-setup
-description: Use this skill when creating, editing, or auditing Tasks — the template type that defines how to implement a feature (implementation units). This includes TASK.md, config.yaml, universal/ and stacks/<stack>/ implementations, task-index.yaml registration, and tier/stack variants. Fits the six-template-types framework (Rules, Blueprints, Tasks, Recipes, Subagents, Skills).
+description: Use this skill when creating, editing, or auditing Tasks — the template type that defines how to implement a feature (implementation units). This includes TASK.md, config.yaml, universal/ and stacks/<stack>/ implementations, task-index.yaml registration, and tier/stack variants. Fits the seven-template-types framework (Rules, Blueprints, Tasks, Recipes, Subagents, Skills, Protocols).
 ---
 
 # Tasks Setup Skill
 
-This skill creates and maintains **Tasks**: implementation units that contain code, configuration, and documentation for a specific feature across technology stacks and complexity tiers (MVP/Core/Enterprise). When invoked, it can add a new task, add or update stack-specific implementations, or audit structure and task-index registration.
+This skill creates and maintains **Tasks**: the template type that defines **how to implement a feature** (implementation units). Tasks live under `tasks/<task-name>/` with universal and stack-specific implementations and a registry in `tasks/task-index.yaml`.
+
+## Your Role
+
+Help users **create** and **modify** Tasks through:
+
+1. **Creating New Tasks** — Add a new task directory with `TASK.md`, `config.yaml`, `universal/` and `stacks/<stack>/` implementations, and register in `task-index.yaml`
+2. **Editing Existing Tasks** — Update `TASK.md` or `config.yaml`, add or change stack implementations, or adjust tier/stack variants
+3. **Auditing Tasks** — Check structure and task-index registration; ensure all stack variants resolve when a validation script exists
+
+When invoked, produce or update task files so they conform to the framework. Run full validation when the project includes `scripts/validate-templates.py`.
 
 ## Core Approach
 
@@ -50,6 +60,18 @@ Add an entry for the task in `tasks/task-index.yaml` with id, name, description,
 ### 7. Validate (when the project has a validation script)
 
 When the project includes `scripts/validate-templates.py`, run full validation so all stack variants are checked.
+
+## Editing Tasks
+
+When modifying an existing task:
+
+- **TASK.md** — Update purpose, usage, inputs/outputs, or run instructions
+- **config.yaml** — Change metadata, dependencies, or tier/stack constraints
+- **universal/** — Add or edit stack-agnostic templates
+- **stacks/<stack>/** — Add a new stack, or change implementations for an existing stack
+- **task-index.yaml** — Update the task’s entry (id, name, description, categories) so it stays in sync
+
+Re-run validation after edits when the project has a validation script.
 
 ## Best Practices
 

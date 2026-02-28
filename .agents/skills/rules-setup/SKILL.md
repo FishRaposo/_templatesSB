@@ -1,13 +1,23 @@
 ---
 name: rules-setup
-description: Use this skill when creating, improving, or auditing the Rules template type for any repository — AGENTS.md (canonical), CLAUDE.md, CURSOR.md, WINDSURF.md. Includes generating AGENTS.md with Three Pillars (AUTOMATING with prefer scripts, TESTING, DOCUMENTING), Prompt Validation, four rule files in ALL CAPS, thin tool-specific entries that point to AGENTS.md, and optional .cursor/rules. Fits the six-template-types framework (Rules, Blueprints, Tasks, Recipes, Subagents, Skills).
+description: Use this skill when creating, improving, or auditing the Rules template type for any repository — AGENTS.md (canonical), CLAUDE.md, CURSOR.md, WINDSURF.md. Includes generating AGENTS.md with Three Pillars (AUTOMATING with prefer scripts, TESTING, DOCUMENTING), Prompt Validation, four rule files in ALL CAPS, thin tool-specific entries that point to AGENTS.md, and optional .cursor/rules. Fits the seven-template-types framework (Rules, Blueprints, Tasks, Recipes, Subagents, Skills, Protocols).
 ---
 
 # Rules Setup Skill
 
-This skill creates and maintains the **Rules** template type: **AGENTS.md** (canonical) plus tool-specific rule files (**CLAUDE.md**, **CURSOR.md**, **WINDSURF.md**) so every AI tool follows the same project conventions. Rule files at project root use **ALL CAPS** filenames. When invoked, it can analyze the codebase and generate a complete AGENTS.md, add or update the four rule files, improve an existing setup, or audit against the six core areas and Three Pillars.
+This skill creates and maintains the **Rules** template type: **AGENTS.md** (canonical) plus tool-specific rule files (**CLAUDE.md**, **CURSOR.md**, **WINDSURF.md**) so every AI tool follows the same project conventions. Rule files at project root use **ALL CAPS** filenames.
 
-**Note:** This SKILL.md exceeds the usual 500-line guideline because it embeds the full **Prompt Validation Protocol** as an appendix for single-file reference. For quick reference, use the main sections and the Supporting Files listed at the end.
+## Your Role
+
+Help users **create** and **modify** the Rules template type through:
+
+1. **Creating New Rules** — Generate AGENTS.md and the four rule files (AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md) for a project from scratch
+2. **Editing Existing Rules** — Improve or update an existing AGENTS.md or rule files (add sections, refine commands, add Prompt Validation or Three Pillars)
+3. **Auditing Rules** — Review rule files against the framework (six core areas, Three Pillars, Prompt Validation) and fix gaps
+
+When invoked, analyze the codebase as needed and produce concrete, actionable rule content. Every generated AGENTS.md must include the Three Pillars (AUTOMATING with prefer scripts, TESTING, DOCUMENTING) and a Prompt Validation reference (4 checks). Do not duplicate full protocol text in AGENTS.md—link to the protocol.
+
+**Note:** The complete **Prompt Validation Protocol** is available in `./reference/prompt-validation-protocol-reference.md` for embedding in generated AGENTS.md files. The SKILL.md includes a brief reference section (Step 9) that points to the full protocol.
 
 # Core Approach — The Three Pillars Framework
 
@@ -172,7 +182,7 @@ Skipping any pillar = incomplete work.
 | Prompt Validation | Agent acts on vague or unsafe prompts | 4-check gate before every task |
 | Git Workflow | Inconsistent commits, stale docs | Validation before commit, CHANGELOG append-only |
 
-**When the project uses the six-template-types framework** (Rules, Blueprints, Tasks, Recipes, Subagents, Skills), include: Project Overview (six types), Tech stack, Commands (with prefer scripts), **Testing** section, Code Style, Repository Structure, **Boundaries**, **Git Workflow**, Memory System Protocol, **Prompt Validation — Before Every Task** (4 checks), Three Pillars, Workflows (adding rule file, blueprint, task, recipe, subagent, skill), Tool Selection, **Subagents for execution**, **Right tool for the job**, Key References, When Stuck. Use the project's AGENTS.md as the reference implementation (when present).
+**When the project uses the seven-template-types framework** (Rules, Blueprints, Tasks, Recipes, Subagents, Skills, Protocols), include: Project Overview (seven types), Tech stack, Commands (with prefer scripts), **Testing** section, Code Style, Repository Structure, **Boundaries**, **Git Workflow**, Memory System Protocol, **Prompt Validation — Before Every Task** (4 checks), Three Pillars, Workflows (adding rule file, blueprint, task, recipe, subagent, skill, protocol), Tool Selection, **Subagents for execution**, **Right tool for the job**, Key References, When Stuck. Use the project's AGENTS.md as the reference implementation (when present).
 
 ## 3. Add File-Scoped Commands
 
@@ -502,7 +512,7 @@ See `PROMPT-VALIDATION-PROTOCOL.md` for:
 
 ## 10. Set Up the Four Rule Files (Rules Template Type)
 
-**Rules** are one of six template types. At project root, use **ALL CAPS** filenames so rule files are consistent: **AGENTS.md** (canonical), **CLAUDE.md**, **CURSOR.md**, **WINDSURF.md**. One project, one source of truth — AGENTS.md — and thin tool-specific files that point to it.
+**Rules** are one of seven template types. At project root, use **ALL CAPS** filenames so rule files are consistent: **AGENTS.md** (canonical), **CLAUDE.md**, **CURSOR.md**, **WINDSURF.md**. One project, one source of truth — AGENTS.md — and thin tool-specific files that point to it.
 
 **AGENTS.md** — Contains all behavioral rules, commands, Three Pillars, Prompt Validation reference, and project-specific content. This is the only file that should hold the full rule set.
 
@@ -638,378 +648,15 @@ When reviewing an AGENTS.md, verify:
 - See `./_examples/basic-examples.md` for before/after AGENTS.md patterns by project type
 - See `./_examples/three-pillars-reference.md` for the comprehensive Three Pillars guide
 - **Framework:** The project's `AGENTIC-ASSETS-FRAMEWORK.md` at project root (when present) for the Rules template type, four rule files (AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md), and "Rules, Skills, and Subagents"
-- **Prompt validation protocol:** The project's protocol at project root or `docs/protocols/PROMPT-VALIDATION-PROTOCOL.md` (when present). This skill embeds the complete protocol into generated AGENTS.md files
+- **Prompt validation protocol:** The project's protocol at project root or `docs/protocols/PROMPT-VALIDATION-PROTOCOL.md` (when present). To **install** the protocol file in a new project, use the **prompt-validation-setup** skill (`.agents/skills/prompt-validation-setup/`). For the **complete protocol text** to embed in generated AGENTS.md files, see `./reference/prompt-validation-protocol-reference.md`
 - **Archive (optional):** When the project has an archive, a prompt-validation or system reference doc may exist there (e.g. PROMPT-VALIDATION-SYSTEM-REFERENCE.md) for the original implementation
 
 ## Related Skills
 
-- **skill-builder** — Create the AI agent skills that rule files and AGENTS.md reference
+- **prompt-validation-setup** — Installs and maintains the Prompt Validation Protocol in `docs/protocols/PROMPT-VALIDATION-PROTOCOL.md`. Use it when setting up a new project so the protocol file exists; use this skill (rules-setup) to add the "Prompt Validation — Before Every Task" reference section to AGENTS.md.
+- **agents-md-setup** — Create or edit AGENTS.md as the primary rule only (canonical content and structure). Use when the user wants to focus on AGENTS.md; use this skill (rules-setup) when you need all four rule files (AGENTS.md + CLAUDE.md, CURSOR.md, WINDSURF.md).
+- **skill-setup** — Create the AI agent skills that rule files and AGENTS.md reference
 - **memory-system-setup** — When adding event-sourced memory (CHANGELOG, .memory/) and the Memory System Protocol section to AGENTS.md
 - When the project uses other skills (e.g. for linting, code review, logging), reference them in AGENTS.md; this skill generates the rule files that point to them
 
 Remember: The best rule sets grow through iteration — add a rule the second time you see the same mistake. Keep AGENTS.md canonical and CLAUDE.md, CURSOR.md, WINDSURF.md thin.
-
----
-
-# Appendix: Complete Prompt Validation Protocol
-
-**Copy this entire section into generated AGENTS.md files.** This ensures every project has the full validation protocol built-in.
-
-## Prompt Validation Protocol (Complete)
-
-**All agents MUST validate user prompts before execution** to ensure clarity, completeness, security, and effectiveness. Validation is mandatory — no exceptions.
-
----
-
-### Table of Contents
-
-1. [Validation Levels](#validation-levels-1)
-2. [Quick Validation (2 minutes)](#quick-validation-2-minutes-must-pass-for-all-prompts-1)
-3. [Security Patterns — BLOCKED](#security-patterns-blocked-1)
-4. [Standard Validation (10 minutes)](#standard-validation-10-minutes-for-standard-and-strict-levels-1)
-5. [Three-Dimension Validation Checklist](#three-dimension-validation-checklist-1)
-6. [Type-Specific Checks](#type-specific-checks-1)
-7. [4-Step Validation Process](#4-step-validation-process-for-strict-level-1)
-8. [Common Validation Failures & Fixes](#common-validation-failures-fixes-1)
-9. [Validation Log Template](#validation-log-template-1)
-10. [Quick Emergency Validation (5-Minute Version)](#quick-validation-5-minute-emergency-version-1)
-11. [Validation Priority Tiers](#validation-priority-tiers-1)
-12. [Security Quick Scan](#security-quick-scan-for-any-sensitive-task-1)
-13. [When to Escalate](#when-to-escalate-1)
-14. [Adaptation by Project Type](#adaptation-by-project-type-1)
-15. [Integration with Three Pillars](#integration-with-three-pillars-1)
-
----
-
-### Validation Levels
-
-| Level | When to Use | What It Checks |
-|-------|-------------|----------------|
-| **PERMISSIVE** | Simple queries, low-risk tasks | Basic syntax, obvious security issues, purpose clarity |
-| **STANDARD** | Default for all tasks | Full 4-check validation, 5-dimension scoring, type-specific checks |
-| **STRICT** | Security-sensitive, shared prompts, production code | Everything in Standard + adversarial testing, peer-review simulation, edge case analysis |
-
----
-
-### Quick Validation (2 minutes) — MUST PASS FOR ALL PROMPTS
-
-If ANY of these fail, stop and ask for clarification:
-
-| Check | How to Verify | Fail If |
-|-------|-------------|---------|
-| **1. Purpose in first line** | Can you state what the prompt wants in one sentence? | No clear objective, multiple competing goals |
-| **2. All variables defined** | Search for `{{`, `[`, `{` — is every placeholder defined or defaulted? | Undefined variables, ambiguous references |
-| **3. No dangerous patterns** | Scan for injection vectors (see Security Patterns below) | Any blocked pattern found |
-| **4. Output format specified** | Does the prompt say what the output should look like? | Format undefined, multiple conflicting formats |
-
----
-
-### Security Patterns — BLOCKED
-
-These 27 patterns must be flagged and rejected:
-
-**Script Injection (7):**
-- `<script>`, `</script>`, `javascript:`
-- `onerror=`, `onload=`, `onclick=`, event handlers
-
-**Command Injection (7):**
-- `eval(`, `exec(`, `subprocess`, `os.system`, `os.popen`
-- Backticks `` ` ``, `${...}`, `$()`
-
-**Path Traversal (3):**
-- `../`, `..\`, `/etc/passwd`, `.env`, `.git/`
-
-**SQL Injection (3):**
-- `DROP TABLE`, `UNION SELECT`, `DELETE FROM`
-
-**System Commands (4):**
-- `rm -rf /`, `sudo`, `chmod`, `chown`, `cmd.exe`, `powershell`, `registry`
-
-**Secrets (3):**
-- Hardcoded passwords, API keys, `AWS_SECRET`, `PRIVATE_KEY`
-
----
-
-### Standard Validation (10 minutes) — FOR STANDARD AND STRICT LEVELS
-
-#### Step 1: Classify the Prompt Type
-
-| Type | Signals |
-|------|---------|
-| **Code Generation** | "generate", "create", "implement", "write code" |
-| **Code Refactoring** | "refactor", "improve", "optimize", "clean up" |
-| **Documentation** | "document", "explain", "write docs", "describe" |
-| **Analysis** | "analyze", "review", "audit", "find issues" |
-| **Conversion** | "convert", "migrate", "transform", "translate" |
-| **Testing** | "test", "verify", "validate", "check" |
-| **Configuration** | "configure", "set up", "install", "deploy" |
-| **General** | None of the above |
-
-#### Step 2: Score 5 Dimensions (0-1 Scale)
-
-| Dimension | Weight | Checks |
-|-----------|--------|--------|
-| **Clarity** | 25% | Single interpretation? No vague words? Imperative instructions? Scope bounded? |
-| **Completeness** | 25% | All variables defined? Sufficient context? Output format? Constraints? Error handling? |
-| **Structure** | 15% | Logical sections? Numbered steps? No wall of text? |
-| **Security** | 20% | No injection vectors? No secrets? No dangerous ops? Output boundaries set? |
-| **Effectiveness** | 15% | Tested with real input? Edge cases covered? Consistent output? |
-
-#### Step 3: Calculate Grade
-
-```
-Final Score = (Clarity × 0.25) + (Completeness × 0.25) + (Structure × 0.15) + (Security × 0.20) + (Effectiveness × 0.15)
-
-A: 0.90-1.00  → Proceed
-B: 0.75-0.89  → Fix warnings, then proceed
-C: 0.60-0.74  → Fix all issues before proceeding
-D: 0.40-0.59  → Major rewrite needed
-F: 0.00-0.39  → Do not proceed
-```
-
-**Automatic Failures** (forces at least a D):
-- Any Security check scores 0
-- Clarity "single interpretation" scores 0
-- Completeness "all variables defined" scores 0
-- 3+ zeros in any single dimension
-
----
-
-### Three-Dimension Validation Checklist
-
-Every prompt must pass these three dimensions:
-
-**Content Validation:**
-- [ ] Prompt clearly states its purpose in the first line
-- [ ] All required variables are defined (no undefined placeholders)
-- [ ] Context is sufficient for the task
-- [ ] Output format is specified (markdown, JSON, code, etc.)
-- [ ] Edge cases are considered
-
-**Structure Validation:**
-- [ ] Follows established prompt template structure
-- [ ] Sections are properly organized and labeled
-- [ ] Examples are provided where needed
-- [ ] Instructions are sequential and logical
-- [ ] Error conditions are handled
-
-**Technical Validation:**
-- [ ] All placeholders use consistent format (`{{VAR}}` not mixed `[VAR]` and `{VAR}`)
-- [ ] Tool calls are properly specified (if applicable)
-- [ ] File paths are correct and safe (no traversal)
-- [ ] Dependencies are declared
-- [ ] Security considerations are included
-
----
-
-### Type-Specific Checks
-
-After universal validation, apply these:
-
-**Code Generation:**
-- Language/framework version specified?
-- Input/output types defined?
-- Error handling strategy specified?
-- Test expectations stated?
-
-**Code Refactoring:**
-- Behavior preservation required?
-- Scope bounded (which files/modules)?
-- Test requirements stated (must pass existing tests)?
-
-**Documentation:**
-- Target audience specified?
-- Format specified (README, API docs, inline comments)?
-- Accuracy verification method?
-
-**Analysis:**
-- Scope bounded (time range, file set, criteria)?
-- Output structure defined (report format, priority levels)?
-- Criteria for findings specified?
-- Prioritization method defined?
-
-**Conversion:**
-- Source/target formats defined?
-- Data loss policy specified?
-- Edge case handling (encoding, special characters)?
-
-**Testing:**
-- Framework specified?
-- Coverage expectations stated?
-- Test categories defined (unit, integration, e2e)?
-
-**Configuration:**
-- Target environment specified?
-- Environment variables listed?
-- Secrets handling strategy defined?
-
----
-
-### 4-Step Validation Process (For Strict Level)
-
-| Step | Action | Details |
-|------|--------|---------|
-| **1. Initial Review** | Review prompt against all checklists | Identify missing elements, note areas for improvement |
-| **2. Testing** | Test with sample inputs | Verify output format, check error handling, try edge cases |
-| **3. Peer Review Simulation** | Critique as if another developer | Question ambiguous terms, challenge assumptions |
-| **4. Documentation** | Document validation results | Note limitations, record test cases, log grade |
-
----
-
-### Common Validation Failures & Fixes
-
-| Failure | Problem | Fix Pattern |
-|---------|---------|-------------|
-| **Missing Context** | Not enough background | Add context section with all necessary information |
-| **Ambiguous Instructions** | Can be interpreted multiple ways | Be specific: "IN SCOPE: X, Y. OUT OF SCOPE: Z" |
-| **No Error Handling** | Doesn't specify what to do on errors | Add: "On error: log to stderr, return empty array, do not throw" |
-| **Undefined Variables** | References variables that aren't defined | Define all variables in context section with examples |
-| **Vague Output Format** | "Create a good README" | "Create README.md with: H1 title, one-paragraph description, installation, usage, license" |
-| **Security Blind Spots** | "Set up the database" | "Set up PostgreSQL using DATABASE_URL env var. Never hardcode credentials. Use parameterized queries" |
-
----
-
-### Validation Log Template
-
-When issues are found, log them in your response:
-
-```
-[Prompt Validation: Quick/Standard/Strict]
-- Level: [permissive/standard/strict]
-- Type: [code-gen/refactoring/documentation/analysis/conversion/testing/configuration/general]
-- Issues found: X critical, Y high, Z medium
-- Grade: [A/B/C/D/F] (0.XX)
-- Failed checks: [list specific checks that failed]
-- Actions taken: [what you fixed or asked for clarification on]
-- Status: [proceeding after fix / awaiting clarification / rejected]
-```
-
----
-
-### Quick Validation (5-Minute Emergency Version)
-
-For urgent prompts when you cannot do full validation:
-
-**2-Minute Must-Have Check:**
-- [ ] Purpose is clear in first line
-- [ ] All variables are defined
-- [ ] Error handling mentioned
-- [ ] Output format specified
-- [ ] Sections are labeled
-- [ ] Instructions are numbered
-
-**Red Flags — Stop Immediately:**
-- ❌ No clear purpose statement
-- ❌ Undefined variables or references
-- ❌ No error handling instructions
-- ❌ Ambiguous or vague instructions
-- ❌ Security patterns present (eval, exec, rm -rf, etc.)
-
-**3-Minute Quick Test:**
-1. Test with simple input
-2. Test edge case
-3. Verify output format matches expectations
-
----
-
-### Validation Priority Tiers
-
-| Priority | Requirements | Examples |
-|----------|-------------|----------|
-| **High (Must Pass)** | Blocking — cannot proceed without these | Clarity and specificity, complete context, proper error handling, security considerations |
-| **Medium (Should Pass)** | Important but not blocking | Examples provided, consistent formatting, adequate testing, documentation complete |
-| **Low (Nice to Have)** | Improvement opportunities | Optimization opportunities, alternative approaches, performance considerations |
-
----
-
-### Security Quick Scan (For Any Sensitive Task)
-
-For prompts touching user input, databases, files, or authentication:
-
-1. **Secrets**: Are credentials from env vars only?
-2. **Dangerous ops**: Are `eval`, `exec`, `rm`, `DROP` guarded or absent?
-3. **User input flow**: Is input sanitized before databases/shells/templates?
-4. **Output boundaries**: Could secrets or system info leak?
-5. **Path safety**: Are file paths validated against a base directory?
-
-If any fail → upgrade to Strict validation or ask for clarification.
-
----
-
-### When to Escalate
-
-Escalate to user (do not proceed) when:
-- Grade is D or F after attempting fixes
-- Security dimension scores 0
-- Prompt contains dangerous patterns that cannot be sanitized
-- Purpose is fundamentally unclear even after clarification attempt
-- Multiple critical issues across dimensions
-
----
-
-### Adaptation by Project Type
-
-Customize the validation emphasis based on the project:
-
-**API projects** — emphasize security checks:
-- SQL injection vectors, credential handling, path traversal
-- Input validation, authentication flows, rate limiting
-- Secrets management, environment variable handling
-
-**Library projects** — emphasize completeness:
-- Input/output types, error handling strategy, edge cases
-- API compatibility, versioning, breaking changes
-- Documentation coverage, examples for all public methods
-
-**Documentation projects** — emphasize clarity:
-- Target audience, format, accuracy verification method
-- Structure, navigation, cross-references
-- Code example correctness, runnable snippets
-
-**Configuration projects** — emphasize security:
-- Environment variables, secrets handling, target environment
-- Network access, firewall rules, access controls
-- Audit trails, change management, rollback procedures
-
-**Web/Frontend projects** — emphasize structure:
-- Component boundaries, state management patterns
-- Accessibility, responsive design, browser compatibility
-- Performance budgets, bundle size, lazy loading
-
-**Data/ML projects** — emphasize validation:
-- Data quality checks, schema validation, missing values
-- Model versioning, reproducibility, experiment tracking
-- Bias detection, privacy preservation, ethical guidelines
-
----
-
-### Integration with Three Pillars
-
-Prompt validation is the **pre-task gate** that bookends the Three Pillars:
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                        TASK LIFECYCLE                            │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│   PROMPT VALIDATION          EXECUTION          THREE PILLARS   │
-│   ─────────────────          ─────────          ─────────────   │
-│   "Is input valid?"  ──▶  DO WORK  ──▶  "Is output complete?"  │
-│                                                                  │
-│   • 4 must-pass checks          • Code changes    • AUTOMATING  │
-│   • 27 security patterns                        • TESTING        │
-│   • 5-dimension scoring                         • DOCUMENTING  │
-│   • Grade A-F before proceeding                                  │
-│                                                                  │
-└─────────────────────────────────────────────────────────────────┘
-```
-
-The Three Pillars verify **output quality**. Prompt validation verifies **input quality**. Together they ensure quality at both ends of every task.
-
----
-
-### Maintenance
-
-- **Review frequency**: Monthly — audit your validation habits
-- **Update triggers**: When new failure patterns emerge, update Common Failures table
-- **Log retention**: Keep last 10 validation logs in CHANGELOG.md for pattern analysis

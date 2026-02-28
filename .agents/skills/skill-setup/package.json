@@ -1,5 +1,5 @@
 {
-  "name": "skill-builder",
+  "name": "skill-setup",
   "version": "1.0.0",
   "description": "A comprehensive toolkit for creating, editing, converting, and organizing AI agent skills across platforms",
   "type": "module",
@@ -30,11 +30,11 @@
     "agent",
     "automation"
   ],
-  "author": "Skill Builder",
+  "author": "Skill Setup",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-org/skill-builder.git"
+    "url": "https://github.com/your-org/skill-setup.git"
   },
   "engines": {
     "node": ">=18.0.0"

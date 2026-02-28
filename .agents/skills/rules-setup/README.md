@@ -1,6 +1,6 @@
 # Rules Setup Skill
 
-This skill helps you create and maintain the **Rules** template type: **AGENTS.md** (canonical) plus **CLAUDE.md**, **CURSOR.md**, **WINDSURF.md** — all **ALL CAPS** at project root. Every generated AGENTS.md includes Prompt Validation (4 checks, security patterns) and Three Pillars (AUTOMATING with **prefer scripts**, TESTING, DOCUMENTING). Fits the six-template-types framework (Rules, Blueprints, Tasks, Recipes, Subagents, Skills).
+This skill helps you create and maintain the **Rules** template type: **AGENTS.md** (canonical) plus **CLAUDE.md**, **CURSOR.md**, **WINDSURF.md** — all **ALL CAPS** at project root. Every generated AGENTS.md includes Prompt Validation (4 checks, security patterns) and Three Pillars (AUTOMATING with **prefer scripts**, TESTING, DOCUMENTING). Fits the seven-template-types framework (Rules, Blueprints, Tasks, Recipes, Subagents, Skills, Protocols).
 
 ## Quick Start
 
@@ -28,7 +28,7 @@ in ALL CAPS...
 
 ### Advanced Example
 ```
-User: Audit my rule files and align with the six-template-types framework
+User: Audit my rule files and align with the seven-template-types framework
 
 Agent: I'll check AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md against
 the six core areas and the Rules template type. You're missing
@@ -72,7 +72,7 @@ and CURSOR.md is duplicated content instead of a thin pointer...
 
 ## Related Skills
 
-- **skill-builder** — Create AI agent skills that rule files reference
+- **skill-setup** — Create AI agent skills that rule files reference
 - **memory-system-setup** — When adding event-sourced memory (CHANGELOG, .memory/) and the Memory System Protocol to AGENTS.md
 - When the project uses other skills (e.g. linting, code review), reference them in AGENTS.md; this skill generates the rule files that point to them.
 

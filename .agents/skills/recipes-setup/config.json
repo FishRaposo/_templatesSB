@@ -16,6 +16,8 @@
       "task bundle",
       "create recipe",
       "add recipe",
+      "edit recipe",
+      "modify recipe",
       "compatible blueprints",
       "template type"
     ],

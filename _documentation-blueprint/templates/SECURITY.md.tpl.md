@@ -4,9 +4,9 @@
 
 | Version | Supported |
 |---------|-----------|
-| {{VERSION_LATEST}} | ✅ Active support |
-| {{VERSION_PREVIOUS}} | ⚠️ Security fixes only |
-| < {{VERSION_MIN}} | ❌ No longer supported |
+| Latest | Active support |
+| Previous | Security fixes only |
+| Older | No longer supported |
 
 ## Reporting a Vulnerability
 
@@ -15,8 +15,7 @@
 Report privately via one of these channels:
 
 - **Email**: {{SECURITY_EMAIL}}
-- **GitHub Security Advisories**: {{SECURITY_ADVISORIES_URL}}
-- **{{ALTERNATIVE_CHANNEL}}**: {{ALTERNATIVE_CHANNEL_DETAILS}}
+- **GitHub Security Advisories**: {{REPO_URL}}/security/advisories
 
 ### What to Include
 
@@ -33,7 +32,7 @@ Report privately via one of these channels:
 | Acknowledgment | Within 48 hours |
 | Initial assessment | Within 5 business days |
 | Fix development | Within 30 days (critical) / 90 days (moderate) |
-| Public disclosure | After fix is released and {{DISCLOSURE_DELAY}} has passed |
+| Public disclosure | After fix is released and {{DISCLOSURE_DELAY}} days have passed |
 
 ## Disclosure Policy
 
@@ -47,9 +46,9 @@ We follow coordinated disclosure. We will:
 ## Security Best Practices for Users
 
 - Always run the latest supported version
-- {{SECURITY_BEST_PRACTICE_1}}
-- {{SECURITY_BEST_PRACTICE_2}}
-- Review `CHANGELOG.md` for security-related events tagged `security`
+- Keep dependencies up to date
+- Review configuration for security-sensitive settings
+- Report suspicious behavior promptly
 
 ---
 

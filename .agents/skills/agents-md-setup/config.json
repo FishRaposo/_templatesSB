@@ -1,0 +1,51 @@
+{
+  "agent_support": {
+    "claude": true,
+    "roo": true,
+    "cascade": true,
+    "cursor": true,
+    "generic": true
+  },
+  "triggers": {
+    "keywords": [
+      "AGENTS.md",
+      "primary rule",
+      "canonical rule",
+      "setup AGENTS.md",
+      "create AGENTS.md",
+      "edit AGENTS.md",
+      "agents md",
+      "primary rule file",
+      "canonical agent rules",
+      "agent behavior rules",
+      "three pillars AGENTS",
+      "prompt validation AGENTS"
+    ],
+    "patterns": [
+      "create.*AGENTS\\.md",
+      "edit.*AGENTS\\.md",
+      "setup.*AGENTS\\.md",
+      "primary.*rule",
+      "canonical.*rule",
+      "AGENTS\\.md.*(setup|create|edit)"
+    ],
+    "file_types": [".md"]
+  },
+  "requirements": {
+    "tools": [],
+    "permissions": ["file_read", "file_write"],
+    "memory": false
+  },
+  "examples": {
+    "simple": [
+      "Create an AGENTS.md for this project as the primary rule",
+      "Edit our AGENTS.md to add the Three Pillars section",
+      "Set up AGENTS.md with Prompt Validation and Key References"
+    ],
+    "complex": [
+      "Generate a full AGENTS.md using this repo's AGENTS.md as reference",
+      "Audit our AGENTS.md and add missing sections (Boundaries, DOCUMENTING table)",
+      "Refactor AGENTS.md to match the seven-template-types structure"
+    ]
+  }
+}

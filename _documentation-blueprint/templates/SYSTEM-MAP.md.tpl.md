@@ -2,27 +2,19 @@
 
 _Architecture overview — keep this current with every structural change_
 
-**Last updated**: {{DATE}} (evt-NNN)
+**Last updated**: {{DATE}} (evt-001)
 
 ---
 
 ## System Overview
 
 ```
-{{ASCII_OR_MERMAID_DIAGRAM}}
-
-Example (replace with actual):
-
 ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
-│   Client    │────▶│     API     │────▶│  Database   │
-│ {{CLIENT}}  │     │  {{API}}    │     │   {{DB}}    │
+│   Client    │────▶│   Server    │────▶│  Database   │
 └─────────────┘     └─────────────┘     └─────────────┘
-                           │
-                    ┌──────▼──────┐
-                    │   Cache     │
-                    │ {{CACHE}}   │
-                    └─────────────┘
 ```
+
+_Replace this diagram with your actual architecture (ASCII or Mermaid)._
 
 ---
 
@@ -30,19 +22,22 @@ Example (replace with actual):
 
 | Component | Purpose | Location | Owner | Status |
 |-----------|---------|----------|-------|--------|
-| {{COMPONENT_1}} | {{COMPONENT_1_PURPOSE}} | `{{COMPONENT_1_PATH}}` | {{COMPONENT_1_OWNER}} | Active |
-| {{COMPONENT_2}} | {{COMPONENT_2_PURPOSE}} | `{{COMPONENT_2_PATH}}` | {{COMPONENT_2_OWNER}} | Active |
-| {{COMPONENT_3}} | {{COMPONENT_3_PURPOSE}} | `{{COMPONENT_3_PATH}}` | {{COMPONENT_3_OWNER}} | Active |
+| Core | Main application logic | `src/` | Team | Active |
+| API | REST endpoints | `src/api/` | Team | Active |
+| Config | Configuration | `config/` | Team | Active |
+
+_Update this table with your actual components._
 
 ---
 
 ## Data Flow
 
-{{DATA_FLOW_DESCRIPTION}}
+1. Client sends request to API
+2. Server processes request through business logic
+3. Data persisted to database
+4. Response returned to client
 
-1. {{STEP_1}}
-2. {{STEP_2}}
-3. {{STEP_3}}
+_Replace with your actual data flow description._
 
 ---
 
@@ -52,14 +47,15 @@ Example (replace with actual):
 
 | Dependency | Version | Purpose | Risk |
 |------------|---------|---------|------|
-| {{DEP_1}} | {{DEP_1_VERSION}} | {{DEP_1_PURPOSE}} | {{DEP_1_RISK}} |
-| {{DEP_2}} | {{DEP_2_VERSION}} | {{DEP_2_PURPOSE}} | {{DEP_2_RISK}} |
+| {{STACK}} | — | Runtime | Low |
+
+_Replace with your actual dependencies._
 
 ### Internal Dependencies
 
 ```
-{{COMPONENT_A}} depends on {{COMPONENT_B}}
-{{COMPONENT_C}} depends on {{COMPONENT_A}}, {{COMPONENT_B}}
+Core depends on Config
+API depends on Core
 ```
 
 ---
@@ -68,20 +64,19 @@ Example (replace with actual):
 
 Key decisions recorded as `decision` events in `CHANGELOG.md`:
 
-| Decision | Event | Rationale Summary |
-|----------|-------|------------------|
-| {{DECISION_1}} | evt-NNN | {{DECISION_1_RATIONALE}} |
-| {{DECISION_2}} | evt-NNN | {{DECISION_2_RATIONALE}} |
+| Decision | Event | Rationale |
+|----------|-------|-----------|
+| Initial architecture | evt-001 | Project foundation |
 
-For full ADR content, see `docs/adr/` (Full tier) or search CHANGELOG.md for `type: decision`.
+_For full ADR content, see `docs/adr/` (Full tier) or search CHANGELOG.md for `type: decision`._
 
 ---
 
 ## Boundaries and Constraints
 
-- **{{BOUNDARY_1}}**: {{BOUNDARY_1_DESCRIPTION}}
-- **{{BOUNDARY_2}}**: {{BOUNDARY_2_DESCRIPTION}}
-- **{{BOUNDARY_3}}**: {{BOUNDARY_3_DESCRIPTION}}
+- **Scope**: This project focuses on {{PROJECT_DESCRIPTION}}
+- **Constraints**: See AGENTS.md for behavioral constraints
+- **Security**: See SECURITY.md for security boundaries
 
 ---
 

@@ -4,13 +4,13 @@ _Immediate trajectory and active work. Ephemeral — regenerate every session fr
 
 **Last updated**: {{DATE}} {{TIME}}  
 **Event horizon**: evt-001  
-**Session**: {{SESSION_DESCRIPTION}}
+**Session**: Project initialization
 
 ---
 
 ## Active Mission
 
-{{ACTIVE_MISSION_PARAGRAPH}}
+Initialize {{PROJECT_NAME}} with complete documentation and development environment.
 
 _Source: most recent milestone or decision events in CHANGELOG.md_
 
@@ -18,12 +18,11 @@ _Source: most recent milestone or decision events in CHANGELOG.md_
 
 ## Active Tasks
 
-_Rename to "Current Sprint" if your project uses sprint methodology._
-
 | Task | Priority | Status | Blockers |
 |------|----------|--------|---------|
-| {{TASK_1}} | high | active | none |
-| {{TASK_2}} | medium | active | none |
+| Set up development environment | high | active | none |
+| Review and customize documentation | medium | active | none |
+| Implement initial features | medium | pending | none |
 
 _Source: graph.md nodes where Type = task, Status = active_
 
@@ -31,8 +30,8 @@ _Source: graph.md nodes where Type = task, Status = active_
 
 ## Active Constraints
 
-- {{CONSTRAINT_1}} — evt-NNN
-- {{CONSTRAINT_2}} — evt-NNN
+- Follow conventions defined in AGENTS.md
+- All changes must satisfy Three Pillars
 
 _Source: recent decision events defining boundaries_
 
@@ -48,8 +47,7 @@ _Source: graph.md edges where Relation = blocks and target is active node_
 
 ## Recent Changes
 
-- {{DATE}} — {{CHANGE_1_SUMMARY}} — evt-001
-- _Add entries as events are appended to CHANGELOG.md_
+- {{DATE}} — Initialize project documentation — evt-001
 
 _Source: last 20 events or last 48 hours from CHANGELOG.md_
 
@@ -57,7 +55,7 @@ _Source: last 20 events or last 48 hours from CHANGELOG.md_
 
 ## Key Dependencies
 
-- {{DEPENDENCY_1}} depends on {{DEPENDENCY_2}} — evt-NNN
+- None identified yet
 
 _Source: graph.md edges where Relation = depends_on for active components_
 
@@ -65,9 +63,9 @@ _Source: graph.md edges where Relation = depends_on for active components_
 
 ## Next Actions
 
-1. {{NEXT_ACTION_1}}
-2. {{NEXT_ACTION_2}}
-3. {{NEXT_ACTION_3}}
+1. Review and customize AGENTS.md for project-specific rules
+2. Update README.md with actual project details
+3. Set up development environment per QUICKSTART.md
 
 _Source: active tasks minus blockers, respecting precedes edges in graph.md_
 

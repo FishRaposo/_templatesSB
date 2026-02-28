@@ -1,0 +1,53 @@
+# project.yaml — Documentation Blueprint Configuration
+# Copy this file to your project and fill in the values.
+# Run: python scaffold.py --config project.yaml
+
+project:
+  name: "MyProject"
+  description: "A brief description of what this project does (2-3 sentences)."
+  tagline: "One-line project tagline"
+  repo_url: "https://github.com/user/repo"
+  tier: core  # mvp | core | full
+  stack: python  # python | node | go | generic
+  primary_language: ""  # Optional: overrides stack default
+
+license:
+  name: "MIT"  # MIT | Apache-2.0 | GPL-3.0 | BSD-3-Clause | proprietary
+
+# Commands (optional — uses stack defaults if omitted)
+commands:
+  install: ""  # e.g., "pip install -r requirements.txt"
+  run: ""      # e.g., "python main.py"
+  test: ""     # e.g., "pytest"
+  lint: ""     # e.g., "ruff check ."
+
+# Features (optional — shown in README)
+features:
+  - "Feature 1 description"
+  - "Feature 2 description"
+  - "Feature 3 description"
+
+# Tech stack (optional — shown in README)
+tech_stack:
+  - "Python 3.11"
+  - "FastAPI"
+
+# AI tool files to generate (optional)
+# Only generated for core and full tiers
+ai_tools:
+  - claude
+  # - cursor
+  # - windsurf
+
+# Components for SYSTEM-MAP.md (optional)
+# Leave empty to use placeholder markers
+components:
+  # - name: "API"
+  #   purpose: "REST API endpoints"
+  #   path: "src/api/"
+  #   owner: "backend-team"
+
+# Security settings (optional)
+security:
+  email: "security@example.com"
+  disclosure_delay_days: 7

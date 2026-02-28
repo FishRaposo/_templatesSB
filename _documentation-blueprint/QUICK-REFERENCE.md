@@ -4,12 +4,26 @@ _One-page agent cheat sheet_
 
 ---
 
-## Agent Cheat Sheet
+## CLI Commands
+
+```bash
+# Scaffold new project
+python scaffold.py --interactive
+python scaffold.py --name "Project" --tier core --stack python
+
+# Validate
+python validate.py .
+
+# List files for tier
+python scaffold.py --list-files core
+```
+
+## Agent Lifecycle
 
 ```
-BOOT:     Read AGENTS.md → Read context.md → Check staleness → Query graph.md → Verify constraints
+BOOT:     Read AGENTS.md → Read context.md → Check staleness → Query graph.md → Verify
 EXECUTE:  Work within boundaries → Append events to CHANGELOG.md
-SHUTDOWN: Append → Materialize → Regenerate → Commit → Handoff → Die
+SHUTDOWN: Append → Materialize → Regenerate → Commit → Die
 RECOVER:  Trust L1 → Rebuild L2 → Rebuild L3 → Resume
 ```
 
@@ -20,48 +34,45 @@ AGENTS.md  >  CHANGELOG.md  >  .memory/graph.md  >  .memory/context.md
 (immutable)   (source of truth)  (derived)              (ephemeral)
 ```
 
-## Three Pillars — Must All Pass Before Done
+## Three Pillars
 
 | Pillar | Check |
 |--------|-------|
-| **AUTOMATING** | **MUST use scripts** — if a script can check it, the script checks it. Existing → standard tools → write new → manual only as last resort |
-| **TESTING** | Code examples run · setup instructions verified · links resolve |
-| **DOCUMENTING** | CHANGELOG has event · affected docs updated · memory layers regenerated |
+| **AUTOMATING** | Scripts for all mechanical checks. Existing → standard tools → write new → manual last |
+| **TESTING** | Code examples run · setup verified · links resolve |
+| **DOCUMENTING** | CHANGELOG has event · docs updated · memory regenerated |
 
-## Tier Selection
+## Tiers
 
-| Project Type | Use Tier |
-|-------------|----------|
-| Solo, prototype, < 1 month | **MVP** |
-| Team, real project, 1–6 months | **Core** |
-| Multi-agent, enterprise, 6+ months | **Full** |
+| Tier | Files | Use When |
+|------|-------|----------|
+| **MVP** | 4 | Solo, prototype, < 1 month |
+| **Core** | 11 | Team, 1–6 months |
+| **Full** | 21+ | Enterprise, multi-agent, > 6 months |
 
-**Upgrade triggers**: MVP → Core when changelog hits 30 events or >1 agent. Core → Full when >3 agents or >6 months.
-
-## Required Files by Tier
+## Files by Tier
 
 | File | MVP | Core | Full |
-|------|-----|------|------|
-| `AGENTS.md` | ✅ | ✅ | ✅ |
-| `CHANGELOG.md` | ✅ | ✅ | ✅ |
-| `README.md` | ✅ | ✅ | ✅ |
-| `.memory/context.md` | ✅ | ✅ | ✅ |
-| `TODO.md` | | ✅ | ✅ |
-| `QUICKSTART.md` | | ✅ | ✅ |
-| `CONTRIBUTING.md` | | ✅ | ✅ |
-| `SECURITY.md` | | ✅ | ✅ |
-| `.memory/graph.md` | | ✅ | ✅ |
-| `docs/SYSTEM-MAP.md` | | ✅ | ✅ |
-| `docs/PROMPT-VALIDATION.md` | | ✅ | ✅ |
-| `WORKFLOW.md` | | | ✅ |
-| `CODE_OF_CONDUCT.md` | | | ✅ |
-| `LICENSE.md` | | | ✅ |
-| `EVALS.md` | | | ✅ |
-| `DOCUMENTATION-OVERVIEW.md` | | | ✅ |
-| `.github/` templates | | | ✅ |
-| AI tool files (CLAUDE.md, etc.) | | ✅ | ✅ |
+|------|:---:|:----:|:----:|
+| AGENTS.md | ✅ | ✅ | ✅ |
+| CHANGELOG.md | ✅ | ✅ | ✅ |
+| README.md | ✅ | ✅ | ✅ |
+| .memory/context.md | ✅ | ✅ | ✅ |
+| TODO.md | | ✅ | ✅ |
+| QUICKSTART.md | | ✅ | ✅ |
+| CONTRIBUTING.md | | ✅ | ✅ |
+| SECURITY.md | | ✅ | ✅ |
+| .memory/graph.md | | ✅ | ✅ |
+| docs/SYSTEM-MAP.md | | ✅ | ✅ |
+| docs/PROMPT-VALIDATION.md | | ✅ | ✅ |
+| WORKFLOW.md | | | ✅ |
+| CODE_OF_CONDUCT.md | | | ✅ |
+| LICENSE.md | | | ✅ |
+| EVALS.md | | | ✅ |
+| DOCUMENTATION-OVERVIEW.md | | | ✅ |
+| .github/* | | | ✅ |
 
-## CHANGELOG Event Format
+## Event Format
 
 ```markdown
 ### evt-NNN | YYYY-MM-DD HH:MM | agent-name | type
@@ -76,57 +87,29 @@ AGENTS.md  >  CHANGELOG.md  >  .memory/graph.md  >  .memory/context.md
 **Tags**: tag1, tag2
 ```
 
-Event types: `decision` `create` `modify` `delete` `test` `fix` `dependency` `blocker` `milestone` `escalation` `handoff`
+Types: `decision` `create` `modify` `delete` `test` `fix` `dependency` `blocker` `milestone` `escalation` `handoff`
 
-## Handoff Event
-
-```markdown
-### evt-NNN | YYYY-MM-DD HH:MM | from-agent | handoff
-
-**Scope**: module
-**Summary**: Handing off X to Y because Z
-
-**Details**:
-- From agent: name
-- To agent: name
-- Invariants: must not violate these
-- Boundaries: scope limits
-- Artifacts: evt-NNN, evt-NNN
-```
-
-## Documentation Parity — What to Update
+## Documentation Parity
 
 | Change | Update |
 |--------|--------|
 | New feature | README, SYSTEM-MAP, CHANGELOG |
 | API change | API docs, CHANGELOG, QUICKSTART |
 | Dependency | CONTRIBUTING, QUICKSTART, CHANGELOG |
-| Security fix | SECURITY, CHANGELOG |
-| Architecture | SYSTEM-MAP, AGENTS if behavioral, CHANGELOG |
-
-## What Each File Answers
-
-| Question | File |
-|----------|------|
-| What can agents do? | `AGENTS.md` |
-| What happened? | `CHANGELOG.md` |
-| What is this project? | `README.md` |
-| What's happening now? | `.memory/context.md` |
-| How do entities relate? | `.memory/graph.md` |
-| How do I set up? | `QUICKSTART.md` |
-| How do I contribute? | `CONTRIBUTING.md` |
-| What's the architecture? | `docs/SYSTEM-MAP.md` |
-
-**Update cascade**: Do work → Append event (L1) → Update affected files → Materialize graph (L2) → Regenerate context (L3) → Commit
+| Security | SECURITY, CHANGELOG |
+| Architecture | SYSTEM-MAP, AGENTS, CHANGELOG |
 
 ## When In Doubt
 
 1. **Read the event log** — it is the only truth
-2. **Rebuild, don't repair** — regenerate derived layers from upstream
-3. **Append, don't edit** — wrong? append a corrective event
-4. **Escalate, don't guess** — if constraints are unclear, ask a human
+2. **Rebuild, don't repair** — regenerate derived layers
+3. **Append, don't edit** — wrong? append corrective event
+4. **Escalate, don't guess** — unclear? ask human
 
 ---
 
-_Full specification: `DOCUMENTATION-BLUEPRINT.md`_  
-_Templates: `templates/` directory_
+## For AI Agents
+
+**Start with `AI-ENTRYPOINT.md`** for step-by-step instructions.
+
+Full spec: `DOCUMENTATION-BLUEPRINT.md`

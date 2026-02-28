@@ -1,4 +1,4 @@
-# Skill Builder
+# Skill Setup
 
 Toolkit for creating, editing, converting, and organizing AI agent skills across Claude, Roo Code, Cascade, Cursor, Windsurf, and custom agents. Covers description best practices, instruction patterns, and anti-patterns.
 
@@ -11,7 +11,7 @@ Toolkit for creating, editing, converting, and organizing AI agent skills across
 1. **Create directory** (e.g. `~/.claude/skills/your-skill-name` or `.cursor/skills/your-skill-name`).
 2. **Copy** `templates/skill-template.md` → `SKILL.md`, `templates/config-template.json` → `config.json`.
 3. **Edit**: `name` (gerund, lowercase, hyphens, max 64 chars), `description` ("Use this skill when..." + triggers, max 1024 chars), required sections (minimum: Core Approach, Step-by-Step, Validation Checklist; see SKILL.md), real examples. Keep SKILL.md under 500 lines.
-4. **Validate** (if using the skill-builder scripts): `node scripts/validate-skill.js path/to/skill`.
+4. **Validate** (if using the skill-setup scripts): `node scripts/validate-skill.js path/to/skill`.
 
 **Packs:** Use a pack creation guide (e.g. HOW_TO_CREATE_SKILL_PACKS.md) when the project provides one. Projects may use a flat `skills/` directory or a `skill-packs/` layout; follow the project's convention.  
 **Walkthrough:** `creating-skills-from-scratch.md`  

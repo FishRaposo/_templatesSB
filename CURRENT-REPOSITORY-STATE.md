@@ -3,7 +3,7 @@
 **Generated**: 2026-02-26  
 **Purpose**: Inventory of current implementation in this repository  
 
-**Current implementation**: Only **Rules** (AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md) and **seven Skills** are actively maintained: **memory-system-setup**, **rules-setup**, **skill-builder**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup** (under `.agents/skills/`). Blueprints, Tasks, Recipes, Subagents, and legacy skill-packs are **archived** (see `_complete_archive/` and framework doc). The six template types are defined in `AGENTIC-ASSETS-FRAMEWORK.md` for reference.
+**Current implementation**: Only **Rules** (AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md), **Protocols** (in `docs/protocols/`), and **nine Skills** are actively maintained. This repo follows the **Documentation Blueprint** at **MVP + Core** tier (see `_documentation-blueprint/DOCUMENTATION-BLUEPRINT.md`). Core-tier root files (QUICKSTART.md, CONTRIBUTING.md, SECURITY.md) and docs (SYSTEM-MAP.md, PROMPT-VALIDATION.md pointer, WORKFLOW.md) are present.
 
 **Total Items**: 600+ files across 10 main directories (including archived content).
 
@@ -14,8 +14,14 @@
 ### Core Documentation
 - **AGENTS.md** (21.4KB) - Agent framework with Three Pillars
 - **CLAUDE.md** (39.8KB) - Claude AI comprehensive guide
+- **CURSOR.md** - Cursor AI guide
 - **WINDSURF.md** (2.8KB) - Windsurf AI guide
 - **README.md** (3.2KB) - Repository overview and navigation
+- **QUICKSTART.md** - Prerequisites, setup, first run, common errors
+- **CONTRIBUTING.md** - How to contribute, Three Pillars, branch/commit/PR
+- **SECURITY.md** - Supported versions, how to report vulnerabilities
+- **WORKFLOW.md** - Branching, development cycle, commit convention, CI
+- **TODO.md** - Task tracker
 
 ---
 
@@ -24,14 +30,16 @@
 ```
 ├── .memory/                        # Memory data directory
 ├── .agents/
-│   └── skills/                     # 🧠 Current skills (seven)
+│   └── skills/                     # 🧠 Current skills (nine)
 │       ├── memory-system-setup/
 │       ├── rules-setup/
-│       ├── skill-builder/
+│       ├── skill-setup/
 │       ├── blueprints-setup/
 │       ├── tasks-setup/
 │       ├── recipes-setup/
-│       └── subagents-setup/
+│       ├── subagents-setup/
+│       ├── prompt-validation-setup/
+│       └── protocol-setup/
 ├── docs/                           # Documentation hub (~68 items)
 ├── plans/                          # Planning artifacts
 ├── _documentation-blueprint/       # Documentation blueprint system
@@ -48,13 +56,15 @@
 
 #### Core Files
 - **INDEX.md** - Complete documentation index
+- **SYSTEM-MAP.md** - Architecture overview, components, data flow, decision log
+- **PROMPT-VALIDATION.md** - 4-check gate; points to docs/protocols/PROMPT-VALIDATION-PROTOCOL.md
 - **MEMORY_SYSTEM.md** - Memory system overview (when present)
 - **THREE_PILLARS.md** - Three Pillars framework
 
 #### Subdirectories
 - **core/** - AGENTIC-RULES.md and agent behavior rules
 - **guides/** - AGENT_SKILLS_GUIDE, TEMPLATE-SYSTEM-GUIDE, ADD-NEW-*-TEMPLATE guides
-- **protocols/** - MEMORY-SYSTEM-PROTOCOL.md, PROMPT-VALIDATION-PROTOCOL.md
+- **protocols/** - 📋 **Protocols** (template type): MEMORY-SYSTEM-PROTOCOL.md, PROMPT-VALIDATION-PROTOCOL.md. Install Prompt Validation via `.agents/skills/prompt-validation-setup/`.
 - **memory-system/** - Memory system docs, templates, scripts, and examples
 - **templates/**, **examples/**, **technical/**, **universal/** - As documented in INDEX.md
 
@@ -74,7 +84,7 @@ Memory system documentation, templates, scripts, and examples live under `docs/m
 
 ### 🤖 rules-setup / .agents/skills/rules-setup — Rules Template Setup
 
-Creates and maintains the **Rules** template type: AGENTS.md (canonical) + CLAUDE.md, CURSOR.md, WINDSURF.md (ALL CAPS). Three Pillars (AUTOMATING with prefer scripts, TESTING, DOCUMENTING), Prompt Validation, six core areas. Fits the six-template-types framework.
+Creates and maintains the **Rules** template type: AGENTS.md (canonical) + CLAUDE.md, CURSOR.md, WINDSURF.md (ALL CAPS). Three Pillars (AUTOMATING with prefer scripts, TESTING, DOCUMENTING), Prompt Validation reference, six core areas. Fits the seven-template-types framework. To **install** the Prompt Validation Protocol file, use **prompt-validation-setup** skill.
 
 #### Core Files
 - **README.md** — Setup overview
@@ -84,7 +94,7 @@ Creates and maintains the **Rules** template type: AGENTS.md (canonical) + CLAUD
 #### Subdirectories
 - **_examples/** — Setup examples
 
-### 🔧 skill-builder / .agents/skills/skill-builder — Skill Development
+### 🔧 skill-setup / .agents/skills/skill-setup — Skill Development
 
 Skill creation and improvement. Use when creating or updating skills (SKILL.md, config.json, README, examples).
 
@@ -102,7 +112,7 @@ Skill creation and improvement. Use when creating or updating skills (SKILL.md, 
 
 ### 📚 skill-packs (archived)
 
-Legacy skill packs (e.g. 1-programming-core, 2-code-quality) and HOW_TO_CREATE_SKILL_PACKS.md are **archived**. See `_complete_archive/`. Current skills live in `.agents/skills/` (memory-system-setup, rules-setup, skill-builder, blueprints-setup, tasks-setup, recipes-setup, subagents-setup).
+Legacy skill packs (e.g. 1-programming-core, 2-code-quality) and HOW_TO_CREATE_SKILL_PACKS.md are **archived**. See `_complete_archive/`. Current skills live in `.agents/skills/` (memory-system-setup, rules-setup, skill-setup, blueprints-setup, tasks-setup, recipes-setup, subagents-setup, **prompt-validation-setup**, **protocol-setup**).
 
 ### 🏗️ blueprints/ - Template Blueprints (archived)
 
@@ -114,7 +124,7 @@ Blueprint definitions (e.g. mins, saas-api, web-dashboard) are **archived**. See
 
 ### 📜 scripts/ - Automation (when present)
 
-This repo has no top-level `scripts/`. Template automation is in framework reference or `_complete_archive/`. In-repo automation: `docs/memory-system/scripts/` (memory) when present, and `.agents/skills/skill-builder/scripts/` (validate-skill.js, etc.). When a project has top-level `scripts/`, use them per AGENTS.md.
+This repo has no top-level `scripts/`. Template automation is in framework reference or `_complete_archive/`. In-repo automation: `docs/memory-system/scripts/` (memory) when present, and `.agents/skills/skill-setup/scripts/` (validate-skill.js, etc.). When a project has top-level `scripts/`, use them per AGENTS.md.
 
 ### 📦 _complete_archive/ - Archived Content
 
@@ -140,23 +150,25 @@ Previous repository states, legacy skill-packs, blueprints, tasks, scripts, feat
 - **Automated generation**: Scripts for documentation creation
 
 ### 🔧 Skill Development
-- **Skill builder**: `.agents/skills/skill-builder/` — skill creation and improvement
-- **Current skills**: memory-system-setup, rules-setup, skill-builder, blueprints-setup, tasks-setup, recipes-setup, subagents-setup (in `.agents/skills/`)
+- **Skill builder**: `.agents/skills/skill-setup/` — skill creation and improvement
+- **Current skills**: memory-system-setup, rules-setup, skill-setup, blueprints-setup, tasks-setup, recipes-setup, subagents-setup, prompt-validation-setup, **protocol-setup** (in `.agents/skills/`)
 - Legacy skill-packs are archived
 
 ### 🏗️ Template System
+- **Seven template types**: Rules, Blueprints, Tasks, Recipes, Subagents, Skills, **Protocols** (see AGENTIC-ASSETS-FRAMEWORK.md)
+- **Protocols**: `docs/protocols/` — process definitions (e.g. PROMPT-VALIDATION-PROTOCOL.md, MEMORY-SYSTEM-PROTOCOL.md). Install Prompt Validation via `.agents/skills/prompt-validation-setup/`.
 - **Blueprints, Tasks, Recipes, Subagents**: Defined in framework; implementations in this repo are archived
 
 ### ⚡ Automation
-- **In this repo**: memory-system/scripts/ (memory), .agents/skills/skill-builder/scripts/ (skill validation)
+- **In this repo**: memory-system/scripts/ (memory), .agents/skills/skill-setup/scripts/ (skill validation)
 - **When present**: Top-level scripts/ (validate-templates, setup-project, etc.) as in framework/archive
 
 ---
 
 ## Usage Statistics
 
-- **Root**: Core docs (AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md, README, CHANGELOG, framework), `.agents/skills/` (7 skills), `.memory/`, `docs/` (~68 items), `_documentation-blueprint/`, `plans/`, `_complete_archive/`
-- **Skills**: Seven skills in `.agents/skills/` (memory-system-setup, rules-setup, skill-builder, blueprints-setup, tasks-setup, recipes-setup, subagents-setup)
+- **Root**: Core docs (AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md, README, CHANGELOG, framework), `.agents/skills/` (9 skills), `.memory/`, `docs/` (~68 items), `docs/protocols/` (Protocols), `_documentation-blueprint/`, `plans/`, `_complete_archive/`
+- **Skills**: Nine skills in `.agents/skills/` (memory-system-setup, rules-setup, skill-setup, blueprints-setup, tasks-setup, recipes-setup, subagents-setup, prompt-validation-setup, protocol-setup)
 - **Documentation**: INDEX.md, protocols, guides, memory-system docs, and supporting dirs under `docs/`
 
 ---
@@ -170,12 +182,12 @@ Previous repository states, legacy skill-packs, blueprints, tasks, scripts, feat
 - **Archive** ↔ **Current State** via restoration capability
 
 ### Workflow Integration
-1. **Setup Phase**: Use `.agents/skills/rules-setup/` and `.agents/skills/skill-builder/`
+1. **Setup Phase**: Use `.agents/skills/rules-setup/`, `.agents/skills/skill-setup/`, `.agents/skills/protocol-setup/`
 2. **Development Phase**: When the project adopts them, use blueprints/, tasks/, recipes/, subagents/ (see framework and archive)
 3. **Documentation Phase**: Use `_documentation-blueprint/` and `docs/`
-4. **Maintenance Phase**: Use memory-system protocol, CHANGELOG, and skill-builder scripts as applicable
+4. **Maintenance Phase**: Use memory-system protocol, CHANGELOG, and skill-setup scripts as applicable
 
 ---
 
 *Repository state captured: 2026-02-26*  
-*Active: Rules (four rule files) + seven Skills in `.agents/skills/`. Blueprints, Tasks, Recipes, Subagents, and legacy skill-packs archived.*
+*Active: Rules (four rule files) + Protocols (docs/protocols/) + nine Skills in `.agents/skills/`. Blueprints, Tasks, Recipes, Subagents, and legacy skill-packs archived.*

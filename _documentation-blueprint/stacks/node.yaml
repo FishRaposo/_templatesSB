@@ -1,0 +1,30 @@
+name: Node.js
+primary_language: TypeScript
+
+commands:
+  install: "npm install"
+  run: "npm run dev"
+  test: "npm test"
+  lint: "npm run lint"
+  build: "npm run build"
+
+local_url: "http://localhost:3000"
+
+prerequisites:
+  - name: Node.js
+    version: "20+"
+    check: "node --version"
+    install_url: "https://nodejs.org/"
+  - name: npm
+    version: "10+"
+    check: "npm --version"
+    install_url: "https://docs.npmjs.com/downloading-and-installing-node-js-and-npm"
+
+tech_stack_default:
+  - "Node.js 20"
+  - "TypeScript"
+
+style_rules:
+  - "Follow the project's ESLint configuration"
+  - "Use TypeScript strict mode"
+  - "Write JSDoc comments for public APIs"

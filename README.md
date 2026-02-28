@@ -1,6 +1,6 @@
 # Unified AI Development Ecosystem
 
-A comprehensive repository built on **six template types** for AI-assisted software development.
+A comprehensive repository built on **seven template types** for AI-assisted software development.
 
 **Last Updated**: 2025  
 **Status**: Active Development
@@ -9,9 +9,9 @@ See `AGENTIC-ASSETS-FRAMEWORK.md` for complete framework documentation.
 
 ---
 
-## 🎯 Six-Pillar Architecture
+## 🎯 Seven Template Types
 
-This repository is organized around **six complementary template types**:
+This repository is organized around **seven complementary template types**:
 
 ### 1. 📜 Rules
 **How agents must behave** — Tool- and audience-specific constraints (Markdown)
@@ -35,11 +35,16 @@ This repository is organized around **six complementary template types**:
 
 ### 6. 🧠 Skills
 **How to do it well** — Capabilities & best practices (Markdown + JSON)
-- **Current skills in this repo**: **memory-system-setup**, **rules-setup**, **skill-builder**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup** (under `.agents/skills/`)
-- Use `.agents/skills/skill-builder/` to create or improve skills; `.agents/skills/rules-setup/` for the four rule files; `.agents/skills/memory-system-setup/` for the memory system
+- **Current skills in this repo**: **memory-system-setup**, **rules-setup**, **skill-setup**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup**, **prompt-validation-setup**, **protocol-setup** (under `.agents/skills/`)
+- Use `.agents/skills/skill-setup/` to create or improve skills; `.agents/skills/rules-setup/` for the four rule files; `.agents/skills/memory-system-setup/` for the memory system; `.agents/skills/prompt-validation-setup/` to install the Prompt Validation Protocol; `.agents/skills/protocol-setup/` for the Protocols template type
 - Legacy skill-packs (e.g. 1-programming-core, 2-code-quality) are **archived**
 
-**"Templates"** refers to all six types (Rules, Blueprints, Tasks, Recipes, Subagents, Skills).
+### 7. 📋 Protocols
+**How processes are defined** — Repeatable procedures (Markdown in `docs/protocols/`)
+- **PROMPT-VALIDATION-PROTOCOL.md** — Installed by **prompt-validation-setup** skill
+- **MEMORY-SYSTEM-PROTOCOL.md** — Referenced by **memory-system-setup** skill
+
+**"Templates"** refers to all seven types (Rules, Blueprints, Tasks, Recipes, Subagents, Skills, Protocols).
 
 ---
 
@@ -51,20 +56,22 @@ This repository is organized around **six complementary template types**:
 ├── CLAUDE.md                      # 📜 RULES — Claude
 ├── CURSOR.md                      # 📜 RULES — Cursor
 ├── WINDSURF.md                    # 📜 RULES — Windsurf
-├── AGENTIC-ASSETS-FRAMEWORK.md    # Six template types definitions
+├── AGENTIC-ASSETS-FRAMEWORK.md    # Seven template types definitions
 ├── CHANGELOG.md                   # Event log (append-only)
 ├── README.md                      # This file
 ├── CURRENT-REPOSITORY-STATE.md    # Repository inventory
 │
 ├── .agents/
-│   └── skills/                    # 🧠 SKILLS (seven skills)
+│   └── skills/                    # 🧠 SKILLS (nine skills)
 │       ├── memory-system-setup/
 │       ├── rules-setup/
-│       ├── skill-builder/
+│       ├── skill-setup/
 │       ├── blueprints-setup/
 │       ├── tasks-setup/
 │       ├── recipes-setup/
-│       └── subagents-setup/
+│       ├── subagents-setup/
+│       ├── prompt-validation-setup/
+│       └── protocol-setup/
 │
 ├── .memory/                       # Memory system data (when in use)
 ├── docs/                          # Documentation & protocols
@@ -97,8 +104,8 @@ python scripts/setup-project.py --auto --name "MyApp" --description "minimalist 
 ```
 
 ### Create a Skill
-1. Use `.agents/skills/skill-builder/` for creating or improving skills
-2. Follow the SKILL.md and config.json patterns (see any of the seven skills in `.agents/skills/`)
+1. Use `.agents/skills/skill-setup/` for creating or improving skills
+2. Follow the SKILL.md and config.json patterns (see any of the nine skills in `.agents/skills/`)
 3. Follow Three Pillars framework
 
 ### Create a Blueprint
@@ -160,15 +167,14 @@ Every task must satisfy all three pillars:
 
 | File | Purpose |
 |------|---------|
-| `AGENTIC-ASSETS-FRAMEWORK.md` | **Six template types** — Complete framework definitions |
+| `AGENTIC-ASSETS-FRAMEWORK.md` | **Seven template types** — Complete framework definitions |
 | `AGENTS.md` | **📜 Rules** — Canonical behavioral constraints (start here) |
 | `CLAUDE.md` | **📜 Rules** — Claude Code guide |
 | `CURSOR.md` | **📜 Rules** — Cursor AI guide |
 | `WINDSURF.md` | **📜 Rules** — Windsurf AI guide |
 | `CURRENT-REPOSITORY-STATE.md` | Repository inventory and directory overview |
-| `.agents/skills/` | **🧠 Skills** — memory-system-setup, rules-setup, skill-builder, blueprints-setup, tasks-setup, recipes-setup, subagents-setup |
-| `docs/protocols/MEMORY-SYSTEM-PROTOCOL.md` | Event-sourced memory system |
-| `docs/protocols/PROMPT-VALIDATION-PROTOCOL.md` | Prompt validation rules |
+| `.agents/skills/` | **🧠 Skills** — memory-system-setup, rules-setup, skill-setup, blueprints-setup, tasks-setup, recipes-setup, subagents-setup, prompt-validation-setup, protocol-setup |
+| `docs/protocols/` | **📋 Protocols** — MEMORY-SYSTEM-PROTOCOL.md, PROMPT-VALIDATION-PROTOCOL.md |
 
 ---
 
@@ -226,10 +232,13 @@ python -m py_compile scripts/*.py
 
 ## 📊 Current Implementation
 
+This repository follows the **Documentation Blueprint** at **MVP + Core** tier (see `_documentation-blueprint/DOCUMENTATION-BLUEPRINT.md`). Full tier (WORKFLOW, CODE_OF_CONDUCT, LICENSE, EVALS, .github/) is optional and partially adopted (WORKFLOW.md added).
+
 | Asset Type | In this repo | Notes |
 |------------|--------------|-------|
 | **Rules** | ✅ Active | AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md |
-| **Skills** | ✅ Active (7) | memory-system-setup, rules-setup, skill-builder, blueprints-setup, tasks-setup, recipes-setup, subagents-setup in `.agents/skills/` |
+| **Protocols** | ✅ Active | docs/protocols/ (PROMPT-VALIDATION-PROTOCOL.md, MEMORY-SYSTEM-PROTOCOL.md) |
+| **Skills** | ✅ Active (9) | memory-system-setup, rules-setup, skill-setup, blueprints-setup, tasks-setup, recipes-setup, subagents-setup, prompt-validation-setup, protocol-setup in `.agents/skills/` |
 | **Blueprints** | Archived | Framework defined; see `AGENTIC-ASSETS-FRAMEWORK.md` |
 | **Tasks** | Archived | Framework defined |
 | **Recipes** | Archived | Framework defined |
@@ -241,7 +250,7 @@ python -m py_compile scripts/*.py
 
 - **Framework**: Read `AGENTIC-ASSETS-FRAMEWORK.md` for complete definitions
 - **Rules**: AGENTS.md is canonical; use `.agents/skills/rules-setup/` for setting up the four rule files
-- **Skills**: Use `.agents/skills/rules-setup/`, `.agents/skills/memory-system-setup/`, or `.agents/skills/skill-builder/`; see `.agents/skills/skill-builder/` for creating skills
+- **Skills**: Use `.agents/skills/rules-setup/`, `.agents/skills/memory-system-setup/`, or `.agents/skills/skill-setup/`; see `.agents/skills/skill-setup/` for creating skills
 - **Blueprints, Tasks, Recipes, Subagents**: Defined in the framework; implementations in this repo are archived
 - **Validation**: When the project includes `scripts/validate-templates.py`, run it when templates/scripts are in use.
 

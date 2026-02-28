@@ -9,7 +9,7 @@ _Materialized view of entities and relationships. Never edit directly — materi
 | Node | Type | Status | Created (evt) | Last Event | Attributes |
 |------|------|--------|---------------|------------|------------|
 | {{PROJECT_NAME}} | component | active | evt-001 | evt-001 | path: /, tier: {{TIER}} |
-| {{COMPONENT_1}} | component | active | evt-001 | evt-001 | path: {{COMPONENT_1_PATH}} |
+| core | component | active | evt-001 | evt-001 | path: src/ |
 | docs_foundation | milestone | completed | evt-001 | evt-001 | criteria: blueprint initialized |
 
 **Node types**: `component` `task` `dependency` `decision` `document` `milestone`  
@@ -21,7 +21,7 @@ _Materialized view of entities and relationships. Never edit directly — materi
 
 | From | To | Relation | Created (evt) | Attributes |
 |------|----|----------|---------------|------------|
-| {{COMPONENT_1}} | {{PROJECT_NAME}} | contains | evt-001 | |
+| core | {{PROJECT_NAME}} | contains | evt-001 | |
 
 **Edge relations**: `depends_on` `blocks` `implements` `tests` `documents` `contains` `precedes` `related_to`
 
@@ -31,8 +31,8 @@ _Materialized view of entities and relationships. Never edit directly — materi
 
 - **Last updated**: {{DATE}}
 - **Event horizon**: evt-001
-- **Nodes**: {{NODE_COUNT}}  ← update this to match the actual number of rows in the Nodes table
-- **Edges**: {{EDGE_COUNT}}  ← update this to match the actual number of rows in the Edges table
+- **Nodes**: 3
+- **Edges**: 1
 
 ---
 

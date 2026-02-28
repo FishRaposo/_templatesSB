@@ -6,7 +6,7 @@
 
 ## What It Does
 
-{{PROJECT_DESCRIPTION_2_3_SENTENCES}}
+{{PROJECT_DESCRIPTION}}
 
 ## Quick Start
 
@@ -30,16 +30,6 @@ Visit {{LOCAL_URL}} to see it running.
 - **{{FEATURE_2}}**
 - **{{FEATURE_3}}**
 
-## Documentation
-
-| Document | Purpose |
-|----------|---------|
-| [QUICKSTART.md](QUICKSTART.md) | Detailed setup and first-run guide |
-| [CONTRIBUTING.md](CONTRIBUTING.md) | How to contribute |
-| [SECURITY.md](SECURITY.md) | Security policy and vulnerability reporting |
-| [docs/SYSTEM-MAP.md](docs/SYSTEM-MAP.md) | Architecture overview |
-| [CHANGELOG.md](CHANGELOG.md) | Full change history |
-
 ## Tech Stack
 
 - **{{TECH_1}}**
@@ -48,8 +38,9 @@ Visit {{LOCAL_URL}} to see it running.
 
 ## License
 
-{{LICENSE_NAME}} — see [LICENSE.md](LICENSE.md) for details.
+{{LICENSE_NAME}}
 
 ---
 
-_For AI agents working on this project: read [AGENTS.md](AGENTS.md) first._
+_For AI agents working on this project: read [AGENTS.md](AGENTS.md) first._  
+_See [CHANGELOG.md](CHANGELOG.md) for change history._

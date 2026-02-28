@@ -8,17 +8,17 @@ _Task tracker — single source of truth for open work_
 
 ## Active
 
-- [ ] {{TASK_1}}
-- [ ] {{TASK_2}}
-- [ ] {{TASK_3}}
+- [ ] Set up development environment
+- [ ] Review and customize documentation
+- [ ] Add initial features
 
 ## In Progress
 
-- [ ] {{TASK_IN_PROGRESS}} _(started {{DATE}})_
+- [ ] Project initialization _(started {{DATE}})_
 
 ## Blocked
 
-- [ ] {{BLOCKED_TASK}} — blocked by: {{BLOCKER_DESCRIPTION}} (see evt-NNN)
+- [ ] No blocked tasks currently
 
 ## Done
 

@@ -1,11 +1,21 @@
 ---
 name: recipes-setup
-description: Use this skill when creating, editing, or auditing Recipes — the template type that bundles Tasks and Skills for common scenarios (feature combinations). This includes recipe.yaml, RECIPE.md, task and skill lists, blueprint compatibility, and configuration overrides. Fits the six-template-types framework (Rules, Blueprints, Tasks, Recipes, Subagents, Skills).
+description: Use this skill when creating, editing, or auditing Recipes — the template type that bundles Tasks and Skills for common scenarios (feature combinations). This includes recipe.yaml, RECIPE.md, task and skill lists, blueprint compatibility, and configuration overrides. Fits the seven-template-types framework (Rules, Blueprints, Tasks, Recipes, Subagents, Skills, Protocols).
 ---
 
 # Recipes Setup Skill
 
-This skill creates and maintains **Recipes**: pre-configured bundles of Tasks and Skills for common development scenarios (e.g. e-commerce, SaaS starter). When invoked, it can add a new recipe, update task/skill lists or blueprint compatibility, or audit recipe configuration against the framework.
+This skill creates and maintains **Recipes**: the template type that bundles **Tasks and Skills** for common scenarios (e.g. e-commerce, SaaS starter). Recipes live under `recipes/<recipe-name>/` with `recipe.yaml` (machine-readable) and `RECIPE.md` (human-readable).
+
+## Your Role
+
+Help users **create** and **modify** Recipes through:
+
+1. **Creating New Recipes** — Add a new recipe directory with `recipe.yaml` (tasks, skills, compatible blueprints, optional configuration) and `RECIPE.md`
+2. **Editing Existing Recipes** — Update task or skill lists, blueprint compatibility, or per-task configuration overrides in `recipe.yaml`; revise `RECIPE.md` to match
+3. **Auditing Recipes** — Check that every task ID exists in `tasks/task-index.yaml` and skill references resolve; fix broken references when the project has validation
+
+When invoked, produce or update recipe files so they conform to the framework. Validate dependencies when the project includes validation for recipes.
 
 ## Core Approach
 
@@ -41,6 +51,15 @@ Document the scenario this recipe targets, which tasks and skills it includes, a
 ### 4. Validate dependencies (when the project has validation)
 
 When the project includes validation for recipes, ensure every task ID exists in `tasks/task-index.yaml` and every skill/task reference resolves. Fix broken references before considering the recipe complete.
+
+## Editing Recipes
+
+When modifying an existing recipe:
+
+- **recipe.yaml** — Update `tasks`, `skills`, `blueprints.compatible`, or `configuration` overrides; keep YAML valid and IDs consistent with the project’s task index and skills
+- **RECIPE.md** — Revise scenario description, included tasks/skills, or usage to match changes
+
+Re-run dependency validation after edits when the project has a validation script.
 
 ## Best Practices
 

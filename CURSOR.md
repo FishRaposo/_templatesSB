@@ -1,6 +1,6 @@
 # CURSOR.md - Unified AI Development Ecosystem
 
-**Purpose**: Cursor AI guide for the six template types (Rules, Blueprints, Tasks, Recipes, Subagents, Skills).  
+**Purpose**: Cursor AI guide for the seven template types (Rules, Blueprints, Tasks, Recipes, Subagents, Skills, Protocols).  
 **Last Updated**: 2025
 
 See `AGENTIC-ASSETS-FRAMEWORK.md` for complete framework documentation.
@@ -11,7 +11,7 @@ See `AGENTIC-ASSETS-FRAMEWORK.md` for complete framework documentation.
 
 ## Quick Start
 
-This repository is built on **six template types**:
+This repository is built on **seven template types**:
 
 1. **Rules** — How agents must behave (AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md, .cursor/rules)
 2. **Blueprints** — What to build (product archetypes)
@@ -19,8 +19,9 @@ This repository is built on **six template types**:
 4. **Recipes** — Feature combinations (bundles)
 5. **Subagents** — Who does the work (configured sub-agents)
 6. **Skills** — How to do it well (capabilities)
+7. **Protocols** — How processes are defined (e.g. prompt validation, memory; in `docs/protocols/`)
 
-**"Templates"** = all six types (Rules, Blueprints, Tasks, Recipes, Subagents, Skills). **Rules** are loaded by Cursor from this file or from `.cursor/rules/`. **In this repo** only **Rules** and **seven Skills** are active: **memory-system-setup**, **rules-setup**, **skill-builder**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup** (under `.agents/skills/`). Other template-type implementations are archived.
+**"Templates"** = all seven types (Rules, Blueprints, Tasks, Recipes, Subagents, Skills, Protocols). **Rules** are loaded by Cursor from this file or from `.cursor/rules/`. **In this repo** only **Rules**, **Protocols** (in `docs/protocols/`), and **nine Skills** are active: **memory-system-setup**, **rules-setup**, **skill-setup**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup**, **prompt-validation-setup**, **protocol-setup** (under `.agents/skills/`). Other template-type implementations are archived.
 
 ```bash
 # Validate JSON (skills)
@@ -48,9 +49,10 @@ python scripts/setup-project.py --auto --name "Project" --description "desc"
 ├── WINDSURF.md                # 📜 RULES — Windsurf entry
 ├── AGENTIC-ASSETS-FRAMEWORK.md
 ├── CHANGELOG.md, README.md, CURRENT-REPOSITORY-STATE.md
-├── .agents/skills/            # 🧠 SKILLS (seven)
+├── .agents/skills/            # 🧠 SKILLS (nine)
 ├── .memory/                   # Memory data (when in use)
 ├── docs/, plans/, _documentation-blueprint/
+│   └── protocols/            # 📋 PROTOCOLS (e.g. PROMPT-VALIDATION-PROTOCOL.md)
 ├── .cursor/rules/             # Optional Cursor rule files
 ├── blueprints/, tasks/, recipes/, subagents/   # When present or archived
 └── scripts/                   # When present (framework/archive)
@@ -58,14 +60,32 @@ python scripts/setup-project.py --auto --name "Project" --description "desc"
 
 ---
 
+## Memory System
+
+**Load memory at session start:** This project uses an event-sourced memory system. Before doing work:
+
+1. Read **AGENTS.md** for behavioral constraints (canonical rules).
+2. Read **`.memory/context.md`** for current trajectory. If the file is missing, create it from `CHANGELOG.md` (and `.memory/graph.md` if present) per `docs/protocols/MEMORY-SYSTEM-PROTOCOL.md`.
+3. **Check staleness:** In `.memory/context.md`, find the "Event horizon" comment (e.g. `Event horizon: evt-002`). In `CHANGELOG.md`, find the last event under `## Event Log` (e.g. `### evt-002`). If they differ or context is missing, regenerate `.memory/context.md` (and `.memory/graph.md` if used) from the event log before proceeding.
+4. Optionally: run `python docs/memory-system/scripts/relevant_events.py` (when present) for a compact recent-events index.
+
+**After tasks:** Append a new event to `CHANGELOG.md` under `## Event Log` (next evt-NNN), then update `.memory/graph.md` and `.memory/context.md`. See AGENTS.md and `docs/protocols/MEMORY-SYSTEM-PROTOCOL.md` for full lifecycle.
+
+---
+
 ## Key References
 
 | File | Purpose |
 |------|---------|
-| `AGENTIC-ASSETS-FRAMEWORK.md` | **Six template types** — Full framework |
-| `AGENTS.md` | 📜 **Rules** — Canonical (build/test/lint, conventions, memory) |
+| `AGENTIC-ASSETS-FRAMEWORK.md` | **Seven template types** — Full framework |
+| `AGENTS.md` | 📜 **Rules** — Canonical (build/test/lint, conventions, **memory load**) |
 | `CLAUDE.md` | 📜 **Rules** — Claude-specific |
 | `CURSOR.md` | 📜 **Rules** — This file (Cursor-specific) |
 | `WINDSURF.md` | 📜 **Rules** — Windsurf-specific |
+| `docs/protocols/` | 📋 **Protocols** — Process definitions (prompt validation, memory) |
+| `docs/protocols/MEMORY-SYSTEM-PROTOCOL.md` | Memory system — boot, staleness, Event Log |
+| `docs/protocols/PROMPT-VALIDATION-PROTOCOL.md` | Prompt validation (install via prompt-validation-setup skill) |
+| `.agents/skills/prompt-validation-setup/` | Install/maintain Prompt Validation Protocol |
+| `.agents/skills/protocol-setup/` | Create/audit Protocols template type |
 
 When in doubt, read `AGENTS.md` and `AGENTIC-ASSETS-FRAMEWORK.md`.

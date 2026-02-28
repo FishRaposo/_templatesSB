@@ -1,6 +1,6 @@
 # WINDSURF.md - Unified AI Development Guide
 
-**Purpose**: Windsurf AI guide for the six template types (Rules, Blueprints, Tasks, Recipes, Subagents, Skills).  
+**Purpose**: Windsurf AI guide for the seven template types (Rules, Blueprints, Tasks, Recipes, Subagents, Skills, Protocols).  
 **Last Updated**: 2025
 
 See `AGENTIC-ASSETS-FRAMEWORK.md` for complete framework documentation.
@@ -11,15 +11,16 @@ See `AGENTIC-ASSETS-FRAMEWORK.md` for complete framework documentation.
 
 ## Quick Start
 
-This repository is built on **six template types**:
+This repository is built on **seven template types**:
 1. **Rules** — How agents must behave (AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md)
 2. **Blueprints** — What to build (product archetypes)
 3. **Tasks** — How to implement (feature units)
 4. **Recipes** — Feature combinations (bundles)
 5. **Subagents** — Who does the work (configured sub-agents)
 6. **Skills** — How to do it well (capabilities)
+7. **Protocols** — How processes are defined (e.g. prompt validation, memory; in `docs/protocols/`)
 
-**"Templates"** = all six types (Rules, Blueprints, Tasks, Recipes, Subagents, Skills). **In this repo** only **Rules** and **seven Skills** are active: **memory-system-setup**, **rules-setup**, **skill-builder**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup** (under `.agents/skills/`). Other template-type implementations are archived.
+**"Templates"** = all seven types (Rules, Blueprints, Tasks, Recipes, Subagents, Skills, Protocols). **In this repo** only **Rules**, **Protocols** (in `docs/protocols/`), and **nine Skills** are active: **memory-system-setup**, **rules-setup**, **skill-setup**, **blueprints-setup**, **tasks-setup**, **recipes-setup**, **subagents-setup**, **prompt-validation-setup**, **protocol-setup** (under `.agents/skills/`). Other template-type implementations are archived.
 
 ```bash
 # Validate JSON (skills)
@@ -41,8 +42,9 @@ python scripts/setup-project.py --auto --name "Project" --description "desc"
 ```
 ├── AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md   # 📜 RULES
 ├── AGENTIC-ASSETS-FRAMEWORK.md
-├── .agents/skills/            # 🧠 SKILLS (seven)
+├── .agents/skills/            # 🧠 SKILLS (nine)
 ├── .memory/, docs/, plans/, _documentation-blueprint/
+│   └── protocols/            # 📋 PROTOCOLS (e.g. PROMPT-VALIDATION-PROTOCOL.md)
 ├── blueprints/, tasks/, recipes/, subagents/      # When present or archived
 └── scripts/                  # When present (framework/archive)
 ```
@@ -232,12 +234,15 @@ python scripts/setup-project.py --auto --name "MyApp" --description "mobile app"
 
 | File | Purpose |
 |------|---------|
-| `AGENTIC-ASSETS-FRAMEWORK.md` | **Six template types** — Complete framework |
+| `AGENTIC-ASSETS-FRAMEWORK.md` | **Seven template types** — Complete framework |
 | `AGENTS.md` | 📜 **Rules** — Canonical (main guide) |
 | `CLAUDE.md` | 📜 **Rules** — Claude entry |
 | `CURSOR.md` | 📜 **Rules** — Cursor entry |
 | `WINDSURF.md` | 📜 **Rules** — This file (Windsurf entry) |
-| `.agents/skills/` | 🧠 **Skills** — memory-system-setup, rules-setup, skill-builder, blueprints-setup, tasks-setup, recipes-setup, subagents-setup |
+| `.agents/skills/` | 🧠 **Skills** — memory-system-setup, rules-setup, skill-setup, blueprints-setup, tasks-setup, recipes-setup, subagents-setup, prompt-validation-setup, protocol-setup |
+| `docs/protocols/` | 📋 **Protocols** — Process definitions (prompt validation, memory) |
+| `.agents/skills/prompt-validation-setup/` | Install/maintain Prompt Validation Protocol |
+| `.agents/skills/protocol-setup/` | Create/audit Protocols template type |
 | `scripts/validate-templates.py` | Validation (when project includes scripts/) |
 | `scripts/setup-project.py` | Project generation (when blueprints in use) |
 
@@ -245,14 +250,16 @@ python scripts/setup-project.py --auto --name "MyApp" --description "mobile app"
 
 ## Memory System
 
-**Before:** Read `AGENTS.md` → Check `CHANGELOG.md` → Read `.memory/context.md`
+**Before (load memory):** Read `AGENTS.md` → Read `.memory/context.md` → **Check staleness:** Event horizon in context must match last event ID in `CHANGELOG.md` under `## Event Log`; if they differ or context is missing, regenerate `.memory/context.md` (and `.memory/graph.md` if present) before proceeding. Optionally run `docs/memory-system/scripts/relevant_events.py` when present.
 
-**After:** Append `CHANGELOG.md` → Update `.memory/*` → Update `AGENTS.md` if needed
+**After:** Append to `CHANGELOG.md` (Event Log, next evt-NNN) → Update `.memory/*` → Update `AGENTS.md` if needed
+
+Full protocol: `docs/protocols/MEMORY-SYSTEM-PROTOCOL.md`.
 
 ---
 
 ## When Stuck
 
-- **Skills**: Use `.agents/skills/rules-setup/`, `.agents/skills/memory-system-setup/`, or `.agents/skills/skill-builder/`; see `.agents/skills/skill-builder/` for creating skills.
+- **Skills**: Use `.agents/skills/rules-setup/`, `.agents/skills/memory-system-setup/`, `.agents/skills/prompt-validation-setup/`, `.agents/skills/protocol-setup/`, or `.agents/skills/skill-setup/`; see `.agents/skills/skill-setup/` for creating skills.
 - **Blueprints, Tasks, Recipes, Subagents**: See `AGENTIC-ASSETS-FRAMEWORK.md`; implementations in this repo are archived.
 - **Validation**: When the project includes `scripts/validate-templates.py`, run it when templates/scripts are in use.

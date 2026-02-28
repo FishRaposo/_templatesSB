@@ -1,11 +1,21 @@
 ---
 name: subagents-setup
-description: Use this skill when creating, editing, or auditing Subagents — the template type that defines who does the work (configured sub-agents with skills and workflows). This includes subagent.yaml, SUBAGENT.md, workflows/, skill lists, and blueprint compatibility. Fits the six-template-types framework (Rules, Blueprints, Tasks, Recipes, Subagents, Skills).
+description: Use this skill when creating, editing, or auditing Subagents — the template type that defines who does the work (configured sub-agents with skills and workflows). This includes subagent.yaml, SUBAGENT.md, workflows/, skill lists, and blueprint compatibility. Fits the seven-template-types framework (Rules, Blueprints, Tasks, Recipes, Subagents, Skills, Protocols).
 ---
 
 # Subagents Setup Skill
 
-This skill creates and maintains **Subagents**: pre-configured sub-agents with curated skills, compatible blueprints, and defined workflows for specific domains (e.g. code review, testing, architecture). When invoked, it can add a new subagent, update skills or workflows, or audit subagent configuration against the framework.
+This skill creates and maintains **Subagents**: the template type that defines **who does the work** (configured sub-agents with skills and workflows). Subagents live under `subagents/<name>/` with `subagent.yaml` (machine-readable) and `SUBAGENT.md` (human-readable).
+
+## Your Role
+
+Help users **create** and **modify** Subagents through:
+
+1. **Creating New Subagents** — Add a new subagent directory with `subagent.yaml` (skills, compatible blueprints, workflows), `SUBAGENT.md`, and optional `workflows/` definitions
+2. **Editing Existing Subagents** — Update skill lists (primary/secondary), blueprint compatibility, or workflow definitions; revise `SUBAGENT.md` to match
+3. **Auditing Subagents** — Check that skill identifiers match the project’s skills (e.g. `.agents/skills/`) and workflows execute correctly when the project has validation
+
+When invoked, produce or update subagent files so they conform to the framework. Subagents run within Rules and use Skills for capability.
 
 ## Core Approach
 
@@ -32,7 +42,7 @@ Include at minimum:
 - `blueprints.compatible`: list of blueprint IDs this subagent works with (or equivalent)
 - References to workflows under `workflows/` if the schema supports it
 
-Reference the full schema and examples in `AGENTIC-ASSETS-FRAMEWORK.md` → Subagents.
+Reference the full schema and examples in the project's framework doc (`AGENTIC-ASSETS-FRAMEWORK.md` at project root, when present) → Subagents.
 
 ### 3. Write SUBAGENT.md
 
@@ -45,6 +55,16 @@ Under `workflows/`, add workflow definitions (e.g. YAML or tool-specific format)
 ### 5. Validate (when the project has validation)
 
 When the project includes validation for subagents, ensure workflows execute correctly and skill references resolve. Fix any reported errors before considering the subagent complete.
+
+## Editing Subagents
+
+When modifying an existing subagent:
+
+- **subagent.yaml** — Update `skills` (primary/secondary), `blueprints.compatible`, or workflow references; keep YAML valid and skill IDs matching the project’s skills
+- **SUBAGENT.md** — Revise role, when to invoke, or which skills/workflows are used
+- **workflows/** — Add, remove, or edit workflow definition files per project or tool conventions
+
+Re-run validation after edits when the project has a validation script.
 
 ## Best Practices
 
@@ -69,7 +89,7 @@ When the project includes validation for subagents, ensure workflows execute cor
 ## Related Skills
 
 - **rules-setup** — When updating AGENTS.md or rule files that reference subagents or execution boundaries
-- **skill-builder** — When creating or editing skills that this subagent uses
+- **skill-setup** — When creating or editing skills that this subagent uses
 - **blueprints-setup** — When defining which blueprints are compatible with this subagent
 
 ## Supporting Files

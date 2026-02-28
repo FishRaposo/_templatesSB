@@ -4,6 +4,8 @@ Event-sourced multi-agent cognition — pure markdown implementation.
 
 A 4-layer memory system that turns AI agents into stateless workers operating on shared, immutable state. No runtime, no database, no JSON — just markdown files deployed to a `.memory/` folder.
 
+**Full overview:** For a single end-to-end document (layers, events, agent lifecycle, retrieval, tiers), see **`MEMORY-SYSTEM-OVERVIEW.md`** (this directory).
+
 ---
 
 ## Directory Structure
@@ -28,6 +30,13 @@ memory-system/
 │       ├── templates/            # changelog.md, graph.md, context.md
 │       └── _examples/            # worked-example.md
 ├── scripts/                      # Automation
+│   ├── _events_common.py         # Shared parsing (ParsedEvent, read_events_from_file, etc.)
+│   ├── get_event.py              # Resolve evt-ID to full event text
+│   ├── search_events.py          # Keyword search, timeline, list-ids
+│   ├── suggest_event.py          # Draft event from git diff or stdin (approve then append)
+│   ├── summarize_events.py       # Summarize event range (bullets)
+│   ├── relevant_events.py        # Compact index for boot injection
+│   ├── generate_memory_viewer.py # Static HTML viewer (events, graph, context)
 │   ├── validate-memory.py        # Validate all layers (run from project root)
 │   └── initialize-memory.py      # Initialize by tier (run from project root)
 ├── docs/                         # Supporting documentation
@@ -157,6 +166,25 @@ cp memory-system/templates/context.md .memory/context.md
 ```
 
 **Validate after setup:** `python memory-system/scripts/validate-memory.py` (from project root).
+
+---
+
+## Retrieval and Tools
+
+Scripts in `scripts/` support **resolve**, **search**, **timeline**, **summarize**, **suggest**, **boot injection**, and **viewer**. Run from project root; use `--project-root PATH` if needed. See `docs/protocols/MEMORY-SYSTEM-PROTOCOL.md` §15 for full details.
+
+| Script | Purpose |
+|--------|---------|
+| `get_event.py evt-NNN` or `1` | Return full event text from CHANGELOG (or archive). |
+| `search_events.py [QUERY] [--type/--scope/--tag]` | Keyword search; compact index. `--timeline evt-NNN --context N` for timeline; `--list-ids` for IDs only. |
+| `suggest_event.py --from-git` or `--from-stdin` | Draft one event for approval; does not append. |
+| `summarize_events.py --last N` or `--start/--end` | Bullet list of events in range (rule-based). |
+| `relevant_events.py [QUERY] [--scope/--tag] --limit N` | Compact index for session boot (default limit 5). |
+| `generate_memory_viewer.py [--output .memory/memory-viewer.html]` | Static HTML: Event Log (evt-ID anchors), graph, context. |
+
+**Progressive disclosure:** search → timeline → get_event (fetch full only for selected IDs).
+
+**Privacy:** Events with tags `private` or `sensitive` are excluded (or redacted) in search, summarize, relevant_events, and the viewer by default; use `--include-sensitive` where supported.
 
 ---
 
@@ -383,6 +411,8 @@ See `_examples/worked-example.md` for a complete walkthrough: 8 events flowing t
 
 ## Further Reading
 
+- **`MEMORY-SYSTEM-OVERVIEW.md`** — Full overview: how the memory system works (layers, events, boot, retrieval, tiers)
+- `docs/protocols/MEMORY-SYSTEM-PROTOCOL.md` — Full protocol; §15 Retrieval and Tools (scripts, progressive disclosure, privacy)
 - `docs/ARCHITECTURE-AUDIT.md` — Architecture deep-dive with Mermaid diagrams and gap analysis
 - `docs/VALIDATION-SCRIPT.md` — Validation script reference
 - `docs/INITIALIZATION-SCRIPT.md` — Initialization script reference

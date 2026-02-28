@@ -16,6 +16,8 @@
       "what to build",
       "create blueprint",
       "add blueprint",
+      "edit blueprint",
+      "modify blueprint",
       "overlays",
       "stacks",
       "tier defaults",

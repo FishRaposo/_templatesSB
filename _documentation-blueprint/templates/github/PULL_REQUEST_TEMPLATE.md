@@ -10,7 +10,7 @@
 
 ## Related Issues / Events
 
-- Closes #{{ISSUE_NUMBER}}
+- Closes #NNN
 - CHANGELOG event: evt-NNN
 
 ## Three Pillars Checklist
@@ -19,12 +19,12 @@ Before marking this PR ready for review, all three must pass:
 
 **AUTOMATING**
 - [ ] Structure validator run — 0 errors
-- [ ] Placeholder scanner run — 0 `{{PLACEHOLDER}}` strings remaining (`grep -r '{{' .`)
+- [ ] Placeholder scanner run — 0 `{{PLACEHOLDER}}` strings remaining
 - [ ] Link checker run — 0 broken links
-- [ ] Linter run — 0 style errors (`{{TEST_COMMAND}}`)
+- [ ] Linter run — 0 style errors
 
 **TESTING**
-- [ ] All tests pass (`{{TEST_COMMAND}}`)
+- [ ] All tests pass
 - [ ] New code has test coverage
 - [ ] Code examples in docs are runnable
 
